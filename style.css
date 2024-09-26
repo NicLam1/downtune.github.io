@@ -2,3 +2,28 @@
   margin: 0;
   padding: 0;
 }
+
+.backgroundMain {
+  background-color: rgb(206, 206, 206);
+}
+
+.main {
+  min-height: 100vh;
+}
+.nav-item {
+  min-width: 100px;
+  text-align: center;
+}
+.nav-item:hover {
+  font-weight: bold;
+  background-color: rgb(220, 220, 222);
+  border-radius: 16em;
+}
+
+.navbar-brand {
+  transform: translateY(0px);
+}
+
+.all-cards {
+  margin-top: ;
+}
