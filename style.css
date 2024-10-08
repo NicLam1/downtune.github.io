@@ -4,7 +4,7 @@
 }
 
 .backgroundMain {
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(7, 0, 19);
 }
 
 .main {
@@ -26,4 +26,56 @@
 
 .all-cards {
   margin-top: ;
+}
+
+/* .item img{
+  width: 200px;
+} */
+
+.cardsDiv {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+.cardsDiv img {
+  max-height: 100%;
+}
+.cardsDiv .item {
+  transition: 0.5s;
+  filter: brightness(0.2);
+  padding: 2em;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.cardsDiv .item:hover {
+  filter: brightness(1);
+  transform: translateZ(200px);
+}
+
+.cardsDiv .item:hover + * {
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(40deg);
+}
+
+.cardsDiv .item:hover + * + * {
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(20deg);
+}
+
+.cardsDiv .item:hover + * + * + * {
+  filter: brightness(0.2);
+  transform: translateZ(30px) rotateY(10deg);
+}
+
+.cardsDiv .item:has(+ * :hover) {
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(-40deg);
+}
+.cardsDiv .item:has(+ * + *:hover) {
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(-20deg);
+}
+.cardsDiv .item:has(+ * + * + *:hover) {
+  filter: brightness(0.2);
+  transform: translateZ(30px) rotateY(-10deg);
 }
