@@ -24,6 +24,14 @@
   transform: translateY(0px);
 }
 
+.all-cards {
+  margin-top: ;
+}
+
+/* .item img{
+  width: 200px;
+} */
+
 .cardsDiv {
   transform-style: preserve-3d;
   transform: perspective(1000px);
@@ -37,7 +45,6 @@
   padding: 2em;
   max-height: 500px;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .cardsDiv .item:hover {
@@ -71,9 +78,4 @@
 .cardsDiv .item:has(+ * + * + *:hover) {
   filter: brightness(0.2);
   transform: translateZ(30px) rotateY(-10deg);
-}
-
-.cardsDiv h1 {
-  font-size: 4em;
-  font-weight: bolder;
 }
