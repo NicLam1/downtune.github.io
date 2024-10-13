@@ -208,13 +208,16 @@ export default {
     <div class="video-container" v-if="liveNowBoolean">
       <h3>Live Now: {{ currentLivestream.name }} ({{ currentLivestream.performanceTime }} - {{ currentLivestream.performanceEndTime }}) @ {{ currentLivestream.location}}</h3>
       <p></p>
-      <iframe
+      <div class="iframe-wrapper">
+      <iframe 
         :src="currentLivestream.livestream.replace('watch?v=', 'embed/') + '?autoplay=1&mute=0'"
-        style="width:100% ; height: 50vh;" 
+         
+        class="responsive-iframe"
         frameborder="0"
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
+    </div>
     </div>
     <p v-else>{{ nextLivestreamMessage }}</p>
   </div>
@@ -338,17 +341,28 @@ a {
 
 
 .video-container {
-  position: relative; /* Allow absolutely positioned children to overflow */
-  overflow: visible;  /* Ensure overflow is visible */
-  width: auto; /* Adjust as needed */
-  height: auto; /* Adjust as needed */
+  position: relative; /* Establish positioning context */
+  overflow: visible; /* Allow overflow */
+  padding: 0px; /* Optional padding */
 }
 
-.video-iframe {
-  position: absolute; /* Position the iframe absolutely */
-  width: auto; /* Full viewport width */
-  height: auto; /* Full viewport height */
+.iframe-wrapper {
+  position: relative; /* Establish positioning for the iframe */
+  width: 100%; /* Full width of the parent */
+  height: 50vh; /* Set height as desired */
+  overflow: visible; /* Allow overflow */
 }
+
+.responsive-iframe {
+  position: absolute; /* Position absolutely within the wrapper */
+  top: 0; /* Align to the top */
+  left: 50%; /* Align to the left */
+  transform: translateX(-50%); /* Center the iframe */
+  width: 80vw; /* Full viewport width */
+  height: 100%; /* Full height of the wrapper */
+  border: none; /* Remove border */
+}
+
 
 </style>
 
