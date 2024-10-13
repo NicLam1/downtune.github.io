@@ -8,10 +8,10 @@ export default {
           name: "The Sonic Waves",
           image: "./images/stock band/image1.jpg",
           performanceDate: "October 13, 2024",
-          performanceTime: "7:30 PM",
-          performanceEndTime: "9:00 PM",
+          performanceTime: "3:30 PM",
+          performanceEndTime: "5:00 PM",
           location: "Singapore",
-          livestream: "https://www.youtube.com/watch?v=7Jv9T5gMbkE" 
+          livestream: "https://www.youtube.com/watch?v=tRWWJ7iBLgc" 
         },
         {
           name: "Echo & The Vibes",
@@ -74,11 +74,11 @@ export default {
   computed: {
     today() {
       //Use first one for actual date, else use below for debugging
-      //return new Date();
+      // return new Date();
 
 
       // Set a specific date and time for debugging
-      return new Date('2024-10-13T21:00:00+08:00');
+      return new Date('2024-10-13T16:00:00+08:00');
       
       // return new Date('2024-12-01T21:00:00+08:00');
     },
@@ -178,7 +178,8 @@ export default {
         entries.forEach(this.fadeIn);
       });
 
-      const bandCards = document.querySelectorAll('.band-card');
+      //Select what items add observer for fadein effect
+      const bandCards = document.querySelectorAll('.fade-element'); 
       bandCards.forEach(card => {
         this.observer.observe(card);
       });
@@ -206,8 +207,10 @@ export default {
     <!-- <pre>{{ currentLivestream }}</pre>  -->
     <!-- //debugging ^^^ instead of using console.log -->
     <div class="video-container" v-if="liveNowBoolean">
-      <h3>Live Now: {{ currentLivestream.name }} ({{ currentLivestream.performanceTime }} - {{ currentLivestream.performanceEndTime }}) @ {{ currentLivestream.location}}</h3>
-      <p></p>
+      <div class = "h3-blur">
+      <h3>Live Now till {{ currentLivestream.performanceEndTime }}: {{ currentLivestream.name }} </h3>
+      <h3> @ {{ currentLivestream.location}}</h3>
+      </div>
       <div class="iframe-wrapper">
       <iframe 
         :src="currentLivestream.livestream.replace('watch?v=', 'embed/') + '?autoplay=1&mute=0'"
@@ -219,12 +222,13 @@ export default {
       ></iframe>
     </div>
     </div>
-    <p v-else>{{ nextLivestreamMessage }}</p>
+    <h3 v-else class = "h3-blur-nolive">{{ nextLivestreamMessage }}</h3>
   </div>
-
-<h3>Upcoming events:</h3>
+ 
+<h3 class = "h3-blur">Upcoming events:</h3>
   <div>
-    <div v-for="(band, index) in upcomingEvents" :key="index" class="band-card">
+    <div v-for="(band, index) in upcomingEvents" :key="index" class="band-card fade-element">
+      <div class = "band-card-blur">
       <div class="date-container">
         <div class="circle-container">
           <div class="date-circle">{{ formatDate(band.performanceDate).day }}</div>
@@ -250,24 +254,42 @@ export default {
       <p v-else>No livestream available</p>
     </div>
   </div>
+  </div>
 </template>
 
 <style scoped>
 .band-card {
-  background-color: #333;
+  /* background-color: #333; */
+  background-image: url('../images/background-mid.png');
+  
+  border-radius: 8px;
+  color: white;
+  
+}
+
+.band-card-blur {
+  /* background-color: #333; */
+  background-color: rgba(0, 0, 0, 0.7);
+  
   padding: 15px;
   margin: 15px 0;
   border-radius: 8px;
-  color: white;
-  opacity: 0; /* Start hidden */
-  transition: opacity 0.5s ease-in-out; /* Transition for fade-in */
+  
+  
 }
 
-.band-card.fade-in {
+.fade-element{
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.5s ease-in-out; /* Transition for fade-in */
+  
+}
+
+.fade-in {
   opacity: 1; /* Fully visible when faded in */
 }
 
 .date-container {
+  padding-top: 22px;
   display: flex; /* Use flexbox for the container */
   align-items: center; /* Align items vertically in the center */
 }
@@ -289,7 +311,7 @@ export default {
   width: 50px; /* Adjust size as needed */
   height: 50px; /* Adjust size as needed */
   border-radius: 50%;
-  background-color: #FFD700; /* Background color */
+  background-color: #ffb300; /* Background color */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -315,7 +337,7 @@ export default {
   margin: 0; /* Remove margin for better alignment */
   font-weight: bold; /* Optional: make it bold for emphasis */
   font-size: 50%; /* Smaller size */
-  color: #FFD700; /* Gold color*/
+  color: #ffb300; /* Gold color*/
 }
 
 .performance-date {
@@ -324,13 +346,13 @@ export default {
 }
 
 .band-card h2 {
-  color: #FFD700; /* Gold color for band names */
+  color: #ffb300; /* Gold color for band names */
 }
 
 .band-image {
   /* max-width: 100%;
   height: auto; */
-  max-width: 100vh;
+  max-width: 360px;
   max-height: 20vh;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -341,26 +363,64 @@ a {
 
 
 .video-container {
-  position: relative; /* Establish positioning context */
-  overflow: visible; /* Allow overflow */
-  padding: 0px; /* Optional padding */
+  position: relative; 
+  /* Establish positioning context */ 
+  /*  Allow overflow */
+  overflow: visible;
+  /* padding: 0px; Optional padding */
+  padding-bottom: 30px;
 }
 
 .iframe-wrapper {
   position: relative; /* Establish positioning for the iframe */
-  width: 100%; /* Full width of the parent */
-  height: 50vh; /* Set height as desired */
+  /* width: 100%; Full width of the parent */
+  /* height: 50vh; Set height as desired */
+  /* width: 600px; */
+  height: 300px;
+  width: auto;
   overflow: visible; /* Allow overflow */
 }
+
 
 .responsive-iframe {
   position: absolute; /* Position absolutely within the wrapper */
   top: 0; /* Align to the top */
   left: 50%; /* Align to the left */
   transform: translateX(-50%); /* Center the iframe */
-  width: 80vw; /* Full viewport width */
+  width: 130%; /* Full viewport width */
   height: 100%; /* Full height of the wrapper */
   border: none; /* Remove border */
+}
+/* Remove this later^ */
+
+h3{
+  color:rgb(255, 255, 255);
+  text-shadow: 
+        -1px -1px 0 #000000, /* white outline */
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
+
+}
+
+.h3-blur {
+  /* background-color: #333; */
+  background-color: rgba(0, 0, 0, 0.7);
+  
+  padding: 5px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+.h3-blur-nolive {
+  /* background-color: #333; */
+  background-color: rgba(0, 0, 0, 0.7);
+  
+  padding: 100px 0;
+  margin: 180px 0 50px 0;
+  border-radius: 8px;
+  
+  
 }
 
 

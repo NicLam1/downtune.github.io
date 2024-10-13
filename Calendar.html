@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Band Performances</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesh">
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0px;
+
+
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      
+    }
+
+    #app {
+      max-width: 400px; 
+      /* edited this ^ */
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .bg-container {
+      background-image: url('images/wallpaperstart0.png'); /* Replace with your image path */
+      background-position: top; /* Aligns the image to the top center */
+      background-repeat: no-repeat;
+      background-size: 2600px auto; /* Ensures the image covers the whole container */
+      justify-content: center; /* Horizontally center the content */
+      width: 100vw;
+      padding-top: 40px;
+    }
+
+
+    .bg-container-end {
+      background-image: url('images/wallpaperend.png'); /* Replace with your image path */
+      background-position: top; /* Aligns the image to the top center */
+      background-repeat: no-repeat;
+      background-size: 1300px auto; /* Ensures the image covers the whole container */
+      justify-content: center; /* Horizontally center the content */
+      width: 100vw;
+      display:block;
+      padding: 900px 0;
+      margin-top: -50px;
+
+      opacity: 0; /* Start hidden */
+      transition: opacity 2s ease-in-out; /* Transition for fade-in */
+    }
+
+    .fade-in {
+      opacity: 1; /* Fully visible when faded in */
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif; /* Use Poppins font */
+      font-style: italic; /* Italic style */
+      margin: 0;
+      padding: 20px 0 0 0;
+      text-align: center;
+      color: #ffb300;
+      text-shadow: 
+        -1px -1px 0 #000000, /* white outline */
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
+
+    }
+
+    .logo {
+            display: block;
+            max-width: 100px; /* Responsive image */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Optional: rounded corners */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Optional: shadow around the image */
+            margin: 0 auto 0 auto; /* Center the image horizontally */
+
+        }
+
+
+    /* @media (max-width: 1500px) {
+      .bg-container {
+        background-attachment: fixed; 
+        background-size: 1500px auto;
+      }
+    } */
+  </style>
+</head>
+<body>
+  <div class="bg-container">
+    <img src="images/Logo.png" alt="Sample Image" class = "logo" />
+    <h1>downtune Calendar & Live Stream</h1>
+    <div id="app" class="container">
+      
+      <!-- Vue will mount the band cards here -->
+    </div>
+  </div>
+  <div class="bg-container-end fade-element">
+  
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
+
+<!-- <body>
+  <h1>Live Performance Calendar & Streaming</h1>
+  <div>XXX is now live from XXXpm - xxxpm</div>
+  <div>Show your support @ Locationname</div>
+  <div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/XcfPeqespX4?si=nTEzP3Xa-t8EfMWn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</body> -->
+<body>
+
+</body>
+</html>
