@@ -1,4 +1,6 @@
 <script>
+import { experimentalSetDeliveryMetricsExportedToBigQueryEnabled } from 'firebase/messaging/sw';
+
 export default {
   data() {
     return {
@@ -74,7 +76,7 @@ export default {
   computed: {
     today() {
       //Use first one for actual date, else use below for debugging
-      // return new Date();
+       return new Date();
 
 
       // Set a specific date and time for debugging
@@ -161,6 +163,22 @@ export default {
         // console.log("Entry is intersecting: ", entry.target); // Debugging
         entry.target.classList.add('fade-in');
         this.observer.unobserve(entry.target); // Stop observing after it's visible
+        
+        console.log("CLASSSSS")
+        console.log(entry.target)
+
+        //added this so that it will not affect the last one!!!
+        console.log("LENNN")
+        console.log(entry.target.parentElement.parentElement.getElementsByClassName("animation-border"))
+        if (!entry.target.classList.contains('bg-container-end') && entry.target.parentElement.parentElement.getElementsByClassName("animation-border").length !== 0){
+
+        setTimeout(() => {
+
+                
+                this.fadeGifs(entry.target.parentElement.parentElement);
+                // console.log("entry target")
+                // console.log(entry.target.parentElement.parentElement)
+            }, 1000); };
       }
     },
     formatDate(dateString) {
@@ -188,7 +206,25 @@ export default {
       if (this.observer) {
         this.observer.disconnect(); // Clean up observer
       }
-    }
+    },
+    fadeGifs(animationborderelement) {
+      const gif1 = animationborderelement.getElementsByTagName('img')[0];
+      const gif2 = animationborderelement.getElementsByTagName('img')[1];
+      const colordiv = animationborderelement.getElementsByClassName('coloring')[0];
+      console.log(animationborderelement)
+      // Fade out the first GIF
+      gif1.style.opacity = 0;
+
+      console.log(animationborderelement)
+
+      // After the fade-out transition, fade in the second GIF
+      setTimeout(() => {
+          gif2.style.opacity = 1;
+          colordiv.style.opacity=1;
+      }, 1000); // Wait for 1 second before fading in the second GIF
+
+      console.log("gif faded")
+  }
   },
   mounted() {
     this.initObserver();
@@ -226,13 +262,20 @@ export default {
   </div>
  
 <h3 class = "h3-blur">Upcoming events:</h3>
-  <div>
-    <div v-for="(band, index) in upcomingEvents" :key="index" class="band-card fade-element">
+    <div v-for="(band, index) in upcomingEvents" :key="index" >
+      <div class = "animation-and-card-border">
+      <div v-if="index !== 0" class = "animation-border">
+      <div class = "coloring"></div>
+      <img class="gif1" src="../images/white-flame-on-appear.gif" alt="Your First GIF" style="opacity: 1; "> 
+      <img class="gif2" src="../images/white-flame-after-appear.gif" alt="Your Second GIF" style="opacity: 0; width: 750px "> 
+      
+      </div>
+      <div class = "band-card-parent-border">
+      <div class = "band-card fade-element" >
       <div class = "band-card-blur">
       <div class="date-container">
         <div class="circle-container">
           <div class="date-circle">{{ formatDate(band.performanceDate).day }}</div>
-          
           <p class="day-of-week">{{ formatDate(band.performanceDate).dayOfWeek }}</p>
         </div>
         <div class="circle-container-beside">
@@ -254,6 +297,8 @@ export default {
       <p v-else>No livestream available</p>
     </div>
   </div>
+</div>
+</div>
   </div>
 </template>
 
@@ -264,6 +309,9 @@ export default {
   
   border-radius: 8px;
   color: white;
+  position: relative;
+  z-index: 2; /* Higher z-index to place above animation-border */
+  width: 400px;
   
 }
 
@@ -271,18 +319,20 @@ export default {
   /* background-color: #333; */
   background-color: rgba(0, 0, 0, 0.7);
   
+
+  border-radius: 8px;  
   padding: 15px;
-  margin: 15px 0;
-  border-radius: 8px;
+
   
   
 }
 
 .fade-element{
   opacity: 0; /* Start hidden */
-  transition: opacity 0.5s ease-in-out; /* Transition for fade-in */
+  transition: opacity 2s ease-in-out; /* Transition for fade-in */
   
 }
+
 
 .fade-in {
   opacity: 1; /* Fully visible when faded in */
@@ -356,6 +406,8 @@ export default {
   max-height: 20vh;
   border-radius: 8px;
   margin-bottom: 10px;
+  z-index: 5; /* higher z-index to place in front  band-card */
+
 }
 /* 
 a {
@@ -422,6 +474,55 @@ h3{
   
   
 }
+
+
+.gif1, .gif2{
+  height: 99%; /* Keep height full to maintain aspect ratio */
+  width: auto;
+  position: absolute; /* Changed to absolute */
+  top: 50%; /* Move the top to the center vertically */
+  left: 50%; /* Move the left to the center horizontally */
+  padding-left: 400px;
+
+  transform: translate(-50%, -50%); /* Adjust the position to center both images */
+  transition: opacity 1s ease-in-out; /* Fade transition */
+
+  
+}
+
+.animation-border{
+  position: relative; /* Create a positioning context for absolute children */
+  width: 400px; /* Set the width as needed */
+  height: inherit; /* Set height as needed */
+  z-index: 1; /* Lower z-index to place behind band-card */
+
+}
+
+.animation-and-card-border {
+  margin: 15px 0; 
+  display: flex;
+
+}
+
+.coloring {
+  content: '';
+  position: absolute;
+
+  background: linear-gradient(to bottom, red, orange, yellow, green, blue, indigo, violet);
+  mix-blend-mode: color;
+  pointer-events: none;
+  z-index: 1; /* Ensure the gradient covers the video */
+  height: 98.5%; /* Keep height full to maintain aspect ratio */
+  width: 740px;
+  position: absolute; /* Changed to absolute */
+  top: 50%; /* Move the top to the center vertically */
+  left: 50%; /* Move the left to the center horizontally */
+  margin-left: 200px;
+  transform: translate(-50%, -50%); /* Adjust the position to center both images */
+  opacity: 0; /* Start hidden */
+  transition: opacity 5s ease-in-out; /* Transition for fade-in */
+}
+
 
 
 </style>

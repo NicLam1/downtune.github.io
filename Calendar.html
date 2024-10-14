@@ -6,6 +6,9 @@
   <title>Band Performances</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesh">
 
+
+
+
   <style>
     body {
       background-color: black;
@@ -13,7 +16,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0px;
-
+      position: relative; /* Ensure body is the reference for :before */
 
     }
 
@@ -31,6 +34,8 @@
       text-align: center;
     }
 
+
+
     .bg-container {
       background-image: url('images/wallpaperstart0.png'); /* Replace with your image path */
       background-position: top; /* Aligns the image to the top center */
@@ -39,6 +44,8 @@
       justify-content: center; /* Horizontally center the content */
       width: 100vw;
       padding-top: 40px;
+      overflow: hidden; /* This will also help with any overflow */
+
     }
 
 
