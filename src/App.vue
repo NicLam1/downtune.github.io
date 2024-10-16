@@ -76,7 +76,7 @@ export default {
   computed: {
     today() {
       //Use first one for actual date, else use below for debugging
-       return new Date();
+      // return new Date();
 
 
       // Set a specific date and time for debugging
