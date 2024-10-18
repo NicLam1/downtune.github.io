@@ -1,5 +1,5 @@
 {
-  "name": "downtune",
+  "name": "vite-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "firebase": "^10.14.1",
     "vue": "^3.5.10"
   },
