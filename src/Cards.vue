@@ -178,7 +178,6 @@ export default {
     handleLogin() {
       // Placeholder for login functionality
       console.log('Login button clicked');
-      window.location.href = '';
     }
   },
   mounted() {
