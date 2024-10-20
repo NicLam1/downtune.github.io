@@ -5,27 +5,28 @@
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
-            <h2 class="text-center text-dark fw-bold mb-4">Sign in to your account</h2>
+            <h2 class="text-center text-dark fw-bold mb-4">Register</h2>
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
                 <label for="email-address" class="form-label sr-only">Email address</label>
-                <input type="email" id="email-address" v-model="email" name="email" class="form-control" placeholder="Email address" required />
+                <input type="email" id="email-address" name="email" class="form-control" placeholder="Email address" required />
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label sr-only">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label sr-only">Password</label>
-                <input type="password" id="password" v-model="password" name="password" class="form-control" placeholder="Password" required />
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
               </div>
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="remember-me" v-model="rememberMe">
-                  <label class="form-check-label" for="remember-me">Remember me</label>
-                </div>
-                <a href="/forgot-password" class="text-primary">Forgot your password?</a>
+              <div class="mb-3">
+                <label for="password-confirm" class="form-label sr-only">Confirm Password</label>
+                <input type="password" id="password-confirm" name="password-confirm" class="form-control" placeholder="Confirm Password" required />
               </div>
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
             </form>
             <p class="text-center mt-3">
-              Don't have an account? <a href="../userRegister.html" class="text-primary">Sign up</a>
+              Have an account? <a href="../userLogin.html" class="text-primary">Sign In</a>
             </p>
           </div>
 
