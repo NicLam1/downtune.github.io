@@ -1,4 +1,8 @@
 <template>
+  <div v-if="loading">
+    <LoadingScreen/>
+  </div>
+
   <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
     <div class="container min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-100 h-100 shadow-lg overflow-hidden">
@@ -23,7 +27,7 @@
                 <label for="password-confirm" class="form-label sr-only">Confirm Password</label>
                 <input type="password" id="password-confirm" name="password-confirm" class="form-control" placeholder="Confirm Password" required />
               </div>
-              <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              <button type="submit" class="btn btn-primary w-100">Sign Up</button>
             </form>
             <p class="text-center mt-3">
               Have an account? <a href="../userLogin.html" class="text-primary">Sign In</a>
@@ -53,22 +57,28 @@
 </template>
 
 <script>
+import LoadingScreen from './components/loadingScreen.vue';
+
 export default {
+  components: {
+    LoadingScreen,
+  },
   data() {
     return {
       email: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      loading: false,
     };
   },
   methods: {
-    handleSubmit() {
-      // Handle form submission
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
-      console.log("Remember me:", this.rememberMe);
-    }
-  }
+
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000); // Adjust as needed
+  },
 };
 </script>
 
