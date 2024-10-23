@@ -1,6 +1,10 @@
 import { createApp } from 'vue'
 import './style.css';
-import UserQuestions from './userQuestions.vue'; 
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import UserQuestions2 from './userQuestions2.vue'; 
 
-createApp(UserQuestions).mount('#app');
+createApp(UserQuestions2).mount('#app');
 
