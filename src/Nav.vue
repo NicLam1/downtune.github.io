@@ -30,7 +30,7 @@
             <a class="nav-link" href="#">Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="../userLogin.html">Contact</a>
           </li>
         </ul>
       </div>
@@ -40,28 +40,28 @@
 
 <script>
 export default {
-  name: 'Nav',
+  name: "Nav",
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 .custom-navbar {
-  background: linear-gradient(to right, #243B55, #141E30);
+  background: linear-gradient(to right, #243b55, #141e30);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1em;
 }
 
 .nav-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: #feb47b; /* Using the accent color for a pop */
   font-size: 1.5rem;
 }
 
 .navbar-nav .nav-link {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   color: #f0f0f0;
   margin: 0 0.8em;
@@ -85,7 +85,8 @@ export default {
   .custom-navbar {
     background: linear-gradient(to right, #ffffff, #eeeeee);
   }
-  .nav-title, .navbar-nav .nav-link {
+  .nav-title,
+  .navbar-nav .nav-link {
     color: #213547;
   }
   .nav-link:hover {
