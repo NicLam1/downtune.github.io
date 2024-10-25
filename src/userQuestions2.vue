@@ -33,9 +33,10 @@
           1024: { slidesPerView: 3 }
         }"
         @slideChange="onSlideChange"
+        :allow-touch-move="true"
         class="mySwiper"
       >
-        <swiper-slide v-for="(slide, index) in slides" :key="index" :class="{'selected-genre': isGenreSelected(slide.title)}">
+        <swiper-slide v-for="(slide, index) in slides" :key="index" :class="{'selected-genre': isGenreSelected(slide.title)}" @click="toggleGenreSelection(slide.title)">
           <img :src="slide.url" :alt="slide.title" />
         </swiper-slide>
 
@@ -188,6 +189,10 @@ export default {
   width: 300px;
   height: 100%;
   transition: border 0.3s ease;
+}
+
+.swiper-slide-active{
+  cursor: pointer;
 }
 
 .swiper-slide img {
