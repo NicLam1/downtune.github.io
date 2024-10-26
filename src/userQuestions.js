@@ -1,10 +1,14 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 import './style.css';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import UserQuestions2 from './userQuestions2.vue'; 
+import questionContainer from './questionContainer.vue';
+import { MotionPlugin } from '@vueuse/motion';
 
-createApp(UserQuestions2).mount('#app');
+const app = createApp(questionContainer); 
 
+app.use(MotionPlugin); 
+
+app.mount('#app'); 

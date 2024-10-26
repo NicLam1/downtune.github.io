@@ -1,9 +1,9 @@
 <template>
-  <div class="background-wrapper" :style="{ background: backgroundGradient }">
+  <div class="background-wrapper" >
     <div class="carousel-wrapper"> <!-- Wrapper to center the carousel -->
       <div class="question mb-5 text-center">
         <h1>What genre of music are you looking for?</h1>
-        <h3 :class="{ 'bounce-text': bounceLimitReached }">Pick up to 3</h3>
+        <h3 :class="{ 'bounce-text': bounceLimitReached }">Click up to 3</h3>
       </div>
 
       <swiper
@@ -53,12 +53,13 @@
       </div>
 
       <!-- Single Button for selecting/deselecting current genre -->
-      <button
+      <!-- <button
         :class="{'btn btn-primary': !isGenreSelected(currentGenre), 'btn btn-danger': isGenreSelected(currentGenre)}"
         @click="toggleGenreSelection(currentGenre)"
       >
         {{ isGenreSelected(currentGenre) ? 'Deselect' : 'Select' }} {{ currentGenre }}
-      </button>
+      </button> -->
+
     </div>
   </div>
 </template>
@@ -152,7 +153,13 @@ export default {
           return 'linear-gradient(135deg, forestgreen, darkseagreen)'; // Default background
       }
     },
-  }
+  },
+  watch: {
+    // Watch for changes in backgroundGradient
+    backgroundGradient(newGradient) {
+      this.$emit('updateBackgroundGradient', newGradient);
+    },
+  },
 };
 </script>
 <style scoped>
