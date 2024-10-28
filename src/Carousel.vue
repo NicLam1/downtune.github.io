@@ -211,7 +211,7 @@ export default {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #000;
+  color: #ffffff;
 }
 
 .selected-genre {

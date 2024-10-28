@@ -1,6 +1,6 @@
 <template>
   <div class="container row w-75 my-2 mx-auto">
-    <div class="question-container col-5">
+    <div class="question-container col-12 col-md-6 col-lg-5 h-75">
       <h1 class="py-4">{{ title }}</h1>
       <div v-for="(option, index) in options" :key="index" class="my-2">
         <input
@@ -15,8 +15,8 @@
         </label>
       </div>
     </div>
-    <div class="img-container col-7">
-      <!-- Image or additional content goes here -->
+    <div class="img-container d-none d-md-block col-md-6 col-lg-7">
+      <img src="" alt="">
     </div>
   </div>
 </template>
@@ -34,22 +34,18 @@ export default {
 
 <style scoped>
 .container {
-  background-color: rgb(244, 243, 243);
   height: 100vh;
   border-radius: 15px;
   display: flex;
-  position: relative;
+
 }
 .question-container {
   padding: 2rem;
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  left: 0;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   height: 100%;
 }
+
 .option-radio {
   display: none; /* Hide the radio input */
 }
@@ -60,11 +56,12 @@ export default {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   text-align: left;
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
+  background-color: rgba(255, 255, 255, 0.5); /* Translucent background */
+  border: 1px solid rgba(0, 0, 0, 0.2); /* Translucent border */
   border-radius: 4px;
+  color: rgba(0, 0, 0, 0.7); /* Semi-translucent text */
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .option-radio:checked + .option-button {
