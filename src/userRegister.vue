@@ -1,7 +1,4 @@
 <template>
-  <div v-if="loading">
-    <LoadingScreen/>
-  </div>
 
   <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
     <div class="container min-h-screen d-flex justify-content-center align-items-center">
@@ -10,23 +7,24 @@
           <!-- Login Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
             <h2 class="text-center text-dark fw-bold mb-4">Register</h2>
-            <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
+            <form @submit.prevent="handleRegister" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
                 <label for="email-address" class="form-label sr-only">Email address</label>
-                <input type="email" id="email-address" name="email" class="form-control" placeholder="Email address" required />
+                <input type="email" v-model="email" class="form-control" id="email" required />
               </div>
               <div class="mb-3">
                 <label for="username" class="form-label sr-only">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required />
+                <input type="text" v-model="username" class="form-control" id="username" required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+                <input type="password" v-model="password" class="form-control" id="password" required />
               </div>
               <div class="mb-3">
                 <label for="password-confirm" class="form-label sr-only">Confirm Password</label>
-                <input type="password" id="password-confirm" name="password-confirm" class="form-control" placeholder="Confirm Password" required />
+                <input type="password" v-model="confirmPassword" class="form-control" id="confirmPassword" required />
               </div>
+              <p v-if="error" class="text-danger">{{ error }}</p>
               <button type="submit" class="btn btn-primary w-100">Sign Up</button>
             </form>
             <p class="text-center mt-3">
@@ -57,27 +55,47 @@
 </template>
 
 <script>
-import LoadingScreen from './components/loadingScreen.vue';
+import { auth } from '../firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 export default {
   components: {
-    LoadingScreen,
   },
   data() {
     return {
       email: '',
+      username: '',
       password: '',
-      rememberMe: false,
-      loading: false,
+      confirmPassword: '',
+      error: ''
     };
   },
   methods: {
+    async handleRegister() {
+      this.error = '';
 
-  },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000); // Adjust as needed
+      // Basic validation for password matching
+      if (this.password !== this.confirmPassword) {
+        this.error = "Passwords do not match.";
+        return;
+      }
+
+      try {
+        // Create the user in Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
+        const user = userCredential.user;
+
+        // Set the username as the display name in Firebase
+        await updateProfile(user, {
+          displayName: this.username
+        });
+
+        console.log("User successfully registered:", user);
+      } catch (error) {
+        console.error("Error during registration:", error);
+        this.error = error.message;
+      }
+    }
   },
 };
 </script>
@@ -86,26 +104,28 @@ export default {
 .min-h-screen {
   min-height: 100vh;
 }
+
 .card {
   /* height: 100%; */
 }
+
 .col-flex {
   /* flex: 1; */
 }
+
 .carousel-item {
   height: 100%;
 }
+
 .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .backgroundMain {
   background-color: rgb(7, 0, 19);
 }
 </style>
 
 <!-- Bootstrap -->
-
-
-

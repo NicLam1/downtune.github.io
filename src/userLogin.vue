@@ -9,11 +9,13 @@
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
                 <label for="email-address" class="form-label sr-only">Email address</label>
-                <input type="email" id="email-address" v-model="email" name="email" class="form-control" placeholder="Email address" required />
+                <input type="email" id="email-address" v-model="email" name="email" class="form-control"
+                  placeholder="Email address" required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label sr-only">Password</label>
-                <input type="password" id="password" v-model="password" name="password" class="form-control" placeholder="Password" required />
+                <input type="password" id="password" v-model="password" name="password" class="form-control"
+                  placeholder="Password" required />
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="form-check">
@@ -52,6 +54,8 @@
 </template>
 
 <script>
+import { auth } from '../firebaseConfig.js';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 export default {
   data() {
     return {
@@ -61,12 +65,17 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
-      // Handle form submission
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
-      console.log("Remember me:", this.rememberMe);
+    async handleSubmit() {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password);
+        const user = userCredential.user;
+        console.log("User successfully logged in:", user);
+      } catch (error) {
+        console.error("Error logging in:", error);
+        this.error = error.message;
+      }
     }
+
   }
 };
 </script>
@@ -75,26 +84,28 @@ export default {
 .min-h-screen {
   min-height: 100vh;
 }
+
 .card {
   /* height: 100%; */
 }
+
 .col-flex {
   /* flex: 1; */
 }
+
 .carousel-item {
   height: 100%;
 }
+
 .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .backgroundMain {
   background-color: rgb(7, 0, 19);
 }
 </style>
 
 <!-- Bootstrap -->
-
-
-
