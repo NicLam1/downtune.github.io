@@ -203,12 +203,8 @@ export default {
 };
 </script>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #1a1a2e;
-  color: #e0e0e0;
-}
+<style scoped>
+
 
 .cardsSection {
   background: linear-gradient(to bottom, rgba(34, 49, 63, 0.7), rgba(45, 52, 54, 0.7));
