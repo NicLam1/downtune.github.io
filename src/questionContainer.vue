@@ -9,7 +9,7 @@
       </div>
       <div v-if="showArrow" v-motion :initial="{ opacity: 0, y: 0 }" :enter="{
         opacity: 0.5, y: 100, transition: {
-          repeat: 3,
+          repeat: 2,
         }
       }" :delay="3000" :duration="2000" class="scroll-arrow">
         <i class="fa fa-arrow-down"></i>
@@ -38,15 +38,18 @@ export default {
     return {
       backgroundGradient: 'linear-gradient(135deg, forestgreen, darkseagreen)',
       showArrow: true,
-      questions: [{ title: 'What is your budget for hiring the band?', options: ['1', '2', '3', '4'] },
-      { title: 'Question 2', options: ['a', 'b', 'c', 'd'] }
+      questions: [
+        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'] },
+        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'] },
+        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event']},
+        { title: 'My event is...', options:['Indoors', 'Outdoors']}
       ],
     };
   },
   mounted() {
     setTimeout(() => {
       this.showArrow = false;
-    }, 9000);
+    }, 6500);
   },
   methods: {
     setBackgroundGradient(gradient) {

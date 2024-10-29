@@ -74,4 +74,9 @@ export default {
 .option-button:hover {
   background-color: #e2e6ea;
 }
+
+
+.img-container img{
+  width: 100%;
+}
 </style>
