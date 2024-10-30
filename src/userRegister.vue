@@ -124,7 +124,7 @@ export default {
 }
 
 .backgroundMain {
-  background-color: rgb(7, 0, 19);
+  background: linear-gradient(to right, black , rgb(85, 98, 110));
 }
 </style>
 

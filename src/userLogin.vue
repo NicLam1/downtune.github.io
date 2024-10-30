@@ -1,6 +1,6 @@
 <template>
   <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
-    <div class="container min-h-screen d-flex justify-content-center align-items-center">
+    <div class="container  min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-100 h-100 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
@@ -104,7 +104,7 @@ export default {
 }
 
 .backgroundMain {
-  background-color: rgb(7, 0, 19);
+  background: linear-gradient(to right, black , rgb(85, 98, 110));
 }
 </style>
 

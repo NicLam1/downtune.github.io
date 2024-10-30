@@ -15,13 +15,14 @@
         <i class="fa fa-arrow-down"></i>
       </div>
     </div>
-    <Carousel @updateBackgroundGradient="setBackgroundGradient" @scroll="scroll"></Carousel>
+    <Carousel @updateBackgroundGradient="setBackgroundGradient"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
-      <div v-for="(question, index) in questions" :key="index">
-        <OtherQuestions :title="question.title" :options="question.options" :background="backgroundGradient">
+        <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
+          :options="question.options" :background="backgroundGradient" :questionIndex="index"
+          @selectedOption="updateResponse">
         </OtherQuestions>
-      </div>
     </MotionGroup>
+    <button class="btn btn-success" @click="showResponse">submit</button>
   </div>
 </template>
 
@@ -41,9 +42,10 @@ export default {
       questions: [
         { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'] },
         { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'] },
-        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event']},
-        { title: 'My event is...', options:['Indoors', 'Outdoors']}
+        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'] },
+        { title: 'My event is...', options: ['Indoors', 'Outdoors'] }
       ],
+      responses:{},
     };
   },
   mounted() {
@@ -55,6 +57,12 @@ export default {
     setBackgroundGradient(gradient) {
       this.backgroundGradient = gradient; // Update the parent background
     },
+    updateResponse({ questionIndex, selectedOption }) {
+      this.responses[questionIndex] = selectedOption;
+    },
+    showResponse(){
+      console.log(this.responses)
+    }
   },
 };
 </script>
@@ -80,6 +88,6 @@ export default {
   margin-top: 2rem;
   position: absolute;
   bottom: 20px;
-  left: 20px;
+
 }
 </style>
