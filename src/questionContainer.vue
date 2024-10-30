@@ -18,12 +18,19 @@
     <Carousel @updateBackgroundGradient="setBackgroundGradient"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
         <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
-          :options="question.options" :background="backgroundGradient" :questionIndex="index"
+          :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
           @selectedOption="updateResponse">
         </OtherQuestions>
     </MotionGroup>
     <button class="btn btn-success" @click="showResponse">submit</button>
+    <footer style="font-size: 10px;">
+      Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/3FiWjHDj0Zf)<br>
+      "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).<br>
+      "Electric Guitar" (https://skfb.ly/6nFJX) by haerades is licensed under Creative Commons Attribution-NonCommercial (http://creativecommons.org/licenses/by-nc/4.0/).<br>
+      DJ gear by Poly by Google [CC-BY] via Poly Pizza<br>
+    </footer>
   </div>
+  
 </template>
 
 <script>
@@ -40,10 +47,10 @@ export default {
       backgroundGradient: 'linear-gradient(135deg, forestgreen, darkseagreen)',
       showArrow: true,
       questions: [
-        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'] },
-        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'] },
-        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'] },
-        { title: 'My event is...', options: ['Indoors', 'Outdoors'] }
+        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link:'../public/Guitar_Amp.glb' },
+        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'], link:'../public/Piano.glb'  },
+        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'], link:'../public/Electric_guitar.glb'  },
+        { title: 'My event is...', options: ['Indoors', 'Outdoors'], link:'../public/DJ_gear.glb'  }
       ],
       responses:{},
     };

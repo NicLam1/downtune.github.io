@@ -12,7 +12,7 @@
     </div>
     <div class="img-container d-none d-md-block col-md-6 col-lg-7">
       <model-viewer
-      src="../public/Guita_Amp.glb"  
+      :src="link"  
       auto-rotate
       camera-controls
       disable-zoom 
@@ -26,7 +26,7 @@
 import '@google/model-viewer';
 
 export default {
-  props: ['title', 'options', 'questionIndex'],
+  props: ['title', 'options', 'link' ,'questionIndex'],
   components: {
   },
   data() {
