@@ -1,23 +1,21 @@
 <template>
-  <main class="container">
+  <main class="container py-5">
     <h2 class="title">About Club Bandwagon</h2>
-    <p class="description">Join us on an unforgettable musical journey. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    <img src="../images/image5.jpg" alt="Band Photo" class="img-fluid band-photo">
+    <p class="description">Join us on an unforgettable musical journey. Experience the rhythm of our vibes as we blend genres and create unforgettable melodies.</p>
+    <img src="../images/image5.jpg" alt="Band Photo" class="img-fluid band-photo mb-5">
     
     <h3 class="subheading">Band Members</h3>
-    <ul class="list-group members-list">
-      <li class="list-group-item">David Boll</li>
-      <li class="list-group-item">Tan Peng</li>
-      <li class="list-group-item">Pa</li>
-      <li class="list-group-item">Ashraf</li>
+    <ul class="list-group members-list mb-5">
+      <li class="list-group-item" v-for="member in bandMembers" :key="member">{{ member }}</li>
     </ul>
   </main>
 
   <section class="album py-5">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-        <div class="col" v-for="(album, index) in albums" :key="index">
-          <div class="card shadow-sm rotate-animation">
+      <h3 class="subheading mb-4">Our Albums</h3>
+      <div class="album-scroll" ref="albumScroll">
+        <div class="album-item" v-for="(album, index) in albums" :key="index">
+          <div class="card shadow-sm">
             <img :src="album.image" :alt="album.title" class="card-img-top">
             <div class="card-body">
               <p class="card-text">{{ album.title }}</p>
@@ -30,48 +28,98 @@
   </section>
 
   <section class="call-to-action text-center py-5">
-    <h2 class="cta-title">Join the Club Mild Fanclub</h2>
-    <p class="cta-description">Sign up for our email list to get exclusive updates, news, and special offers.</p>
-    <form action="#">
-      <div class="mb-3">
-        <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" required>
-      </div>
-      <button type="submit" class="btn btn-cta">Subscribe</button>
-    </form>
+    <div class="container">
+      <h2 class="cta-title">Join the Club Mild Fanclub</h2>
+      <p class="cta-description">Sign up for our email list to get exclusive updates, news, and special offers.</p>
+      <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+          <input v-model="email" type="email" class="form-control" id="emailInput" placeholder="Enter your email" required>
+        </div>
+        <button type="submit" class="btn btn-cta">Subscribe</button>
+      </form>
+    </div>
   </section>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      albums: [
-        { image: '../images/image5.jpg', title: 'Distraction', duration: '04:11' },
-        { image: '../images/image5.jpg', title: 'Homely', duration: '05:10' },
-        { image: '../images/image5.jpg', title: 'Lonely', duration: '04:30' },
-        { image: '../images/image5.jpg', title: 'Soul', duration: '04:50' }
-      ]
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const bandMembers = ['David Boll', 'Tan Peng', 'Pa', 'Ashraf']
+
+const albums = [
+  { image: '../images/image5.jpg', title: 'Distraction', duration: '04:11' },
+  { image: '../images/image5.jpg', title: 'Homely', duration: '05:10' },
+  { image: '../images/image5.jpg', title: 'Lonely', duration: '04:30' },
+  { image: '../images/image5.jpg', title: 'Soul', duration: '04:50' },
+  { image: '../images/image5.jpg', title: 'Echoes', duration: '03:55' },
+  { image: '../images/image5.jpg', title: 'Whisper', duration: '04:22' }
+]
+
+const email = ref('')
+
+const submitForm = () => {
+  console.log('Submitted email:', email.value)
+  alert('Thanks for subscribing!')
+  email.value = ''
+}
+
+const startInfiniteScroll = () => {
+  const albumScroll = document.querySelector('.album-scroll');
+  const scrollStep = 1; // Adjust for scrolling speed
+
+  if (albumScroll) {
+    const cloneAlbums = () => {
+      const items = albumScroll.querySelectorAll('.album-item');
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        albumScroll.appendChild(clone);
+      });
+    }
+
+    cloneAlbums(); // Clone album items to create seamless scroll
+
+    const scroll = () => {
+      if (albumScroll.scrollLeft >= albumScroll.scrollWidth / 2) {
+        albumScroll.scrollLeft = 0;
+      } else {
+        albumScroll.scrollLeft += scrollStep;
+      }
+      requestAnimationFrame(scroll);
     };
+    scroll();
   }
-};
+}
+
+onMounted(() => {
+  startInfiniteScroll();
+})
 </script>
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 body {
-  background-color: #ffedda;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  color: #333;
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  color: #333;
+}
+
+.title, .subheading {
+  font-family: 'Playfair Display', serif;
+  color: #ff6f61;
+  text-align: center;
 }
 
 .title {
   font-size: 2.5rem;
-  text-align: center;
   margin-bottom: 1.5rem;
-  color: #ff6f61;
-  font-family: 'Playfair Display', serif;
+}
+
+.subheading {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .description {
@@ -82,23 +130,8 @@ body {
 }
 
 .band-photo {
-  max-width: 100%;
-  height: auto;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.subheading {
-  font-size: 2rem;
-  margin-top: 2rem;
-  text-align: center;
-  color: #ff6f61;
-}
-
-.members-list {
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
 }
 
 .members-list .list-group-item {
@@ -108,63 +141,48 @@ body {
   padding: 15px 20px;
   margin: 10px 0;
   border-radius: 8px;
-  transition: transform 0.3s;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
 .members-list .list-group-item:hover {
-  transform: scale(1.05);
+  transform: rotateY(180deg);
+  background-color: #ff6f61;
+  color: #fff;
 }
 
 .album {
-  background-color: #f67280;
-  padding: 2rem 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.album .card {
-  border: none;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
   overflow: hidden;
-  transition: transform 0.6s;
+  padding: 4rem 0;
+  border-radius: 15px;
 }
 
-.rotate-animation {
-  animation: rotate 8s infinite linear;
+.album-scroll {
+  display: flex;
+  overflow-x: hidden;
+  gap: 20px;
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotateY(0deg) rotateX(0deg);
-  }
-  25% {
-    transform: rotateY(90deg) rotateX(10deg);
-  }
-  50% {
-    transform: rotateY(180deg) rotateX(0deg);
-  }
-  75% {
-    transform: rotateY(270deg) rotateX(-10deg);
-  }
-  100% {
-    transform: rotateY(360deg) rotateX(0deg);
-  }
+.album-item {
+  flex: 0 0 auto;
+  width: 250px;
 }
 
-.album .card-img-top {
-  height: 200px;
-  object-fit: cover;
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
 }
 
-.album .card:hover .card-img-top {
+.card:hover {
   transform: scale(1.05);
 }
 
-.album .card-text {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #2c3e50;
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
 }
 
 .cta-title {
