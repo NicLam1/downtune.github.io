@@ -17,23 +17,31 @@
     </div>
     <Carousel @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
-        <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
-          :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
-          @selectedOption="updateResponse">
-        </OtherQuestions>
+      <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
+        :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
+        @selectedOption="updateResponse">
+      </OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-success submit-responses" @click="showResponse">Submit</button>
+    <button class="btn btn-success submit-responses" @click="submitResponses">Submit</button>
     <footer style="font-size: 10px;">
-      Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/3FiWjHDj0Zf)<br>
-      "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).<br>
-      "Electric Guitar" (https://skfb.ly/6nFJX) by haerades is licensed under Creative Commons Attribution-NonCommercial (http://creativecommons.org/licenses/by-nc/4.0/).<br>
+      Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
+      (https://poly.pizza/m/3FiWjHDj0Zf)<br>
+      "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution
+      (http://creativecommons.org/licenses/by/4.0/).<br>
+      "Electric Guitar" (https://skfb.ly/6nFJX) by haerades is licensed under Creative Commons Attribution-NonCommercial
+      (http://creativecommons.org/licenses/by-nc/4.0/).<br>
       DJ gear by Poly by Google [CC-BY] via Poly Pizza<br>
     </footer>
   </div>
-  
+
 </template>
 
 <script>
+import { db } from '../firebaseConfig.js';
+import { collection, doc, setDoc } from "firebase/firestore";
+
+
+
 import Carousel from './Carousel.vue';
 import OtherQuestions from './questionComponent.vue';
 
@@ -47,13 +55,13 @@ export default {
       backgroundGradient: 'linear-gradient(135deg, forestgreen, darkseagreen)',
       showArrow: true,
       questions: [
-        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link:'/Guitar_Amp.glb' },
-        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'], link:'/Piano.glb'  },
-        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'], link:'/Electric_guitar.glb'  },
-        { title: 'My event is...', options: ['Indoors', 'Outdoors'], link:'/DJ_gear.glb'  }
+        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link: '/Guitar_Amp.glb' },
+        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'], link: '/Piano.glb' },
+        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'], link: '/Electric_guitar.glb' },
+        { title: 'My event is...', options: ['Indoors', 'Outdoors'], link: '/DJ_gear.glb' }
       ],
-      responses:{},
-      genres:[],
+      responses: {},
+      genres: [],
     };
   },
   mounted() {
@@ -68,11 +76,28 @@ export default {
     updateResponse({ questionIndex, selectedOption }) {
       this.responses[questionIndex] = selectedOption;
     },
-    showResponse(){
-      console.log(this.responses);
-      console.log(this.genres);
-    },
-    updateGenres(genres){
+    submitResponses() {
+  console.log(this.responses);
+  console.log(this.genres);
+  const userId = "user123"; // Replace with actual user ID
+  const preferences = {
+    genres: this.genres,
+    eventType: this.responses[0],
+    budget: this.responses[1],
+    eventDuration: this.responses[2],
+    eventLocation: this.responses[3],
+  };
+
+  // Save preferences directly to Firestore using the modular syntax
+  setDoc(doc(collection(db, "userPreferences"), userId), preferences)
+    .then(() => {
+      console.log("User preferences saved successfully!");
+    })
+    .catch(error => {
+      console.error("Error saving preferences:", error);
+    });
+},
+    updateGenres(genres) {
       this.genres = genres;
     }
   },
@@ -102,7 +127,8 @@ export default {
   bottom: 20px;
 
 }
-.submit-responses{
+
+.submit-responses {
   border: none;
   outline: none;
   padding: 10px;
@@ -112,10 +138,10 @@ export default {
   transform: 0.3s ease;
   background-color: #00bfff;
   display: block;
-  margin: 20px auto; 
+  margin: 20px auto;
 }
+
 .submit-responses:hover {
   background-color: #00bfff96;
 }
-
 </style>
