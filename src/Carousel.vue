@@ -90,7 +90,7 @@ export default {
     return {
       currentSlideTitle: "Rock",
       currentGenre: "Rock",
-      userSelection: { genres: [] },
+      userSelection: [],
       slides: [
         { title: 'Rock', url: '../images/userQuestionImg/rock.jpg' },
         { title: 'Pop', url: '../images/userQuestionImg/pop.jpeg' },
@@ -110,24 +110,24 @@ export default {
     },
      // Toggles the current genre in the user's selection list
      toggleGenreSelection(genre) {
-      if (this.userSelection.genres.includes(genre)) {
+      if (this.userSelection.includes(genre)) {
         // If the genre is already selected, remove it
-        const index = this.userSelection.genres.indexOf(genre);
-        this.userSelection.genres.splice(index, 1);
+        const index = this.userSelection.indexOf(genre);
+        this.userSelection.splice(index, 1);
       } else {
         // Add the genre to the selected list (ensure the user can only select up to 3)
-        if (this.userSelection.genres.length < 3) {
-          this.userSelection.genres.push(genre);
+        if (this.userSelection.length < 3) {
+          this.userSelection.push(genre);
         } else {
           this.triggerBounceAnimation();
         }
       }
-      console.log(this.userSelection.genres);  // For debugging purposes
+      this.$emit('selectedGenres',this.userSelection);
     },
 
     // Check if a genre is already selected
     isGenreSelected(genre) {
-      return this.userSelection.genres.includes(genre);
+      return this.userSelection.includes(genre);
     },
     triggerBounceAnimation() {
       this.bounceLimitReached = true;
@@ -158,6 +158,7 @@ export default {
     // Watch for changes in backgroundGradient
     backgroundGradient(newGradient) {
       this.$emit('updateBackgroundGradient', newGradient);
+      
     },
   },
 };

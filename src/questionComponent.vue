@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .container {
-  height: 100vh;
+  height: 75vh;
   border-radius: 15px;
   display: flex;
 

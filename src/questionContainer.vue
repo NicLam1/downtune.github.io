@@ -1,6 +1,6 @@
 <template>
   <div class="form-container" :style="{ background: backgroundGradient }">
-    <div class="welcome-container text-center">
+    <div class="welcome-container text-center ">
       <div v-motion :initial="{ opacity: 0, y: 0 }" :enter="{ opacity: 1, y: 0 }" :delay="200" :duration="1500">
         <h1 class="welcome-text">Welcome to Downtune</h1>
       </div>
@@ -15,14 +15,14 @@
         <i class="fa fa-arrow-down"></i>
       </div>
     </div>
-    <Carousel @updateBackgroundGradient="setBackgroundGradient"></Carousel>
+    <Carousel @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
         <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
           :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
           @selectedOption="updateResponse">
         </OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-success" @click="showResponse">submit</button>
+    <button class="btn btn-success submit-responses" @click="showResponse">Submit</button>
     <footer style="font-size: 10px;">
       Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/3FiWjHDj0Zf)<br>
       "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).<br>
@@ -47,12 +47,13 @@ export default {
       backgroundGradient: 'linear-gradient(135deg, forestgreen, darkseagreen)',
       showArrow: true,
       questions: [
-        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link:'../public/Guitar_Amp.glb' },
-        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'], link:'../public/Piano.glb'  },
-        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'], link:'../public/Electric_guitar.glb'  },
-        { title: 'My event is...', options: ['Indoors', 'Outdoors'], link:'../public/DJ_gear.glb'  }
+        { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link:'/Guitar_Amp.glb' },
+        { title: 'What is your budget for live music?', options: ['$400-$600 per hour', '$600-$1000 per hour', '$1000-$1400 per hour', '$1500+ per hour'], link:'/Piano.glb'  },
+        { title: 'How long is the event?', options: ['Less than 6 hours', '6 to 12 hours', 'Multi-Day event'], link:'/Electric_guitar.glb'  },
+        { title: 'My event is...', options: ['Indoors', 'Outdoors'], link:'/DJ_gear.glb'  }
       ],
       responses:{},
+      genres:[],
     };
   },
   mounted() {
@@ -68,7 +69,11 @@ export default {
       this.responses[questionIndex] = selectedOption;
     },
     showResponse(){
-      console.log(this.responses)
+      console.log(this.responses);
+      console.log(this.genres);
+    },
+    updateGenres(genres){
+      this.genres = genres;
     }
   },
 };
@@ -97,4 +102,20 @@ export default {
   bottom: 20px;
 
 }
+.submit-responses{
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 24px;
+  transform: 0.3s ease;
+  background-color: #00bfff;
+  display: block;
+  margin: 20px auto; 
+}
+.submit-responses:hover {
+  background-color: #00bfff96;
+}
+
 </style>
