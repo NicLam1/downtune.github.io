@@ -2,11 +2,16 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router'; // Import the router
+import { MotionPlugin } from '@vueuse/motion';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const app = createApp(App);
 
 app.use(router); // Tell Vue to use the router
-
+app.use(MotionPlugin); 
 app.mount('#app');
 
 // Import the functions you need from the SDKs you need

@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid botwSection ">
         
-        <div class="pt-5 botw row px-5 justify-content-center">
+        <div class="pt-4 botw row px-4 justify-content-center">
           <h1 class='text-center'>Bands of the Week</h1>
           <div class='item col-lg-2'><img src="../images/stock band/image1.jpg"
               class='object-fit-cover' alt> </div>
@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+  color: #e0e0e0;
+}
 .botwSection{
     height: 80vh;
 }

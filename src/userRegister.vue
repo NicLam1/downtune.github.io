@@ -1,6 +1,6 @@
 <template>
 
-  <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
+  <div v-if="!isRegistered" class="backgroundMain d-flex justify-content-center align-items-center w-100">
     <div class="container min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-100 h-100 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
@@ -9,26 +9,29 @@
             <h2 class="text-center text-dark fw-bold mb-4">Register</h2>
             <form @submit.prevent="handleRegister" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
-                <label for="email-address" class="form-label sr-only">Email address</label>
+                <label for="email-address" class="form-label">Email address</label>
                 <input type="email" v-model="email" class="form-control" id="email" required />
               </div>
               <div class="mb-3">
-                <label for="username" class="form-label sr-only">Username</label>
+                <label for="username" class="form-label">Username</label>
                 <input type="text" v-model="username" class="form-control" id="username" required />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label sr-only">Password</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" v-model="password" class="form-control" id="password" required />
               </div>
               <div class="mb-3">
-                <label for="password-confirm" class="form-label sr-only">Confirm Password</label>
+                <label for="password-confirm" class="form-label">Confirm Password</label>
                 <input type="password" v-model="confirmPassword" class="form-control" id="confirmPassword" required />
               </div>
               <p v-if="error" class="text-danger">{{ error }}</p>
               <button type="submit" class="btn btn-primary w-100">Sign Up</button>
             </form>
             <p class="text-center mt-3">
-              Have an account? <a href="../userLogin.html" class="text-primary">Sign In</a>
+              Have an account?
+              <router-link to="/login">
+                <a class="text-primary">Sign In</a>
+              </router-link>
             </p>
           </div>
 
@@ -52,14 +55,19 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <QuestionContainer></QuestionContainer>
+  </div>
 </template>
 
 <script>
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import QuestionContainer from './questionContainer.vue';
 
 export default {
   components: {
+    QuestionContainer
   },
   data() {
     return {
@@ -67,7 +75,8 @@ export default {
       username: '',
       password: '',
       confirmPassword: '',
-      error: ''
+      error: '',
+      isRegistered: false,
     };
   },
   methods: {
@@ -91,6 +100,7 @@ export default {
         });
 
         console.log("User successfully registered:", user);
+        this.isRegistered = true;
       } catch (error) {
         console.error("Error during registration:", error);
         this.error = error.message;
@@ -124,7 +134,7 @@ export default {
 }
 
 .backgroundMain {
-  background: linear-gradient(to right, black , rgb(85, 98, 110));
+  /* background: linear-gradient(to right, black , rgb(85, 98, 110)); */
 }
 </style>
 

@@ -1,7 +1,9 @@
 <template>
-<Botw></Botw>
-<div class="container-fluid ">
-<Cards></Cards>
+<div class="p-lg-4">
+    <Botw></Botw>
+    <div class="container-fluid ">
+    <Cards></Cards>
+</div>
 </div>
 </template>
 

@@ -8,12 +8,12 @@
             <h2 class="text-center text-dark fw-bold mb-4">Sign in to your account</h2>
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
-                <label for="email-address" class="form-label sr-only">Email address</label>
+                <label for="email-address" class="form-label">Email address</label>
                 <input type="email" id="email-address" v-model="email" name="email" class="form-control"
-                  placeholder="Email address" required />
+                placeholder="Email address" required />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label sr-only">Password</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" v-model="password" name="password" class="form-control"
                   placeholder="Password" required />
               </div>
@@ -27,7 +27,10 @@
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
             </form>
             <p class="text-center mt-3">
-              Don't have an account? <a href="../userRegister.html" class="text-primary">Sign up</a>
+              Don't have an account?
+              <router-link to="/register">
+               <a class="text-primary">Sign up</a>
+              </router-link>
             </p>
           </div>
 

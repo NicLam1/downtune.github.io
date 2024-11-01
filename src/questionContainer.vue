@@ -40,8 +40,6 @@
 import { db } from '../firebaseConfig.js';
 import { collection, doc, setDoc } from "firebase/firestore";
 
-
-
 import Carousel from './Carousel.vue';
 import OtherQuestions from './questionComponent.vue';
 
