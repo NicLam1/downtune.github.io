@@ -1,4 +1,4 @@
-[{"id":1,"name":"Vic","genres":"Funk","thumbnail":"http://dummyimage.com/500x500.png/ff4444/ffffff","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":185},
+[{"id":1,"name":"Vic","genres":"Funk","thumbnail":"images/BYJE04412.jpg","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":185},
 {"id":2,"name":"Wittie","genres":"Ambient","thumbnail":"http://dummyimage.com/500x500.png/dddddd/000000","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Lily","price":68},
 {"id":3,"name":"Oswald","genres":"Country","thumbnail":"http://dummyimage.com/500x500.png/cc0000/ffffff","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":432},
 {"id":4,"name":"Berta","genres":"Country","thumbnail":"http://dummyimage.com/500x500.png/5fa2dd/ffffff","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Lily","price":254},

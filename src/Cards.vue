@@ -11,7 +11,9 @@
             <p class="text-light">Welcome, {{ loggedInUser }}!</p>
           </div>
           <div v-else class="login-button mb-3">
-            <button class="btn btn-primary w-100" @click="handleLogin">Log In</button>
+            <router-link to="/login">
+              <button class="btn btn-primary w-100" >Log In</button>
+            </router-link>
           </div>
         </div>
         <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
@@ -201,12 +203,8 @@ export default {
 };
 </script>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #1a1a2e;
-  color: #e0e0e0;
-}
+<style scoped>
+
 
 .cardsSection {
   background: linear-gradient(to bottom, rgba(34, 49, 63, 0.7), rgba(45, 52, 54, 0.7));
@@ -357,6 +355,10 @@ body {
   height: 100%;
 }
 
+.card-img-top{
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
 .card:hover {
   transform: translateY(-10px);
 }

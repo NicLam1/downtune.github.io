@@ -1,19 +1,21 @@
 <template>
   <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
-    <div class="container min-h-screen d-flex justify-content-center align-items-center">
+    <div class="container  min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-100 h-100 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
-          <div class="col-md-12 col-lg-8 p-5 col-flex d-flex flex-column">
+          <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
             <h2 class="text-center text-dark fw-bold mb-4">Sign in to your account</h2>
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
-                <label for="email-address" class="form-label sr-only">Email address</label>
-                <input type="email" id="email-address" v-model="email" name="email" class="form-control" placeholder="Email address" required />
+                <label for="email-address" class="form-label">Email address</label>
+                <input type="email" id="email-address" v-model="email" name="email" class="form-control"
+                placeholder="Email address" required />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label sr-only">Password</label>
-                <input type="password" id="password" v-model="password" name="password" class="form-control" placeholder="Password" required />
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" v-model="password" name="password" class="form-control"
+                  placeholder="Password" required />
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="form-check">
@@ -25,12 +27,15 @@
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
             </form>
             <p class="text-center mt-3">
-              Don't have an account? <a href="/signup" class="text-primary">Sign up</a>
+              Don't have an account?
+              <router-link to="/register">
+               <a class="text-primary">Sign up</a>
+              </router-link>
             </p>
           </div>
 
           <!-- Carousel Section -->
-          <div class="col-md-0 col-lg-4 col-flex d-none d-md-block">
+          <div class="col-md-4 col-0 col-flex d-none d-md-block">
             <div id="carouselExampleSlidesOnly" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner h-100">
                 <div class="carousel-item active">
@@ -52,6 +57,8 @@
 </template>
 
 <script>
+import { auth } from '../firebaseConfig.js';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 export default {
   data() {
     return {
@@ -61,12 +68,17 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
-      // Handle form submission
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
-      console.log("Remember me:", this.rememberMe);
+    async handleSubmit() {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password);
+        const user = userCredential.user;
+        console.log("User successfully logged in:", user);
+      } catch (error) {
+        console.error("Error logging in:", error);
+        this.error = error.message;
+      }
     }
+
   }
 };
 </script>
@@ -75,26 +87,28 @@ export default {
 .min-h-screen {
   min-height: 100vh;
 }
+
 .card {
-  height: 100%;
+  /* height: 100%; */
 }
+
 .col-flex {
-  flex: 1;
+  /* flex: 1; */
 }
+
 .carousel-item {
   height: 100%;
 }
+
 .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .backgroundMain {
-  background-color: rgb(7, 0, 19);
+  background: linear-gradient(to right, black , rgb(85, 98, 110));
 }
 </style>
 
 <!-- Bootstrap -->
-
-
-

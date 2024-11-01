@@ -1,12 +1,22 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './Cards.vue'
+// src/main.js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router'; // Import the router
+import { MotionPlugin } from '@vueuse/motion';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+app.use(router); // Tell Vue to use the router
+app.use(MotionPlugin); 
+app.mount('#app');
 
 // Import the functions you need from the SDKs you need
 
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const genrePillsContainer = document.getElementById('genrePills');
     const genrePills = document.querySelectorAll('.genre-pill');
     const lessCommonGenresDropdown = document.getElementById('lessCommonGenres');
@@ -53,9 +63,3 @@ createApp(App).mount('#app')
       lessCommonGenresDropdown.selectedIndex = 0;
     });
   });
-
-
-import Nav from './Nav.vue';
-createApp(Nav).mount('#nav-container');
-import Botw from './Botw.vue';
-createApp(Botw).mount('#botw')
