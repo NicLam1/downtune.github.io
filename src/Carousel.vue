@@ -92,10 +92,10 @@ export default {
       currentGenre: "Rock",
       userSelection: [],
       slides: [
-        { title: 'Rock', url: '../images/userQuestionImg/rock.jpg' },
-        { title: 'Pop', url: '../images/userQuestionImg/pop.jpeg' },
-        { title: 'Jazz', url: '../images/userQuestionImg/jazz.jpg' },
-        { title: 'Electronic', url: '../images/userQuestionImg/electronic.jpg' },
+        { title: 'Rock', url: '/userQuestionImg/rock.jpg' },
+        { title: 'Pop', url: '/userQuestionImg/pop.jpeg' },
+        { title: 'Jazz', url: '/userQuestionImg/jazz.jpg' },
+        { title: 'Electronic', url: '/userQuestionImg/electronic.jpg' },
       ],
       bounceLimitReached: false, 
     };
