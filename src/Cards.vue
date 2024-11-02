@@ -11,9 +11,9 @@
             <p class="text-light">Welcome, {{ loggedInUser }}!</p>
           </div>
           <div v-else class="login-button mb-3">
-            <button class="btn btn-primary w-100" @click="handleLogin">
-              <i class="fas fa-sign-in-alt"></i> Log In
-            </button>
+            <router-link to="/login">
+              <button class="btn btn-primary w-100" ><i class="fas fa-sign-in-alt"></i> Log In</button>
+            </router-link>
           </div>
         </div>
         <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
