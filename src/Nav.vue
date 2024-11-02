@@ -27,7 +27,7 @@
             <a class="nav-link" href="#">Bands</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Events</a>
+            <a class="nav-link" href="../Calendar">Events</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../userLogin.html">Contact</a>

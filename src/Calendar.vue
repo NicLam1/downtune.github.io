@@ -73,7 +73,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 
 import { ref, onMounted, computed } from 'vue'; // Import onMounted for lifecycle hook
-import { db } from './Calendarfirebase.js'; // Adjust the import path according to your project
+import { db } from '../firebaseConfig.js'; // Adjust the import path according to your project
 import { collection, onSnapshot } from 'firebase/firestore'; // Import onSnapshot
 import { nextTick } from 'vue'; // Import nextTick
 import {  watch } from 'vue'; 
@@ -485,7 +485,7 @@ const zStep = 2500; // Distance between images
 };
 </script>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
