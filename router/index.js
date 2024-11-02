@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../src/home.vue';
 import UserLogin from '../src/userLogin.vue';
 import UserRegister from '../src/userRegister.vue';
+import BandProfile from '../src/bandprofile.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: UserRegister
+  },
+  {
+    path: '/band', 
+    name: 'BandProfile',
+    component: BandProfile
   }
 ];
 
