@@ -5,7 +5,7 @@
 	<div>
 		<nav class="menu">
 			<div class="menu__item">
-				<a class="menu__item-link" href="../bandLogin.html" target="_blank">Artists</a>
+				<a class="menu__item-link" href="../bandLogin" target="_blank">Artists</a>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band1.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band2.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band3.jpg"/>
