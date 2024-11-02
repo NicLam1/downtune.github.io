@@ -106,6 +106,7 @@ h1 {
 	text-transform: uppercase;
 	font-size: 10em;
 	margin: 10px 0;
+  font-family: 'Fugaz One';
 }
 
 @keyframes neonGlow {
