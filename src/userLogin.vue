@@ -10,12 +10,12 @@
               <div class="mb-3">
                 <label for="email-address" class="form-label">Email address</label>
                 <input type="email" id="email-address" v-model="email" name="email" class="form-control"
-                placeholder="Email address" required />
+                 required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" v-model="password" name="password" class="form-control"
-                  placeholder="Password" required />
+                   required />
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="form-check">
@@ -90,6 +90,7 @@ export default {
 
 .card {
   /* height: 100%; */
+  border: none;
 }
 
 .col-flex {
@@ -100,6 +101,11 @@ export default {
   height: 100%;
 }
 
+.carousel.slide {
+  height: 100%;
+  
+}
+
 .carousel-item img {
   width: 100%;
   height: 100%;
@@ -107,8 +113,6 @@ export default {
 }
 
 .backgroundMain {
-  background: linear-gradient(to right, black , rgb(85, 98, 110));
+
 }
 </style>
-
-<!-- Bootstrap -->

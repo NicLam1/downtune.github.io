@@ -117,6 +117,7 @@ export default {
 
 .card {
   /* height: 100%; */
+  border: none;
 }
 
 .col-flex {

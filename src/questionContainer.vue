@@ -104,7 +104,7 @@ export default {
 
 <style scoped>
 .welcome-container {
-  height: 100vh;
+  height: 95vh;
   font-weight: bold;
   display: flex;
   flex-direction: column;
