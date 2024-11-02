@@ -1,15 +1,35 @@
 <template>
+    <header class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Club Bandwagon</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <nav class="navbar-nav ms-auto">
+            <a class="nav-link" href="#">HOME</a>
+            <a class="nav-link" href="#">NEW SINGLE</a>
+            <a class="nav-link" href="#">SUN GAZER SHOWS</a>
+            <a class="nav-link" href="#">BAND</a>
+            <a class="nav-link" href="#">CONTACT</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Band profile main content -->
     <main class="container py-5">
       <h2 class="title">About Club Bandwagon</h2>
       <p class="description">Join us on an unforgettable musical journey. Experience the rhythm of our vibes as we blend genres and create unforgettable melodies.</p>
       <img src="../images/stock band/image5.jpg" alt="Band Photo" class="img-fluid band-photo mb-5">
-      
+  
       <h3 class="subheading">Band Members</h3>
       <ul class="list-group members-list mb-5">
         <li class="list-group-item" v-for="member in bandMembers" :key="member">{{ member }}</li>
       </ul>
     </main>
   
+    <!-- Albums section with infinite scroll -->
     <section class="album py-5">
       <div class="container">
         <h3 class="subheading mb-4">Our Soundtracks</h3>
@@ -27,6 +47,7 @@
       </div>
     </section>
   
+    <!-- Call to action section -->
     <section class="call-to-action text-center py-5">
       <div class="container">
         <h2 class="cta-title">Join the Club Mild Fanclub</h2>
@@ -39,6 +60,16 @@
         </form>
       </div>
     </section>
+  
+    <!-- Footer section -->
+    <footer class="text-center">
+      <div class="social-icons mb-3">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2023 Club Mild | Join the rhythm of our vibes</p>
+    </footer>
   </template>
   
   <script setup>
@@ -65,7 +96,7 @@
   
   const startInfiniteScroll = () => {
     const albumScroll = document.querySelector('.album-scroll');
-    const scrollStep = 1; // Adjust for scrolling speed
+    const scrollStep = 1;
   
     if (albumScroll) {
       const cloneAlbums = () => {
@@ -76,7 +107,7 @@
         });
       }
   
-      cloneAlbums(); // Clone album items to create seamless scroll
+      cloneAlbums();
   
       const scroll = () => {
         if (albumScroll.scrollLeft >= albumScroll.scrollWidth / 2) {
@@ -100,10 +131,46 @@
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
   
   body {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-    color: #333;
+    background: linear-gradient(to bottom, #6a11cb, #2575fc);
+    color: #fff;
     font-family: 'Poppins', sans-serif;
     margin: 0;
+  }
+  
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+  
+  .nav-link {
+    font-weight: 500;
+    color: #f1f1f1;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #ffcbf2;
+  }
+  
+  .social-icons a {
+    color: #ffcbf2;
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+  }
+  
+  .social-icons a:hover {
+    transform: scale(1.2);
+  }
+  
+  footer {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.85);
   }
   
   .title, .subheading {
@@ -189,35 +256,33 @@
   }
   
   .card-img-top {
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px 12px 0 0;
-  }
-  
-  .cta-title {
-    font-size: 2.5rem;
-    color: #ff6f61;
-    margin-bottom: 1rem;
-    font-family: 'Playfair Display', serif;
-  }
-  
-  .cta-description {
-    font-size: 1.2rem;
-    color: #444;
-    margin-bottom: 2rem;
-  }
-  
-  .btn-cta {
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-cta:hover {
-    background-color: #e74c3c;
-  }
-  </style>
-  
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  color: #ff6f61;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.cta-description {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.btn-cta {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #e74c3c;
+}
