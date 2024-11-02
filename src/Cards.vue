@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="container-fluid p-4 px-sm-0">
+  <div id="app" class="container-fluid px-sm-0 px-lg-4 mt-4">
     <!-- Bootstrap Row -->
-    <div class="row no-margin-on-small align-items-start">
+    <div class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3">
       
       <!-- Filter Section -->
       <div class="filter-section col-12 col-lg-3 mb-4 mb-lg-0">
@@ -12,32 +12,34 @@
           </div>
           <div v-else class="login-button mb-3">
             <router-link to="/login">
-              <button class="btn btn-primary w-100" >Log In</button>
+              <button class="btn btn-primary w-100" ><i class="fas fa-sign-in-alt"></i> Log In</button>
             </router-link>
           </div>
         </div>
         <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
-          Toggle Filters
+          <i class="fas fa-sliders-h"></i> Toggle Filters
         </button>
         <div class="collapse d-lg-block" id="filterCollapse">
-          <h3>Filters</h3>
-          <h5>Genres</h5>
+          <h3 class="filter-heading"><i class="fas fa-filter"></i> Filters</h3>
+          <h5><i class="fas fa-music"></i> Genres</h5>
           <div class="genre-pills-container mb-3">
             <div v-for="genre in genres" :key="genre" class="genre-pill" :class="{ 'selected': selectedGenres.includes(genre) }" @click="toggleGenre(genre)">
-              {{ genre }}
+              <i :class="genreIcons[genre]" class="genre-icon"></i> {{ genre }}
             </div>
             <div v-for="genre in additionalGenres" :key="'additional-' + genre" class="genre-pill" :class="{ 'selected': selectedGenres.includes(genre) }" @click="toggleGenre(genre)">
-              {{ genre }}
+              <i :class="genreIcons[genre]" class="genre-icon"></i> {{ genre }}
             </div>
           </div>
 
-          <h5>Other Genres</h5>
+          <h5><i class="fas fa-plus-circle"></i> Other Genres</h5>
           <select class="styled-select mb-3" @change="addLessCommonGenre($event)">
             <option value="" disabled selected>Select other genres...</option>
-            <option v-for="genre in lessCommonGenres" :key="genre" :value="genre" v-if="!selectedGenres.includes(genre)">{{ genre }}</option>
+            <option v-for="genre in lessCommonGenres" :key="genre" :value="genre" v-if="!selectedGenres.includes(genre)">
+              {{ genre }}
+            </option>
           </select>
 
-          <h5>Price Range</h5>
+          <h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
           <div class="d-flex justify-content-between mb-2">
             <span>${{ minPrice }}</span>
             <span>${{ maxPrice }}</span>
@@ -45,25 +47,34 @@
           <input type="range" v-model="priceRange" :min="minPrice" :max="maxPrice" class="styled-range mb-3" @input="updatePriceRange" />
           <p>Up to: ${{ priceRange }}</p>
 
-          <button class="btn btn-danger w-100 mt-3" @click="clearFilters">Clear All Filters</button>
+          <button class="btn btn-danger w-100 mt-3" @click="clearFilters">
+            <i class="fas fa-times-circle"></i> Clear All Filters
+          </button>
         </div>
       </div>
       
       <!-- Cards Section -->
       <div class="cardsSection col-12 col-lg-9">
-        <input type="text" class="search-bar mb-4" placeholder="Search by name or genre..." v-model="searchQuery" @input="resetPage" />
+        <input type="text" class="search-bar mb-4 mx-2" placeholder="Search by name or genre..." v-model="searchQuery" @input="resetPage" />
         <div class="d-flex flex-wrap gap-3 align-items-stretch">
           <div v-for="band in paginatedBands" :key="band.id + '-' + filterTrigger" class="card-container">
             <div class="card h-100">
-              <img :src="band.thumbnail" alt="" class="card-img-top" />
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ band.name }}</h5>
+              <div class="card-image-container">
+                <img :src="band.thumbnail" alt="" class="card-img-top" />
+                <div class="overlay">
+                  <i class="fas fa-play-circle"></i>
+                </div>
+              </div>
+              <div class="card-body d-flex flex-column text-left">
+                <h5 class="card-title fw-bold">{{ band.name }}</h5>
                 <p class="card-text">
                   Genre: {{ band.genres }} <br />
-                  Price: ${{ band.price }}
+                  Rate: ${{ band.price }}/hr
                 </p>
                 <div class="mt-auto">
-                  <a href="#" class="btn btn-primary w-100">More Info</a>
+                  <a href="#" class="btn btn-primary w-100">
+                    <i class="fas fa-info-circle"></i> More Info
+                  </a>
                 </div>
               </div>
             </div>
@@ -73,9 +84,13 @@
 
         <!-- Pagination Controls -->
         <div class="pagination-controls d-flex justify-content-center mt-4">
-          <button class="btn btn-secondary me-2" :disabled="currentPage === 1" @click="prevPage">Previous Page</button>
+          <button class="btn btn-secondary me-2" :disabled="currentPage === 1" @click="prevPage">
+            <i class="fas fa-chevron-left"></i> Previous Page
+          </button>
           <span>Page {{ currentPage }} of {{ totalPages }}</span>
-          <button class="btn btn-secondary ms-2" :disabled="currentPage === totalPages" @click="nextPage">Next Page</button>
+          <button class="btn btn-secondary ms-2" :disabled="currentPage === totalPages" @click="nextPage">
+            Next Page <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -105,7 +120,28 @@ export default {
       maxPrice: 500,
       currentPage: 1,
       itemsPerPage: 15,
-      filterTrigger: 0,  // New property to trigger animation
+      filterTrigger: 0,
+      genreIcons: {
+        'Pop': 'fas fa-music',
+        'Country': 'fas fa-guitar',
+        'Ambient': 'fas fa-leaf',
+        'Jazz': 'fas fa-music',
+        'Rock': 'fas fa-guitar',
+        'Hip Hop': 'fas fa-microphone-alt',
+        'Metal': 'fas fa-skull',
+        'Electronic': 'fas fa-headphones',
+        'Blues': 'fas fa-music',
+        'Reggae': 'fas fa-tree',
+        'Folk': 'fas fa-tree',
+        'Indie': 'fas fa-star',
+        'Ska': 'fas fa-music',
+        'Punk': 'fas fa-bolt',
+        'Funk': 'fas fa-guitar',
+        'Latin': 'fas fa-music',
+        'Gospel': 'fas fa-church',
+        'Grunge': 'fas fa-smog',
+        'Soul': 'fas fa-heart',
+      },
     };
   },
   computed: {
@@ -130,20 +166,24 @@ export default {
   methods: {
     updatePriceRange() {
       this.resetPage();
-      this.filterTrigger++;  // Increment to trigger animation whenever price changes
+      this.filterTrigger++;
     },
     resetPage() {
       this.currentPage = 1;
-      this.filterTrigger++;  // Increment to trigger animation
+      this.filterTrigger++;
     },
     toggleGenre(genre) {
       if (this.selectedGenres.includes(genre)) {
         this.selectedGenres = this.selectedGenres.filter(g => g !== genre);
+        if (this.additionalGenres.includes(genre)) {
+          this.additionalGenres = this.additionalGenres.filter(g => g !== genre);
+          this.lessCommonGenres.push(genre);
+        }
       } else {
         this.selectedGenres.push(genre);
       }
       this.resetPage();
-      this.filterTrigger++;  // Increment to trigger animation
+      this.filterTrigger++;
     },
     addLessCommonGenre(event) {
       const genre = event.target.value;
@@ -158,7 +198,7 @@ export default {
       this.lessCommonGenres = this.lessCommonGenres.filter(g => g !== genre);
       event.target.selectedIndex = 0;
       this.resetPage();
-      this.filterTrigger++;  // Increment to trigger animation
+      this.filterTrigger++;
     },
     clearFilters() {
       this.selectedGenres = [];
@@ -206,21 +246,29 @@ export default {
 <style scoped>
 
 
+#app {
+  /* Remove side padding on small screens */
+  padding-left: 0;
+  padding-right: 0;
+  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+}
+
 .cardsSection {
-  background: linear-gradient(to bottom, rgba(34, 49, 63, 0.7), rgba(45, 52, 54, 0.7));
-  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9));
   padding: 20px;
   border-radius: 16px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-grow: 1;
+  min-height: 130vh;
 }
 
 .search-bar {
   padding: 15px;
   border-radius: 50px;
   border: none;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
@@ -229,14 +277,14 @@ export default {
 }
 
 .search-bar::placeholder {
-  color: #adadad;
+  color: #b8a1c9;
 }
 
 .styled-select {
   padding: 10px;
   border-radius: 16px;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(102, 0, 153, 0.3);
   color: #ffffff;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
@@ -246,7 +294,7 @@ export default {
 }
 
 .styled-select option {
-  background: #2a2a40;
+  background: #3d004d;
   color: #ffffff;
 }
 
@@ -254,10 +302,11 @@ export default {
   width: 100%;
   height: 10px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #6a0572, #a6038b);
+  background: linear-gradient(135deg, #b000e8, #ff00ff);
   outline: none;
   opacity: 0.9;
   transition: opacity 0.2s;
+  cursor: pointer;
 }
 
 .styled-range::-webkit-slider-thumb {
@@ -266,7 +315,7 @@ export default {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #ff7e5f;
+  background: #ff6bd6;
   cursor: pointer;
 }
 
@@ -274,7 +323,7 @@ export default {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #ff7e5f;
+  background: #ff6bd6;
   cursor: pointer;
 }
 
@@ -284,9 +333,11 @@ export default {
   padding: 10px;
   display: flex;
   align-items: stretch;
-  opacity: 0; /* Set initial opacity to 0 for the animation effect */
-  animation: fadeInUp 0.2s ease-in-out forwards; /* Use forwards to keep final state */
+  opacity: 0;
+  animation: fadeInUp 0.2s ease-in-out forwards;
   animation-delay: var(--animation-delay);
+  cursor: pointer;
+  
 }
 
 @keyframes fadeInUp {
@@ -343,11 +394,11 @@ export default {
 }
 
 .card {
-  background: rgba(31, 38, 135, 0.37);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(58, 0, 77, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
   border-radius: 16px;
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: transform 0.3s;
   width: 100%;
   display: flex;
@@ -355,31 +406,35 @@ export default {
   height: 100%;
 }
 
-.card-img-top{
-  aspect-ratio: 1/1;
+.card-img-top {
   object-fit: cover;
+  aspect-ratio: 1/1;
 }
+
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 .card-title {
-  color: #f39c12;
+  color: #ff00ff;
 }
 
 .card-text {
-  color: #ffffff;
+  color: #e6e1e5;
 }
 
 .filter-section {
-  background: linear-gradient(to bottom, rgba(52, 73, 94, 0.7), rgba(44, 62, 80, 0.7));
+  background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
   padding: 15px;
   border-radius: 16px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
   min-height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .genre-pills-container {
@@ -391,7 +446,7 @@ export default {
 
 .genre-pill {
   padding: 10px 20px;
-  background: linear-gradient(135deg, #6a0572, #a6038b);
+  background: linear-gradient(135deg, #6f00e8, #c603ff);
   border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
@@ -399,11 +454,41 @@ export default {
   transition: background 0.3s, color 0.3s;
   user-select: none;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
 }
 
 .genre-pill.selected {
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: linear-gradient(135deg, #e600e8, #ff66ff);
   color: #fff;
+}
+
+.genre-icon {
+  margin-right: 8px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(26, 0, 38, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #fff;
+  font-size: 48px;
+}
+
+.card-image-container {
+  position: relative;
+}
+
+.card-image-container:hover .overlay {
+  opacity: 1;
 }
 
 .pagination-controls {
@@ -411,35 +496,44 @@ export default {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff512f, #dd2476);
+  background: linear-gradient(135deg, #d900ff, #7500e8);
   border: none;
   transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: linear-gradient(135deg, #ff66ff, #c603ff);
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  background: linear-gradient(135deg, #7100e0, #ac00e8);
   border: none;
   color: #fff;
   transition: background-color 0.3s;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(135deg, #5b86e5, #36d1dc);
+  background: linear-gradient(135deg, #b66dff, #d66bff);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, #e52d27, #b31217);
+  background: linear-gradient(135deg, #a000e8, #7500e8);
   border: none;
   color: #fff;
   transition: background-color 0.3s;
 }
 
 .btn-danger:hover {
-  background: linear-gradient(135deg, #ff6a6a, #ff4b4b);
+  background: linear-gradient(135deg, #d666ff, #e600e8);
+}
+
+.filter-heading {
+  display: flex;
+  align-items: center;
+}
+
+.filter-heading i {
+  margin-right: 8px;
 }
 
 .custom-gap {
@@ -452,17 +546,3 @@ export default {
   }
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
