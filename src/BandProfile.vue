@@ -2,7 +2,7 @@
   <main class="container py-5">
     <h2 class="title">About Club Bandwagon</h2>
     <p class="description">Join us on an unforgettable musical journey. Experience the rhythm of our vibes as we blend genres and create unforgettable melodies.</p>
-    <img src="../images/image5.jpg" alt="Band Photo" class="img-fluid band-photo mb-5">
+    <img src="../images/stock band/image5.jpg" alt="Band Photo" class="img-fluid band-photo mb-5">
     
     <h3 class="subheading">Band Members</h3>
     <ul class="list-group members-list mb-5">
@@ -12,7 +12,7 @@
 
   <section class="album py-5">
     <div class="container">
-      <h3 class="subheading mb-4">Our Albums</h3>
+      <h3 class="subheading mb-4">Our Soundtracks</h3>
       <div class="album-scroll" ref="albumScroll">
         <div class="album-item" v-for="(album, index) in albums" :key="index">
           <div class="card shadow-sm">
@@ -47,12 +47,12 @@ import { ref, onMounted } from 'vue'
 const bandMembers = ['David Boll', 'Tan Peng', 'Pa', 'Ashraf']
 
 const albums = [
-  { image: '../images/image5.jpg', title: 'Distraction', duration: '04:11' },
-  { image: '../images/image5.jpg', title: 'Homely', duration: '05:10' },
-  { image: '../images/image5.jpg', title: 'Lonely', duration: '04:30' },
-  { image: '../images/image5.jpg', title: 'Soul', duration: '04:50' },
-  { image: '../images/image5.jpg', title: 'Echoes', duration: '03:55' },
-  { image: '../images/image5.jpg', title: 'Whisper', duration: '04:22' }
+  { image: '../images/stock band/image1.jpg', title: 'Distraction', duration: '04:11' },
+  { image: '../images/stock band/image3.jpg', title: 'Homely', duration: '05:10' },
+  { image: '../images/stock band/image4.jpg', title: 'Lonely', duration: '04:30' },
+  { image: '../images/stock band/image6.jpg', title: 'Soul', duration: '04:50' },
+  { image: '../images/stock band/image5.jpg', title: 'Echoes', duration: '03:55' },
+  { image: '../images/stock band/image2.jpg', title: 'Whisper', duration: '04:22' }
 ]
 
 const email = ref('')
@@ -134,14 +134,23 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.members-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
 .members-list .list-group-item {
+  width: 60%;
   background: rgba(255, 255, 255, 0.9);
   color: #2c3e50;
   border: none;
   padding: 15px 20px;
-  margin: 10px 0;
+  margin: 5px 0;
   border-radius: 8px;
   transition: transform 0.8s;
+  text-align: center;
   transform-style: preserve-3d;
 }
 
