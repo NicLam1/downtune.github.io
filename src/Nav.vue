@@ -48,7 +48,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 .custom-navbar {
-  background: linear-gradient(to right, #243b55, #141e30);
+  background: linear-gradient(to right, #240244, #100014);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1em;
 }

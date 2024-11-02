@@ -244,13 +244,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 
-body {
-  font-family: 'Fugaz One', cursive;
-  background-color: #1a0026;
-  color: #e6e1e5;
-}
 
 #app {
   /* Remove side padding on small screens */
@@ -260,13 +254,14 @@ body {
 }
 
 .cardsSection {
-  background: linear-gradient(135deg, rgba(58, 0, 77, 0.85), rgba(120, 0, 255, 0.9));
+  background: linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9));
   padding: 20px;
   border-radius: 16px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   flex-grow: 1;
+  min-height: 130vh;
 }
 
 .search-bar {
@@ -342,6 +337,7 @@ body {
   animation: fadeInUp 0.2s ease-in-out forwards;
   animation-delay: var(--animation-delay);
   cursor: pointer;
+  
 }
 
 @keyframes fadeInUp {
@@ -429,7 +425,7 @@ body {
 }
 
 .filter-section {
-  background: linear-gradient(135deg, rgba(64, 0, 128, 0.85), rgba(158, 0, 255, 0.85));
+  background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
   padding: 15px;
   border-radius: 16px;
   backdrop-filter: blur(10px);

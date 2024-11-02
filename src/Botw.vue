@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid botwSection">
     <!-- Grid view for large screens -->
-    <div class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-4">
+    <div class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-5">
       <div class="title"><h1 class="text-center botw-heading">Bands of the Week</h1></div>
       
       <div class="item col-lg-2" v-for="(band, index) in bands" :key="index">
@@ -131,25 +131,37 @@ h1 {
   position: relative;
 }
 
-.botw .item:hover {
+.botw  .item:hover {
   filter: brightness(1);
-  transform: translateZ(100px) scale(1.1);
-  z-index: 10;
+  transform: translateZ(150px);
 }
 
-/* Adjust neighboring items when an item is hovered */
-.botw .item:hover ~ .item {
+.botw  .item:hover + * {
   filter: brightness(0.6);
-  transform: translateZ(50px) rotateY(20deg);
+  transform: translateZ(100px) rotateY(30deg);
 }
 
-.botw .item:hover ~ .item ~ .item {
+.botw  .item:hover + * + * {
   filter: brightness(0.4);
-  transform: translateZ(20px) rotateY(10deg);
+  transform: translateZ(50px) rotateY(10deg);
 }
 
-.botw .item:not(:hover):not(:hover) {
-  filter: brightness(0.5);
+.botw  .item:hover + * + * + * {
+  filter: brightness(0.2);
+  transform: translateZ(20px) rotateY(5deg);
+}
+
+.botw  .item:has(+ * :hover) {
+  filter: brightness(0.6);
+  transform: translateZ(100px) rotateY(-30deg);
+}
+.botw  .item:has(+ * + *:hover) {
+  filter: brightness(0.4);
+  transform: translateZ(50px) rotateY(-10deg);
+}
+.botw  .item:has(+ * + * + *:hover) {
+  filter: brightness(0.2);
+  transform: translateZ(20px) rotateY(-5deg);
 }
 
 .image-container {
@@ -186,7 +198,7 @@ h1 {
 
 .caption h3 {
   margin: 0;
-  font-family: 'Fugaz One', cursive;
+  font-family: 'Fugaz One';
   animation: captionGlow 2s infinite alternate;
 }
 
