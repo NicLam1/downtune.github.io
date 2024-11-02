@@ -39,36 +39,35 @@
                       </div>
                     
                     <div v-else>
-                        <!-- Login Form Section -->
-                        <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
-                            <h2 class="text-center text-dark fw-bold mb-4">Sign in to your account</h2>
-                            <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
-                            <div class="mb-3">
-                                <label for="email-address" class="form-label">Email address</label>
-                                <input type="email" id="email-address" v-model="email" name="email" class="form-control"
-                                placeholder="Email address" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" v-model="password" name="password" class="form-control"
-                                placeholder="Password" required />
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" v-model="rememberMe">
-                                <label class="form-check-label" for="remember-me">Remember me</label>
-                                </div>
-                                <a href="/forgot-password" class="text-primary">Forgot your password?</a>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
-                            </form>
-                            <p class="text-center mt-3">
-                            Don't have an account?
-                            <router-link to="/register">
-                            <a class="text-primary">Sign up</a>
-                            </router-link>
-                            </p>
-                        </div>
+                        <form v-show="showLoginForm" id="loginForm" :class="{'slide-in': showLoginForm, 'slide-out': !showLoginForm}">
+                            <h2>Band Login</h2>
+                            <input type="text" placeholder="Username" required>
+                            <input type="password" placeholder="Password" required>
+                            <button class="sub" type="submit">Login</button>
+                        </form>
+                
+                        <form v-show="!showLoginForm" id="signupForm" :class="{'slide-in': !showLoginForm, 'slide-out': showLoginForm}">
+                            <h2>Band Sign Up</h2>
+                            <input type="text" id="username" placeholder="Username" required>
+                            <input type="password" id="password" placeholder="Password" required>
+                            <input type="text" id="bandName" placeholder="Band Name" required>
+                            <select id="genre" required>
+                                <option value="">Select genre</option>
+                                <option value="rock">Rock</option>
+                                <option value="pop">Pop</option>
+                                <option value="jazz">Jazz</option>
+                                <option value="hiphop">Hip Hop</option>
+                                <option value="electronic">Electronic</option>
+                                <option value="classical">Classical</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="profilePicture">Profile Picture (optional)</label>
+                            <input type="file" id="profilePicture">
+                            <input type="url" id="spotifyLink" placeholder="Spotify Link (optional)">
+                            <button class="sub" type="submit">Sign Up</button>
+                        </form>
+                
+                        <p class="toggle-form" @click="toggleForm">{{ buttonText }}</p>
                     </div>
                 </div>
 
