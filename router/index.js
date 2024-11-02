@@ -6,6 +6,7 @@ import UserRegister from '../src/userRegister.vue';
 import BandProfile from '../src/bandProfile.vue'
 import chooseUserType from '../src/chooseUserType.vue';
 import bandLogin from '../src/bandLogin.vue';
+import newBandLogin from '../src/newBandLogin.vue';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/band', 
     name: 'BandProfile',
     component: BandProfile
+  },
+  {
+    path: '/newBandLogin', 
+    name: 'newBandLogin',
+    component: newBandLogin
   }
 ];
 
