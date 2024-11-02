@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg custom-navbar">
+  <nav class="navbar navbar-expand-lg custom-navbar" :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <span class="nav-title">Downtune</span>
@@ -39,8 +39,21 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
 export default {
-  name: "Nav",
+  name: "Nav", 
+  setup() {
+    const route = useRoute();
+    
+    // This will hold the state of whether we are on the Calendar page
+    const isCalendarPage = computed(() => route.name === 'Calendar'); 
+
+    return {
+      isCalendarPage,
+    };
+  },
 };
 </script>
 
@@ -51,6 +64,15 @@ export default {
   background: linear-gradient(to right, #240244, #100014);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1em;
+
+}
+
+
+.custom-navbar-sticky-for-calendar{
+  z-index: 100000000; 
+  position: sticky;
+  top: 0;
+  /* Make sure z index is high so it works for the calendar / evnet page */
 }
 
 .nav-title {

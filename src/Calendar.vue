@@ -93,6 +93,15 @@ const vertexShader = `
     }
 `;
 
+
+// linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9))
+// vec3 color1 = vec3(0.396, 0.0, 0.639); // Dark purple
+// vec3 color2 = vec3(0.435, 0.0, 0.91);   // darker purple
+
+// vec3 color1 = vec3(0.125, 0.004, 0.169); // Dark purple
+// vec3 color2 = vec3(0.039, 0.0, 0.078);   // darker purple
+
+
 const fragmentShader = `
     uniform vec2 iResolution;
     uniform float iTime;
@@ -104,8 +113,8 @@ const fragmentShader = `
         float normalizedValue = (value + 1.0) / 2.0; // Assuming value ranges from -1 to 1
         
         // Define colors
-        vec3 color1 = vec3(0.396, 0.0, 0.639); // Dark purple
-        vec3 color2 = vec3(0.435, 0.0, 0.91);   // darker purple
+        vec3 color1 = vec3(0.161,0.,0.231); // Dark purple
+        vec3 color2 = vec3(0.09,0.,0.129);   // darker purple
         
         // Define the color blend logic
         if (abs(value) < 0.2) {
@@ -510,34 +519,14 @@ img {
 
 .color-1 {
     font-size: 50px;
-    color: #ff6700; 
-    text-shadow:
-      0 0 5px #ff6700,
-      0 0 10px #ff6700,
-      0 0 20px #ff6700,
-      0 0 40px #ff6700,
-      0 0 80px #ff6700,
-      0 0 90px #ff6700,
-      0 0 100px #ff6700,
-      0 0 150px #ff6700;
+    color: #ff00ff;
     font-weight: bold;
-    -webkit-text-stroke: 1px #ff0000; /* Outline color and thickness */
+
 }
 
 .color-2 {
     font-size: 30px;
-    color: #000000; 
-    text-shadow:
-      0 0 5px #FFFFFF,
-      0 0 10px #FFFFFF,
-      0 0 20px #FFFFFF,
-      0 0 40px #FFFFFF,
-      0 0 80px #FFFFFF,
-      0 0 90px #FFFFFF,
-      0 0 100px #FFFFFF,
-      0 0 150px #FFFFFF;
-    font-weight: bold;
-    /* -webkit-text-stroke: 1px #FFFFFF; Outline color and thickness */
+    color: white;
 }
 
   
@@ -629,6 +618,18 @@ nav > div{
 }
 
 
+.slide-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    background-color: #3d004d;;
+    box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 10%
+  }
 
 .slide.slide-class-video{
     display: block;
@@ -636,8 +637,11 @@ nav > div{
     align-items: center;
     height: auto; /* Fixed height */
     width: auto; /* Full width of the container */
-    background-color: #00000092;
-    border-radius: 10%;
+    background-color: #3d004d;;
+    box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
     padding: 2%;
   }
 
@@ -693,15 +697,7 @@ nav > div{
 
 
 
-.slide-text {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    background-color: #00000092;
-    border-radius: 10%;
-    padding: 10%
-  }
+
 
 .overlay {
     position: fixed;
@@ -734,5 +730,11 @@ nav > div{
     pointer-events: none;
 }
 
+
+#app .custom-navbar {
+    position: sticky !important;
+    top: 0;
+    z-index: 1000; /* Ensures it stays on top of other elements */
+}
 
 </style>
