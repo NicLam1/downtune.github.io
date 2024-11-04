@@ -77,11 +77,14 @@ export default {
 
 .botwSection {
   background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  /* background-image: url('src/chooseUserTypeImg/band4.jpg'); */
   padding: 40px 0;
   position: relative;
   overflow: hidden;
+  object-fit: cover;
+  background-repeat: none;
   
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(50px);
   
 }
 .title {
@@ -121,6 +124,7 @@ h1 {
 .botw {
   transform-style: preserve-3d;
   transform: perspective(1000px);
+  
 }
 
 .botw .item {

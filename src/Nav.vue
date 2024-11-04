@@ -8,8 +8,10 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <!-- Updated navbar-collapse -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <!-- Navigation links on the left -->
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
@@ -26,6 +28,17 @@
             <a class="nav-link">Contact</a>
           </li>
         </ul>
+        <!-- Login button on the right -->
+        <div class="user-section">
+          <div v-if="loggedInUser" class="logged-in-info">
+            <p class="text-light">Welcome, {{ loggedInUser }}!</p>
+          </div>
+          <div v-else class="login-button">
+            <router-link to="/choose">
+              <button class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Log In</button>
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -61,12 +74,11 @@ export default {
   z-index: 100000000; /* Higher z-index to appear above the background */
 }
 
-
 .custom-navbar-sticky-for-calendar {
   z-index: 100000000;
   position: sticky;
   top: 0;
-  /* Make sure z index is high so it works for the calendar / evnet page */
+  /* Make sure z index is high so it works for the calendar / event page */
 }
 
 .nav-title {
@@ -75,7 +87,7 @@ export default {
   color: #feb47b;
   /* Using the accent color for a pop */
   font-size: 1.5rem;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .navbar-nav .nav-link {
@@ -117,5 +129,35 @@ export default {
 
 router-link a {
   text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff66ff, #c603ff);
+}
+
+/* Additional styling for alignment */
+.user-section {
+  display: flex;
+  align-items: center;
+}
+
+.logged-in-info p {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: #f0f0f0;
+}
+
+.login-button .btn {
+  font-family: "Poppins", sans-serif;
+}
+
+a.router-link-active{
+  color: #ff7e5f;
 }
 </style>

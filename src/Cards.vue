@@ -6,16 +6,7 @@
       <!-- Filter Section -->
       <div class="filter-section col-12 col-lg-3 mb-4 mb-lg-0">
         <!-- User Section -->
-        <div class="user-section col-12 col-lg-12 mb-4 mb-lg-0">
-          <div v-if="loggedInUser" class="logged-in-info mb-3">
-            <p class="text-light">Welcome, {{ loggedInUser }}!</p>
-          </div>
-          <div v-else class="login-button mb-3">
-            <router-link to="/choose">
-              <button class="btn btn-primary w-100" ><i class="fas fa-sign-in-alt"></i> Log In</button>
-            </router-link>
-          </div>
-        </div>
+        
         <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
           <i class="fas fa-sliders-h"></i> Toggle Filters
         </button>
@@ -256,7 +247,7 @@ export default {
 .cardsSection {
   background: linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9));
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 0px 16px 16px 0px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -427,7 +418,7 @@ export default {
 .filter-section {
   background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
   padding: 15px;
-  border-radius: 16px;
+  border-radius: 16px 0px 0px 16px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);

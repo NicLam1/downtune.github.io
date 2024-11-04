@@ -1,5 +1,6 @@
 
 <template>
+	<div>
     <body>
 	
 	<div>
@@ -39,7 +40,7 @@
 		</nav>
 	</div>
 </body>
-
+</div>
 </template>
 
 <style scoped>
