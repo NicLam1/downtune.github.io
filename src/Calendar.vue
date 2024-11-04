@@ -13,7 +13,7 @@
       :key="event.id" 
     >
       <div class="slide-img">
-        <img :src="`./src/assets/Band/${event.bandName}_image1.png`" alt="Band Image" />
+        <img :src="`../images/calendar/${event.bandName}_image1.png`" alt="Band Image" />
       </div>
       <div class="slide-text  landscape-mode">
         <h1 class = "color-1">{{ event.bandName }}</h1>
