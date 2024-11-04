@@ -5,7 +5,7 @@
 	<div>
 		<nav class="menu">
 			<div class="menu__item">
-				<a class="menu__item-link" href="../bandLogin" target="_blank">Artists</a>
+				<router-link to="/login/band" class="menu__item-link">Artists</router-link>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band1.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band2.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/band3.jpg"/>
@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="menu__item">
-				<a class="menu__item-link">Listener</a>
+				<router-link to="/login/user" class="menu__item-link">Listener</router-link>
                 <img class="menu__item-img" src="./chooseUserTypeImg/fan3.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/fan6.jpg"/>
 				<img class="menu__item-img" src="./chooseUserTypeImg/fan4.jpg"/>
@@ -236,4 +236,5 @@ body {
     transform: translate3d(0,-30%,0) rotate3d(0,0,1,5deg);
     transition: all 0.4s 0.4s;
 }
+
 </style>
