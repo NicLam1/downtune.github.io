@@ -293,7 +293,7 @@ onBeforeUnmount(() => {
       </div>
 
       <h2>{{ event.bandName }}</h2>
-      <img :src="`../images/calendar/${event.bandName}_image1.png`" :alt="event.bandName" class="band-image" />
+      <img :src="`../calendar/${event.bandName}_image1.png`" :alt="event.bandName" class="band-image" />
       <p class = "color-2">&#x1F553; {{ formatTime(event.performanceStart)}} - {{ formatTime(event.performanceEnd)}}</p>
       <p class = "color-2">&#x1F4CD; {{ event.location }} </p>
       <p class = "color-2" >&#x1F4FA; Livestream? <span v-if="event.livestream  !== '' "> &#x2705;</span><span v-else>&#x274C;</span> </p>
@@ -312,7 +312,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .band-card {
   /* background-color: #333; */
-  background-image: url('../images/calendar/background-mid.png');
+  background-image: url('../calendar/background-mid.png');
   
   border-radius: 8px;
   color: white;
@@ -551,7 +551,7 @@ body {
 
 
     .bg-container-start {
-  background-image: url('../images/calendar/wallpaperstart.png');
+  background-image: url('../calendar/wallpaperstart.png');
   background-position: top center;
   background-repeat: no-repeat;
   background-size: 2600px auto; /* Set specific background size */
@@ -568,7 +568,7 @@ body {
 
 
 .bg-container-end {
-  background-image: url('../images/calendar/wallpaperend.png'); /* Replace with your image path */
+  background-image: url('../calendar/wallpaperend.png'); /* Replace with your image path */
   background-position: top center; /* Aligns the image to the top center */
   background-repeat: no-repeat;
   background-size: 1300px auto; /* Set specific background size */
