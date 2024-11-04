@@ -1,6 +1,6 @@
 <template>
   <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
-    <div class="container  min-h-screen d-flex justify-content-center align-items-center">
+    <div class="container min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-100 h-100 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
@@ -9,13 +9,11 @@
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
                 <label for="email-address" class="form-label">Email address</label>
-                <input type="email" id="email-address" v-model="email" name="email" class="form-control"
-                 required />
+                <input type="email" id="email-address" v-model="email" name="email" class="form-control" required />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" v-model="password" name="password" class="form-control"
-                   required />
+                <input type="password" id="password" v-model="password" name="password" class="form-control" required />
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="form-check">
@@ -29,7 +27,7 @@
             <p class="text-center mt-3">
               Don't have an account?
               <router-link to="/register/user" class="text-primary">
-              Sign up
+                Sign up
               </router-link>
             </p>
           </div>
@@ -57,15 +55,22 @@
 </template>
 
 <script>
-import { auth } from '../firebaseConfig.js';
+import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { inject } from 'vue';
+
 export default {
   data() {
     return {
       email: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      error: null
     };
+  },
+  setup() {
+    const setLoginState = inject('setLoginState');
+    return { setLoginState };
   },
   methods: {
     async handleSubmit() {
@@ -73,12 +78,13 @@ export default {
         const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password);
         const user = userCredential.user;
         console.log("User successfully logged in:", user);
+        this.setLoginState(true);
+        this.$router.push('/'); // Redirect to home page
       } catch (error) {
         console.error("Error logging in:", error);
         this.error = error.message;
       }
     }
-
   }
 };
 </script>
@@ -89,12 +95,11 @@ export default {
 }
 
 .card {
-  /* height: 100%; */
   border: none;
 }
 
 .col-flex {
-  /* flex: 1; */
+  flex: 1;
 }
 
 .carousel-item {
@@ -103,7 +108,6 @@ export default {
 
 .carousel.slide {
   height: 100%;
-  
 }
 
 .carousel-item img {

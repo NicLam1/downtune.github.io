@@ -7,11 +7,16 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { isLoggedIn, setLoginState } from './authState';
 
 const app = createApp(App);
 
 app.use(router); // Tell Vue to use the router
 app.use(MotionPlugin); 
+
+app.provide('isLoggedIn', isLoggedIn);
+app.provide('setLoginState', setLoginState);
+
 app.mount('#app');
 
 // Import the functions you need from the SDKs you need
