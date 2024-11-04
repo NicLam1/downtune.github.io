@@ -7,6 +7,10 @@ import BandProfile from '../src/bandProfile.vue';
 import chooseUserType from '../src/chooseUserType.vue';
 import bandLogin from '../src/bandLogin.vue';
 import newBandLogin from '../src/newBandLogin.vue';
+import newBandRegis from '../src/newBandRegis.vue';
+import bandQnComponent from '../src/bandQnComponent.vue';
+import bandQnContainer from '../src/bandQnContainer.vue';
+import questionContainer from '../src/questionContainer.vue';
 
 const routes = [
   {
@@ -43,6 +47,26 @@ const routes = [
     path: '/newBandLogin', 
     name: 'newBandLogin',
     component: newBandLogin
+  },
+  {
+    path: '/newBandRegis', 
+    name: 'newBandRegis',
+    component: newBandRegis
+  },
+  {
+    path: '/bandQnComponent', 
+    name: 'bandQnComponent',
+    component: bandQnComponent
+  },
+  {
+    path: '/bandQnContainer', 
+    name: 'bandQnContainer',
+    component: bandQnContainer
+  },
+  {
+    path: '/questionContainer', 
+    name: 'questionContainer',
+    component: questionContainer
   }
 ];
 
