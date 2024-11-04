@@ -64,7 +64,8 @@ export default {
   background: linear-gradient(to right, #240244, #100014);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1em;
-
+  position: relative; /* Ensure z-index works */
+  z-index: 100000000; /* Higher z-index to appear above the background */
 }
 
 

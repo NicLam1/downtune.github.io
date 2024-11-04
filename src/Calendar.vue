@@ -1,5 +1,6 @@
 
 <template>
+  <div class="nav-sticky"><a class="nav-link" href="../Calendar2">If you’re experiencing lag, click here for a better user experience.</a></div>
       <div class="container">
         <div class="overlay">
   <div class="slider" id = "slider" >
@@ -20,6 +21,7 @@
          </p>
         <p class = "color-2">&#x1F553; {{ formatTime(event.performanceStart)}} - {{ formatTime(event.performanceEnd)}}</p>
         <p class = "color-2">&#x1F4CD; {{ event.location }} </p>
+        <p class = "color-2" >&#x1F4FA; Livestream? <span v-if="event.livestream  !== '' "> &#x2705;</span><span v-else>&#x274C;</span> </p>
         
       </div>
     </div> 
@@ -196,9 +198,10 @@ setup() {
 
 
   //Use first one for actual date, else use below for debugging
-//const today = new Date();
+const today = new Date();
 // Set a specific date and time for debugging
-const today = new Date('2024-10-27T20:00:00+08:00');
+//const today = new Date('2024-10-27T20:00:00+08:00');
+//const today = new Date('2024-09-27T20:00:00+08:00');
 
 
 
@@ -730,11 +733,13 @@ nav > div{
     pointer-events: none;
 }
 
-
-#app .custom-navbar {
-    position: sticky !important;
-    top: 0;
-    z-index: 1000; /* Ensures it stays on top of other elements */
+.nav-sticky{
+  color:white;
+  z-index: 100000000; 
+  position: fixed;
+  top: 80px;
+  text-align: center;
+  width: 100%; /* Ensure full width */
 }
 
 </style>

@@ -7,6 +7,7 @@ import BandProfile from '../src/bandProfile.vue';
 import chooseUserType from '../src/chooseUserType.vue';
 import bandLogin from '../src/bandLogin.vue';
 import Calendar from  '../src/Calendar.vue';
+import CalendarGuitar from  '../src/CalendarGuitar.vue';
 
 const routes = [
   {
@@ -43,6 +44,12 @@ const routes = [
     path: '/calendar', 
     name: 'Calendar',
     component: Calendar
+  }
+  ,
+  {
+    path: '/calendar2', 
+    name: 'CalendarGuitar',
+    component: CalendarGuitar
   }
 ];
 
