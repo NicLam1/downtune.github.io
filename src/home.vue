@@ -47,6 +47,6 @@ export default {
 
 #app {
     font-family: 'Poppins', sans-serif;
-
+    
 }
 </style>

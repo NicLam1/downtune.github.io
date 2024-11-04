@@ -29,7 +29,7 @@
             </form>
             <p class="text-center mt-3">
               Have an account?
-              <router-link to="/login">
+              <router-link to="/login/user">
                 <a class="text-primary">Sign In</a>
               </router-link>
             </p>

@@ -28,8 +28,8 @@
             </form>
             <p class="text-center mt-3">
               Don't have an account?
-              <router-link to="/register">
-               <a class="text-primary">Sign up</a>
+              <router-link to="/register/user" class="text-primary">
+              Sign up
               </router-link>
             </p>
           </div>

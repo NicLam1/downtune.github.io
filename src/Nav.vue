@@ -1,24 +1,17 @@
 <template>
-  <nav class="navbar navbar-expand-lg custom-navbar">
+  <nav class="navbar navbar-expand-lg custom-navbar" :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <span class="nav-title">Downtune</span>
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <div class="navbar-brand">
+        <router-link to="/" class="nav-title">Downtune</router-link>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Discover</a>
@@ -27,10 +20,10 @@
             <a class="nav-link" href="#">Bands</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Events</a>
+            <router-link to="/calendar" class="nav-link">Events</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../userLogin.html">Contact</a>
+            <a class="nav-link">Contact</a>
           </li>
         </ul>
       </div>
@@ -39,8 +32,21 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
 export default {
   name: "Nav",
+  setup() {
+    const route = useRoute();
+
+    // This will hold the state of whether we are on the Calendar page
+    const isCalendarPage = computed(() => route.name === 'Calendar');
+
+    return {
+      isCalendarPage,
+    };
+  },
 };
 </script>
 
@@ -48,16 +54,27 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 .custom-navbar {
-  background: linear-gradient(to right, #243b55, #141e30);
+  background: linear-gradient(to right, #240244, #100014);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   padding: 1em;
+
+}
+
+
+.custom-navbar-sticky-for-calendar {
+  z-index: 100000000;
+  position: sticky;
+  top: 0;
+  /* Make sure z index is high so it works for the calendar / evnet page */
 }
 
 .nav-title {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  color: #feb47b; /* Using the accent color for a pop */
+  color: #feb47b;
+  /* Using the accent color for a pop */
   font-size: 1.5rem;
+  text-decoration: none
 }
 
 .navbar-nav .nav-link {
@@ -69,7 +86,8 @@ export default {
 }
 
 .navbar-nav .nav-link:hover {
-  color: #ff7e5f; /* A more noticeable color on hover */
+  color: #ff7e5f;
+  /* A more noticeable color on hover */
 }
 
 .navbar-toggler {
@@ -85,12 +103,18 @@ export default {
   .custom-navbar {
     background: linear-gradient(to right, #ffffff, #eeeeee);
   }
+
   .nav-title,
   .navbar-nav .nav-link {
     color: #213547;
   }
+
   .nav-link:hover {
     color: #747bff;
   }
+}
+
+router-link a {
+  text-decoration: none;
 }
 </style>
