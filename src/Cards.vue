@@ -11,7 +11,7 @@
             <p class="text-light">Welcome, {{ loggedInUser }}!</p>
           </div>
           <div v-else class="login-button mb-3">
-            <router-link to="/login">
+            <router-link to="/choose">
               <button class="btn btn-primary w-100" ><i class="fas fa-sign-in-alt"></i> Log In</button>
             </router-link>
           </div>

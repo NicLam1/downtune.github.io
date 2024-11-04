@@ -16,22 +16,22 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: '/login/user',
+    name: 'UserLogin',
     component: UserLogin 
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: '/register/user',
+    name: 'UserRegister',
     component: UserRegister
   },
   {
-    path: '/chooseUserType',
+    path: '/choose',
     name: 'chooseUserType',
     component: chooseUserType
   },
   {
-    path: '/bandLogin',
+    path: '/login/band',
     name: 'bandLogin',
     component: bandLogin
   },
