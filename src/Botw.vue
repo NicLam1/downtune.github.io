@@ -77,38 +77,35 @@ export default {
 
 .botwSection {
   background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
-  /* background-image: url('src/chooseUserTypeImg/band4.jpg'); */
   padding: 40px 0;
   position: relative;
   overflow: hidden;
   object-fit: cover;
   background-repeat: none;
-  
   backdrop-filter: blur(50px);
-  
 }
+
 .title {
-	font-family: "Fugaz One";
+  font-family: "Fugaz One";
   font-weight: bolder;
-	text-align: center;
-	color: #FFF;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	letter-spacing: 1px;
-	line-height:2
+  text-align: center;
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  line-height: 2;
 }
 
 h1 {
-	background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM25pb2ZtMmxseXZoY3Q5NzU1MmF4emE4bGgxMjRhbnh0cjhpemQ0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Fpe0mIR5Y7MyCcxse/giphy.gif);
-	background-size: cover;
-	color: transparent;
-	-moz-background-clip: text;
-	-webkit-background-clip: text;
-	text-transform: uppercase;
-	font-size: 10em;
-	margin: 10px 0;
+  background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM25pb2ZtMmxseXZoY3Q5NzU1MmF4emE4bGgxMjRhbnh0cjhpemQ0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Fpe0mIR5Y7MyCcxse/giphy.gif);
+  color: transparent;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: clamp(2em, 8vw, 10em); /* Responsive font size */
+  margin: 10px 0;
   font-family: 'Fugaz One';
 }
 
@@ -124,7 +121,6 @@ h1 {
 .botw {
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  
 }
 
 .botw .item {
@@ -136,35 +132,35 @@ h1 {
   position: relative;
 }
 
-.botw  .item:hover {
+.botw .item:hover {
   filter: brightness(1);
   transform: translateZ(150px);
 }
 
-.botw  .item:hover + * {
+.botw .item:hover + * {
   filter: brightness(0.6);
   transform: translateZ(100px) rotateY(30deg);
 }
 
-.botw  .item:hover + * + * {
+.botw .item:hover + * + * {
   filter: brightness(0.4);
   transform: translateZ(50px) rotateY(10deg);
 }
 
-.botw  .item:hover + * + * + * {
+.botw .item:hover + * + * + * {
   filter: brightness(0.2);
   transform: translateZ(20px) rotateY(5deg);
 }
 
-.botw  .item:has(+ * :hover) {
+.botw .item:has(+ * :hover) {
   filter: brightness(0.6);
   transform: translateZ(100px) rotateY(-30deg);
 }
-.botw  .item:has(+ * + *:hover) {
+.botw .item:has(+ * + *:hover) {
   filter: brightness(0.4);
   transform: translateZ(50px) rotateY(-10deg);
 }
-.botw  .item:has(+ * + * + *:hover) {
+.botw .item:has(+ * + * + *:hover) {
   filter: brightness(0.2);
   transform: translateZ(20px) rotateY(-5deg);
 }
@@ -173,7 +169,7 @@ h1 {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  height: 400px; /* Set a fixed height for portrait orientation */
+  height: 400px;
 }
 
 .image-container img {
@@ -217,21 +213,33 @@ h1 {
 }
 
 /* Carousel Styles */
-#botwCarousel .carousel-item {
-  max-height: 60vh;
-}
-
+#botwCarousel .carousel-inner,
+#botwCarousel .carousel-item,
 #botwCarousel .image-container {
-  border-radius: 16px;
-  overflow: hidden;
-  height: 400px; /* Ensure same height */
+  height: 400px; /* Consistent height */
 }
 
+#botwCarousel .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Center carousel controls vertically */
+#botwCarousel .carousel-control-prev,
+#botwCarousel .carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5%;
+}
+
+/* Ensure the caption is always visible in the carousel */
 #botwCarousel .caption {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Responsive adjustments */
 @media (min-width: 992px) {
   /* Hide carousel on large screens */
   #botwCarousel {
@@ -252,4 +260,5 @@ h1 {
     padding: 20px 0;
   }
 }
+
 </style>

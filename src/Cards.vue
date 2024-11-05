@@ -46,7 +46,7 @@
       
       <!-- Cards Section -->
       <div class="cardsSection col-12 col-lg-9">
-        <input type="text" class="search-bar mb-4 mx-2" placeholder="Search by name or genre..." v-model="searchQuery" @input="resetPage" />
+        <input type="text" class="search-bar mb-4" placeholder="Search by name or genre..." v-model="searchQuery" @input="resetPage" />
         <div class="d-flex flex-wrap gap-3 align-items-stretch">
           <div v-for="band in paginatedBands" :key="band.id + '-' + filterTrigger" class="card-container">
             <div class="card h-100">
@@ -262,10 +262,11 @@ export default {
   background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 0 10px 5px rgba(185, 72, 255, 0.521);
   font-weight: bold;
   width: 100%;
-}
+} 
 
 .search-bar::placeholder {
   color: #b8a1c9;
