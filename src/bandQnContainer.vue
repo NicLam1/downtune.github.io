@@ -103,7 +103,7 @@ export default {
       };
 
     // Save preferences directly to Firestore using the modular syntax
-    setDoc(doc(collection(db, "userPreferences"), userId), preferences)
+    setDoc(doc(collection(db, "bandPreferences"), userId), preferences)
       .then(() => {
         console.log("User preferences saved successfully!");
       })
