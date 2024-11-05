@@ -27,18 +27,18 @@
           <li class="nav-item">
             <a class="nav-link">Contact</a>
           </li>
-          <li class="nav-item">
-            <button class="nav-link btn auth-button" @click="handleAuth">{{ isLoggedIn ? 'Logout' : 'Login' }}</button>
-          </li>
         </ul>
         <!-- Login button on the right -->
         <div class="user-section">
           <div v-if="loggedInUser" class="logged-in-info">
             <p class="text-light">Welcome, {{ loggedInUser }}!</p>
           </div>
-          <div v-else class="login-button">
+          <div class="login-button">
             <router-link to="/choose">
-              <button class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Log In</button>
+              <button class="btn btn-primary" @click="handleAuth">
+                <i :class="isLoggedIn ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt'"></i>
+                {{ isLoggedIn ? 'Logout' : 'Login' }}
+              </button>
             </router-link>
           </div>
         </div>
@@ -78,6 +78,11 @@ export default {
       isLoggedIn,
       handleAuth
     };
+  },
+  data(){
+    return {
+      loggedInUser: null
+    }
   }
 };
 </script>
