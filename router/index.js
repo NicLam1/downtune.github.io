@@ -5,9 +5,11 @@ import UserLogin from '../src/userLogin.vue';
 import UserRegister from '../src/userRegister.vue';
 import BandProfile from '../src/bandProfile.vue';
 import chooseUserType from '../src/chooseUserType.vue';
-import bandLogin from '../src/bandLogin.vue';
 import Calendar from  '../src/Calendar.vue';
 import CalendarGuitar from  '../src/CalendarGuitar.vue';
+import newBandLogin from '../src/newBandLogin.vue';
+import newBandRegis from '../src/newBandRegis.vue';
+
 
 const routes = [
   {
@@ -33,7 +35,7 @@ const routes = [
   {
     path: '/login/band',
     name: 'bandLogin',
-    component: bandLogin
+    component: newBandLogin
   },
   {
     path: '/band/:id', 
@@ -42,9 +44,9 @@ const routes = [
     props: true
   },
   {
-    path: '/calendar', 
-    name: 'Calendar',
-    component: Calendar
+    path: '/register/band', 
+    name: 'bandRegister',
+    component: newBandRegis
   }
   ,
   {

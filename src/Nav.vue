@@ -27,6 +27,9 @@
           <li class="nav-item">
             <a class="nav-link">Contact</a>
           </li>
+          <li class="nav-item">
+            <button class="nav-link btn auth-button" @click="handleAuth">{{ isLoggedIn ? 'Logout' : 'Login' }}</button>
+          </li>
         </ul>
         <!-- Login button on the right -->
         <div class="user-section">
@@ -45,21 +48,37 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, inject } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { auth } from '../firebaseConfig'; // Adjust the path as necessary
+import { signOut } from 'firebase/auth';
 
 export default {
   name: "Nav",
   setup() {
     const route = useRoute();
+    const router = useRouter();
+    const isLoggedIn = inject('isLoggedIn');
+    const setLoginState = inject('setLoginState');
 
-    // This will hold the state of whether we are on the Calendar page
     const isCalendarPage = computed(() => route.name === 'Calendar');
+
+    const handleAuth = async () => {
+      if (isLoggedIn.value) {
+        await signOut(auth);
+        setLoginState(false);
+        router.push('/'); // Redirect to home page
+      } else {
+        router.push('/choose'); // Redirect to login page
+      }
+    };
 
     return {
       isCalendarPage,
+      isLoggedIn,
+      handleAuth
     };
-  },
+  }
 };
 </script>
 

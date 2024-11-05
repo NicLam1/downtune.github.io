@@ -22,7 +22,7 @@
         @selectedOption="updateResponse">
       </OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-success submit-responses" @click="submitResponses">Submit</button>
+    <button class="btn btn-primary submit-responses" @click="submitResponses">Submit</button>
     <footer style="font-size: 10px;">
       Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
       (https://poly.pizza/m/3FiWjHDj0Zf)<br>
@@ -37,8 +37,9 @@
 </template>
 
 <script>
-import { db } from '../firebaseConfig.js';
-import { collection, doc, setDoc } from "firebase/firestore";
+import { auth } from '../firebaseConfig';
+import { doc, setDoc, collection } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 import Carousel from './Carousel.vue';
 import OtherQuestions from './questionComponent.vue';
@@ -74,27 +75,34 @@ export default {
     updateResponse({ questionIndex, selectedOption }) {
       this.responses[questionIndex] = selectedOption;
     },
-    submitResponses() {
-  console.log(this.responses);
-  console.log(this.genres);
-  const userId = "user123"; // Replace with actual user ID
-  const preferences = {
-    genres: this.genres,
-    eventType: this.responses[0],
-    budget: this.responses[1],
-    eventDuration: this.responses[2],
-    eventLocation: this.responses[3],
-  };
+    async submitResponses() {
+      console.log(this.responses);
+      console.log(this.genres);
 
-  // Save preferences directly to Firestore using the modular syntax
-  setDoc(doc(collection(db, "userPreferences"), userId), preferences)
-    .then(() => {
-      console.log("User preferences saved successfully!");
-    })
-    .catch(error => {
-      console.error("Error saving preferences:", error);
-    });
-},
+      const user = auth.currentUser;
+      if (!user) {
+        console.error("No user is currently signed in.");
+        return;
+      }
+
+      const userId = user.uid; // Retrieve the user ID
+      const preferences = {
+        genres: this.genres,
+        eventType: this.responses[0],
+        budget: this.responses[1],
+        eventDuration: this.responses[2],
+        eventLocation: this.responses[3],
+      };
+
+      try {
+        // Save preferences directly to Firestore using the modular syntax
+        await setDoc(doc(collection(db, "userPreferences"), userId), preferences);
+        console.log("User preferences saved successfully!");
+        this.$router.push('/');
+      } catch (error) {
+        console.error("Error saving preferences:", error);
+      }
+    },
     updateGenres(genres) {
       this.genres = genres;
     }
@@ -104,7 +112,7 @@ export default {
 
 <style scoped>
 .welcome-container {
-  height: 100vh;
+  height: 95vh;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -134,12 +142,18 @@ export default {
   color: #fff;
   font-size: 24px;
   transform: 0.3s ease;
-  background-color: #00bfff;
   display: block;
   margin: 20px auto;
 }
 
-.submit-responses:hover {
-  background-color: #00bfff96;
+
+.btn-primary {
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff66ff, #c603ff);
 }
 </style>
