@@ -36,9 +36,10 @@ const routes = [
     component: bandLogin
   },
   {
-    path: '/band', 
+    path: '/band/:id', 
     name: 'BandProfile',
-    component: BandProfile
+    component: BandProfile,
+    props: true
   },
   {
     path: '/calendar', 

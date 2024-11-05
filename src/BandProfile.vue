@@ -1,289 +1,459 @@
 <template>
-    <header class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Club Bandwagon</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <nav class="navbar-nav ms-auto">
-            <a class="nav-link" href="#">HOME</a>
-            <a class="nav-link" href="#">NEW SINGLE</a>
-            <a class="nav-link" href="#">SUN GAZER SHOWS</a>
-            <a class="nav-link" href="#">BAND</a>
-            <a class="nav-link" href="#">CONTACT</a>
-          </nav>
+  <div class="band-profile-container">
+    <!-- Loading Spinner -->
+    <div v-if="loading" class="loading-spinner">
+      <i class="fas fa-spinner fa-spin fa-3x"></i>
+    </div>
+
+    <!-- Band Profile Content -->
+    <div v-else-if="band" class="band-profile-content">
+      <!-- Band Banner -->
+      <div class="banner" :style="{ backgroundImage: `url('${band.thumbnail}')` }">
+        <div class="banner-overlay justify-content-center">
+          <h1 class="band-name">{{ band.name }}</h1>
         </div>
       </div>
-    </header>
-  
-    <!-- Band profile main content -->
-    <main class="container py-5">
-      <h2 class="title">About Club Bandwagon</h2>
-      <p class="description">Join us on an unforgettable musical journey. Experience the rhythm of our vibes as we blend genres and create unforgettable melodies.</p>
-      <img src="../images/stock band/image5.jpg" alt="Band Photo" class="img-fluid band-photo mb-5">
-  
-      <h3 class="subheading">Band Members</h3>
-      <ul class="list-group members-list mb-5">
-        <li class="list-group-item" v-for="member in bandMembers" :key="member">{{ member }}</li>
-      </ul>
-    </main>
-  
-    <!-- Albums section with infinite scroll -->
-    <section class="album py-5">
-      <div class="container">
-        <h3 class="subheading mb-4">Our Soundtracks</h3>
-        <div class="album-scroll" ref="albumScroll">
-          <div class="album-item" v-for="(album, index) in albums" :key="index">
-            <div class="card shadow-sm">
-              <img :src="album.image" :alt="album.title" class="card-img-top">
-              <div class="card-body">
-                <p class="card-text">{{ album.title }}</p>
-                <small class="text-muted">{{ album.duration }}</small>
+
+      <main class="container py-5">
+        <!-- Biography and Genres Section -->
+        <section class="row biography-genres-section mb-5">
+          <div class="col-md-6 biography-section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Biography</h2>
+            <p class="biography">{{ band.biography }}</p>
+          </div>
+          <div class="col-md-6 genres-section">
+            <h3 class="section-title"><i class="fas fa-music"></i> Genres</h3>
+            <div class="genres-list">
+              <span
+                v-for="genre in band.genres"
+                :key="genre"
+                class="badge bg-primary genre-badge genre-pill fs-3 mx-2"
+              >
+                {{ genre }}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Band Members Section -->
+        <section class="members-section mb-5">
+          <h3 class="section-title"><i class="fas fa-users"></i> Band Members</h3>
+          <div class="row">
+            <div
+              class="col-md-4 member-card my-2"
+              v-for="member in band.members"
+              :key="member"
+            >
+              <div class="card text-center">
+                <div class="card-body">
+                  <i class="fas fa-user fa-3x mb-3"></i>
+                  <h5 class="card-title">{{ member }}</h5>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Call to action section -->
-    <section class="call-to-action text-center py-5">
-      <div class="container">
-        <h2 class="cta-title">Join the Club Mild Fanclub</h2>
-        <p class="cta-description">Sign up for our email list to get exclusive updates, news, and special offers.</p>
-        <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px;">
-          <div class="mb-3">
-            <input v-model="email" type="email" class="form-control" id="emailInput" placeholder="Enter your email" required>
+        </section>
+
+        <!-- Events Section -->
+        <section class="events-section mb-5">
+          <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Events</h3>
+          <div class="row">
+            <!-- Upcoming Events -->
+            <div class="col-md-6 mb-4">
+              <h4>Upcoming Events</h4>
+              <ul class="list-group">
+                <li
+                  class="list-group-item event-item"
+                  v-for="event in band.upcoming_events"
+                  :key="event.name + event.date"
+                >
+                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                </li>
+                <li v-if="!band.upcoming_events.length" class="list-group-item">No upcoming events.</li>
+              </ul>
+            </div>
+            <!-- Past Events -->
+            <div class="col-md-6 mb-4">
+              <h4>Past Events</h4>
+              <ul class="list-group">
+                <li
+                  class="list-group-item event-item"
+                  v-for="event in band.past_events"
+                  :key="event.name + event.date"
+                >
+                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                </li>
+                <li v-if="!band.past_events.length" class="list-group-item">No past events.</li>
+              </ul>
+            </div>
           </div>
-          <button type="submit" class="btn btn-cta">Subscribe</button>
-        </form>
-      </div>
-    </section>
-  
-    <!-- Footer section -->
-    <footer class="text-center">
-      <div class="social-icons mb-3">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p>&copy; 2023 Club Mild | Join the rhythm of our vibes</p>
-    </footer>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  
-  const bandMembers = ['David Boll', 'Tan Peng', 'Pa', 'Ashraf']
-  
-  const albums = [
-    { image: '../images/stock band/image1.jpg', title: 'Distraction', duration: '04:11' },
-    { image: '../images/stock band/image3.jpg', title: 'Homely', duration: '05:10' },
-    { image: '../images/stock band/image4.jpg', title: 'Lonely', duration: '04:30' },
-    { image: '../images/stock band/image6.jpg', title: 'Soul', duration: '04:50' },
-    { image: '../images/stock band/image5.jpg', title: 'Echoes', duration: '03:55' },
-    { image: '../images/stock band/image2.jpg', title: 'Whisper', duration: '04:22' }
-  ]
-  
-  const email = ref('')
-  
-  const submitForm = () => {
-    console.log('Submitted email:', email.value)
-    alert('Thanks for subscribing!')
-    email.value = ''
-  }
-  
-  const startInfiniteScroll = () => {
-    const albumScroll = document.querySelector('.album-scroll');
-    const scrollStep = 1;
-  
-    if (albumScroll) {
-      const cloneAlbums = () => {
-        const items = albumScroll.querySelectorAll('.album-item');
-        items.forEach(item => {
-          const clone = item.cloneNode(true);
-          albumScroll.appendChild(clone);
-        });
-      }
-  
-      cloneAlbums();
-  
-      const scroll = () => {
-        if (albumScroll.scrollLeft >= albumScroll.scrollWidth / 2) {
-          albumScroll.scrollLeft = 0;
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="call-to-action text-center py-5">
+          <div class="container">
+            <h2 class="cta-title">Stay updated on {{ band.name }}</h2>
+
+            <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px;">
+              <div class="mb-3">
+                <input
+                  v-model="email"
+                  type="email"
+                  class="form-control styled-select"
+                  id="emailInput"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-envelope"></i> Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer Section -->
+      <footer class="text-center">
+        <div class="social-icons mb-3">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Club Bandwagon | Join the rhythm of our vibes</p>
+      </footer>
+    </div>
+
+    <!-- Error Message -->
+    <div v-else class="error-message">
+      <p>Band not found.</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+export default {
+  name: 'BandProfile',
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const band = ref(null);
+    const email = ref('');
+    const loading = ref(true);
+    const error = ref(false);
+
+    const submitForm = () => {
+      console.log('Submitted email:', email.value);
+      alert('Thanks for subscribing!');
+      email.value = '';
+    };
+
+    const fetchBandData = async (bandId) => {
+      try {
+        const response = await axios.get('/MOCK_DATA.json');
+        const allBands = response.data;
+
+        // Find the band with the matching ID
+        const foundBand = allBands.find((b) => b.id === bandId);
+
+        if (foundBand) {
+          // Ensure all required properties are arrays
+          foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
+          foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
+          foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events) ? foundBand.upcoming_events : [];
+          foundBand.past_events = Array.isArray(foundBand.past_events) ? foundBand.past_events : [];
+
+          band.value = foundBand;
         } else {
-          albumScroll.scrollLeft += scrollStep;
+          console.error('Band not found');
+          error.value = true;
         }
-        requestAnimationFrame(scroll);
-      };
-      scroll();
-    }
-  }
+      } catch (err) {
+        console.error('Error fetching band data:', err);
+        error.value = true;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const formatDate = (dateStr) => {
+      if (!dateStr) return '';
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const date = new Date(dateStr);
+      if (isNaN(date)) return dateStr;
+      return date.toLocaleDateString(undefined, options);
+    };
+
+    onMounted(() => {
+      const bandId = parseInt(route.params.id, 10);
+      if (isNaN(bandId)) {
+        console.error('Invalid band ID');
+        error.value = true;
+        loading.value = false;
+      } else {
+        fetchBandData(bandId);
+      }
+    });
+
+    return {
+      band,
+      email,
+      submitForm,
+      formatDate,
+      loading,
+      error,
+    };
+  },
+};
+</script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+.band-profile-container {
+  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  min-height: 100vh;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
   
-  onMounted(() => {
-    startInfiniteScroll();
-  })
-  </script>
-  
-  <style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-  
-  body {
-    background: linear-gradient(to bottom, #6a11cb, #2575fc);
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-  }
-  
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .navbar-brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #fff;
-  }
-  
-  .nav-link {
-    font-weight: 500;
-    color: #f1f1f1;
-    transition: color 0.3s;
-  }
-  
-  .nav-link:hover {
-    color: #ffcbf2;
-  }
-  
-  .social-icons a {
-    color: #ffcbf2;
-    margin: 0 15px;
-    font-size: 1.5rem;
-    transition: transform 0.3s;
-  }
-  
-  .social-icons a:hover {
-    transform: scale(1.2);
-  }
-  
-  footer {
-    padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.85);
-  }
-  
-  .title, .subheading {
-    font-family: 'Playfair Display', serif;
-    color: #ff6f61;
-    text-align: center;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .subheading {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .description {
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #444;
-  }
-  
-  .band-photo {
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .members-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
-  
-  .members-list .list-group-item {
-    width: 60%;
-    background: rgba(255, 255, 255, 0.9);
-    color: #2c3e50;
-    border: none;
-    padding: 15px 20px;
-    margin: 5px 0;
-    border-radius: 8px;
-    transition: transform 0.8s;
-    text-align: center;
-    transform-style: preserve-3d;
-  }
-  
-  .members-list .list-group-item:hover {
-    transform: rotateY(180deg);
-    background-color: #ff6f61;
-    color: #fff;
-  }
-  
-  .album {
-    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-    overflow: hidden;
-    padding: 4rem 0;
-    border-radius: 15px;
-  }
-  
-  .album-scroll {
-    display: flex;
-    overflow-x: hidden;
-    gap: 20px;
-  }
-  
-  .album-item {
-    flex: 0 0 auto;
-    width: 250px;
-  }
-  
-  .card {
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-img-top {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
+}
+
+.genre-pill {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6f00e8, #c603ff);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  transition: background 0.3s, color 0.3s;
+  user-select: none;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ff6f61;
+}
+
+.banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.band-name {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10vh;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  animation: bounceIn 1s ease;
+}
+
+.biography-section,
+.genres-section,
+.members-section,
+.events-section,
+.call-to-action {
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #ff6f61;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  animation: fadeInDown 0.5s ease forwards;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: #ff6f61;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  animation: growWidth 0.5s ease forwards;
+}
+
+.biography {
+  font-size: 1.2rem;
+  text-align: left;
+  margin-bottom: 1rem;
+  color: #e6e1e5;
+  line-height: 1.6;
+  animation: fadeIn 1s ease forwards;
+}
+
+.genres-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.genre-badge {
+  margin: 0.2rem;
+  animation: popIn 0.5s ease forwards;
+}
+
+.member-card .card {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.3s;
+  animation: fadeIn 1s ease forwards;
+}
+
+.member-card .card:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #e600e8, #ff66ff);
+}
+
+.events-section .row {
+  animation: fadeIn 1s ease forwards;
+}
+
+.call-to-action {
+  background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
+  padding: 4rem 0;
+  border-radius: 16px;
+  animation: fadeIn 1s ease forwards;
 }
 
 .cta-title {
   font-size: 2.5rem;
-  color: #ff6f61;
+  color: #ff66ff;
   margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeInDown 0.5s ease forwards;
 }
 
-.cta-description {
-  font-size: 1.2rem;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-.btn-cta {
-  background-color: #ff6f61;
-  color: white;
+.styled-select {
+  padding: 10px;
+  border-radius: 16px;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  transition: background-color 0.3s;
+  background: rgba(102, 0, 153, 0.3);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.btn-cta:hover {
-  background-color: #e74c3c;
+.styled-select::placeholder {
+  color: #b8a1c9;
+}
+
+.styled-select:focus {
+  outline: none;
+  background: rgba(102, 0, 153, 0.5);
+  transform: scale(1.02);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff66ff, #c603ff);
+  transform: scale(1.05);
+}
+
+.social-icons a {
+  color: #ff66ff;
+  margin: 0 15px;
+  font-size: 1.5rem;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #ff00ff;
+}
+
+footer p {
+  margin-top: 1rem;
+  color: #e6e1e5;
+  animation: fadeIn 1s ease forwards;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #ff6f61;
+  font-size: 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-30px); }
+  60% { transform: translateY(-15px); }
+}
+
+@keyframes growWidth {
+  from { width: 0; }
+  to { width: 50px; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 </style>

@@ -1,100 +1,1875 @@
-[{"id":1,"name":"Vic","genres":"Funk","thumbnail":"/public/band/image (1).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":185},
-{"id":2,"name":"Wittie","genres":"Ambient","thumbnail":"/public/band/image (2).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Lily","price":68},
-{"id":3,"name":"Oswald","genres":"Country","thumbnail":"/public/band/image (3).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":432},
-{"id":4,"name":"Berta","genres":"Country","thumbnail":"/public/band/image (4).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Lily","price":254},
-{"id":5,"name":"Rawley","genres":"Classical","thumbnail":"/public/band/image (5).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Evelyn","price":275},
-{"id":6,"name":"Jonas","genres":"Folk","thumbnail":"/public/band/image (6).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Ava","price":208},
-{"id":7,"name":"Raphaela","genres":"Pop","thumbnail":"/public/band/image (7).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Charlotte","price":187},
-{"id":8,"name":"Sarah","genres":"Jazz","thumbnail":"/public/band/image (8).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Isabella","price":296},
-{"id":9,"name":"Miquela","genres":"Classical","thumbnail":"/public/band/image (9).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Amelia","price":457},
-{"id":10,"name":"Kele","genres":"Indie","thumbnail":"/public/band/image (10).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Lily","price":161},
-{"id":11,"name":"Corabella","genres":"Hip Hop","thumbnail":"/public/band/image (11).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Oliver","price":290},
-{"id":12,"name":"Walton","genres":"Indie","thumbnail":"/public/band/image (12).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Charlotte","price":490},
-{"id":13,"name":"Simona","genres":"Jazz","thumbnail":"/public/band/image (13).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Benjamin","price":120},
-{"id":14,"name":"Rosalia","genres":"Classical","thumbnail":"/public/band/image (14).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Charlotte","price":472},
-{"id":15,"name":"Otis","genres":"Classical","thumbnail":"/public/band/image (15).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Lucas","price":221},
-{"id":16,"name":"Halie","genres":"Reggae","thumbnail":"/public/band/image (16).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Mason","price":197},
-{"id":17,"name":"Alwyn","genres":"Reggae","thumbnail":"/public/band/image (17).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"William","price":117},
-{"id":18,"name":"Jacki","genres":"Reggae","thumbnail":"/public/band/image (18).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Harper","price":262},
-{"id":19,"name":"Gare","genres":"Jazz","thumbnail":"/public/band/image (19).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Alexander","price":140},
-{"id":20,"name":"Farah","genres":"Funk","thumbnail":"/public/band/image (20).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Mia","price":398},
-{"id":21,"name":"Vicki","genres":"Blues","thumbnail":"/public/band/image (21).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Charlotte","price":370},
-{"id":22,"name":"Milissent","genres":"Ambient","thumbnail":"/public/band/image (22).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Noah","price":394},
-{"id":23,"name":"Fanechka","genres":"Rock","thumbnail":"/public/band/image (23).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Charlotte","price":375},
-{"id":24,"name":"Mimi","genres":"Country","thumbnail":"/public/band/image (24).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Harper","price":320},
-{"id":25,"name":"Miguelita","genres":"Country","thumbnail":"/public/band/image (25).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Emma","price":312},
-{"id":26,"name":"Osborn","genres":"Punk","thumbnail":"/public/band/image (26).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Lily","price":492},
-{"id":27,"name":"Dianna","genres":"Blues","thumbnail":"/public/band/image (27).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":350},
-{"id":28,"name":"Hilliary","genres":"Blues","thumbnail":"/public/band/image (28).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Ava","price":77},
-{"id":29,"name":"Warren","genres":"Blues","thumbnail":"/public/band/image (29).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Charlotte","price":254},
-{"id":30,"name":"Trumaine","genres":"Metal","thumbnail":"/public/band/image (30).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Benjamin","price":158},
-{"id":31,"name":"Pen","genres":"Punk","thumbnail":"/public/band/image (31).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Lily","price":175},
-{"id":32,"name":"Charisse","genres":"Ska","thumbnail":"/public/band/image (32).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Oliver","price":453},
-{"id":33,"name":"Rodrigo","genres":"Latin","thumbnail":"/public/band/image (33).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"James","price":277},
-{"id":34,"name":"Dela","genres":"Latin","thumbnail":"/public/band/image (34).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Mason","price":477},
-{"id":35,"name":"Clemmie","genres":"Latin","thumbnail":"/public/band/image (35).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Sophia","price":162},
-{"id":36,"name":"Cristen","genres":"Blues","thumbnail":"/public/band/image (36).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Isabella","price":352},
-{"id":37,"name":"Brade","genres":"Punk","thumbnail":"/public/band/image (37).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Lily","price":464},
-{"id":38,"name":"Lianna","genres":"Hip Hop","thumbnail":"/public/band/image (38).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Oliver","price":207},
-{"id":39,"name":"Amity","genres":"Ambient","thumbnail":"/public/band/image (39).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Lucas","price":130},
-{"id":40,"name":"Joellen","genres":"Classical","thumbnail":"/public/band/image (40).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Isabella","price":431},
-{"id":41,"name":"Ariana","genres":"Metal","thumbnail":"/public/band/image (41).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"William","price":227},
-{"id":42,"name":"Fraze","genres":"Classical","thumbnail":"/public/band/image (42).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Liam","price":456},
-{"id":43,"name":"Patin","genres":"Metal","thumbnail":"/public/band/image (43).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Lucas","price":258},
-{"id":44,"name":"Evangelia","genres":"Indie","thumbnail":"/public/band/image (44).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Alexander","price":413},
-{"id":45,"name":"Vally","genres":"Blues","thumbnail":"/public/band/image (45).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Noah","price":185},
-{"id":46,"name":"Elfie","genres":"Soul","thumbnail":"/public/band/image (46).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Henry","price":54},
-{"id":47,"name":"Torry","genres":"Funk","thumbnail":"/public/band/image (47).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Amelia","price":137},
-{"id":48,"name":"Anabel","genres":"Grunge","thumbnail":"/public/band/image (48).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Henry","price":414},
-{"id":49,"name":"Alonso","genres":"Ska","thumbnail":"/public/band/image (49).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Benjamin","price":495},
-{"id":50,"name":"Maximilianus","genres":"Soul","thumbnail":"/public/band/image (50).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Emma","price":153},
-{"id":51,"name":"Maureene","genres":"Country","thumbnail":"/public/band/image (51).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Noah","price":480},
-{"id":52,"name":"Rosanna","genres":"Gospel","thumbnail":"/public/band/image (52).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Isabella","price":490},
-{"id":53,"name":"Rebecka","genres":"Jazz","thumbnail":"/public/band/image (53).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Mia","price":419},
-{"id":54,"name":"Robbyn","genres":"Classical","thumbnail":"/public/band/image (54).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Evelyn","price":333},
-{"id":55,"name":"Rosene","genres":"Reggae","thumbnail":"/public/band/image (55).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Evelyn","price":386},
-{"id":56,"name":"Kalie","genres":"Country","thumbnail":"/public/band/image (56).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Ava","price":210},
-{"id":57,"name":"Sherie","genres":"Rock","thumbnail":"/public/band/image (57).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Alexander","price":494},
-{"id":58,"name":"Kandace","genres":"Gospel","thumbnail":"/public/band/image (58).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Isabella","price":95},
-{"id":59,"name":"Danni","genres":"Jazz","thumbnail":"/public/band/image (59).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Noah","price":426},
-{"id":60,"name":"Star","genres":"Rock","thumbnail":"/public/band/image (60).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Alexander","price":181},
-{"id":61,"name":"Shir","genres":"Reggae","thumbnail":"/public/band/image (61).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Charlotte","price":141},
-{"id":62,"name":"Clarey","genres":"Grunge","thumbnail":"/public/band/image (62).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Benjamin","price":230},
-{"id":63,"name":"Corbet","genres":"Folk","thumbnail":"/public/band/image (63).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"William","price":232},
-{"id":64,"name":"Gennie","genres":"Pop","thumbnail":"/public/band/image (64).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Liam","price":339},
-{"id":65,"name":"Jeanne","genres":"Jazz","thumbnail":"/public/band/image (65).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"William","price":129},
-{"id":66,"name":"Lorne","genres":"Rock","thumbnail":"/public/band/image (66).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Evelyn","price":368},
-{"id":67,"name":"Adriaens","genres":"Latin","thumbnail":"/public/band/image (67).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Sophia","price":222},
-{"id":68,"name":"Babb","genres":"Classical","thumbnail":"/public/band/image (68).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Noah","price":175},
-{"id":69,"name":"Gisela","genres":"Grunge","thumbnail":"/public/band/image (69).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Lucas","price":370},
-{"id":70,"name":"Mira","genres":"Funk","thumbnail":"/public/band/image (70).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Amelia","price":194},
-{"id":71,"name":"Concordia","genres":"Funk","thumbnail":"/public/band/image (71).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Alexander","price":394},
-{"id":72,"name":"Tracy","genres":"Jazz","thumbnail":"/public/band/image (72).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Emma","price":199},
-{"id":73,"name":"Talya","genres":"Metal","thumbnail":"/public/band/image (73).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Alexander","price":382},
-{"id":74,"name":"Ambrosius","genres":"Latin","thumbnail":"/public/band/image (74).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Charlotte","price":113},
-{"id":75,"name":"Herve","genres":"Funk","thumbnail":"/public/band/image (75).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"William","price":447},
-{"id":76,"name":"Sada","genres":"Hip Hop","thumbnail":"/public/band/image (76).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Benjamin","price":99},
-{"id":77,"name":"Shannah","genres":"Punk","thumbnail":"/public/band/image (77).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Oliver","price":145},
-{"id":78,"name":"Gordie","genres":"Metal","thumbnail":"/public/band/image (78).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Oliver","price":68},
-{"id":79,"name":"Theresita","genres":"Soul","thumbnail":"/public/band/image (79).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Noah","price":235},
-{"id":80,"name":"Denis","genres":"Soul","thumbnail":"/public/band/image (80).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Isabella","price":225},
-{"id":81,"name":"Joellen","genres":"Blues","thumbnail":"/public/band/image (81).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Ava","price":193},
-{"id":82,"name":"Gayler","genres":"Rock","thumbnail":"/public/band/image (82).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Oliver","price":62},
-{"id":83,"name":"Rutter","genres":"Ambient","thumbnail":"/public/band/image (83).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Lucas","price":87},
-{"id":84,"name":"Burnaby","genres":"Soul","thumbnail":"/public/band/image (84).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Benjamin","price":88},
-{"id":85,"name":"Emlynn","genres":"Folk","thumbnail":"/public/band/image (85).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Sophia","price":413},
-{"id":86,"name":"Meredith","genres":"Ska","thumbnail":"/public/band/image (86).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Benjamin","price":57},
-{"id":87,"name":"Randene","genres":"Indie","thumbnail":"/public/band/image (87).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Ava","price":451},
-{"id":88,"name":"Titos","genres":"Pop","thumbnail":"/public/band/image (88).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Evelyn","price":291},
-{"id":89,"name":"Rouvin","genres":"Reggae","thumbnail":"/public/band/image (89).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Charlotte","price":78},
-{"id":90,"name":"Kimmie","genres":"Pop","thumbnail":"/public/band/image (90).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Henry","price":192},
-{"id":91,"name":"Jenda","genres":"Pop","thumbnail":"/public/band/image (91).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Lucas","price":485},
-{"id":92,"name":"Cassandre","genres":"Indie","thumbnail":"/public/band/image (92).jfif","banner":"http://dummyimage.com/1000x500.png/cc0000/ffffff","members":"Emma","price":197},
-{"id":93,"name":"Alfonso","genres":"Country","thumbnail":"/public/band/image (93).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Amelia","price":261},
-{"id":94,"name":"Kacey","genres":"Country","thumbnail":"/public/band/image (94).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Alexander","price":420},
-{"id":95,"name":"Valentia","genres":"Ska","thumbnail":"/public/band/image (95).jfif","banner":"http://dummyimage.com/1000x500.png/ff4444/ffffff","members":"Amelia","price":269},
-{"id":96,"name":"Annalee","genres":"Latin","thumbnail":"/public/band/image (96).jfif","banner":"http://dummyimage.com/1000x500.png/5fa2dd/ffffff","members":"Liam","price":277},
-{"id":97,"name":"Christean","genres":"Folk","thumbnail":"/public/band/image (97).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Ava","price":366},
-{"id":98,"name":"Ailis","genres":"Ska","thumbnail":"/public/band/image (98).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Noah","price":465},
-{"id":99,"name":"Bondy","genres":"Folk","thumbnail":"/public/band/image (99).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Noah","price":347},
-{"id":100,"name":"Nevile","genres":"Metal","thumbnail":"/public/band/image (100).jfif","banner":"http://dummyimage.com/1000x500.png/dddddd/000000","members":"Mason","price":354}]
+[
+    {
+        "id": 1,
+        "name": "The Groove Alliance",
+        "genres": ["Funk", "Soul", "Jazz"],
+        "thumbnail": "/band/image (1).jpg",
+        "banner": "/band/image (1).jpg",
+        "members": ["Henry Woods", "Liam White", "Emily Stone", "Grace Taylor"],
+        "price": 185,
+        "biography": "The Groove Alliance is known for their deep, soulful sounds combined with the rhythmic edge of funk. They bring smooth melodies and groovy basslines that captivate audiences.",
+        "upcoming_events": [
+            {"name": "Soul Vibes Festival", "date": "2024-05-15", "location": "Singapore"},
+            {"name": "Jazz on the Bay", "date": "2024-06-02", "location": "Sentosa"},
+            {"name": "Funk Night Fever", "date": "2024-06-20", "location": "Orchard Road"}
+        ],
+        "past_events": [
+            {"name": "City Soul Fest", "date": "2023-11-03", "location": "Marina Bay Sands"},
+            {"name": "Funk and Jazz Gala", "date": "2023-09-18", "location": "Esplanade"},
+            {"name": "The Groove Extravaganza", "date": "2023-07-12", "location": "Chinatown"}
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Ethereal Echo",
+        "genres": ["Ambient", "Electronic", "Experimental"],
+        "thumbnail": "/band/image (2).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Lily Hart", "Jordan Lee", "Evelyn Grace", "Mason Hill", "Alex Chen"],
+        "price": 68,
+        "biography": "Ethereal Echo creates immersive soundscapes that transport listeners to another dimension. Their unique mix of ambient and electronic sounds is perfect for introspective and meditative experiences.",
+        "upcoming_events": [
+            {"name": "Mystic Sounds Night", "date": "2024-04-21", "location": "Gardens by the Bay"},
+            {"name": "Echoes in the Dark", "date": "2024-05-07", "location": "Sentosa Cove"},
+            {"name": "Ambient Waves", "date": "2024-05-30", "location": "Bukit Timah"}
+        ],
+        "past_events": [
+            {"name": "Tranquil Beats", "date": "2023-12-15", "location": "Chinatown"},
+            {"name": "Night of Echoes", "date": "2023-09-10", "location": "Orchard Road"},
+            {"name": "Ambient Evening", "date": "2023-06-22", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 3,
+        "name": "The Country Roads",
+        "genres": ["Country", "Folk", "Bluegrass"],
+        "thumbnail": "/band/image (3).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Henry Woods", "Lucas Brown", "Sarah Davis", "Eliza Turner"],
+        "price": 432,
+        "biography": "The Country Roads brings the spirit of classic country and folk to life, with heartfelt lyrics and a nostalgic sound that resonates with all ages.",
+        "upcoming_events": [
+            {"name": "Folk in the Park", "date": "2024-05-22", "location": "East Coast Park"},
+            {"name": "Country Music Night", "date": "2024-06-10", "location": "Marina Bay"},
+            {"name": "Rural Rhythms", "date": "2024-07-14", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Country Fest", "date": "2023-10-05", "location": "Clarke Quay"},
+            {"name": "Southern Vibes", "date": "2023-08-29", "location": "Changi Beach"},
+            {"name": "Heartland Harmony", "date": "2023-05-15", "location": "Jurong"}
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Soul Fire",
+        "genres": ["Jazz", "Soul"],
+        "thumbnail": "/band/image (8).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Isabella Flores", "Thomas King", "Nina Bell", "Miles Green", "Samantha Young"],
+        "price": 296,
+        "biography": "Soul Fire combines the smooth sound of jazz with the intensity of soul, creating an electrifying performance that leaves the audience spellbound.",
+        "upcoming_events": [
+            {"name": "Jazz and Soul Extravaganza", "date": "2024-03-30", "location": "Esplanade"},
+            {"name": "Night of Blues and Jazz", "date": "2024-04-19", "location": "Downtown Core"},
+            {"name": "Soulful Beats", "date": "2024-05-13", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Jazz Fest", "date": "2023-11-15", "location": "Gardens by the Bay"},
+            {"name": "Soulful Sundays", "date": "2023-09-30", "location": "Sentosa"},
+            {"name": "Blues and Jazz Night", "date": "2023-07-21", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Classique Ensemble",
+        "genres": ["Classical", "Chamber", "Orchestral"],
+        "thumbnail": "/band/image (5).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Evelyn Grace", "Benjamin Turner", "Sophia Lin", "James Tan"],
+        "price": 275,
+        "biography": "Classique Ensemble brings timeless classical pieces to the modern audience with grace and sophistication. Their performances are a treat for all classical music aficionados.",
+        "upcoming_events": [
+            {"name": "Classical Nights", "date": "2024-06-15", "location": "Singapore Symphony Hall"},
+            {"name": "Evening with Bach", "date": "2024-07-20", "location": "Esplanade Concert Hall"},
+            {"name": "Baroque Gala", "date": "2024-08-25", "location": "Victoria Theatre"}
+        ],
+        "past_events": [
+            {"name": "Symphonic Evening", "date": "2023-11-02", "location": "Victoria Theatre"},
+            {"name": "Orchestral Showcase", "date": "2023-08-23", "location": "Singapore Symphony Hall"},
+            {"name": "Classical Highlights", "date": "2023-06-19", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Folk Harmony",
+        "genres": ["Folk", "Acoustic", "Indie"],
+        "thumbnail": "/band/image (6).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Ava Morgan", "Charlie Day", "Ella Thompson", "Jacky Smith"],
+        "price": 208,
+        "biography": "Folk Harmony is a group that captures the essence of traditional folk music with a modern twist. Their acoustic and indie influences bring a unique sound that resonates with audiences.",
+        "upcoming_events": [
+            {"name": "Indie Folk Fest", "date": "2024-06-18", "location": "Botanic Gardens"},
+            {"name": "Summer Folk Sounds", "date": "2024-07-05", "location": "Marina Barrage"},
+            {"name": "Acoustic Evening", "date": "2024-08-12", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Folk Fest", "date": "2023-12-01", "location": "Orchard"},
+            {"name": "Night of Harmony", "date": "2023-10-20", "location": "East Coast Park"},
+            {"name": "Acoustic Vibes", "date": "2023-08-15", "location": "Bukit Timah"}
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Pop Motion",
+        "genres": ["Pop", "Dance", "Electronic"],
+        "thumbnail": "/band/image (7).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Charlotte Lee", "Olivia Wright", "Jacob Harris", "Ella Scott", "Ryan Cooper"],
+        "price": 187,
+        "biography": "Pop Motion brings high-energy pop and dance music to every event, getting the crowd moving with their catchy beats and lively performances.",
+        "upcoming_events": [
+            {"name": "Dance the Night Away", "date": "2024-06-10", "location": "Marina Bay Sands"},
+            {"name": "Pop Beats Festival", "date": "2024-07-08", "location": "Esplanade"},
+            {"name": "Electronic Groove", "date": "2024-08-15", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Pop Extravaganza", "date": "2023-12-12", "location": "Downtown Core"},
+            {"name": "City Dance Fest", "date": "2023-09-18", "location": "Gardens by the Bay"},
+            {"name": "Electronic Bliss", "date": "2023-06-20", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Smooth Jazz Collective",
+        "genres": ["Jazz", "Blues", "Soul"],
+        "thumbnail": "/band/image (8).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Isabella Cruz", "James Wong", "Michael Lee", "Sophia Martinez"],
+        "price": 296,
+        "biography": "Smooth Jazz Collective blends smooth jazz and blues with a touch of soul, creating a relaxing and elegant musical experience.",
+        "upcoming_events": [
+            {"name": "Jazz Under the Stars", "date": "2024-05-25", "location": "Esplanade Theatre"},
+            {"name": "Blue Note Nights", "date": "2024-06-18", "location": "Victoria Theatre"},
+            {"name": "Soulful Jazz Evening", "date": "2024-07-10", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Jazz and Blues Gala", "date": "2023-11-10", "location": "City Hall"},
+            {"name": "Soul Sundays", "date": "2023-08-12", "location": "Marina Bay"},
+            {"name": "Blue Jazz Sessions", "date": "2023-06-21", "location": "Bukit Timah"}
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Classical Fusion",
+        "genres": ["Classical", "Crossover", "Contemporary"],
+        "thumbnail": "/band/image (9).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Amelia Zhang", "David Tan", "Clara Nguyen", "Jason Lee"],
+        "price": 457,
+        "biography": "Classical Fusion brings together traditional classical sounds with contemporary influences, offering a unique and modern interpretation of classical music.",
+        "upcoming_events": [
+            {"name": "Modern Classics", "date": "2024-05-30", "location": "Singapore Symphony Hall"},
+            {"name": "Crossover Nights", "date": "2024-06-25", "location": "Esplanade"},
+            {"name": "Contemporary Classics", "date": "2024-07-14", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Classical Modern Fest", "date": "2023-12-10", "location": "City Hall"},
+            {"name": "Fusion of Sounds", "date": "2023-09-15", "location": "Sentosa"},
+            {"name": "Contemporary Gala", "date": "2023-07-10", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Indie Vibes",
+        "genres": ["Indie", "Alternative", "Rock"],
+        "thumbnail": "/band/image (10).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Lily Adams", "Jake Robertson", "Chris Johnson", "Samantha Roberts", "Ella Tan"],
+        "price": 161,
+        "biography": "Indie Vibes brings an alternative edge to rock with their unique indie sound, appealing to fans of both classic rock and modern alternative.",
+        "upcoming_events": [
+            {"name": "Rock Indie Nights", "date": "2024-05-22", "location": "Bugis"},
+            {"name": "Alternative Sounds Fest", "date": "2024-06-15", "location": "Clarke Quay"},
+            {"name": "Indie Rock Gala", "date": "2024-07-20", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Indie Fest", "date": "2023-11-30", "location": "Marina Bay"},
+            {"name": "Alternative Waves", "date": "2023-08-15", "location": "East Coast"},
+            {"name": "Rock Night", "date": "2023-06-05", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Hip Hop Nation",
+        "genres": ["Hip Hop", "Rap", "R&B"],
+        "thumbnail": "/band/image (11).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Oliver Scott", "Mia Brown", "Kevin White", "Sara Johnson"],
+        "price": 290,
+        "biography": "Hip Hop Nation is a high-energy group that brings powerful lyrics, heavy beats, and a strong connection with the crowd. Their fusion of hip hop, rap, and R&B creates an electrifying performance.",
+        "upcoming_events": [
+            {"name": "Urban Beats Fest", "date": "2024-06-30", "location": "Downtown Core"},
+            {"name": "Hip Hop Vibes", "date": "2024-07-15", "location": "Sentosa"},
+            {"name": "R&B Rhythm", "date": "2024-08-05", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "City Groove Fest", "date": "2023-12-02", "location": "Marina Bay Sands"},
+            {"name": "Hip Hop Gala", "date": "2023-10-19", "location": "City Hall"},
+            {"name": "Night of Beats", "date": "2023-08-15", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Indie Horizon",
+        "genres": ["Indie", "Rock", "Alternative"],
+        "thumbnail": "/band/image (12).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Charlotte Green", "Ryan Cooper", "Ava Brown", "Ben King"],
+        "price": 490,
+        "biography": "Indie Horizon brings a fresh take to indie rock with their experimental soundscapes and vibrant energy, drawing in fans of alternative music.",
+        "upcoming_events": [
+            {"name": "Indie Fest", "date": "2024-06-10", "location": "Esplanade"},
+            {"name": "Alternative Sounds", "date": "2024-07-12", "location": "Sentosa"},
+            {"name": "Rock the Night", "date": "2024-08-07", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Indie Pulse", "date": "2023-11-20", "location": "City Hall"},
+            {"name": "Alternative Groove", "date": "2023-09-15", "location": "Orchard"},
+            {"name": "Rock Explosion", "date": "2023-07-25", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Jazz Journey",
+        "genres": ["Jazz", "Blues", "Fusion"],
+        "thumbnail": "/band/image (13).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Benjamin Lee", "Mia Chen", "Jacob Wong", "Sophie Kim"],
+        "price": 120,
+        "biography": "Jazz Journey takes listeners on a musical adventure through jazz classics, modern blues, and fusion. Their style is perfect for laid-back evenings and jazz enthusiasts.",
+        "upcoming_events": [
+            {"name": "Jazz Night", "date": "2024-06-20", "location": "Esplanade"},
+            {"name": "Fusion Beats", "date": "2024-07-15", "location": "Sentosa Cove"},
+            {"name": "Blues Gala", "date": "2024-08-09", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Blue Notes", "date": "2023-12-12", "location": "Downtown Core"},
+            {"name": "Jazz Jam", "date": "2023-10-18", "location": "Gardens by the Bay"},
+            {"name": "Evening Jazz", "date": "2023-08-13", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 14,
+        "name": "The Classics",
+        "genres": ["Classical", "Baroque", "Romantic"],
+        "thumbnail": "/band/image (14).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Charlotte Lin", "James Tan", "Olivia Lee", "David Ng"],
+        "price": 472,
+        "biography": "The Classics bring a refined and elegant interpretation of classical pieces from the Baroque and Romantic eras, delighting audiences with their skilled performances.",
+        "upcoming_events": [
+            {"name": "Classical Evenings", "date": "2024-06-28", "location": "Victoria Concert Hall"},
+            {"name": "Baroque Gala", "date": "2024-07-21", "location": "Singapore Symphony Hall"},
+            {"name": "Romantic Classics", "date": "2024-08-16", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Symphony Night", "date": "2023-11-12", "location": "City Hall"},
+            {"name": "Classical Gala", "date": "2023-09-20", "location": "Marina Bay"},
+            {"name": "Baroque Evening", "date": "2023-06-29", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Classical Tones",
+        "genres": ["Classical", "Symphonic", "Opera"],
+        "thumbnail": "/band/image (15).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Lucas Roberts", "Sophia Lin", "Michael Chen", "Emily Zhao"],
+        "price": 221,
+        "biography": "Classical Tones perform with a focus on symphonic and operatic pieces, creating powerful renditions of timeless classics for audiences who love the grandeur of classical music.",
+        "upcoming_events": [
+            {"name": "Symphonic Night", "date": "2024-06-22", "location": "Esplanade Theatre"},
+            {"name": "Opera Gala", "date": "2024-07-27", "location": "Victoria Concert Hall"},
+            {"name": "Grand Classics", "date": "2024-08-12", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Symphonic Evening", "date": "2023-12-02", "location": "Marina Bay"},
+            {"name": "Opera Night", "date": "2023-09-30", "location": "City Hall"},
+            {"name": "Classical Showcase", "date": "2023-07-21", "location": "Gardens by the Bay"}
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Reggae Roots",
+        "genres": ["Reggae", "Dub", "Roots"],
+        "thumbnail": "/band/image (16).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Mason Carter", "Ethan White", "Olivia Grant", "Sophie Brooks"],
+        "price": 197,
+        "biography": "Reggae Roots brings the iconic sounds of reggae, dub, and roots to life with deep basslines and chill vibes that keep the audience swaying to their beats.",
+        "upcoming_events": [
+            {"name": "Reggae in the Park", "date": "2024-07-10", "location": "East Coast Park"},
+            {"name": "Dub Nights", "date": "2024-08-18", "location": "Downtown Core"},
+            {"name": "Roots Vibes", "date": "2024-09-05", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Reggae Wave", "date": "2023-11-08", "location": "Marina Bay"},
+            {"name": "Chill Vibes", "date": "2023-09-14", "location": "Orchard"},
+            {"name": "Dub Roots Fest", "date": "2023-07-22", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Rasta Groove",
+        "genres": ["Reggae", "Ska", "World Music"],
+        "thumbnail": "/band/image (17).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["William Parker", "Maya Scott", "Jackson Clark", "Noah Reed", "Hannah Young"],
+        "price": 117,
+        "biography": "Rasta Groove is known for their lively performances that blend reggae, ska, and world music, creating an uplifting experience for audiences.",
+        "upcoming_events": [
+            {"name": "Global Beats Fest", "date": "2024-06-30", "location": "Bugis"},
+            {"name": "Rasta Rhythms", "date": "2024-07-20", "location": "Esplanade"},
+            {"name": "Ska & Reggae Nights", "date": "2024-08-10", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Island Vibes", "date": "2023-11-10", "location": "Sentosa"},
+            {"name": "Reggae Pulse", "date": "2023-08-25", "location": "Downtown Core"},
+            {"name": "Ska Fusion", "date": "2023-06-30", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Echoes of Jazz",
+        "genres": ["Jazz", "Soul", "Blues"],
+        "thumbnail": "/band/image (18).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Harper Collins", "Thomas Lee", "Sophia Brown", "Evan Green"],
+        "price": 262,
+        "biography": "Echoes of Jazz infuses the best of jazz, soul, and blues, creating a rich, nostalgic sound that appeals to jazz lovers of all ages.",
+        "upcoming_events": [
+            {"name": "Smooth Jazz Night", "date": "2024-07-12", "location": "Downtown Core"},
+            {"name": "Jazz & Blues Bash", "date": "2024-08-15", "location": "Esplanade"},
+            {"name": "Soulful Sounds", "date": "2024-09-03", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "City Jazz Fest", "date": "2023-12-05", "location": "Orchard"},
+            {"name": "Blue Soul Evening", "date": "2023-09-10", "location": "Marina Bay"},
+            {"name": "Jazz in the Park", "date": "2023-06-25", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Blue Note Jazz",
+        "genres": ["Jazz", "Fusion", "R&B"],
+        "thumbnail": "/band/image (19).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Alexander Tan", "Sarah Lim", "Jake Lee", "Emily Tan"],
+        "price": 140,
+        "biography": "Blue Note Jazz takes the classics of jazz and infuses them with elements of R&B and fusion, making each performance a fresh and soulful experience.",
+        "upcoming_events": [
+            {"name": "Jazz Fusion Nights", "date": "2024-07-18", "location": "Victoria Theatre"},
+            {"name": "Blue R&B Groove", "date": "2024-08-07", "location": "Esplanade"},
+            {"name": "Jazz with a Twist", "date": "2024-09-11", "location": "Downtown Core"}
+        ],
+        "past_events": [
+            {"name": "Jazz & Soul Fest", "date": "2023-10-15", "location": "Marina Bay"},
+            {"name": "Smooth Groove", "date": "2023-08-10", "location": "Clarke Quay"},
+            {"name": "Fusion Beats", "date": "2023-05-18", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Funkadelic Soul",
+        "genres": ["Funk", "Soul", "R&B"],
+        "thumbnail": "/band/image (20).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Mia Brown", "Tommy Hughes", "Amelia Davis", "Mark Turner"],
+        "price": 398,
+        "biography": "Funkadelic Soul delivers high-energy funk infused with soulful and rhythmic R&B, bringing groovy vibes to every performance.",
+        "upcoming_events": [
+            {"name": "Funk & Soul Bash", "date": "2024-06-20", "location": "Bugis"},
+            {"name": "R&B Groove Night", "date": "2024-07-18", "location": "Downtown Core"},
+            {"name": "Soulful Beats", "date": "2024-08-25", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Funk Fest", "date": "2023-10-12", "location": "Esplanade"},
+            {"name": "Soul Vibes", "date": "2023-08-18", "location": "Marina Bay"},
+            {"name": "Night of Funk", "date": "2023-06-29", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Blues Connection",
+        "genres": ["Blues", "Rock", "Soul"],
+        "thumbnail": "/band/image (21).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Charlotte Green", "Lucas James", "David Harris", "Olivia Thompson"],
+        "price": 370,
+        "biography": "Blues Connection brings the heart of blues alive with a rock edge and soulful vibes, making their performances a dynamic experience.",
+        "upcoming_events": [
+            {"name": "Blues Bash", "date": "2024-06-25", "location": "Marina Bay"},
+            {"name": "Rockin' Blues Night", "date": "2024-07-10", "location": "Orchard"},
+            {"name": "Soul and Blues Fest", "date": "2024-08-15", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Blues at the Bay", "date": "2023-10-14", "location": "City Hall"},
+            {"name": "Soulful Sounds", "date": "2023-08-22", "location": "Esplanade"},
+            {"name": "Night of Blues", "date": "2023-06-16", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Ambient Flow",
+        "genres": ["Ambient", "Downtempo", "Chillout"],
+        "thumbnail": "/band/image (22).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Noah Reed", "Grace Lee", "Liam Chen", "Isabella Tan"],
+        "price": 394,
+        "biography": "Ambient Flow creates ethereal soundscapes with a blend of downtempo and chillout beats, perfect for relaxing and meditative environments.",
+        "upcoming_events": [
+            {"name": "Chillout Evening", "date": "2024-06-18", "location": "Gardens by the Bay"},
+            {"name": "Ambient Waves", "date": "2024-07-25", "location": "East Coast Park"},
+            {"name": "Night of Serenity", "date": "2024-08-05", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Ambient Sounds", "date": "2023-11-05", "location": "Bugis"},
+            {"name": "Calm Vibes", "date": "2023-09-15", "location": "Sentosa"},
+            {"name": "Downtempo Dream", "date": "2023-07-28", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Rock Force",
+        "genres": ["Rock", "Alternative", "Grunge"],
+        "thumbnail": "/band/image (23).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Charlotte Lee", "Daniel Garcia", "Sophia Kim", "Jack Anderson"],
+        "price": 375,
+        "biography": "Rock Force brings raw energy and gritty sounds to the stage with their alternative rock and grunge influences.",
+        "upcoming_events": [
+            {"name": "Grunge Fest", "date": "2024-06-22", "location": "Clarke Quay"},
+            {"name": "Alternative Rock Night", "date": "2024-07-18", "location": "Marina Bay"},
+            {"name": "Rock Explosion", "date": "2024-08-12", "location": "Downtown Core"}
+        ],
+        "past_events": [
+            {"name": "Raw Rock Night", "date": "2023-11-12", "location": "Bugis"},
+            {"name": "City Grunge Fest", "date": "2023-08-20", "location": "Orchard"},
+            {"name": "Edge of Rock", "date": "2023-06-14", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Country Roads Collective",
+        "genres": ["Country", "Folk", "Bluegrass"],
+        "thumbnail": "/band/image (24).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Harper Grey", "Lily Smith", "James Brown", "Ava Cooper"],
+        "price": 320,
+        "biography": "Country Roads Collective captures the heart of rural music, blending traditional country with folk and bluegrass influences for a nostalgic experience.",
+        "upcoming_events": [
+            {"name": "Folk Night", "date": "2024-06-17", "location": "East Coast Park"},
+            {"name": "Country Fest", "date": "2024-07-21", "location": "Marina Bay"},
+            {"name": "Bluegrass Bash", "date": "2024-08-13", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Heartland Harmony", "date": "2023-10-03", "location": "City Hall"},
+            {"name": "Country Beats", "date": "2023-08-11", "location": "Downtown Core"},
+            {"name": "Folk Vibes", "date": "2023-06-19", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Latin Fusion",
+        "genres": ["Latin", "Salsa", "Bossa Nova"],
+        "thumbnail": "/band/image (25).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Emma Santos", "Carlos Rivera", "Sofia Hernandez", "Miguel Torres"],
+        "price": 312,
+        "biography": "Latin Fusion brings the lively sounds of salsa, Latin jazz, and bossa nova to life, inviting everyone to dance along to their infectious beats.",
+        "upcoming_events": [
+            {"name": "Latin Dance Night", "date": "2024-06-20", "location": "Sentosa Cove"},
+            {"name": "Bossa Beats", "date": "2024-07-25", "location": "Esplanade"},
+            {"name": "Salsa Fiesta", "date": "2024-08-10", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Latin Groove", "date": "2023-10-25", "location": "Orchard"},
+            {"name": "Dance to Latin", "date": "2023-08-13", "location": "City Hall"},
+            {"name": "Salsa Beats", "date": "2023-06-30", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 26,
+        "name": "Punk Revolution",
+        "genres": ["Punk", "Hardcore", "Alternative"],
+        "thumbnail": "/band/image (26).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Lily Jones", "Max Thompson", "Dylan Reid", "Jamie Carter"],
+        "price": 492,
+        "biography": "Punk Revolution brings raw punk energy to the stage, with a hard-hitting mix of hardcore and alternative influences.",
+        "upcoming_events": [
+            {"name": "Punk Rock Fest", "date": "2024-06-15", "location": "Bugis"},
+            {"name": "Hardcore Revolution", "date": "2024-07-12", "location": "Clarke Quay"},
+            {"name": "Alternative Night", "date": "2024-08-05", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Punk's Not Dead", "date": "2023-10-10", "location": "Sentosa"},
+            {"name": "Edge of Punk", "date": "2023-08-17", "location": "Marina Bay"},
+            {"name": "Hardcore Explosion", "date": "2023-06-05", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Blues & Soul",
+        "genres": ["Blues", "Soul", "Rock"],
+        "thumbnail": "/band/image (27).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Henry Stone", "Lucas Grey", "Ella Wright", "Sarah Green"],
+        "price": 350,
+        "biography": "Blues & Soul delivers a unique mix of soulful melodies and bluesy rock, creating an intimate atmosphere that captivates audiences.",
+        "upcoming_events": [
+            {"name": "Soul & Blues Fest", "date": "2024-06-25", "location": "Victoria Theatre"},
+            {"name": "Rockin' Blues Night", "date": "2024-07-08", "location": "Esplanade"},
+            {"name": "Soulful Sounds", "date": "2024-08-03", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Blues Bash", "date": "2023-11-12", "location": "Orchard"},
+            {"name": "Soul Vibes", "date": "2023-09-08", "location": "Bugis"},
+            {"name": "Night of Blues", "date": "2023-07-15", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Blues Trio",
+        "genres": ["Blues", "Jazz", "Soul"],
+        "thumbnail": "/band/image (28).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Ava Mitchell", "Emma Clark", "Liam Brooks", "Noah Edwards"],
+        "price": 77,
+        "biography": "Blues Trio combines the elegance of jazz with soulful blues, making their performances perfect for a relaxed and intimate vibe.",
+        "upcoming_events": [
+            {"name": "Jazz & Blues Evening", "date": "2024-06-28", "location": "Esplanade"},
+            {"name": "Soulful Jazz Night", "date": "2024-07-22", "location": "City Hall"},
+            {"name": "Blues at Dusk", "date": "2024-08-15", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Soulful Blues Fest", "date": "2023-11-20", "location": "Marina Bay"},
+            {"name": "Jazz in the Park", "date": "2023-09-18", "location": "Gardens by the Bay"},
+            {"name": "Blues Under the Stars", "date": "2023-06-22", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Blues Underground",
+        "genres": ["Blues", "Rock", "Funk"],
+        "thumbnail": "/band/image (29).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Charlotte Brown", "Oliver Martin", "Sophia Liu", "Jake Taylor"],
+        "price": 254,
+        "biography": "Blues Underground adds a funky twist to blues and rock, creating a powerful sound that is both gritty and groovy.",
+        "upcoming_events": [
+            {"name": "Funky Blues Night", "date": "2024-06-30", "location": "Downtown Core"},
+            {"name": "Rockin' Blues Fest", "date": "2024-07-15", "location": "Marina Bay"},
+            {"name": "Groove & Blues", "date": "2024-08-20", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Underground Blues", "date": "2023-10-05", "location": "Orchard"},
+            {"name": "Blues Groove Fest", "date": "2023-08-20", "location": "City Hall"},
+            {"name": "Funk Vibes", "date": "2023-06-15", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 30,
+        "name": "Metal Storm",
+        "genres": ["Metal", "Hard Rock", "Thrash"],
+        "thumbnail": "/band/image (30).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Benjamin Knight", "Chris Stone", "Emma Black", "Sophie Johnson"],
+        "price": 158,
+        "biography": "Metal Storm brings a storm of heavy riffs and intense vocals, making every performance a headbanger's paradise.",
+        "upcoming_events": [
+            {"name": "Metal Mayhem", "date": "2024-06-20", "location": "Clarke Quay"},
+            {"name": "Rock the Night", "date": "2024-07-12", "location": "Esplanade"},
+            {"name": "Thrash Fest", "date": "2024-08-25", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Metal Rage", "date": "2023-10-18", "location": "Downtown Core"},
+            {"name": "Heavy Nights", "date": "2023-08-09", "location": "Sentosa"},
+            {"name": "Storm of Rock", "date": "2023-06-30", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 31,
+        "name": "The Punk Riffs",
+        "genres": ["Punk", "Rock", "Alternative"],
+        "thumbnail": "/band/image (31).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Lily Matthews", "Ethan Johnson", "Chloe Roberts", "Daniel Foster"],
+        "price": 175,
+        "biography": "The Punk Riffs bring an explosive punk rock energy to the stage, keeping audiences engaged with their rebellious riffs and catchy choruses.",
+        "upcoming_events": [
+            {"name": "Rock Riot", "date": "2024-06-16", "location": "Clarke Quay"},
+            {"name": "Punk Power", "date": "2024-07-13", "location": "Downtown Core"},
+            {"name": "Alt Night", "date": "2024-08-18", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Riot Fest", "date": "2023-10-14", "location": "Sentosa"},
+            {"name": "Punk Revolution", "date": "2023-08-21", "location": "Marina Bay"},
+            {"name": "Raw Rock", "date": "2023-06-19", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 32,
+        "name": "Ska Movement",
+        "genres": ["Ska", "Reggae", "Rocksteady"],
+        "thumbnail": "/band/image (32).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Oliver Black", "Amelia White", "Charlie Reed", "Grace Taylor"],
+        "price": 453,
+        "biography": "Ska Movement is known for their upbeat ska tunes, combined with reggae rhythms and a rocksteady beat that gets the crowd dancing.",
+        "upcoming_events": [
+            {"name": "Ska Fest", "date": "2024-06-25", "location": "Bugis"},
+            {"name": "Reggae Rhythms", "date": "2024-07-21", "location": "East Coast Park"},
+            {"name": "Rocksteady Vibes", "date": "2024-08-11", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Island Beats", "date": "2023-10-20", "location": "Marina Bay"},
+            {"name": "Ska Extravaganza", "date": "2023-08-30", "location": "Downtown Core"},
+            {"name": "Reggae Night", "date": "2023-06-22", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 33,
+        "name": "Latin Groove",
+        "genres": ["Latin", "Salsa", "Tango"],
+        "thumbnail": "/band/image (33).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["James Rivera", "Sophia Martinez", "Carlos Gomez", "Isabel Rodriguez"],
+        "price": 277,
+        "biography": "Latin Groove brings the vibrant sounds of Latin America to the stage, blending salsa, tango, and Latin beats for an irresistible dance experience.",
+        "upcoming_events": [
+            {"name": "Salsa Fiesta", "date": "2024-06-29", "location": "Orchard"},
+            {"name": "Latin Dance Night", "date": "2024-07-20", "location": "Bugis"},
+            {"name": "Tango Extravaganza", "date": "2024-08-15", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Dance Fest", "date": "2023-11-10", "location": "Downtown Core"},
+            {"name": "Latin Fever", "date": "2023-09-18", "location": "Gardens by the Bay"},
+            {"name": "Salsa Nights", "date": "2023-06-23", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 34,
+        "name": "Worldly Rhythms",
+        "genres": ["Latin", "World Music", "Afrobeat"],
+        "thumbnail": "/band/image (34).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Mason Torres", "Liam Scott", "Emma Williams", "Noah Garcia"],
+        "price": 477,
+        "biography": "Worldly Rhythms combines a blend of Afrobeat, Latin, and world music for a high-energy, dance-driven performance that celebrates global sounds.",
+        "upcoming_events": [
+            {"name": "Global Beats", "date": "2024-06-23", "location": "Gardens by the Bay"},
+            {"name": "Rhythm Fest", "date": "2024-07-17", "location": "East Coast Park"},
+            {"name": "Dance Around the World", "date": "2024-08-09", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "World Music Night", "date": "2023-12-01", "location": "Bugis"},
+            {"name": "Afrobeat Groove", "date": "2023-10-07", "location": "Downtown Core"},
+            {"name": "Festival of Rhythms", "date": "2023-07-19", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 35,
+        "name": "Fusion Collective",
+        "genres": ["Latin", "Jazz", "Bossa Nova"],
+        "thumbnail": "/band/image (35).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Sophia Liu", "Miguel Ortiz", "Ella Cruz", "Lucas Hernandez"],
+        "price": 162,
+        "biography": "Fusion Collective merges Latin and jazz influences with bossa nova beats to create a sophisticated and smooth musical experience.",
+        "upcoming_events": [
+            {"name": "Jazz & Latin Fusion", "date": "2024-06-14", "location": "Esplanade"},
+            {"name": "Bossa Nova Nights", "date": "2024-07-22", "location": "Victoria Theatre"},
+            {"name": "Jazz Vibes", "date": "2024-08-18", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Bossa Beat", "date": "2023-11-15", "location": "Marina Bay"},
+            {"name": "Jazz Groove", "date": "2023-09-05", "location": "Downtown Core"},
+            {"name": "Latin Night", "date": "2023-07-12", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 36,
+        "name": "Grunge Wave",
+        "genres": ["Grunge", "Alternative", "Rock"],
+        "thumbnail": "/band/image (36).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Isabella James", "Henry Stone", "Daniel Roberts", "Emily Carter"],
+        "price": 352,
+        "biography": "Grunge Wave brings a raw and unfiltered sound, blending grunge with alternative rock for a powerful, nostalgic experience.",
+        "upcoming_events": [
+            {"name": "Grunge Fest", "date": "2024-06-25", "location": "Clarke Quay"},
+            {"name": "Alternative Night", "date": "2024-07-15", "location": "Marina Bay"},
+            {"name": "Rock Revival", "date": "2024-08-18", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Grunge Glory", "date": "2023-11-05", "location": "Downtown Core"},
+            {"name": "Rock Riot", "date": "2023-09-15", "location": "Orchard"},
+            {"name": "90s Vibes", "date": "2023-06-12", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 37,
+        "name": "Punk Alliance",
+        "genres": ["Punk", "Hardcore", "Alt Rock"],
+        "thumbnail": "/band/image (37).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Lily Morgan", "Jacob Lee", "Amelia Wright", "James Parker"],
+        "price": 464,
+        "biography": "Punk Alliance embodies the spirit of punk and hardcore, delivering high-energy performances with a rebellious edge.",
+        "upcoming_events": [
+            {"name": "Punk Rock Night", "date": "2024-07-10", "location": "Esplanade"},
+            {"name": "Hardcore Fest", "date": "2024-07-22", "location": "Orchard"},
+            {"name": "Alt Vibes", "date": "2024-08-20", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Edge Fest", "date": "2023-12-18", "location": "Marina Bay"},
+            {"name": "Punk Pulse", "date": "2023-09-08", "location": "City Hall"},
+            {"name": "Alt Rock Riot", "date": "2023-06-24", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 38,
+        "name": "Hip Hop Vibes",
+        "genres": ["Hip Hop", "Rap", "Trap"],
+        "thumbnail": "/band/image (38).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Oliver Young", "Chris Brown", "Jordan Black", "Mia Garcia"],
+        "price": 207,
+        "biography": "Hip Hop Vibes brings the beats of hip hop, rap, and trap to life, energizing the crowd with powerful lyrics and dynamic rhythms.",
+        "upcoming_events": [
+            {"name": "Hip Hop Nation", "date": "2024-07-18", "location": "Bugis"},
+            {"name": "Trap Night", "date": "2024-08-09", "location": "Sentosa"},
+            {"name": "Rap Revolution", "date": "2024-09-05", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Beats & Rhymes", "date": "2023-11-10", "location": "Downtown Core"},
+            {"name": "Hip Hop Explosion", "date": "2023-08-25", "location": "Marina Bay"},
+            {"name": "Trap Fest", "date": "2023-06-15", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 39,
+        "name": "Ambient Dream",
+        "genres": ["Ambient", "Electronic", "Chillout"],
+        "thumbnail": "/band/image (39).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Lucas Green", "Evelyn Carter", "Alex Brown", "Sophia Hall"],
+        "price": 130,
+        "biography": "Ambient Dream crafts tranquil soundscapes with electronic and chillout vibes, perfect for relaxation and meditation.",
+        "upcoming_events": [
+            {"name": "Dreamwave", "date": "2024-06-20", "location": "Gardens by the Bay"},
+            {"name": "Chillout Night", "date": "2024-07-14", "location": "East Coast Park"},
+            {"name": "Ambient Aura", "date": "2024-08-16", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Serene Sounds", "date": "2023-11-12", "location": "City Hall"},
+            {"name": "Tranquil Vibes", "date": "2023-09-07", "location": "Sentosa"},
+            {"name": "Downtempo Groove", "date": "2023-07-15", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 40,
+        "name": "Classical Reverie",
+        "genres": ["Classical", "Chamber Music", "Symphony"],
+        "thumbnail": "/band/image (40).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Isabella Young", "David Tan", "Olivia Lin", "Emily Zhao"],
+        "price": 431,
+        "biography": "Classical Reverie brings to life the masterpieces of classical music with a focus on chamber and symphonic pieces.",
+        "upcoming_events": [
+            {"name": "Symphonic Evening", "date": "2024-06-25", "location": "Victoria Concert Hall"},
+            {"name": "Chamber Classics", "date": "2024-07-30", "location": "Esplanade"},
+            {"name": "Evening of Mozart", "date": "2024-08-20", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Classical Nights", "date": "2023-11-08", "location": "Downtown Core"},
+            {"name": "Symphonic Gala", "date": "2023-09-10", "location": "Marina Bay"},
+            {"name": "Chamber Fest", "date": "2023-07-25", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 41,
+        "name": "Metal Warriors",
+        "genres": ["Metal", "Thrash", "Hard Rock"],
+        "thumbnail": "/band/image (41).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["William James", "Mason Carter", "Olivia Chen", "Jack Stone"],
+        "price": 227,
+        "biography": "Metal Warriors unleashes heavy riffs and intense energy, perfect for fans of thrash and hard rock.",
+        "upcoming_events": [
+            {"name": "Metal Mayhem", "date": "2024-06-27", "location": "Clarke Quay"},
+            {"name": "Thrash Attack", "date": "2024-07-22", "location": "Marina Bay"},
+            {"name": "Hard Rock Nights", "date": "2024-08-28", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Rage Fest", "date": "2023-10-30", "location": "Downtown Core"},
+            {"name": "Metal Surge", "date": "2023-08-15", "location": "Orchard"},
+            {"name": "Hardcore Fest", "date": "2023-07-18", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 42,
+        "name": "Classic Virtuosos",
+        "genres": ["Classical", "Opera", "Symphony"],
+        "thumbnail": "/band/image (42).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Liam Robinson", "Sophia Lin", "Ella Zhang", "Benjamin Tan"],
+        "price": 456,
+        "biography": "Classic Virtuosos performs timeless pieces from the operatic and symphonic repertoires with precision and grandeur.",
+        "upcoming_events": [
+            {"name": "Opera Gala", "date": "2024-06-28", "location": "Victoria Theatre"},
+            {"name": "Symphonic Delight", "date": "2024-07-20", "location": "Esplanade"},
+            {"name": "Classical Masterpieces", "date": "2024-08-18", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Opera Classics", "date": "2023-11-05", "location": "Marina Bay"},
+            {"name": "Symphony Gala", "date": "2023-09-03", "location": "City Hall"},
+            {"name": "Evening with Beethoven", "date": "2023-07-15", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 43,
+        "name": "Metal Fury",
+        "genres": ["Metal", "Heavy Metal", "Hardcore"],
+        "thumbnail": "/band/image (43).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Lucas Rivera", "James Scott", "Tommy Walker", "Sophia Lee"],
+        "price": 258,
+        "biography": "Metal Fury brings intensity and power with heavy metal and hardcore influences that thrill fans of the genre.",
+        "upcoming_events": [
+            {"name": "Heavy Metal Night", "date": "2024-06-30", "location": "Marina Bay"},
+            {"name": "Fury Fest", "date": "2024-07-18", "location": "Orchard"},
+            {"name": "Metal Rage", "date": "2024-08-22", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Metal Explosion", "date": "2023-10-05", "location": "Esplanade"},
+            {"name": "Hardcore Nights", "date": "2023-08-12", "location": "City Hall"},
+            {"name": "Rage Fest", "date": "2023-06-20", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 44,
+        "name": "Indie Spectrum",
+        "genres": ["Indie", "Alternative", "Rock"],
+        "thumbnail": "/band/image (44).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Alexander Tan", "Sophia Carter", "Emily Green", "Lucas Young"],
+        "price": 413,
+        "biography": "Indie Spectrum explores the nuances of indie and alternative rock with a fresh and edgy sound.",
+        "upcoming_events": [
+            {"name": "Alt Rock Vibes", "date": "2024-06-22", "location": "Downtown Core"},
+            {"name": "Indie Fest", "date": "2024-07-24", "location": "Bugis"},
+            {"name": "Rock the Stage", "date": "2024-08-12", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Indie Nights", "date": "2023-11-22", "location": "Clarke Quay"},
+            {"name": "Alternative Explosion", "date": "2023-09-14", "location": "Orchard"},
+            {"name": "Indie Rock Gala", "date": "2023-07-19", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 45,
+        "name": "Blues Rhythm",
+        "genres": ["Blues", "Soul", "Jazz"],
+        "thumbnail": "/band/image (45).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Noah Brown", "Sophia Miller", "Ethan Garcia", "Lucas Johnson"],
+        "price": 185,
+        "biography": "Blues Rhythm merges soulful blues with jazzy undertones for a smooth, nostalgic sound that resonates deeply with listeners.",
+        "upcoming_events": [
+            {"name": "Soul Jazz Night", "date": "2024-06-28", "location": "Esplanade"},
+            {"name": "Blues Bash", "date": "2024-07-22", "location": "Orchard"},
+            {"name": "Jazz & Blues Evening", "date": "2024-08-15", "location": "City Hall"}
+        ],
+        "past_events": [
+            {"name": "Jazz Vibes", "date": "2023-11-10", "location": "Marina Bay"},
+            {"name": "Soul Night", "date": "2023-09-06", "location": "Bugis"},
+            {"name": "Blues Fest", "date": "2023-07-20", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 46,
+        "name": "Soul Essence",
+        "genres": ["Soul"],
+        "thumbnail": "/band/image (46).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Henry Lee", "Sophia Martinez", "James Chen", "Emma Green"],
+        "price": 54,
+        "biography": "Soul Essence brings smooth, heartfelt melodies that captivate listeners with a deep, soulful sound.",
+        "upcoming_events": [
+            {"name": "Soulful Sundays", "date": "2024-07-07", "location": "Gardens by the Bay"}
+        ],
+        "past_events": [
+            {"name": "Soul Vibes Night", "date": "2023-10-08", "location": "Esplanade"},
+            {"name": "Downtown Soul", "date": "2023-06-12", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 47,
+        "name": "Funky Groove",
+        "genres": ["Funk", "Jazz", "Soul"],
+        "thumbnail": "/band/image (47).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Amelia Brown", "Isabella White", "Michael Garcia"],
+        "price": 137,
+        "biography": "Funky Groove delivers an energetic mix of funk, jazz, and soul, making every performance a night to remember.",
+        "upcoming_events": [
+            {"name": "Groove Fest", "date": "2024-06-14", "location": "Clarke Quay"},
+            {"name": "Funky Beats", "date": "2024-08-05", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Funk & Soul Night", "date": "2023-11-20", "location": "Sentosa"},
+            {"name": "Jazz Fest", "date": "2023-09-12", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 48,
+        "name": "Rock Rebellion",
+        "genres": ["Rock", "Grunge"],
+        "thumbnail": "/band/image (48).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Henry Anderson", "Olivia Clark", "Ethan Walker", "Sophie Harris"],
+        "price": 414,
+        "biography": "Rock Rebellion brings powerful rock and grunge sounds, fueling each performance with raw energy.",
+        "upcoming_events": [
+            {"name": "Rock Fest", "date": "2024-07-20", "location": "Marina Bay"},
+            {"name": "Grunge Night", "date": "2024-08-22", "location": "Downtown Core"}
+        ],
+        "past_events": [
+            {"name": "Edge of Rock", "date": "2023-12-03", "location": "Bugis"},
+            {"name": "Rebel Fest", "date": "2023-10-15", "location": "Orchard"},
+            {"name": "Rock Riot", "date": "2023-07-28", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 49,
+        "name": "Island Vibes",
+        "genres": ["Ska", "Reggae"],
+        "thumbnail": "/band/image (49).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Benjamin Parker", "Ella Watson", "Noah Lee"],
+        "price": 495,
+        "biography": "Island Vibes blends ska and reggae for a beachside feel, creating the perfect soundtrack for laid-back evenings.",
+        "upcoming_events": [
+            {"name": "Ska Fest", "date": "2024-07-18", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Reggae Night", "date": "2023-10-05", "location": "City Hall"},
+            {"name": "Island Beats", "date": "2023-09-10", "location": "Sentosa"},
+            {"name": "Ska Wave", "date": "2023-06-18", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 50,
+        "name": "Jazz Sensations",
+        "genres": ["Jazz", "Blues"],
+        "thumbnail": "/band/image (50).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Emma Young", "Amelia Green", "Sophia Davis", "Jack Williams", "Olivia Tan", "Liam Carter"],
+        "price": 153,
+        "biography": "Jazz Sensations brings a soothing mix of jazz and blues, perfect for elegant evenings and sophisticated vibes.",
+        "upcoming_events": [
+            {"name": "Blue Note Night", "date": "2024-06-16", "location": "Victoria Theatre"},
+            {"name": "Jazz Groove", "date": "2024-08-14", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Blues & Jazz Gala", "date": "2023-11-08", "location": "Downtown Core"},
+            {"name": "Jazz Nights", "date": "2023-08-05", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 51,
+        "name": "Country Harmony",
+        "genres": ["Country"],
+        "thumbnail": "/band/image (51).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Noah Thompson", "Charlotte King", "William Moore", "Grace Lee"],
+        "price": 480,
+        "biography": "Country Harmony brings a heartfelt sound with traditional country vibes that touch the soul.",
+        "upcoming_events": [
+            {"name": "Country Fest", "date": "2024-06-20", "location": "Marina Bay"},
+            {"name": "Heartland Harmony", "date": "2024-07-10", "location": "East Coast Park"}
+        ],
+        "past_events": [
+            {"name": "Country Beats", "date": "2023-10-25", "location": "Bugis"},
+            {"name": "Homegrown Sounds", "date": "2023-08-15", "location": "City Hall"},
+            {"name": "Nashville Nights", "date": "2023-06-12", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 52,
+        "name": "Gospel Voices",
+        "genres": ["Gospel", "Soul"],
+        "thumbnail": "/band/image (52).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Isabella Jones", "Mia Brown", "Ava Wilson"],
+        "price": 490,
+        "biography": "Gospel Voices uplift audiences with powerful gospel songs infused with soulful melodies.",
+        "upcoming_events": [
+            {"name": "Soulful Gospel Night", "date": "2024-07-12", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Gospel Gala", "date": "2023-10-12", "location": "Victoria Theatre"},
+            {"name": "City of Light", "date": "2023-07-05", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 53,
+        "name": "Jazz Journey",
+        "genres": ["Jazz", "Blues", "Soul"],
+        "thumbnail": "/band/image (53).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Mia Chen", "Sophia Zhang", "Ethan Wong", "Jack Lim", "Lily Chan"],
+        "price": 419,
+        "biography": "Jazz Journey creates soulful journeys through jazz, blues, and soul, captivating audiences with their smooth sounds.",
+        "upcoming_events": [
+            {"name": "Jazz Fest", "date": "2024-06-15", "location": "Clarke Quay"},
+            {"name": "Soul Night", "date": "2024-07-27", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Smooth Jazz Gala", "date": "2023-11-18", "location": "Downtown Core"},
+            {"name": "Blue Vibes", "date": "2023-09-15", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 54,
+        "name": "Orchestral Elegance",
+        "genres": ["Classical"],
+        "thumbnail": "/band/image (54).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Evelyn Carter", "James Anderson", "Benjamin Lee", "Sophia Tan", "Grace Zhao"],
+        "price": 333,
+        "biography": "Orchestral Elegance brings classical masterpieces to life with graceful interpretations of timeless works.",
+        "upcoming_events": [
+            {"name": "Evening Classics", "date": "2024-06-22", "location": "Victoria Theatre"}
+        ],
+        "past_events": [
+            {"name": "Orchestral Showcase", "date": "2023-10-15", "location": "Marina Bay"},
+            {"name": "Classics at Night", "date": "2023-08-10", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 55,
+        "name": "Reggae Collective",
+        "genres": ["Reggae", "Dub"],
+        "thumbnail": "/band/image (55).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Evelyn Rivera", "Sophia Young", "Noah Tan", "Olivia Perez", "Mason Jones"],
+        "price": 386,
+        "biography": "Reggae Collective delivers authentic reggae and dub vibes, capturing the essence of the genre in every beat.",
+        "upcoming_events": [
+            {"name": "Reggae Vibes", "date": "2024-07-30", "location": "Downtown Core"},
+            {"name": "Dub Night", "date": "2024-08-19", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Rasta Rhythms", "date": "2023-11-09", "location": "Sentosa"},
+            {"name": "Roots Fest", "date": "2023-08-22", "location": "Marina Bay"},
+            {"name": "Chill Beats", "date": "2023-06-15", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 56,
+        "name": "Folk Horizons",
+        "genres": ["Folk", "Country"],
+        "thumbnail": "/band/image (56).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Ava Brown", "Emily Roberts", "Oliver Green"],
+        "price": 210,
+        "biography": "Folk Horizons combines the charm of folk and country music, painting stories with each melody.",
+        "upcoming_events": [
+            {"name": "Folk Festival", "date": "2024-06-14", "location": "East Coast Park"},
+            {"name": "Country Night", "date": "2024-07-18", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Heartland Folk", "date": "2023-09-25", "location": "City Hall"},
+            {"name": "Songs of the Heart", "date": "2023-07-18", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 57,
+        "name": "Rock Legends",
+        "genres": ["Rock", "Hard Rock"],
+        "thumbnail": "/band/image (57).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Alexander Lee", "Lucas Brown", "Sophia Tan", "Charlotte Evans", "Michael Chen"],
+        "price": 494,
+        "biography": "Rock Legends live up to their name, delivering classic rock anthems with a hard-hitting edge.",
+        "upcoming_events": [
+            {"name": "Rock On Fest", "date": "2024-06-25", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Legends Live", "date": "2023-11-10", "location": "Marina Bay"},
+            {"name": "Hard Rock Heaven", "date": "2023-09-05", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 58,
+        "name": "Gospel Joy",
+        "genres": ["Gospel"],
+        "thumbnail": "/band/image (58).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Isabella Gray", "Mia Turner", "Liam Collins", "Ava Roberts"],
+        "price": 95,
+        "biography": "Gospel Joy spreads joy and inspiration through heartfelt gospel music and powerful harmonies.",
+        "upcoming_events": [
+            {"name": "Praise Night", "date": "2024-07-20", "location": "Victoria Theatre"}
+        ],
+        "past_events": [
+            {"name": "Gospel Harmony", "date": "2023-11-08", "location": "Downtown Core"},
+            {"name": "Faith Fest", "date": "2023-09-22", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 59,
+        "name": "Smooth Jazz Quartet",
+        "genres": ["Jazz"],
+        "thumbnail": "/band/image (59).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Noah Lee", "Sophia Martinez", "Lucas Roberts"],
+        "price": 426,
+        "biography": "Smooth Jazz Quartet offers a laid-back, soothing jazz experience perfect for intimate gatherings and elegant evenings.",
+        "upcoming_events": [
+            {"name": "Evening Jazz", "date": "2024-06-18", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Jazz Lounge Night", "date": "2023-11-20", "location": "City Hall"},
+            {"name": "Smooth Sounds", "date": "2023-08-13", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 60,
+        "name": "Rock Star",
+        "genres": ["Rock", "Punk"],
+        "thumbnail": "/band/image (60).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Alexander Kim", "Lucas Johnson", "James Park", "Ethan White"],
+        "price": 181,
+        "biography": "Rock Star brings an intense punk rock edge to their performances, with high energy and powerful riffs.",
+        "upcoming_events": [
+            {"name": "Rock Night", "date": "2024-06-30", "location": "Bugis"},
+            {"name": "Punk Power", "date": "2024-08-15", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Punk Riot", "date": "2023-11-07", "location": "Downtown Core"},
+            {"name": "Rock and Roll", "date": "2023-09-03", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 61,
+        "name": "Island Rhythm",
+        "genres": ["Reggae", "World"],
+        "thumbnail": "/band/image (61).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Charlotte Garcia", "William Lee", "Emma Nguyen", "Olivia Brown", "Sophia Green"],
+        "price": 141,
+        "biography": "Island Rhythm combines reggae and world music elements, delivering a unique, tropical sound that brings a beachside vibe to any event.",
+        "upcoming_events": [
+            {"name": "Tropical Nights", "date": "2024-07-22", "location": "East Coast Park"}
+        ],
+        "past_events": [
+            {"name": "Reggae & Roots", "date": "2023-10-12", "location": "Marina Bay"},
+            {"name": "Island Beats", "date": "2023-08-01", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 62,
+        "name": "Grunge Society",
+        "genres": ["Grunge", "Alternative"],
+        "thumbnail": "/band/image (62).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Benjamin Carter", "Lucas Anderson", "Ethan Wilson"],
+        "price": 230,
+        "biography": "Grunge Society brings raw, nostalgic grunge vibes, drawing audiences with their gritty alternative rock sound.",
+        "upcoming_events": [
+            {"name": "Grunge Revival", "date": "2024-06-24", "location": "Downtown Core"},
+            {"name": "90s Night", "date": "2024-08-19", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Alternative Fest", "date": "2023-10-18", "location": "City Hall"},
+            {"name": "Grunge Night", "date": "2023-07-20", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 63,
+        "name": "Acoustic Soul",
+        "genres": ["Folk", "Soul"],
+        "thumbnail": "/band/image (63).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["William Harris", "Ava Taylor", "Lily Morgan", "Mason Lee", "Olivia Evans"],
+        "price": 232,
+        "biography": "Acoustic Soul blends folk and soul into an acoustic performance that is as heartfelt as it is powerful.",
+        "upcoming_events": [
+            {"name": "Soulful Strings", "date": "2024-06-17", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Acoustic Nights", "date": "2023-11-25", "location": "Orchard"},
+            {"name": "Folks & Soul", "date": "2023-09-22", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 64,
+        "name": "Pop Fusion",
+        "genres": ["Pop", "Dance", "Electronic"],
+        "thumbnail": "/band/image (64).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Liam Thompson", "Ella Kim", "Grace Brown", "James Cooper"],
+        "price": 339,
+        "biography": "Pop Fusion brings an upbeat pop sound with dance and electronic influences, perfect for a lively night out.",
+        "upcoming_events": [
+            {"name": "Pop Fest", "date": "2024-06-18", "location": "Esplanade"},
+            {"name": "Electronic Vibes", "date": "2024-08-10", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Dance Night", "date": "2023-11-10", "location": "City Hall"},
+            {"name": "Pop Extravaganza", "date": "2023-09-05", "location": "Downtown Core"},
+            {"name": "Groove Fest", "date": "2023-06-15", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 65,
+        "name": "Jazz Impressions",
+        "genres": ["Jazz"],
+        "thumbnail": "/band/image (65).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["William Kim", "Sophia Lim", "Emma Zhang"],
+        "price": 129,
+        "biography": "Jazz Impressions brings sophisticated jazz sounds, perfect for an evening of relaxation and elegance.",
+        "upcoming_events": [
+            {"name": "Smooth Jazz Night", "date": "2024-06-29", "location": "Victoria Theatre"}
+        ],
+        "past_events": [
+            {"name": "Evening of Jazz", "date": "2023-11-05", "location": "Marina Bay"},
+            {"name": "Downtown Jazz", "date": "2023-09-18", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 66,
+        "name": "Hard Rock Heroes",
+        "genres": ["Rock", "Hard Rock"],
+        "thumbnail": "/band/image (66).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Sophia Turner", "Ethan Kim", "Daniel Chen", "Olivia Liu"],
+        "price": 368,
+        "biography": "Hard Rock Heroes live up to their name, delivering classic rock anthems and heavy hard rock with intense energy.",
+        "upcoming_events": [
+            {"name": "Rock Legends", "date": "2024-07-14", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Hard Rock Fest", "date": "2023-11-20", "location": "City Hall"},
+            {"name": "Epic Rock Night", "date": "2023-08-15", "location": "Marina Bay"},
+            {"name": "Riffs & Rhythms", "date": "2023-06-10", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 67,
+        "name": "Tropical Beats",
+        "genres": ["Latin", "Reggae"],
+        "thumbnail": "/band/image (67).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Sophia Adams", "Liam Davis", "Ava Taylor"],
+        "price": 222,
+        "biography": "Tropical Beats brings the feel of the tropics with their blend of Latin and reggae music, creating a lively beachside vibe.",
+        "upcoming_events": [
+            {"name": "Tropical Vibes", "date": "2024-07-20", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Latin & Reggae Fusion", "date": "2023-10-07", "location": "East Coast Park"},
+            {"name": "Beachside Beats", "date": "2023-08-18", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 68,
+        "name": "Classic Fusion",
+        "genres": ["Classical", "Orchestral"],
+        "thumbnail": "/band/image (68).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Sophia Lin", "Noah Johnson", "Ava Chen"],
+        "price": 175,
+        "biography": "Classic Fusion blends the timeless elegance of classical music with an orchestral twist, bringing grandeur to the stage.",
+        "upcoming_events": [
+            {"name": "Symphony Evening", "date": "2024-06-22", "location": "Esplanade"},
+            {"name": "Orchestra Night", "date": "2024-08-09", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Classics Under the Stars", "date": "2023-10-25", "location": "Victoria Theatre"},
+            {"name": "Orchestral Harmony", "date": "2023-07-15", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 69,
+        "name": "Grunge Fusion",
+        "genres": ["Grunge"],
+        "thumbnail": "/band/image (69).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Lucas Lee", "Emma Brown", "Ethan Davis", "Isabella White", "Sophie Green"],
+        "price": 370,
+        "biography": "Grunge Fusion captures the raw energy of the grunge era, with a sound that evokes a sense of nostalgia.",
+        "upcoming_events": [
+            {"name": "90s Grunge Night", "date": "2024-07-18", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Edge of Grunge", "date": "2023-11-15", "location": "Sentosa"},
+            {"name": "Grunge Vibes", "date": "2023-09-09", "location": "Orchard"},
+            {"name": "Retro Rock", "date": "2023-06-18", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 70,
+        "name": "Funk Factory",
+        "genres": ["Funk"],
+        "thumbnail": "/band/image (70).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Amelia Watson", "Lucas Green", "Benjamin Park"],
+        "price": 194,
+        "biography": "Funk Factory keeps the groove going with funky basslines and rhythmic energy that captivates audiences.",
+        "upcoming_events": [
+            {"name": "Funky Fridays", "date": "2024-06-30", "location": "Orchard"},
+            {"name": "Groove Fest", "date": "2024-08-10", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Dance Groove", "date": "2023-11-02", "location": "Marina Bay"},
+            {"name": "Soul & Funk", "date": "2023-08-22", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 71,
+        "name": "Jazz Collective",
+        "genres": ["Jazz", "Fusion"],
+        "thumbnail": "/band/image (71).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Alexander Tan", "Sophia Chen", "Emily Ng", "Grace Wang", "Noah Kim"],
+        "price": 394,
+        "biography": "Jazz Collective blends traditional jazz with a fusion of contemporary styles, creating a fresh and engaging sound.",
+        "upcoming_events": [
+            {"name": "Jazz Fusion", "date": "2024-07-21", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "City Jazz Fest", "date": "2023-11-05", "location": "City Hall"},
+            {"name": "Jazz Evolution", "date": "2023-09-12", "location": "Marina Bay"},
+            {"name": "Evening of Jazz", "date": "2023-06-23", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 72,
+        "name": "Smooth Jazz Experience",
+        "genres": ["Jazz"],
+        "thumbnail": "/band/image (72).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Emma Green", "David Lee", "Sophia Zhang"],
+        "price": 199,
+        "biography": "Smooth Jazz Experience provides a refined, relaxing experience through timeless jazz classics.",
+        "upcoming_events": [
+            {"name": "Jazz Lounge", "date": "2024-06-17", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Jazz & Wine", "date": "2023-10-08", "location": "Orchard"},
+            {"name": "Smooth Sounds", "date": "2023-07-12", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 73,
+        "name": "Metal Blast",
+        "genres": ["Metal", "Thrash"],
+        "thumbnail": "/band/image (73).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Alexander James", "Lily Thompson", "James Lee", "Lucas Turner", "Ella Wilson", "Mason Wong"],
+        "price": 382,
+        "biography": "Metal Blast delivers intense metal and thrash performances that leave audiences electrified.",
+        "upcoming_events": [
+            {"name": "Metal Mayhem", "date": "2024-06-27", "location": "Downtown Core"},
+            {"name": "Blast Fest", "date": "2024-08-15", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Thrash Night", "date": "2023-10-17", "location": "Bugis"},
+            {"name": "Heavy Metal Madness", "date": "2023-08-05", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 74,
+        "name": "Latin Connection",
+        "genres": ["Latin", "Salsa"],
+        "thumbnail": "/band/image (74).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Charlotte Davis", "Liam Turner", "Sophia Hernandez"],
+        "price": 113,
+        "biography": "Latin Connection brings the rhythms of Latin America to life with lively salsa and vibrant Latin tunes.",
+        "upcoming_events": [
+            {"name": "Salsa Fiesta", "date": "2024-06-28", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Latin Nights", "date": "2023-10-20", "location": "City Hall"},
+            {"name": "Dance of the Tropics", "date": "2023-07-15", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 75,
+        "name": "Urban Funk",
+        "genres": ["Funk", "Hip Hop"],
+        "thumbnail": "/band/image (75).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["William Black", "Amelia White", "Lucas Brown", "Sophie James", "Emma Carter"],
+        "price": 447,
+        "biography": "Urban Funk combines urban hip hop beats with funky rhythms, energizing the crowd and keeping the party going.",
+        "upcoming_events": [
+            {"name": "Hip Hop Groove", "date": "2024-07-05", "location": "Marina Bay"},
+            {"name": "Funky Beats Night", "date": "2024-08-20", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Funk & Flow", "date": "2023-11-18", "location": "Orchard"},
+            {"name": "Urban Night", "date": "2023-09-15", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 76,
+        "name": "Hip Hop Collective",
+        "genres": ["Hip Hop", "Trap"],
+        "thumbnail": "/band/image (76).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Benjamin Lee", "Olivia Parker", "Michael Zhang", "Emily Kim"],
+        "price": 99,
+        "biography": "Hip Hop Collective brings an energetic performance with a mix of hip hop and trap beats, engaging the crowd with powerful lyrics.",
+        "upcoming_events": [
+            {"name": "Trap Fest", "date": "2024-06-22", "location": "Downtown Core"}
+        ],
+        "past_events": [
+            {"name": "Urban Groove", "date": "2023-11-15", "location": "Bugis"},
+            {"name": "Hip Hop Beats", "date": "2023-09-25", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 77,
+        "name": "Punk Revival",
+        "genres": ["Punk", "Rock"],
+        "thumbnail": "/band/image (77).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Oliver Turner", "Emma Black", "Lucas Martinez", "Isabella Scott"],
+        "price": 145,
+        "biography": "Punk Revival captures the spirit of classic punk rock, delivering intense performances with a rebellious edge.",
+        "upcoming_events": [
+            {"name": "Rock Riot", "date": "2024-07-10", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Punk Fest", "date": "2023-10-18", "location": "Orchard"},
+            {"name": "Alternative Explosion", "date": "2023-08-05", "location": "Marina Bay"},
+            {"name": "Hardcore Night", "date": "2023-06-17", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 78,
+        "name": "Metal Fury",
+        "genres": ["Metal"],
+        "thumbnail": "/band/image (78).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Oliver Chen", "Ava Williams", "Mason Lee", "Grace White", "Sophia Black"],
+        "price": 68,
+        "biography": "Metal Fury delivers intense, high-energy metal music that keeps the audience on the edge of their seats.",
+        "upcoming_events": [
+            {"name": "Metal Madness", "date": "2024-07-25", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Heavy Fest", "date": "2023-11-10", "location": "City Hall"},
+            {"name": "Headbanger’s Night", "date": "2023-09-20", "location": "Clarke Quay"}
+        ]
+    },
+    {
+        "id": 79,
+        "name": "Soul Fusion",
+        "genres": ["Soul", "R&B"],
+        "thumbnail": "/band/image (79).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Noah Adams", "Mia Lee", "Ethan Garcia", "Isabella Taylor"],
+        "price": 235,
+        "biography": "Soul Fusion blends classic soul and smooth R&B, offering a rich sound that resonates with audiences.",
+        "upcoming_events": [
+            {"name": "Soul Nights", "date": "2024-06-28", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Evening of Soul", "date": "2023-10-20", "location": "Victoria Theatre"},
+            {"name": "Smooth R&B", "date": "2023-08-10", "location": "Marina Bay"},
+            {"name": "Soulful Evening", "date": "2023-06-15", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 80,
+        "name": "Jazz Masters",
+        "genres": ["Jazz", "Fusion"],
+        "thumbnail": "/band/image (80).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Lucas Tan", "Emma Young", "Sophie Chen"],
+        "price": 225,
+        "biography": "Jazz Masters provide a unique blend of classic jazz and modern fusion, captivating audiences with smooth rhythms.",
+        "upcoming_events": [
+            {"name": "Jazz Gala", "date": "2024-07-12", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Jazz Classics", "date": "2023-10-30", "location": "City Hall"},
+            {"name": "Jazz Vibes", "date": "2023-08-11", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 81,
+        "name": "Blues Bandits",
+        "genres": ["Blues"],
+        "thumbnail": "/band/image (81).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Ava Green", "Liam Harris", "Charlotte Wilson"],
+        "price": 193,
+        "biography": "Blues Bandits brings classic blues to life with soulful vocals and intricate guitar work that creates a rich atmosphere.",
+        "upcoming_events": [
+            {"name": "Blues Bash", "date": "2024-06-15", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "City Blues Night", "date": "2023-11-20", "location": "Marina Bay"},
+            {"name": "Blues Legends", "date": "2023-09-15", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 82,
+        "name": "Rockin' Soul",
+        "genres": ["Rock", "Soul"],
+        "thumbnail": "/band/image (82).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Ethan Scott", "Lucas Taylor", "Isabella Martin", "Emma Brown"],
+        "price": 62,
+        "biography": "Rockin' Soul blends rock and soul, creating a high-energy experience with soulful undertones that captivate audiences.",
+        "upcoming_events": [
+            {"name": "Soul & Rock Fest", "date": "2024-07-05", "location": "Victoria Theatre"}
+        ],
+        "past_events": [
+            {"name": "Heart of Rock", "date": "2023-10-22", "location": "City Hall"},
+            {"name": "Soul Fest", "date": "2023-08-12", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 83,
+        "name": "Downtempo Vibes",
+        "genres": ["Ambient", "Chillout"],
+        "thumbnail": "/band/image (83).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Lucas Chen", "Grace Martinez"],
+        "price": 87,
+        "biography": "Downtempo Vibes crafts serene, relaxing soundscapes perfect for winding down and escaping the hustle of the city.",
+        "upcoming_events": [
+            {"name": "Calm Nights", "date": "2024-06-19", "location": "Gardens by the Bay"},
+            {"name": "Chillout Groove", "date": "2024-08-14", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Peaceful Vibes", "date": "2023-11-03", "location": "Sentosa"},
+            {"name": "Tranquil Fest", "date": "2023-09-12", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 84,
+        "name": "Soul Beats",
+        "genres": ["Soul"],
+        "thumbnail": "/band/image (84).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Benjamin White", "Sophie Lee", "Michael Kim"],
+        "price": 88,
+        "biography": "Soul Beats infuses deep, soulful rhythms with smooth beats, creating a performance that resonates with every heart.",
+        "upcoming_events": [
+            {"name": "Soul Night", "date": "2024-07-16", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Evening of Soul", "date": "2023-10-25", "location": "City Hall"},
+            {"name": "Smooth Beats", "date": "2023-08-15", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 85,
+        "name": "Folk & Blues",
+        "genres": ["Folk", "Blues"],
+        "thumbnail": "/band/image (85).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Sophia Green", "Amelia Brown", "Ethan Williams", "Liam Taylor"],
+        "price": 413,
+        "biography": "Folk & Blues brings the simplicity of folk with the depth of blues, offering a storytelling experience in every performance.",
+        "upcoming_events": [
+            {"name": "Folk Fest", "date": "2024-06-22", "location": "Clarke Quay"},
+            {"name": "Blues Night", "date": "2024-08-11", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Songs from the Heart", "date": "2023-10-18", "location": "Bugis"},
+            {"name": "Blues Vibes", "date": "2023-07-16", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 86,
+        "name": "Ska Connection",
+        "genres": ["Ska", "Reggae"],
+        "thumbnail": "/band/image (86).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Benjamin Carter", "Lucas Gray", "Olivia Martinez"],
+        "price": 57,
+        "biography": "Ska Connection combines ska with reggae beats, making every event a dance party with a lively atmosphere.",
+        "upcoming_events": [
+            {"name": "Ska Fest", "date": "2024-07-24", "location": "Orchard"},
+            {"name": "Reggae Vibes", "date": "2024-08-16", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Dance to Ska", "date": "2023-11-18", "location": "Sentosa"},
+            {"name": "Reggae Fusion", "date": "2023-09-20", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 87,
+        "name": "Indie Pulse",
+        "genres": ["Indie", "Alternative"],
+        "thumbnail": "/band/image (87).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Ava Taylor", "Jack Lee", "Sophia Kim", "Daniel Garcia"],
+        "price": 451,
+        "biography": "Indie Pulse brings a fresh take to indie and alternative music, creating soundscapes that capture the essence of modern music.",
+        "upcoming_events": [
+            {"name": "Indie Vibes", "date": "2024-07-10", "location": "Bugis"}
+        ],
+        "past_events": [
+            {"name": "Alt Fest", "date": "2023-10-05", "location": "Downtown Core"},
+            {"name": "Indie Pulse Night", "date": "2023-08-09", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 88,
+        "name": "Pop Collective",
+        "genres": ["Pop"],
+        "thumbnail": "/band/image (88).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Evelyn Johnson", "Lily Thompson", "James Black"],
+        "price": 291,
+        "biography": "Pop Collective brings catchy pop melodies and rhythms that keep the audience dancing and singing along.",
+        "upcoming_events": [
+            {"name": "Pop Explosion", "date": "2024-08-03", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Summer Pop", "date": "2023-11-05", "location": "Orchard"},
+            {"name": "Pop Hits Night", "date": "2023-09-02", "location": "City Hall"}
+        ]
+    },
+    {
+        "id": 89,
+        "name": "Rasta Wave",
+        "genres": ["Reggae"],
+        "thumbnail": "/band/image (89).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Charlotte White", "William Davis", "Emma Johnson"],
+        "price": 78,
+        "biography": "Rasta Wave captures the essence of reggae with roots rhythms and laid-back vibes, creating a relaxing and immersive experience.",
+        "upcoming_events": [
+            {"name": "Roots & Reggae", "date": "2024-06-18", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Island Vibes", "date": "2023-10-18", "location": "Orchard"},
+            {"name": "Rasta Fest", "date": "2023-07-25", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 90,
+        "name": "Electro Pop",
+        "genres": ["Pop", "Electronic"],
+        "thumbnail": "/band/image (90).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Henry Martinez", "Charlotte Reed", "Sophia James", "Noah Garcia"],
+        "price": 192,
+        "biography": "Electro Pop combines electronic beats with catchy pop tunes, creating a fun and danceable atmosphere for every performance.",
+        "upcoming_events": [
+            {"name": "Pop & Beats", "date": "2024-07-27", "location": "Clarke Quay"},
+            {"name": "Dance Fest", "date": "2024-08-22", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Electro Night", "date": "2023-10-30", "location": "Esplanade"},
+            {"name": "Pop Beats", "date": "2023-09-12", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 91,
+        "name": "Indie Dream",
+        "genres": ["Indie", "Pop"],
+        "thumbnail": "/band/image (91).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Lucas Nguyen", "Emma Brown", "Sophia Green", "Ethan White"],
+        "price": 485,
+        "biography": "Indie Dream blends indie and pop elements, creating ethereal, dreamy soundscapes that captivate the heart.",
+        "upcoming_events": [
+            {"name": "Indie Pop Night", "date": "2024-06-25", "location": "Orchard"},
+            {"name": "Dream Fest", "date": "2024-08-17", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Indie Extravaganza", "date": "2023-10-12", "location": "Downtown Core"},
+            {"name": "Pop Fest", "date": "2023-07-15", "location": "Esplanade"}
+        ]
+    },
+    {
+        "id": 92,
+        "name": "Folk Stories",
+        "genres": ["Folk"],
+        "thumbnail": "/band/image (92).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/cc0000/ffffff",
+        "members": ["Emma Walker", "Lucas Thompson", "Sophia Green"],
+        "price": 197,
+        "biography": "Folk Stories delivers heartfelt storytelling through traditional folk music, capturing the spirit of timeless tales and melodies.",
+        "upcoming_events": [
+            {"name": "Folk Fest", "date": "2024-06-18", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Heartland Tales", "date": "2023-10-15", "location": "Marina Bay"},
+            {"name": "Songs of the Past", "date": "2023-08-03", "location": "Bugis"}
+        ]
+    },
+    {
+        "id": 93,
+        "name": "Country Gold",
+        "genres": ["Country", "Rock"],
+        "thumbnail": "/band/image (93).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Amelia Brown", "James King", "Henry Robinson", "Emily Carter"],
+        "price": 261,
+        "biography": "Country Gold combines classic country with rock influences, creating a unique sound that resonates with every listener.",
+        "upcoming_events": [
+            {"name": "Country Rocks", "date": "2024-07-05", "location": "Marina Bay"}
+        ],
+        "past_events": [
+            {"name": "Southern Nights", "date": "2023-10-28", "location": "Orchard"},
+            {"name": "Country Fest", "date": "2023-09-22", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 94,
+        "name": "Blues Essence",
+        "genres": ["Blues"],
+        "thumbnail": "/band/image (94).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Charlotte Evans", "Alexander Reed", "Isabella Cruz"],
+        "price": 420,
+        "biography": "Blues Essence plays soulful blues with raw emotion, offering an authentic experience that takes listeners back to the roots of the genre.",
+        "upcoming_events": [
+            {"name": "Blues Revival", "date": "2024-06-20", "location": "Esplanade"}
+        ],
+        "past_events": [
+            {"name": "Blues Gala", "date": "2023-11-10", "location": "Marina Bay"},
+            {"name": "City Blues", "date": "2023-08-25", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 95,
+        "name": "Ska Rebels",
+        "genres": ["Ska", "Punk"],
+        "thumbnail": "/band/image (95).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/ff4444/ffffff",
+        "members": ["Amelia Black", "Henry Lee", "Olivia King"],
+        "price": 269,
+        "biography": "Ska Rebels brings a lively ska and punk fusion, making every show a high-energy experience that keeps the crowd moving.",
+        "upcoming_events": [
+            {"name": "Ska Punk Night", "date": "2024-07-12", "location": "Bugis"},
+            {"name": "Riot Fest", "date": "2024-08-08", "location": "Clarke Quay"}
+        ],
+        "past_events": [
+            {"name": "Ska Explosion", "date": "2023-11-25", "location": "Sentosa"},
+            {"name": "Punk Ska Fest", "date": "2023-09-18", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 96,
+        "name": "Latin Grooves",
+        "genres": ["Latin", "Bossa Nova"],
+        "thumbnail": "/band/image (96).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/5fa2dd/ffffff",
+        "members": ["Liam Davis", "Sophia Perez", "Olivia Gray", "Daniel Taylor"],
+        "price": 277,
+        "biography": "Latin Grooves delivers infectious Latin rhythms with a hint of Bossa Nova, bringing tropical vibes to every event.",
+        "upcoming_events": [
+            {"name": "Latin Night", "date": "2024-06-24", "location": "Esplanade"},
+            {"name": "Dance Fiesta", "date": "2024-08-02", "location": "Sentosa"}
+        ],
+        "past_events": [
+            {"name": "Salsa Beats", "date": "2023-10-14", "location": "Marina Bay"},
+            {"name": "Bossa Nova Night", "date": "2023-07-28", "location": "Orchard"}
+        ]
+    },
+    {
+        "id": 97,
+        "name": "Acoustic Echo",
+        "genres": ["Folk", "Acoustic"],
+        "thumbnail": "/band/image (97).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Ava Cooper", "Isabella Wright", "James Tan"],
+        "price": 366,
+        "biography": "Acoustic Echo combines simple, heartfelt folk and acoustic tunes, capturing a raw and intimate performance style.",
+        "upcoming_events": [
+            {"name": "Folk Night", "date": "2024-07-15", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Acoustic Harmony", "date": "2023-11-02", "location": "Clarke Quay"},
+            {"name": "Folk Classics", "date": "2023-09-10", "location": "Bugis"},
+            {"name": "Songwriter’s Stage", "date": "2023-07-05", "location": "Downtown Core"}
+        ]
+    },
+    {
+        "id": 98,
+        "name": "Ska Vibes",
+        "genres": ["Ska"],
+        "thumbnail": "/band/image (98).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Noah Brown", "Charlotte Garcia", "Lily Thomas", "Mason White"],
+        "price": 465,
+        "biography": "Ska Vibes brings an energetic ska sound that encourages the audience to dance and embrace the lively beat.",
+        "upcoming_events": [
+            {"name": "Ska Night", "date": "2024-06-28", "location": "Bugis"},
+            {"name": "Dance to Ska", "date": "2024-08-06", "location": "Orchard"}
+        ],
+        "past_events": [
+            {"name": "Ska Explosion", "date": "2023-11-19", "location": "Clarke Quay"},
+            {"name": "Upbeat Nights", "date": "2023-09-15", "location": "Sentosa"}
+        ]
+    },
+    {
+        "id": 99,
+        "name": "Roots Revival",
+        "genres": ["Folk", "Roots"],
+        "thumbnail": "/band/image (99).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Noah Lee", "Ethan Parker", "Sophia Collins", "Emma Brown"],
+        "price": 347,
+        "biography": "Roots Revival takes audiences back to the origins of folk and roots music, offering a nostalgic sound with a contemporary twist.",
+        "upcoming_events": [
+            {"name": "Roots Fest", "date": "2024-07-21", "location": "Gardens by the Bay"}
+        ],
+        "past_events": [
+            {"name": "Folk Roots", "date": "2023-10-05", "location": "Esplanade"},
+            {"name": "Heartland Beats", "date": "2023-08-25", "location": "Marina Bay"}
+        ]
+    },
+    {
+        "id": 100,
+        "name": "Metal Mayhem",
+        "genres": ["Metal", "Hard Rock"],
+        "thumbnail": "/band/image (100).jpg",
+        "banner": "http://dummyimage.com/1000x500.png/dddddd/000000",
+        "members": ["Mason Brown", "Lucas Green", "Olivia Taylor", "Jack White", "Charlotte Evans"],
+        "price": 354,
+        "biography": "Metal Mayhem brings the heat with their heavy metal and hard rock tunes, making each performance an electrifying experience.",
+        "upcoming_events": [
+            {"name": "Rock Thunder", "date": "2024-07-10", "location": "Marina Bay"},
+            {"name": "Heavy Metal Fest", "date": "2024-08-12", "location": "City Hall"}
+        ],
+        "past_events": [
+            {"name": "Headbanger’s Delight", "date": "2023-10-15", "location": "Clarke Quay"},
+            {"name": "Metal Nights", "date": "2023-07-30", "location": "Esplanade"},
+            {"name": "Rock Invasion", "date": "2023-06-10", "location": "Sentosa"}
+        ]
+    }
+
+    
+    
+]
