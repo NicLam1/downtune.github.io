@@ -108,6 +108,7 @@ export default {
 
 .backgroundMain {
   background: linear-gradient(to right, black , rgb(85, 98, 110));
+  background-image: url(../public/userLogin/loginBG.avif);
 }
 </style>
 

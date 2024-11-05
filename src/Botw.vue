@@ -2,7 +2,7 @@
   <div class="container-fluid botwSection">
     <!-- Grid view for large screens -->
     <div class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-5">
-      <div class="title"><h1 class="text-center botw-heading">Bands of the Week</h1></div>
+      <div class="title"><h1 class="text-center botw-heading animate__animated animate__fadeInDown">Bands of the Week</h1></div>
       
       <div class="item col-lg-2" v-for="(band, index) in bands" :key="index">
         <div class="image-container">
