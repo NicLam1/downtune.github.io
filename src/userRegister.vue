@@ -82,7 +82,7 @@ export default {
       confirmPassword: '',
       error: '',
       currentBackground: '/img2/gig.jpg', // Initial background image
-      isRegistered: true,
+      isRegistered: false,
     };
   },
   setup() {

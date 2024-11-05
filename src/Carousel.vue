@@ -79,7 +79,6 @@ export default {
     SwiperSlide,
   },
   setup() {
-    // Return the Swiper modules for the Composition API
     return {
       EffectCoverflow,
       Pagination,

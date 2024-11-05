@@ -1,7 +1,5 @@
 <template>
-    <body>
-
-    <div v-if="!isRegistered" id="app">
+    <div v-if="!isRegistered" class="register">
         <div class="background" :class="{'fade-out': isFadingOut, 'fade-in': !isFadingOut}" :style="{ backgroundImage: `url(${currentBackground})` }"></div>  <!-- New div for background images -->
 
         <div class="fog-container">
@@ -53,17 +51,16 @@
     </div>
 
     <div v-else>
-        <QuestionContainer :key="isRegistered"></QuestionContainer>
+        <QuestionContainer></QuestionContainer>
     </div>
 
-
-</body>
 </template>
 
 <script>
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import QuestionContainer from './bandQnContainer.vue';
+import { inject } from 'vue';
 
 export default {
     components: {
@@ -79,10 +76,14 @@ export default {
         password: '',
         confirmPassword: '',
         error: '',
-        isRegistered: true
+        isRegistered: false
         
         };
     },
+    setup() {
+    const setLoginState = inject('setLoginState');
+    return { setLoginState };
+  },
 
     methods: {
 
@@ -119,6 +120,7 @@ export default {
 
             console.log("User successfully registered:", user);
             this.isRegistered = true;
+            this.setLoginState(true);
         } catch (error) {
             console.error("Error during registration:", error);
             this.error = error.message;
@@ -212,8 +214,7 @@ animation: marquee 30s linear infinite;
 
 
 
-body {
-    font-family: Arial, sans-serif;
+.register {
     margin: 0;
     padding: 0;
     min-height: 100vh;

@@ -26,7 +26,7 @@
         @selectedOption="updateResponse"
       ></OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-success submit-responses" @click="submitResponses">Submit</button>
+    <button class="btn btn-primary submit-responses" @click="submitResponses">Submit</button>
 
      <<div class="playBut">
         <p v-if="showPlayText" class="play-text">Play Me</p>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { auth } from '../firebaseConfig.js';
 import { db } from '../firebaseConfig.js';
 import { collection, doc, setDoc } from "firebase/firestore";
 
@@ -89,27 +90,34 @@ export default {
     updateResponse({ questionIndex, selectedOption }) {
       this.responses[questionIndex] = selectedOption;
     },
-    submitResponses() {
+    async submitResponses() {
       console.log(this.responses);
       console.log(this.genres);
-      const userId = "user123"; // Replace with actual user ID
+
+      const user = auth.currentUser;
+      if (!user) {
+        console.error("No user is currently signed in.");
+        return;
+      }
+
+      const userId = user.uid; // Retrieve the user ID
       const preferences = {
         genres: this.genres,
         bandName: this.responses[0],
         bandBio: this.responses[1],
         bandMembers: this.responses[2],
         bandImage: this.responses[3],
-        bandSpotify: this.responses[4]
+        bandSpotify: this.responses[4],
       };
 
-    // Save preferences directly to Firestore using the modular syntax
-    setDoc(doc(collection(db, "bandPreferences"), userId), preferences)
-      .then(() => {
+      try {
+        // Save preferences directly to Firestore using the modular syntax
+        await setDoc(doc(collection(db, "bandPreferences"), userId), preferences);
         console.log("User preferences saved successfully!");
-      })
-      .catch(error => {
+        this.$router.push('/');
+      } catch (error) {
         console.error("Error saving preferences:", error);
-      });
+      }
     },
     updateGenres(genres) {
       this.genres = genres;
@@ -196,14 +204,11 @@ export default {
     color: #fff;
     font-size: 24px;
     transform: 0.3s ease;
-    background-color: #00bfff;
+
     display: block;
     margin: 20px auto;
   }
   
-  .submit-responses:hover {
-    background-color: #00bfff96;
-  }
 
   /* play butt */
   
@@ -267,5 +272,15 @@ img {
 @keyframes waveMotion3 { 0%, 100% { height: 10px; } 50% { height: 50px; } }
 @keyframes waveMotion4 { 0%, 100% { height: 40px; } 50% { height: 70px; } }
 @keyframes waveMotion5 { 0%, 100% { height: 16px; } 50% { height: 56px; } }
+
+.btn-primary {
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ff66ff, #c603ff);
+}
 </style>
   
