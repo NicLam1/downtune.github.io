@@ -40,7 +40,7 @@
                         </form>
                         <p class="text-center mt-3">
                             Have an account?
-                            <router-link to="/newBandLogin" class="text-primary">Sign In</router-link>
+                            <router-link to="/login/band" class="text-primary">Sign In</router-link>
                         </p>
 
                     </div>
@@ -79,7 +79,7 @@ export default {
         password: '',
         confirmPassword: '',
         error: '',
-        isRegistered: false
+        isRegistered: true
         
         };
     },

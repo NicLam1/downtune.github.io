@@ -41,7 +41,7 @@
 
                     <p class="text-center mt-3">
                         Don't have an account?
-                        <router-link to="/newBandRegis" class="text-primary">Sign up</router-link>
+                        <router-link to="/register/band" class="text-primary">Sign up</router-link>
                     </p>
 
                 

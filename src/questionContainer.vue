@@ -75,26 +75,28 @@ export default {
       this.responses[questionIndex] = selectedOption;
     },
     submitResponses() {
-  console.log(this.responses);
-  console.log(this.genres);
-  const userId = "user123"; // Replace with actual user ID
-  const preferences = {
-    genres: this.genres,
-    eventType: this.responses[0],
-    budget: this.responses[1],
-    eventDuration: this.responses[2],
-    eventLocation: this.responses[3],
-  };
+      console.log(this.responses);
+      console.log(this.genres);
+      const userId = "user123"; // Replace with actual user ID
+      const preferences = {
+        genres: this.genres,
+        eventType: this.responses[0],
+        budget: this.responses[1],
+        eventDuration: this.responses[2],
+        eventLocation: this.responses[3],
+      };
 
-  // Save preferences directly to Firestore using the modular syntax
-  setDoc(doc(collection(db, "userPreferences"), userId), preferences)
-    .then(() => {
-      console.log("User preferences saved successfully!");
-    })
-    .catch(error => {
-      console.error("Error saving preferences:", error);
-    });
-},
+      // Save preferences directly to Firestore using the modular syntax
+      setDoc(doc(collection(db, "userPreferences"), userId), preferences)
+        .then(() => {
+          console.log("User preferences saved successfully!");
+        })
+        .catch(error => {
+          console.error("Error saving preferences:", error);
+        });
+      
+      this.$router.push('/');
+    },
     updateGenres(genres) {
       this.genres = genres;
     }

@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/login/band',
     name: 'bandLogin',
-    component: bandLogin
+    component: newBandLogin
   },
   {
     path: '/bandProfile', 
@@ -44,13 +44,8 @@ const routes = [
     component: BandProfile
   },
   {
-    path: '/newBandLogin', 
-    name: 'newBandLogin',
-    component: newBandLogin
-  },
-  {
-    path: '/newBandRegis', 
-    name: 'newBandRegis',
+    path: '/register/band', 
+    name: 'bandRegister',
     component: newBandRegis
   },
   {

@@ -18,7 +18,7 @@ export default {
 
         // Compute whether the navbar should be hidden based on the route
         const hideNavbar = computed(() => {
-            return route.path === '/login/user' || route.path === '/register' || route.path === '/register/user';
+            return route.path === '/login/user' || route.path === '/login/band' || route.path === '/register/user' || route.path === '/register/band';
         });
 
         return {
