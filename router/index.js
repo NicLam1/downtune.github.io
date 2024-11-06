@@ -9,7 +9,7 @@ import Calendar from  '../src/Calendar.vue';
 import CalendarGuitar from  '../src/CalendarGuitar.vue';
 import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
-
+import editBandProfile from '../src/editBandProfile.vue';
 
 const routes = [
   {
@@ -58,7 +58,13 @@ const routes = [
     path: '/calendar2', 
     name: 'CalendarGuitar',
     component: CalendarGuitar
-  }
+  },
+  {
+    path: '/editbandprofile',
+    name: 'editBandProfile',
+    component: editBandProfile
+  },
+
 ];
 
 const router = createRouter({
