@@ -8,7 +8,7 @@
     <!-- Band Profile Content -->
     <div v-else-if="band" class="band-profile-content">
       <!-- Band Banner -->
-      <div class="banner" :style="{ backgroundImage: `url('${band.thumbnail}')` }">
+      <div class="banner" :style="{ backgroundImage: `url('${band.banner}')` }">
         <div class="banner-overlay justify-content-center">
           <h1 class="band-name">{{ band.name }}</h1>
         </div>
@@ -89,6 +89,52 @@
           </div>
         </section>
 
+        <!-- Spotify Playlist Section -->
+        <section class="spotify-playlist-section mb-5">
+          <h3 class="section-title"><i class="fab fa-spotify"></i> Spotify Playlist</h3>
+          <div class="spotify-embed">
+            <iframe
+              :src="spotifyPlaylistUrl"
+              width="100%"
+              height="380"
+              frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <button v-if="!spotifyLoggedIn" @click="loginToSpotify" class="btn btn-success mt-3">
+            <i class="fab fa-spotify"></i> Login to Spotify
+          </button>
+          <button v-if="spotifyLoggedIn" @click="addToFavorites" class="btn btn-primary mt-3">
+            <i class="fas fa-heart"></i> Add Playlist to Favorites
+          </button>
+        </section>
+
+        <!-- Artist Recommendations Section -->
+        <section class="artist-recommendations-section mb-5">
+          <h3 class="section-title"><i class="fas fa-guitar"></i> Recommended Artists</h3>
+          <div class="row">
+            <div
+              class="col-md-4 recommended-artist-card my-2"
+              v-for="artist in recommendedArtists"
+              :key="artist.id"
+            >
+              <div class="card text-center">
+                <div class="card-body">
+                  <img :src="artist.image" :alt="artist.name" class="artist-image mb-3" />
+                  <h5 class="card-title">{{ artist.name }}</h5>
+                  <button @click="playArtistTopTrack(artist.id)" class="btn btn-outline-primary mt-2">
+                    <i class="fas fa-play"></i> Play Top Track
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div v-if="recommendedArtists.length === 0" class="col-12 text-center text-muted">
+              <p>No recommended artists available.</p>
+            </div>
+          </div>
+        </section>
+
         <!-- Call to Action Section -->
         <section class="call-to-action text-center py-5">
           <div class="container">
@@ -145,11 +191,160 @@ export default {
     const email = ref('');
     const loading = ref(true);
     const error = ref(false);
+    const spotifyLoggedIn = ref(false);
+    const recommendedArtists = ref([]);
+    const spotifyPlaylistUrl = ref('');
+
+    // Predefined list of Spotify Playlist IDs
+    const playlistIds = [
+      '37i9dQZF1DXcBWIGoYBM5M', // Today's Top Hits
+      '37i9dQZF1DX0XUsuxWHRQd', // RapCaviar
+      '37i9dQZF1DX1lVhptIYRda', // Rock Classics
+      '37i9dQZF1DX4JAvHpjipBk', // Mood Booster
+      '37i9dQZF1DWXRqgorJj26U', // Feel Good Friday
+      '37i9dQZF1DX2yvmlOdMYzV', // Pop Rising
+      '37i9dQZF1DX1gIWILh4VV6', // Indie Pop
+      '37i9dQZF1DX5Ejj0EkURtP', // Chill Hits
+      '37i9dQZF1DWYBF1d9QID5V', // Hot Hits USA
+      '37i9dQZF1DXaXB8fQg7xif', // Alternative Hits
+    ];
+
+    // Hardcoded Recommended Artists (Billie Eilish's Related Artists)
+    const hardcodedRecommendedArtists = [
+      {
+        id: '2XUZ4wBdS6aVhu1Szi7w7n',
+        name: 'Lorde',
+        image: 'https://i.scdn.co/image/ab6761610000e5eb10c8a8c0c2b7b8d1a1a1a1a1',
+      },
+      {
+        id: '5pKCCKE2ajJHZ9KAiaK11H',
+        name: 'Khalid',
+        image: 'https://i.scdn.co/image/ab6761610000e5eb6e3c8c3b8d1a1a1a1a1a1a1',
+      },
+      {
+        id: '6MCBfE3xy78H1Z6nLJ3UKZ',
+        name: 'Lana Del Rey',
+        image: 'https://i.scdn.co/image/ab6761610000e5eb7f3c8c3b8d1a1a1a1a1a1a1',
+      },
+      {
+        id: '3fMbdgg4jU18AjLCKBhRSm',
+        name: 'Conan Gray',
+        image: 'https://i.scdn.co/image/ab6761610000e5eb8f3c8c3b8d1a1a1a1a1a1a1',
+      },
+      {
+        id: '2VxeLyX666F8uXCJ0dZF8B',
+        name: 'Olivia Rodrigo',
+        image: 'https://i.scdn.co/image/ab6761610000e5eb9f3c8c3b8d1a1a1a1a1a1a1',
+      },
+      {
+        id: '6qqNVTkY8uBg9cP3Jd7DAH',
+        name: 'Halsey',
+        image: 'https://i.scdn.co/image/ab6761610000e5eba3c8c3b8d1a1a1a1a1a1a1a1',
+      },
+      {
+        id: '4WJlWim93g0eocb0PyXCS4',
+        name: 'Troye Sivan',
+        image: 'https://i.scdn.co/image/ab6761610000e5ebb3c8c3b8d1a1a1a1a1a1a1a1',
+      },
+      {
+        id: '0vS3bLb7rNUE9xY0HAB3Oa',
+        name: 'Grimes',
+        image: 'https://i.scdn.co/image/ab6761610000e5ebb3c8c3b8d1a1a1a1a1a1a1a1',
+      },
+      {
+        id: '7bOeL1Bj8TuxYK5t6nGEmc',
+        name: 'Mitski',
+        image: 'https://i.scdn.co/image/ab6761610000e5ebc3c8c3b8d1a1a1a1a1a1a1a1',
+      },
+    ];
+
+    // URL for Spotify Playlist Embed will be set dynamically
+    // const spotifyPlaylistUrl = ref(''); // Initialized above
 
     const submitForm = () => {
       console.log('Submitted email:', email.value);
       alert('Thanks for subscribing!');
       email.value = '';
+    };
+
+    const loginToSpotify = () => {
+      // Redirect user to Spotify login page (OAuth flow)
+      const clientId = import.meta.env.VITE_CLIENT_ID;
+      const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
+      const scopes = encodeURIComponent('user-library-modify');
+      window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes}`;
+    };
+
+    const addToFavorites = async () => {
+      try {
+        const accessToken = localStorage.getItem('spotifyAccessToken');
+        if (!accessToken) {
+          alert('Please login to Spotify first.');
+          return;
+        }
+
+        const playlistIdMatch = spotifyPlaylistUrl.value.match(/playlist\/([a-zA-Z0-9]+)/);
+        if (!playlistIdMatch || !playlistIdMatch[1]) {
+          console.error('Invalid Spotify playlist URL.');
+          alert('Invalid playlist URL.');
+          return;
+        }
+        const playlistId = playlistIdMatch[1];
+        const response = await axios.put(
+          `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        alert('Playlist added to your favorites!');
+      } catch (err) {
+        console.error('Error adding playlist to favorites:', err);
+        alert('Failed to add playlist to favorites. Please try again.');
+      }
+    };
+
+    const playArtistTopTrack = async (artistId) => {
+      try {
+        const accessToken = localStorage.getItem('spotifyAccessToken');
+        if (!accessToken) {
+          alert('Please login to Spotify first.');
+          return;
+        }
+
+        const response = await axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            market: 'US',
+          },
+        });
+
+        const trackUri = response.data.tracks[0]?.uri;
+        if (trackUri) {
+          await axios.put(
+            'https://api.spotify.com/v1/me/player/play',
+            {
+              uris: [trackUri],
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          alert('Playing top track!');
+        } else {
+          alert('No top track found for this artist.');
+        }
+      } catch (err) {
+        console.error('Error playing artist top track:', err);
+        alert('Failed to play the top track. Please try again.');
+      }
     };
 
     const fetchBandData = async (bandId) => {
@@ -168,6 +363,14 @@ export default {
           foundBand.past_events = Array.isArray(foundBand.past_events) ? foundBand.past_events : [];
 
           band.value = foundBand;
+
+          // Assign a Spotify playlist based on the band ID
+          const playlistIndex = bandId % playlistIds.length;
+          const selectedPlaylistId = playlistIds[playlistIndex];
+          spotifyPlaylistUrl.value = `https://open.spotify.com/embed/playlist/${selectedPlaylistId}`;
+
+          // Set hardcoded recommended artists
+          recommendedArtists.value = hardcodedRecommendedArtists;
         } else {
           console.error('Band not found');
           error.value = true;
@@ -189,6 +392,18 @@ export default {
     };
 
     onMounted(() => {
+      const hash = window.location.hash;
+      if (hash) {
+        const params = new URLSearchParams(hash.substring(1));
+        const accessToken = params.get('access_token');
+        if (accessToken) {
+          localStorage.setItem('spotifyAccessToken', accessToken);
+          spotifyLoggedIn.value = true;
+          // Optionally, you can remove the token from the URL
+          window.history.replaceState(null, null, ' ');
+        }
+      }
+
       const bandId = parseInt(route.params.id, 10);
       if (isNaN(bandId)) {
         console.error('Invalid band ID');
@@ -206,6 +421,12 @@ export default {
       formatDate,
       loading,
       error,
+      spotifyPlaylistUrl,
+      spotifyLoggedIn,
+      loginToSpotify,
+      addToFavorites,
+      recommendedArtists,
+      playArtistTopTrack,
     };
   },
 };
@@ -221,7 +442,6 @@ export default {
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   position: relative;
-  
 }
 
 .genre-pill {
@@ -284,7 +504,8 @@ export default {
 .genres-section,
 .members-section,
 .events-section,
-.call-to-action {
+.call-to-action,
+.artist-recommendations-section {
   animation: fadeInUp 1s ease forwards;
   opacity: 0;
 }
@@ -423,6 +644,13 @@ footer p {
   height: 100vh;
   color: #ff6f61;
   font-size: 1.5rem;
+}
+
+.artist-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Animations */

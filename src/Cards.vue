@@ -1,5 +1,3 @@
-<!-- src/components/Cards.vue -->
-
 <template>
   <div id="app" class="container-fluid px-sm-0 px-lg-4 mt-4">
     <!-- Bootstrap Row -->
@@ -36,7 +34,7 @@
               v-for="genre in lessCommonGenres" 
               :key="genre" 
               :value="genre" 
-              v-if="!selectedGenres.includes(genre)"
+              v-if="!genres.includes(genre)"
             >
               {{ genre }}
             </option>
@@ -56,7 +54,7 @@
             class="styled-range mb-3" 
             @input="updatePriceRange" 
           />
-          <p>Up to: ${{ priceRange }}</p>
+          <p class="text-light fw-bold">Up to: ${{ priceRange }}</p>
 
           <!-- Clear Filters Button -->
           <button class="btn btn-danger w-100 mt-3" @click="clearFilters">
@@ -217,10 +215,13 @@ export default {
     },
     addLessCommonGenre(event) {
       const genre = event.target.value;
-      if (!this.selectedGenres.includes(genre)) {
-        this.selectedGenres.push(genre);
+      if (genre && !this.genres.includes(genre)) {
+        this.genres.push(genre); // Add to genres list to display as a pill
       }
-      event.target.selectedIndex = 0;
+      if (genre && !this.selectedGenres.includes(genre)) {
+        this.selectedGenres.push(genre); // Mark as selected
+      }
+      event.target.selectedIndex = 0; // Reset dropdown selection
       this.resetPage();
       this.filterTrigger++;
     },
@@ -297,8 +298,7 @@ export default {
   padding: 10px;
   display: flex;
   align-items: stretch;
-  opacity: 0;
-  animation: fadeInUp 0.2s ease-in-out forwards;
+  animation: fadeInUp 0.5s ease-in-out forwards;
   animation-delay: var(--animation-delay);
   cursor: pointer;
 }
@@ -339,13 +339,6 @@ export default {
   #app {
     margin-left: 0 !important;
     margin-right: 0 !important;
-  }
-
-  .filter-section {
-    padding: 0;
-  }
-  .no-margin-on-small {
-    margin: 0 !important;
   }
 }
 
@@ -427,6 +420,48 @@ export default {
   background-color: #7100e0;
   border-radius: 50px;
   padding: 5px 10px 5px 10px;
+}
+
+.styled-select {
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  background: rgb(54, 0, 75);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px 5px rgba(185, 72, 255, 0.521);
+  font-weight: bold;
+  width: 100%;
+}
+
+.styled-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  box-shadow: 0 0 10px 5px rgba(185, 72, 255, 0.521);
+}
+
+.styled-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  cursor: pointer;
+}
+
+.styled-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d900ff, #7500e8);
+  cursor: pointer;
 }
 
 .overlay {

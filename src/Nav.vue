@@ -28,18 +28,30 @@
             <a class="nav-link">Contact</a>
           </li>
         </ul>
-        <!-- Login button on the right -->
-        <div class="user-section">
-          <div v-if="displayName" class="logged-in-info">
-            <p class="text-dark">Welcome, {{ displayName }}!</p>
+        <!-- Profile dropdown on the right -->
+        <div v-if="displayName" class="logged-in-info mx-4 text-light fs-bold">
+            Welcome, {{displayName}}!
           </div>
-          <div class="login-button">
-            <router-link to="/choose">
-              <button class="btn btn-primary" @click="handleAuth">
-                <i :class="isLoggedIn ? 'fas fa-sign-out-alt' : 'fas fa-sign-in-alt'"></i>
-                {{ isLoggedIn ? 'Logout' : 'Login' }}
-              </button>
-            </router-link>
+        <div class="user-section">
+          
+          <div v-if="displayName" class="logged-in-info">
+            <div class="dropdown">
+              <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
+              <div v-if="dropdownVisible" class="dropdown-menu show">
+                <router-link to="/account" class="dropdown-item">My Account</router-link>
+                <router-link to="/favourites" class="dropdown-item">Favourites</router-link>
+                <button class="dropdown-item" @click="handleAuth">Logout</button>
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <div class="dropdown">
+              <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
+              <div v-if="dropdownVisible" class="dropdown-menu show">
+                <router-link to="/login/user" class="dropdown-item">Login</router-link>
+                <router-link to="/register/user" class="dropdown-item">Sign Up</router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -48,7 +60,7 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import { computed, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { auth } from '../firebaseConfig'; // Adjust the path as necessary
 import { signOut } from 'firebase/auth';
@@ -61,12 +73,18 @@ export default {
     const isLoggedIn = inject('isLoggedIn');
     const setLoginState = inject('setLoginState');
     const displayName = inject('displayName');
+    const dropdownVisible = ref(false);
+
+    const toggleDropdown = () => {
+      dropdownVisible.value = !dropdownVisible.value;
+    };
 
     const handleAuth = async () => {
       if (isLoggedIn.value) {
         await signOut(auth);
         setLoginState(false);
         router.push('/'); // Redirect to home page
+        location.reload
       } else {
         router.push('/choose'); // Redirect to login page
       }
@@ -75,7 +93,9 @@ export default {
     return {
       isLoggedIn,
       displayName,
-      handleAuth
+      handleAuth,
+      toggleDropdown,
+      dropdownVisible
     };
   }
 };
@@ -171,11 +191,44 @@ router-link a {
   color: #f0f0f0;
 }
 
-.login-button .btn {
-  font-family: "Poppins", sans-serif;
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
 }
 
-a.router-link-active{
+.profile-icon:hover {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #240244;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0.5em 1em;
+  z-index: 100000000;
+}
+
+.dropdown-item {
+  color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+  padding: 0.5em 0;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+
+.dropdown-item:hover {
+  color: #ff7e5f;
+  background: #240244;
+}
+
+a.router-link-active {
   color: #ff7e5f;
 }
 </style>
