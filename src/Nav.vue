@@ -30,8 +30,8 @@
         </ul>
         <!-- Login button on the right -->
         <div class="user-section">
-          <div v-if="loggedInUser" class="logged-in-info">
-            <p class="text-light">Welcome, {{ loggedInUser }}!</p>
+          <div v-if="displayName" class="logged-in-info">
+            <p class="text-dark">Welcome, {{ displayName }}!</p>
           </div>
           <div class="login-button">
             <router-link to="/choose">
@@ -60,8 +60,7 @@ export default {
     const router = useRouter();
     const isLoggedIn = inject('isLoggedIn');
     const setLoginState = inject('setLoginState');
-
-    const isCalendarPage = computed(() => route.name === 'Calendar');
+    const displayName = inject('displayName');
 
     const handleAuth = async () => {
       if (isLoggedIn.value) {
@@ -74,15 +73,10 @@ export default {
     };
 
     return {
-      isCalendarPage,
       isLoggedIn,
+      displayName,
       handleAuth
     };
-  },
-  data(){
-    return {
-      loggedInUser: null
-    }
   }
 };
 </script>

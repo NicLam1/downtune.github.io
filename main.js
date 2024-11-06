@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { isLoggedIn, setLoginState } from './authState';
+import { isLoggedIn, setLoginState, userId, displayName, initializeAuthState } from './authState';
 
 const app = createApp(App);
 
@@ -16,6 +16,10 @@ app.use(MotionPlugin);
 
 app.provide('isLoggedIn', isLoggedIn);
 app.provide('setLoginState', setLoginState);
+app.provide('userId', userId);
+app.provide('displayName', displayName);
+
+initializeAuthState(); // Initialize the auth state listener
 
 app.mount('#app');
 

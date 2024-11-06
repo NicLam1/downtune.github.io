@@ -107,7 +107,7 @@ export default {
                 const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password);
                 const user = userCredential.user;
                 console.log("User successfully logged in:", user);
-                this.setLoginState(true);
+                this.setLoginState(true, user.uid, user.displayName); 
                 this.$router.push('/'); // Redirect to home page
             } catch (error) {
                 console.error("Error logging in:", error);

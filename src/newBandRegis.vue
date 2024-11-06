@@ -120,7 +120,7 @@ export default {
 
             console.log("User successfully registered:", user);
             this.isRegistered = true;
-            this.setLoginState(true);
+            this.setLoginState(true, user.uid, user.displayName); 
         } catch (error) {
             console.error("Error during registration:", error);
             this.error = error.message;
