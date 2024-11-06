@@ -284,6 +284,7 @@ export default {
       }
     },
   },
+<<<<<<< Updated upstream
 
 async mounted() { 
   try { 
@@ -311,6 +312,22 @@ async mounted() {
         this.selectedGenres = [...new Set([...this.selectedGenres, ...newGenres])];
       }
     }
+=======
+  mounted() {
+    axios.get('/MOCK_DATA.json')
+      .then(response => {
+        this.bands = response.data;
+        // Determine min and max price from data
+        const prices = this.bands.map(band => band.price);
+        this.minPrice = Math.min(...prices);
+        this.maxPrice = Math.max(...prices);
+        this.priceRange = this.maxPrice;
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+    this.loadFavorites(); // Load favorites on mount
+>>>>>>> Stashed changes
   }
 
 };
