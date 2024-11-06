@@ -150,21 +150,6 @@ export default {
   filter: invert(1);
 }
 
-@media (prefers-color-scheme: light) {
-  .custom-navbar {
-    background: linear-gradient(to right, #ffffff, #eeeeee);
-  }
-
-  .nav-title,
-  .navbar-nav .nav-link {
-    color: #213547;
-  }
-
-  .nav-link:hover {
-    color: #747bff;
-  }
-}
-
 router-link a {
   text-decoration: none;
 }
