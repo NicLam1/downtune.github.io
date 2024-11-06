@@ -1,7 +1,5 @@
-
 <template>
   <div class="band-profile-container">
-
     <!-- uSER Profile Content -->
     <div class="band-profile-content">
       <!-- Banner -->
@@ -45,58 +43,41 @@
         </div>
         </section>
 
-
-        <!--  Section -->
-        <section class="events-section mb-5">
+        <main class="container py-5">
+        <!-- Change Email / Username / Password -->
+        <section class="change-profile-section mb-5">
           <h3 class="section-title"><i class="fas fa-user-cog"></i> Change Email / Username / Password</h3>
-          <div class="row">
-            <!-- Upcoming Events -->
-            <div class="col-md-6 mb-4">
-              <h4>Upcoming Events</h4>
-              <ul class="list-group">
-                <!-- <li
-                  class="list-group-item event-item"
-                  v-for="event in band.upcoming_events"
-                  :key="event.name + event.date"
-                > -->
-                  <strong> formatDate(event.date) </strong> -  event.name @ event.location
-                <!-- </li> -->
-                <!-- <li v-if="!band.upcoming_events.length" class="list-group-item">No upcoming events.</li> -->
-              </ul>
+          <form @submit.prevent="updateProfile">
+            <div class="form-group col-md-4">
+              <label for="username">Username</label>
+              <input type="text" id="username" class="form-control" v-model="username" placeholder="Enter new username" />
             </div>
-            <!-- Past Events -->
-            <div class="col-md-6 mb-4">
-              <h4>Past Events</h4>
-              <ul class="list-group">
-                <!-- <li
-                  class="list-group-item event-item"
-                  v-for="event in band.past_events"
-                  :key="event.name + event.date"
-                > -->
-                  <strong> formatDate(event.date) </strong> -  event.name  @  event.location 
-                <!-- </li> -->
-                
-              </ul>
+
+            <div class="form-group col-md-4">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" v-model="email" placeholder="Enter new email" />
             </div>
-          </div>
+
+            <div class="form-group col-md-4">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" v-model="password" placeholder="Enter new password" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+          </form>
         </section>
-
-     
       </main>
+    </main>
 
-   
     </div>
   </div>
-
-
-
-  
 </template>
 
 <script>
-import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebaseConfig';
+import { onAuthStateChanged, updateEmail, updatePassword, updateProfile } from 'firebase/auth';
+
 
 export default {
   name: 'BandProfile',
@@ -104,6 +85,8 @@ export default {
     return {
       preferences: null,
       username: null, // To store the user's display name
+      email: null,
+      password: null,
     };
   },
   mounted() {
@@ -132,6 +115,32 @@ export default {
         }
       } catch (error) {
         console.error('Error retrieving preferences:', error);
+      }
+    },
+    async updateProfile() {
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          // Update display name (username)
+          if (this.username !== user.displayName) {
+            await updateProfile(user, { displayName: this.username });
+          }
+
+          // Update email
+          if (this.email !== user.email) {
+            await updateEmail(user, this.email);
+          }
+
+          // Update password (optional)
+          if (this.password) {
+            await updatePassword(user, this.password);
+          }
+
+          alert('Profile updated successfully');
+        } catch (error) {
+          console.error('Error updating profile:', error);
+          alert('Error updating profile: ' + error.message);
+        }
       }
     },
   },
@@ -205,6 +214,12 @@ export default {
     z-index: 1;
     animation: bounceIn 1s ease;
   }
+
+  @media (max-width: 767px) {
+  .band-name {
+    font-size: 5vh; /* Smaller font size for small screens */
+  }
+}
   
   .biography-section,
   .genres-section,
@@ -358,7 +373,8 @@ export default {
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
-  
+
+
   /* Animations */
   @keyframes fadeIn {
     from { opacity: 0; }
