@@ -9,6 +9,9 @@ import Calendar from  '../src/Calendar.vue';
 import CalendarGuitar from  '../src/CalendarGuitar.vue';
 import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
+import Favorite from '../src/Favorite.vue';
+
+
 
 
 const routes = [
@@ -16,6 +19,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/favorites',
+    name: 'Favorite',
+    component: Favorite,
   },
   {
     path: '/login/user',

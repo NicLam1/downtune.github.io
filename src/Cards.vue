@@ -78,36 +78,47 @@
             :key="band.id + '-' + filterTrigger" 
             class="card-container"
           >
-            <router-link :to="{ name: 'BandProfile', params: { id: band.id } }" class="card-link">
-              <div class="card h-100">
-                <div class="card-image-container">
-                  <img 
-                    :src="band.thumbnail" 
-                    :alt="band.name" 
-                    class="card-img-top" 
-                    loading="lazy"
-                  />
-                  <div class="overlay">
-                    <i class="fas fa-info-circle"></i>
+            <div class="card-wrapper">
+              <router-link :to="{ name: 'BandProfile', params: { id: band.id } }" class="card-link">
+                <div class="card h-100">
+                  <div class="card-image-container">
+                    <img 
+                      :src="band.thumbnail" 
+                      :alt="band.name" 
+                      class="card-img-top" 
+                      loading="lazy"
+                    />
+                    <div class="overlay">
+                      <i class="fas fa-info-circle"></i>
+                    </div>
+                  </div>
+                  <div class="card-body d-flex flex-column text-left">
+                    <h5 class="card-title fw-bold">{{ band.name }}</h5>
+                    <p class="card-text">
+                      <span
+                        v-for="genre in band.genres"
+                        :key="genre"
+                        class="badge me-1 genre-badge"
+                      >
+                        {{ genre }}
+                      </span>
+                    </p>
+                    <p class="card-text">
+                      <strong>Price:</strong> ${{ band.price }}/hr
+                    </p>
                   </div>
                 </div>
-                <div class="card-body d-flex flex-column text-left">
-                  <h5 class="card-title fw-bold">{{ band.name }}</h5>
-                  <p class="card-text">
-                    <span
-                      v-for="genre in band.genres"
-                      :key="genre"
-                      class="badge me-1 genre-badge"
-                    >
-                      {{ genre }}
-                    </span>
-                  </p>
-                  <p class="card-text">
-                    <strong>Price:</strong> ${{ band.price }}/hr
-                  </p>
-                </div>
-              </div>
-            </router-link>
+              </router-link>
+              <!-- Add to Favorites Button -->
+              <button 
+                class="btn-favorite"
+                @click.stop="toggleFavorite(band)"
+                :class="{ 'favorited': isFavorited(band.id) }"
+                :title="isFavorited(band.id) ? 'Remove from Favorites' : 'Add to Favorites'"
+              >
+                <i :class="isFavorited(band.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+              </button>
+            </div>
           </div>
           <div v-if="filteredBands.length === 0" class="col-12 text-center text-light mt-5">No results found.</div>
         </div>
@@ -166,6 +177,7 @@ export default {
         'Grunge': 'fas fa-smog',
         'Soul': 'fas fa-heart',
       },
+      favorites: [], // Initialize favorites
     };
   },
   computed: {
@@ -241,6 +253,26 @@ export default {
         this.currentPage--;
       }
     },
+    toggleFavorite(band) {
+      if (this.isFavorited(band.id)) {
+        this.favorites = this.favorites.filter(fav => fav.id !== band.id);
+      } else {
+        this.favorites.push(band);
+      }
+      this.saveFavorites();
+    },
+    isFavorited(bandId) {
+      return this.favorites.some(fav => fav.id === bandId);
+    },
+    loadFavorites() {
+      const storedFavorites = localStorage.getItem('favorites');
+      if (storedFavorites) {
+        this.favorites = JSON.parse(storedFavorites);
+      }
+    },
+    saveFavorites() {
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    },
   },
   mounted() {
     axios.get('/MOCK_DATA.json')
@@ -255,6 +287,7 @@ export default {
       .catch(error => {
         console.error("Error fetching data:", error);
       });
+    this.loadFavorites(); // Load favorites on mount
   }
 };
 </script>
@@ -305,6 +338,33 @@ export default {
 
 .card-link {
   text-decoration: none;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  color: #ff4081;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-favorite:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.btn-favorite.favorited {
+  color: #e91e63;
 }
 
 @media (max-width: 1400px) {

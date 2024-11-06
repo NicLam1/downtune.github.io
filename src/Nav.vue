@@ -39,7 +39,7 @@
               <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
               <div v-if="dropdownVisible" class="dropdown-menu show">
                 <router-link to="/account" class="dropdown-item">My Account</router-link>
-                <router-link to="/favourites" class="dropdown-item">Favourites</router-link>
+                <router-link to="/favorites" class="dropdown-item">Favourites</router-link>
                 <button class="dropdown-item" @click="handleAuth">Logout</button>
               </div>
             </div>
