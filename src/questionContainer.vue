@@ -23,7 +23,7 @@
       </OtherQuestions>
     </MotionGroup>
     <button class="btn btn-primary submit-responses" @click="submitResponses">Submit</button>
-    <footer style="font-size: 10px;">
+    <footer style="font-size: 8px;">
       Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
       (https://poly.pizza/m/3FiWjHDj0Zf)<br>
       "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution

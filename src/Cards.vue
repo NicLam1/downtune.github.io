@@ -2,26 +2,22 @@
   <div id="app" class="container-fluid px-sm-0 px-lg-4 mt-4">
     <!-- Bootstrap Row -->
     <div class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3">
-      
+
       <!-- Filter Section -->
       <div class="filter-section col-12 col-lg-3 mb-4 mb-lg-0">
         <!-- Toggle Filters Button for Small Screens -->
-        <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+        <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
           <i class="fas fa-sliders-h"></i> Toggle Filters
         </button>
         <div class="collapse d-lg-block" id="filterCollapse">
           <h3 class="filter-heading"><i class="fas fa-filter"></i> Filters</h3>
-          
+
           <!-- Genres Filter -->
           <h5><i class="fas fa-music"></i> Genres</h5>
           <div class="genre-pills-container mb-3">
-            <div 
-              v-for="genre in genres" 
-              :key="genre" 
-              class="genre-pill" 
-              :class="{ 'selected': selectedGenres.includes(genre) }" 
-              @click="toggleGenre(genre)"
-            >
+            <div v-for="genre in genres" :key="genre" class="genre-pill"
+              :class="{ 'selected': selectedGenres.includes(genre) }" @click="toggleGenre(genre)">
               <i :class="genreIcons[genre]" class="genre-icon"></i> {{ genre }}
             </div>
           </div>
@@ -30,12 +26,7 @@
           <h5><i class="fas fa-plus-circle"></i> Other Genres</h5>
           <select class="styled-select mb-3" @change="addLessCommonGenre($event)">
             <option value="" disabled selected>Select other genres...</option>
-            <option 
-              v-for="genre in lessCommonGenres" 
-              :key="genre" 
-              :value="genre" 
-              v-if="!genres.includes(genre)"
-            >
+            <option v-for="genre in lessCommonGenres" :key="genre" :value="genre" v-if="!genres.includes(genre)">
               {{ genre }}
             </option>
           </select>
@@ -46,14 +37,8 @@
             <span>${{ minPrice }}</span>
             <span>${{ maxPrice }}</span>
           </div>
-          <input 
-            type="range" 
-            v-model="priceRange" 
-            :min="minPrice" 
-            :max="maxPrice" 
-            class="styled-range mb-3" 
-            @input="updatePriceRange" 
-          />
+          <input type="range" v-model="priceRange" :min="minPrice" :max="maxPrice" class="styled-range mb-3"
+            @input="updatePriceRange" />
           <p class="text-light fw-bold">Up to: ${{ priceRange }}</p>
 
           <!-- Clear Filters Button -->
@@ -62,32 +47,18 @@
           </button>
         </div>
       </div>
-      
+
       <!-- Cards Section -->
       <div class="cardsSection col-12 col-lg-9">
-        <input 
-          type="text" 
-          class="search-bar mb-4" 
-          placeholder="Search by name or genre..." 
-          v-model="searchQuery" 
-          @input="resetPage" 
-        />
+        <input type="text" class="search-bar mb-4" placeholder="Search by name or genre..." v-model="searchQuery"
+          @input="resetPage" />
         <div class="d-flex flex-wrap gap-3 align-items-stretch">
-          <div 
-            v-for="band in paginatedBands" 
-            :key="band.id + '-' + filterTrigger" 
-            class="card-container"
-          >
+          <div v-for="band in paginatedBands" :key="band.id + '-' + filterTrigger" class="card-container">
             <div class="card-wrapper">
               <router-link :to="{ name: 'BandProfile', params: { id: band.id } }" class="card-link">
                 <div class="card h-100">
                   <div class="card-image-container">
-                    <img 
-                      :src="band.thumbnail" 
-                      :alt="band.name" 
-                      class="card-img-top" 
-                      loading="lazy"
-                    />
+                    <img :src="band.thumbnail" :alt="band.name" class="card-img-top" loading="lazy" />
                     <div class="overlay">
                       <i class="fas fa-info-circle"></i>
                     </div>
@@ -95,11 +66,7 @@
                   <div class="card-body d-flex flex-column text-left">
                     <h4 class="card-title fw-bold">{{ band.name }}</h4>
                     <p class="card-text">
-                      <span
-                        v-for="genre in band.genres"
-                        :key="genre"
-                        class="badge me-1 genre-badge"
-                      >
+                      <span v-for="genre in band.genres" :key="genre" class="badge me-1 genre-badge">
                         {{ genre }}
                       </span>
                     </p>
@@ -110,14 +77,14 @@
                 </div>
               </router-link>
               <!-- Add to Favorites Button -->
-              <button 
-                class="btn-favorite"
-                @click.stop="toggleFavorite(band)"
-                :class="{ 'favorited': isFavorited(band.id) }"
-                :title="isFavorited(band.id) ? 'Remove from Favorites' : 'Add to Favorites'"
-              >
-                <i :class="isFavorited(band.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
-              </button>
+              <div v-if="isLoggedIn">
+
+                <button class="btn-favorite" @click.stop="toggleFavorite(band)"
+                  :class="{ 'favorited': isFavorited(band.id) }"
+                  :title="isFavorited(band.id) ? 'Remove from Favorites' : 'Add to Favorites'">
+                  <i :class="isFavorited(band.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+                </button>
+              </div>
             </div>
           </div>
           <div v-if="filteredBands.length === 0" class="col-12 text-center text-light mt-5">No results found.</div>
@@ -140,6 +107,9 @@
 
 <script>
 import axios from 'axios';
+import { inject } from 'vue';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 export default {
   props: {
@@ -149,6 +119,11 @@ export default {
     }
   },
   name: 'Cards',
+  setup() {
+    const isLoggedIn = inject('isLoggedIn');
+    
+    return { isLoggedIn };  
+  },
   data() {
     return {
       bands: [],
@@ -190,12 +165,12 @@ export default {
     filteredBands() {
       return this.bands.filter(band => {
         // Search Filter
-        const matchesSearch = !this.searchQuery || 
+        const matchesSearch = !this.searchQuery ||
           band.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           band.genres.some(genre => genre.toLowerCase().includes(this.searchQuery.toLowerCase()));
 
         // Genre Filter
-        const matchesGenre = this.selectedGenres.length === 0 || 
+        const matchesGenre = this.selectedGenres.length === 0 ||
           band.genres.some(genre => this.selectedGenres.includes(genre));
 
         // Price Filter
@@ -259,46 +234,75 @@ export default {
         this.currentPage--;
       }
     },
-    toggleFavorite(band) {
+    async toggleFavorite(band) {
       if (this.isFavorited(band.id)) {
         this.favorites = this.favorites.filter(fav => fav.id !== band.id);
       } else {
         this.favorites.push(band);
       }
-      this.saveFavorites();
+      await this.saveFavorites();
     },
     isFavorited(bandId) {
       return this.favorites.some(fav => fav.id === bandId);
     },
-    loadFavorites() {
-      const storedFavorites = localStorage.getItem('favorites');
-      if (storedFavorites) {
-        this.favorites = JSON.parse(storedFavorites);
+    async loadFavorites() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const db = getFirestore();
+        const userDoc = doc(db, 'userPreferences', user.uid);
+        try {
+          const docSnap = await getDoc(userDoc);
+          if (docSnap.exists()) {
+            const favoriteIds = docSnap.data().favorites || [];
+            this.favorites = this.bands.filter(band => favoriteIds.includes(band.id));
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.error('Error loading favorites from Firestore:', error);
+        }
+      } else {
+        console.error('User is not authenticated');
       }
     },
-    saveFavorites() {
-      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    async saveFavorites() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const db = getFirestore();
+        const userDoc = doc(db, 'userPreferences', user.uid);
+        const bandIds = this.favorites.map(fav => fav.id);
+        try {
+          await setDoc(userDoc, { favorites: bandIds }, { merge: true });
+          console.log('Favorites saved to Firestore');
+        } catch (error) {
+          console.error('Error saving favorites to Firestore:', error);
+        }
+      } else {
+        console.error('User is not authenticated');
+      }
     },
   },
-  mounted() {
-    axios.get('/MOCK_DATA.json')
-      .then(response => {
-        this.bands = response.data;
-        // Determine min and max price from data
-        const prices = this.bands.map(band => band.price);
-        this.minPrice = Math.min(...prices);
-        this.maxPrice = Math.max(...prices);
-        this.priceRange = this.maxPrice;
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-    this.loadFavorites(); // Load favorites on mount
-    
-    // Append userGenres to selectedGenres when the component is mounted
-    if (this.userGenres && this.userGenres.length) {
-      this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
-    }
+
+async mounted() { 
+  try { 
+    const response = await axios.get('/MOCK_DATA.json'); 
+    this.bands = response.data; 
+    // Determine min and max price from data 
+    const prices = this.bands.map(band => band.price); 
+    this.minPrice = Math.min(...prices); 
+    this.maxPrice = Math.max(...prices); 
+    this.priceRange = this.maxPrice; 
+    await this.loadFavorites(); // Load favorites after bands are loaded 
+  } catch (error) { 
+    console.error('Error fetching data:', error); 
+  }
+
+  // Append userGenres to selectedGenres when the component is mounted
+  if (this.userGenres && this.userGenres.length) {
+    this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
+  }
   },
   watch: {
     userGenres(newGenres) {
@@ -308,6 +312,7 @@ export default {
       }
     }
   }
+
 };
 </script>
 
@@ -342,7 +347,7 @@ export default {
   box-shadow: 0 0 10px 5px rgba(185, 72, 255, 0.521);
   font-weight: bold;
   width: 100%;
-} 
+}
 
 .card-container {
   flex: 1 1 calc(20% - 1rem);
@@ -412,9 +417,11 @@ export default {
     flex: 1 1 calc(100% - 1rem);
     max-width: calc(100% - 1rem);
   }
+
   .filter-section {
     padding: 0;
   }
+
   #app {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -495,7 +502,7 @@ export default {
   margin-right: 8px;
 }
 
-.genre-badge{
+.genre-badge {
   background-color: #7100e0;
   border-radius: 50px;
   padding: 5px 10px 5px 10px;
@@ -630,6 +637,7 @@ export default {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -641,6 +649,7 @@ export default {
     transform: scale(0.8);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
