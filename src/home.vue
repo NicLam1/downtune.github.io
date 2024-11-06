@@ -2,14 +2,15 @@
 <div class="p-lg-4">
     <Botw></Botw>
     <div class="container-fluid ">
-    <Cards></Cards>
+    <Cards :user-genres="preferences ? preferences.genres : []"></Cards>
 </div>
 </div>
 </template>
 
 <script>
-import { db } from '../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+ import { auth, db } from '../firebaseConfig';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import Botw from '../src/Botw.vue';
 import Cards from '../src/Cards.vue';
 export default {
@@ -18,11 +19,15 @@ export default {
     },
     data() {
         return {
-            artists: []
+            artists: [],
+            preferences: null,
         };
     },
     async mounted() {
         await this.getArtists();
+    },
+    mounted() {
+      this.checkAuthState();
     },
     methods: {
         async getArtists() {
@@ -36,7 +41,30 @@ export default {
             } catch (error) {
                 console.error("Error fetching artists:", error);
             }
+        },
+        checkAuthState() {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            this.fetchUserPreferences(user.uid);
+          } else {
+            console.error("No user is currently signed in.");
+          }
+        });
+      },
+      async fetchUserPreferences(userId) {
+        try {
+          const docRef = doc(db, 'userPreferences', userId);
+          const docSnap = await getDoc(docRef);
+  
+          if (docSnap.exists()) {
+            this.preferences = docSnap.data();
+          } else {
+            console.error('No preferences found for this user.');
+          }
+        } catch (error) {
+          console.error('Error retrieving preferences:', error);
         }
+      },
     }
 };
 </script>

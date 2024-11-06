@@ -142,6 +142,12 @@
 import axios from 'axios';
 
 export default {
+  props: {
+    userGenres: {
+      type: Array,
+      default: () => []
+    }
+  },
   name: 'Cards',
   data() {
     return {
@@ -288,6 +294,19 @@ export default {
         console.error("Error fetching data:", error);
       });
     this.loadFavorites(); // Load favorites on mount
+    
+    // Append userGenres to selectedGenres when the component is mounted
+    if (this.userGenres && this.userGenres.length) {
+      this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
+    }
+  },
+  watch: {
+    userGenres(newGenres) {
+      if (newGenres && newGenres.length) {
+        // Ensure that new genres are added only once (avoid duplicates)
+        this.selectedGenres = [...new Set([...this.selectedGenres, ...newGenres])];
+      }
+    }
   }
 };
 </script>
