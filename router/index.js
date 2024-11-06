@@ -9,9 +9,13 @@ import Calendar from  '../src/Calendar.vue';
 import CalendarGuitar from  '../src/CalendarGuitar.vue';
 import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
+<<<<<<< Updated upstream
 import Favorite from '../src/Favorite.vue';
 
 
+=======
+import UserProfile from '../src/UserProfile.vue';
+>>>>>>> Stashed changes
 
 
 const routes = [
@@ -66,6 +70,11 @@ const routes = [
     path: '/calendar2', 
     name: 'CalendarGuitar',
     component: CalendarGuitar
+  },
+  {
+    path: '/UserProfile', 
+    name: 'UserProfile',
+    component: UserProfile
   }
 ];
 

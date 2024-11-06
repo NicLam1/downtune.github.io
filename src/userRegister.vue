@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isRegistered" class="backgroundMain d-flex justify-content-center align-items-center w-100">
+    <!-- Registration Form Section (already exists) -->
     <div class="background" style="background-image: url('/img2/gig.jpg');"></div>
     <div class="fog-container">
       <div class="fog-img fog-img-first"></div>
@@ -8,7 +9,6 @@
     <div class="container min-h-screen d-flex justify-content-center align-items-center">
       <div class="card w-50 h-100 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
-          <!-- Register Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
             <h2 class="text-center text-dark fw-bold mb-4">Register</h2>
             <form @submit.prevent="handleRegister" class="d-flex flex-column justify-content-center">
@@ -38,39 +38,35 @@
               </router-link>
             </p>
           </div>
-
-          <!-- Carousel Section -->
-          <!-- <div class="col-md-4 col-0 col-flex d-none d-md-block">
-            <div id="carouselExampleSlidesOnly" class="carousel slide h-100" data-bs-ride="carousel">
-              <div class="carousel-inner h-100">
-                <div class="carousel-item active">
-                  <img src="../images/stock band/image1.jpg" class="d-block w-100" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                  <img src="../images/stock band/image2.jpg" class="d-block w-100" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                  <img src="../images/stock band/image3.jpg" class="d-block w-100" alt="Slide 3">
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Question Container Section (Visible after registration) -->
   <div v-else>
-    <QuestionContainer></QuestionContainer>
+    <QuestionContainer :user="user" @submit="updatePreferences"></QuestionContainer>
   </div>
 </template>
+
 
 <script>
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import QuestionContainer from './questionContainer.vue';
 import { inject } from 'vue';
 
 export default {
+  mounted() {
+  const user = auth.currentUser;
+  if (user) {
+    this.isRegistered = true;
+    this.user = user;
+    this.setLoginState(true, user.uid, user.displayName); // Keep login state in sync
+  }
+  },
+
   components: {
     QuestionContainer
   },
@@ -81,8 +77,8 @@ export default {
       password: '',
       confirmPassword: '',
       error: '',
-      currentBackground: '/img2/gig.jpg', // Initial background image
       isRegistered: false,
+      user: null, // Store user object
     };
   },
   setup() {
@@ -92,6 +88,13 @@ export default {
   methods: {
     async handleRegister() {
       this.error = '';
+
+
+      const user = auth.currentUser;
+      if (user) {
+        this.isRegistered = true; // Skip registration if user is logged in
+        this.user = user;  // Assign the current user object
+      }
 
       // Basic validation for password matching
       if (this.password !== this.confirmPassword) {
@@ -111,10 +114,23 @@ export default {
 
         console.log("User successfully registered:", user);
         this.isRegistered = true;
+        this.user = user;  // Store the user object
         this.setLoginState(true, user.uid, user.displayName); 
       } catch (error) {
         console.error("Error during registration:", error);
         this.error = error.message;
+      }
+    },
+
+    // Method to update user preferences in Firestore after they answer the questions
+    async updatePreferences(preferences) {
+      try {
+        const userId = this.user.uid;  // Use the current user's UID
+        const docRef = doc(db, 'userPreferences', userId);
+        await setDoc(docRef, preferences);  // Store preferences in Firestore
+        console.log('Preferences updated successfully!');
+      } catch (error) {
+        console.error('Error updating preferences:', error);
       }
     }
   },

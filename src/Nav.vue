@@ -97,7 +97,13 @@ export default {
       toggleDropdown,
       dropdownVisible
     };
+  },
+  computed: {
+  isCalendarPage() {
+    return this.$route.name === 'calendar'; // Adjust based on your routing logic
   }
+}
+
 };
 </script>
 
