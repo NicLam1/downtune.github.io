@@ -47,6 +47,11 @@ const routes = [
     path: '/register/band', 
     name: 'bandRegister',
     component: newBandRegis
+  },
+  {
+    path: '/calendar', 
+    name: 'Calendar',
+    component: Calendar
   }
   ,
   {
