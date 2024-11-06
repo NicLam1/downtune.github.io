@@ -60,11 +60,11 @@ export default {
   data() {
     return {
       bands: [
-        { name: 'Band One', image: '../public/bands/image (78).webp' },
-        { name: 'Band Two', image: '../public/bands/image (54).webp' },
-        { name: 'Band Three', image: '../public/bands/image (24).webp' },
-        { name: 'Band Four', image: '../public/bands/image (99).webp' },
-        { name: 'Band Five', image: '../public/bands/image (37).webp' },
+        { name: 'Band One', image: '../public/stock band/image1.jpg' },
+        { name: 'Band Two', image: '../public/stock band/image2.jpg' },
+        { name: 'Band Three', image: '../public/stock band/image3.jpg' },
+        { name: 'Band Four', image: '../public/stock band/image4.jpg' },
+        { name: 'Band Five', image: '../public/stock band/image5.jpg' },
       ],
     };
   },
