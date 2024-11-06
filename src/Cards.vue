@@ -93,7 +93,7 @@
                     </div>
                   </div>
                   <div class="card-body d-flex flex-column text-left">
-                    <h5 class="card-title fw-bold">{{ band.name }}</h5>
+                    <h4 class="card-title fw-bold">{{ band.name }}</h4>
                     <p class="card-text">
                       <span
                         v-for="genre in band.genres"
