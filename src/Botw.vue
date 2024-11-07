@@ -1,70 +1,84 @@
 <template>
-  <div class="container-fluid botwSection">
-    <!-- Grid view for large screens -->
-    <div class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-5">
-      <div class="title"><h1 class="text-center botw-heading animate__animated animate__fadeInDown">Bands of the Week</h1></div>
-      
-      <div class="item col-lg-2" v-for="(band, index) in bands" :key="index">
-        <div class="image-container">
-          <img :src="band.image" alt="" />
-          <div class="caption">
-            <h3>{{ band.name }}</h3>
-          </div>
+  <div class="backgroundPic">
+    <div class="container-fluid botwSection">
+      <!-- Grid view for large screens -->
+      <div
+        class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-5"
+      >
+        <div class="title">
+          <h1
+            class="text-center botw-heading animate__animated animate__fadeInDown"
+          >
+            Bands of the Week
+          </h1>
         </div>
-      </div>
-    </div>
 
-    <!-- Carousel for smaller screens -->
-    <div id="botwCarousel" class="carousel slide d-lg-none" data-bs-ride="carousel">
-      <h1 class="text-center botw-heading">Bands of the Week</h1>
-      <div class="carousel-inner">
-        <div
-          class="carousel-item"
-          v-for="(band, index) in bands"
-          :key="'carousel-' + index"
-          :class="{ active: index === 0 }"
-        >
+        <div class="item col-lg-2" v-for="(band, index) in bands" :key="index">
           <div class="image-container">
-            <img :src="band.image" class="d-block w-100" alt="" />
+            <img :src="band.image" alt="" />
             <div class="caption">
               <h3>{{ band.name }}</h3>
             </div>
           </div>
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#botwCarousel"
-        data-bs-slide="prev"
+
+      <!-- Carousel for smaller screens -->
+      <div
+        id="botwCarousel"
+        class="carousel slide d-lg-none"
+        data-bs-ride="carousel"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#botwCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <h1 class="text-center botw-heading">Bands of the Week</h1>
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            v-for="(band, index) in bands"
+            :key="'carousel-' + index"
+            :class="{ active: index === 0 }"
+          >
+            <div class="image-container">
+              <img :src="band.image" class="d-block w-100" alt="" />
+              <div class="caption">
+                <h3>{{ band.name }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#botwCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#botwCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Botw',
+  name: "Botw",
   data() {
     return {
       bands: [
-        { name: 'Band One', image: '../public/stock band/image1.jpg' },
-        { name: 'Band Two', image: '../public/stock band/image2.jpg' },
-        { name: 'Band Three', image: '../public/stock band/image3.jpg' },
-        { name: 'Band Four', image: '../public/stock band/image4.jpg' },
-        { name: 'Band Five', image: '../public/stock band/image5.jpg' },
+        { name: "Band One", image: "../public/stock band/image1.jpg" },
+        { name: "Band Two", image: "../public/stock band/image2.jpg" },
+        { name: "Band Three", image: "../public/stock band/image3.jpg" },
+        { name: "Band Four", image: "../public/stock band/image4.jpg" },
+        { name: "Band Five", image: "../public/stock band/image5.jpg" },
       ],
     };
   },
@@ -72,24 +86,33 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Cairo');
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Cairo");
 
+.backgroundPic {
+  background-image: url("/stock band/botw.jpg");
+  background-position: center center;
+  background-size: cover;
+}
 .botwSection {
-  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(14, 0, 19, 0.4),
+    rgba(17, 0, 36, 0.4)
+  );
   padding: 40px 0;
   position: relative;
   overflow: hidden;
   object-fit: cover;
   background-repeat: none;
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
 }
 
 .title {
   font-family: "Fugaz One";
   font-weight: bolder;
   text-align: center;
-  color: #FFF;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,13 +123,16 @@ export default {
 
 h1 {
   background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM25pb2ZtMmxseXZoY3Q5NzU1MmF4emE4bGgxMjRhbnh0cjhpemQ0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Fpe0mIR5Y7MyCcxse/giphy.gif);
+  background-repeat: none;
+  background-size: cover;
   color: transparent;
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
   font-size: clamp(2em, 8vw, 10em); /* Responsive font size */
   margin: 10px 0;
-  font-family: 'Fugaz One';
+  font-family: "Fugaz One";
+  /* text-shadow: 2px 2px #330101; */
 }
 
 @keyframes neonGlow {
@@ -199,7 +225,7 @@ h1 {
 
 .caption h3 {
   margin: 0;
-  font-family: 'Fugaz One';
+  font-family: "Fugaz One";
   animation: captionGlow 2s infinite alternate;
 }
 
@@ -260,5 +286,4 @@ h1 {
     padding: 20px 0;
   }
 }
-
 </style>
