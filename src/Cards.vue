@@ -30,16 +30,35 @@
               {{ genre }}
             </option>
           </select>
+          
+<!-- Price Range Display -->
+<h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
+<div class="d-flex justify-content-between mb-2 align-items-center">
+  <span>Min: $</span>
+  <input type="number" v-model="priceRange.min" :min="minPrice" :max="priceRange.max" 
+    class="form-control me-2 ms-2 w-auto" @input="adjustMinPriceInput" />
+  
+  <span>Max: $</span>
+  <input type="number" v-model="priceRange.max" :min="priceRange.min" :max="maxPrice"
+    class="form-control me-2 ms-2 w-auto" @input="adjustMaxPriceInput" />
+</div>
 
-          <!-- Price Range Filter -->
-          <h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
-          <div class="d-flex justify-content-between mb-2">
-            <span>${{ minPrice }}</span>
-            <span>${{ maxPrice }}</span>
-          </div>
-          <input type="range" v-model="priceRange" :min="minPrice" :max="maxPrice" class="styled-range mb-3"
-            @input="updatePriceRange" />
-          <p class="text-light fw-bold">Up to: ${{ priceRange }}</p>
+
+<!-- Minimum Price Slider -->
+<div class="d-flex align-items-center mb-3">
+  <span class="me-2">Min</span>
+  <input id="minPriceSlider" type="range" v-model="priceRange.min" :min="minPrice" :max="priceRange.max"
+    class="styled-range" @input="adjustMinPrice" />
+</div>
+
+<!-- Maximum Price Slider -->
+<div class="d-flex align-items-center mb-3">
+  <span class="me-2">Max</span>
+  <input id="maxPriceSlider" type="range" v-model="priceRange.max" :min="priceRange.min" :max="maxPrice"
+    class="styled-range" @input="adjustMaxPrice" />
+</div>
+
+
 
           <!-- Clear Filters Button -->
           <button class="btn btn-danger w-100 mt-3" @click="clearFilters">
@@ -116,7 +135,15 @@ export default {
     userGenres: {
       type: Array,
       default: () => []
-    }
+    },
+    userPrefMinPrice: {
+      type: Number,
+      // default: 0 // Set a default value for minPrice if it's not passed
+    },
+    userPrefMaxPrice: {
+      type: Number,
+      // default: 100 // Set a default value for maxPrice if it's not passed
+    },
   },
   name: 'Cards',
   setup() {
@@ -131,9 +158,17 @@ export default {
       genres: ['Pop', 'Country', 'Ambient', 'Jazz', 'Rock', 'Hip Hop', 'Metal', 'Electronic', 'Blues', 'Reggae'],
       lessCommonGenres: ['Folk', 'Indie', 'Ska', 'Punk', 'Funk', 'Latin', 'Gospel', 'Grunge', 'Soul'],
       selectedGenres: [],
-      priceRange: 500,
       minPrice: 0,
-      maxPrice: 500,
+      maxPrice: 1000,
+      priceRange: {
+      min: 0,
+      max: 1000,
+      userPrefMinPrice: null, // User's preferred min price
+      userPrefMaxPrice: null, // User's preferred max price
+      priceRangeMinUpdated: false, // Flag to track if the price range has been updated
+      priceRangeMaxUpdated: false, // Flag to track if the price range has been updated
+
+      },
       currentPage: 1,
       itemsPerPage: 15,
       filterTrigger: 0,
@@ -174,7 +209,7 @@ export default {
           band.genres.some(genre => this.selectedGenres.includes(genre));
 
         // Price Filter
-        const matchesPrice = band.price <= this.priceRange;
+        const matchesPrice = band.price >= this.priceRange.min && band.price <= this.priceRange.max;
 
         return matchesSearch && matchesGenre && matchesPrice;
       });
@@ -189,10 +224,44 @@ export default {
     }
   },
   methods: {
-    updatePriceRange() {
-      this.resetPage();
-      this.filterTrigger++;
-    },
+    adjustMinPrice() {
+    if (this.priceRange.min >= this.priceRange.max) {
+      this.priceRange.min = this.priceRange.max - 1;
+    }
+    this.resetPage();
+    this.filterTrigger++;
+  },
+  adjustMaxPrice() {
+    if (this.priceRange.max <= this.priceRange.min) {
+      this.priceRange.max = this.priceRange.min + 1;
+    }
+    this.resetPage();
+    this.filterTrigger++;
+  },
+  adjustMinPriceInput() {
+    // Handle min price input field change
+    if (this.priceRange.min >= this.priceRange.max) {
+      this.priceRange.min = this.priceRange.max - 1;
+    }
+    this.resetPage();
+    this.filterTrigger++;
+  },
+  adjustMaxPriceInput() {
+    // Handle max price input field change
+    if (this.priceRange.max <= this.priceRange.min) {
+      this.priceRange.max = this.priceRange.min + 1;
+    }
+    this.resetPage();
+    this.filterTrigger++;
+  },
+    // updatePriceRange() {
+    // // Ensure min slider is always less than max slider
+    // if (this.priceRange.min >= this.priceRange.max) {
+    //   this.priceRange.min = this.priceRange.max - 1;
+    // }
+    //   this.resetPage();
+    //   this.filterTrigger++;
+    // },
     resetPage() {
       this.currentPage = 1;
       this.filterTrigger++;
@@ -220,7 +289,7 @@ export default {
     },
     clearFilters() {
       this.selectedGenres = [];
-      this.priceRange = this.maxPrice;
+      this.priceRange = { min: this.minPrice, max: this.maxPrice }; // Reset both min and max
       this.searchQuery = '';
       this.resetPage();
     },
@@ -293,8 +362,8 @@ async mounted() {
     const prices = this.bands.map(band => band.price); 
     this.minPrice = Math.min(...prices); 
     this.maxPrice = Math.max(...prices); 
-    this.priceRange = this.maxPrice; 
-    await this.loadFavorites(); // Load favorites after bands are loaded 
+    this.priceRange = { min: this.minPrice, max: this.maxPrice };
+        await this.loadFavorites(); // Load favorites after bands are loaded 
   } catch (error) { 
     console.error('Error fetching data:', error); 
   }
@@ -304,14 +373,37 @@ async mounted() {
     this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
   }
   },
-  watch: {
-    userGenres(newGenres) {
-      if (newGenres && newGenres.length) {
-        // Ensure that new genres are added only once (avoid duplicates)
-        this.selectedGenres = [...new Set([...this.selectedGenres, ...newGenres])];
-      }
+
+watch: {
+  userGenres(newGenres) {
+    if (newGenres && newGenres.length) {
+      // Ensure that new genres are added only once (avoid duplicates)
+      this.selectedGenres = [...new Set([...this.selectedGenres, ...newGenres])];
     }
-  }
+  },
+  userPrefMinPrice(newMinPrice) {
+      if (newMinPrice !== null && !this.priceRangeMinUpdated) {
+       
+        
+        this.priceRange.min = newMinPrice; // Update the price range
+        this.priceRangeMinUpdated = true
+        console.log(this.priceRange);
+        console.log('User price min range updated to:',  newMinPrice );
+      }
+  },
+  userPrefMaxPrice(newMaxPrice) {
+      if (newMaxPrice !== null && !this.priceRangeMaxUpdated) {
+        console.log('User price min range updated to:',  newMaxPrice );
+        this.priceRange.max = newMaxPrice; // Update the price range
+        this.priceRangeMaxUpdated = true
+        console.log(this.priceRange);
+        console.log('User price min range updated to:',  newMaxPrice );
+      }
+  },
+
+
+
+},
 };
 </script>
 

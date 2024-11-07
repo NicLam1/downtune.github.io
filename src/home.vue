@@ -2,7 +2,10 @@
 <div class="p-lg-4">
     <Botw></Botw>
     <div class="container-fluid ">
-    <Cards :user-genres="preferences ? preferences.genres : []"></Cards>
+      <Cards 
+        :user-genres="preferences ? preferences.genres : []" 
+        :user-pref-min-price="minPrice" 
+        :user-pref-max-price="maxPrice" />
 </div>
 </div>
 </template>
@@ -21,6 +24,8 @@ export default {
         return {
             artists: [],
             preferences: null,
+            minPrice: null,
+            maxPrice: null,
         };
     },
     async mounted() {
@@ -58,11 +63,22 @@ export default {
   
           if (docSnap.exists()) {
             this.preferences = docSnap.data();
+            this.extractPriceRange(); // Extract price range when preferences are fetched
           } else {
             console.error('No preferences found for this user.');
           }
         } catch (error) {
           console.error('Error retrieving preferences:', error);
+        }
+      },
+      extractPriceRange() {
+      // Assuming preferences.budget is a string like "$1000-$1400 per hour"
+      const budget = this.preferences?.budget || "";
+      const priceMatch = budget.match(/\$(\d+)-\$(\d+)/);
+
+        if (priceMatch) {
+          this.minPrice = parseInt(priceMatch[1], 10);
+          this.maxPrice = parseInt(priceMatch[2], 10);
         }
       },
     }
