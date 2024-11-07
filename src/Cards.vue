@@ -114,7 +114,7 @@
           <button class="btn btn-secondary me-2" :disabled="currentPage === 1" @click="prevPage">
             <i class="fas fa-chevron-left"></i> Previous Page
           </button>
-          <span class="text-light">Page {{ currentPage }} of {{ totalPages }}</span>
+          <span class="text-light mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
           <button class="btn btn-secondary ms-2" :disabled="currentPage === totalPages" @click="nextPage">
             Next Page <i class="fas fa-chevron-right"></i>
           </button>
@@ -597,6 +597,7 @@ watch: {
   background-color: #7100e0;
   border-radius: 50px;
   padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
 }
 
 .styled-select {
@@ -667,6 +668,7 @@ watch: {
 
 .pagination-controls {
   margin-top: 20px;
+  align-items: center;
 }
 
 .btn-primary {

@@ -16,16 +16,7 @@
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Discover</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Bands</a>
-          </li>
-          <li class="nav-item">
             <router-link to="/calendar" class="nav-link">Events</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Contact</a>
           </li>
         </ul>
         <!-- Profile dropdown on the right -->
