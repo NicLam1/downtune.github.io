@@ -95,6 +95,13 @@ export default {
         { title: 'Pop', url: '/userQuestionImg/pop.jpeg' },
         { title: 'Jazz', url: '/userQuestionImg/jazz.jpg' },
         { title: 'Electronic', url: '/userQuestionImg/electronic.jpg' },
+        { title: 'Country', url: '/userQuestionImg/country.webp' },
+        { title: 'Ambient', url: '/userQuestionImg/ambient.webp' },
+        { title: 'Blues', url: '/userQuestionImg/blues.jpg' },
+        { title: 'Hip-hop', url: '/userQuestionImg/hiphop.jpg' },
+        { title: 'Metal', url: '/userQuestionImg/metal.webp' },
+        { title: 'Reggae', url: '/userQuestionImg/reggae.webp' },
+        
       ],
       bounceLimitReached: false, 
     };
@@ -143,11 +150,23 @@ export default {
         case 'Pop':
           return 'linear-gradient(135deg, lightpink, pink)';
         case 'Jazz':
-          return 'linear-gradient(135deg, chocolate, coral)'; // 'dimgray' for the charcoal-like color
+          return 'linear-gradient(135deg, chocolate, coral)'; 
         case 'Electronic':
-          return 'linear-gradient(135deg, cyan, dodgerblue)'; // 'dodgerblue' is a good match for a bright blue
+          return 'linear-gradient(135deg, cyan, dodgerblue)'; 
         case 'Classical':
-          return 'linear-gradient(135deg, beige, mistyrose)'; // 'beige' and 'mistyrose' are close to soft beige/pink tones
+          return 'linear-gradient(135deg, beige, mistyrose)'; 
+        case 'Country':
+          return 'linear-gradient(135deg, goldenrod, peru)';
+        case 'Ambient':
+          return 'linear-gradient(135deg, lavender, lightsteelblue)';
+        case 'Blues':
+          return 'linear-gradient(135deg, royalblue, skyblue)'; 
+        case 'Hip-hop':
+          return 'linear-gradient(135deg, darkorange, orangered)'; 
+        case 'Metal':
+          return 'linear-gradient(135deg, darkslategray, silver)'; 
+        case 'Reggae':
+          return 'linear-gradient(135deg, yellowgreen, limegreen)'; 
         default:
           return 'linear-gradient(135deg, forestgreen, darkseagreen)'; // Default background
       }
