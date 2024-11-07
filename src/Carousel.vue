@@ -10,6 +10,7 @@
         :modules="[EffectCoverflow, Pagination, Navigation]"
         effect="coverflow"
         :grab-cursor="true"
+        :loop="true"
         :centered-slides="true"
         :slides-per-view="'auto'"
         :coverflowEffect="{
