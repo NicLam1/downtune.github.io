@@ -74,11 +74,11 @@ export default {
   data() {
     return {
       bands: [
-        { name: "Band One", image: "../public/stock band/image1.jpg" },
-        { name: "Band Two", image: "../public/stock band/image2.jpg" },
-        { name: "Band Three", image: "../public/stock band/image3.jpg" },
-        { name: "Band Four", image: "../public/stock band/image4.jpg" },
-        { name: "Band Five", image: "../public/stock band/image5.jpg" },
+        { name: "Band One", image: "/stock band/image1.jpg" },
+        { name: "Band Two", image: "/stock band/image2.jpg" },
+        { name: "Band Three", image: "/stock band/image3.jpg" },
+        { name: "Band Four", image: "/stock band/image4.jpg" },
+        { name: "Band Five", image: "/stock band/image5.jpg" },
       ],
     };
   },
