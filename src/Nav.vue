@@ -48,8 +48,7 @@
             <div class="dropdown">
               <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
               <div v-if="dropdownVisible" class="dropdown-menu show">
-                <router-link to="/login/user" class="dropdown-item">Login</router-link>
-                <router-link to="/register/user" class="dropdown-item">Sign Up</router-link>
+                <router-link to="/choose" class="dropdown-item">Login / Sign Up</router-link>
               </div>
             </div>
           </div>

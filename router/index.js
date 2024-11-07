@@ -10,8 +10,6 @@ import CalendarGuitar from  '../src/CalendarGuitar.vue';
 import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
 import Favorite from '../src/Favorite.vue';
-
-
 import UserProfile from '../src/UserProfile.vue';
 
 
@@ -69,8 +67,8 @@ const routes = [
     component: CalendarGuitar
   },
   {
-    path: '/UserProfile', 
-    name: 'UserProfile',
+    path: '/account', 
+    name: 'account',
     component: UserProfile
   }
 ];
