@@ -10,7 +10,7 @@
       <!-- Band Banner -->
       <div class="banner" :style="{ backgroundImage: `url('${band.banner}')` }">
         <div class="banner-overlay justify-content-center">
-          <h1 class="band-name">{{ band.name }}</h1>
+          <h1 class="band-name mx-4">{{ band.name }}</h1>
         </div>
       </div>
 
@@ -59,22 +59,21 @@
         </section>
 
         <!-- Events Section -->
-        <section class="events-section mb-5">
+        <section class="events-section mb-2">
           <h3 class="section-title">
             <i class="fas fa-calendar-alt"></i> Events
           </h3>
           <div class="row">
             <!-- Upcoming Events -->
-            <div class="col-md-6 mb-4">
-              <h4>Upcoming Events</h4>
+            <div class="col-md-6">
+              <h4 class="fw-bold">Upcoming Events</h4>
               <ul class="list-group">
                 <li
                   class="list-group-item event-item"
                   v-for="event in band.upcoming_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> -
-                  {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
                 </li>
                 <li v-if="!band.upcoming_events.length" class="list-group-item">
                   No upcoming events.
@@ -82,16 +81,15 @@
               </ul>
             </div>
             <!-- Past Events -->
-            <div class="col-md-6 mb-4">
-              <h4>Past Events</h4>
+            <div class="col-md-6 mb-4 mt-4 mt-md-0">
+              <h4 class="fw-bold">Past Events</h4>
               <ul class="list-group">
                 <li
                   class="list-group-item event-item"
                   v-for="event in band.past_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> -
-                  {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
                 </li>
                 <li v-if="!band.past_events.length" class="list-group-item">
                   No past events.
@@ -101,71 +99,76 @@
           </div>
         </section>
 
-        <!-- Spotify Playlist Section -->
-        <section class="spotify-playlist-section mb-5">
+        <!-- Artist Playlist Section -->
+        <section class="artist-playlist-section mb-5">
           <h3 class="section-title">
-            <i class="fab fa-spotify"></i> Spotify Playlist
+            <i class="fas fa-headphones-alt"></i> Featured Artist Playlist
           </h3>
-          <div class="spotify-embed">
-            <iframe
-              :src="spotifyPlaylistUrl"
-              width="100%"
-              height="380"
-              frameborder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+          <div v-if="featuredArtist" class="featured-artist">
+            
+            <!-- Embedded Spotify Player -->
+            <div class="spotify-embed">
+              <iframe
+                v-if="featuredArtist.spotifyEmbedUrl"
+                :src="featuredArtist.spotifyEmbedUrl"
+                width="100%"
+                height="380"
+                frameborder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+                aria-label="Spotify player for {{ featuredArtist.name }}"
+              ></iframe>
+              <div v-else class="text-center text-light">
+                <p>Spotify player not available.</p>
+              </div>
+            </div>
           </div>
-          <button
-            v-if="!spotifyLoggedIn"
-            @click="loginToSpotify"
-            class="btn btn-success mt-3"
-          >
-            <i class="fab fa-spotify"></i> Login to Spotify
-          </button>
-          <button
-            v-if="spotifyLoggedIn"
-            @click="addToFavorites"
-            class="btn btn-primary mt-3"
-          >
-            <i class="fas fa-heart"></i> Add Playlist to Favorites
-          </button>
+          <div v-else class="text-center text-light">
+            <p>Loading featured artist...</p>
+          </div>
         </section>
 
         <!-- Artist Recommendations Section -->
-        <section class="artist-recommendations-section mb-5">
+        <section class="artist-recommendations-section">
           <h3 class="section-title">
             <i class="fas fa-guitar"></i> Recommended Artists
           </h3>
-          <div class="row">
-            <div
-              class="col-md-4 recommended-artist-card my-2"
-              v-for="artist in recommendedArtists"
-              :key="artist.id"
-            >
-              <div class="card text-center">
-                <div class="card-body">
-                  <img
-                    :src="artist.image"
-                    :alt="artist.name"
-                    class="artist-image mb-3"
-                  />
-                  <h5 class="card-title">{{ artist.name }}</h5>
-                  <button
-                    @click="playArtistTopTrack(artist.id)"
-                    class="btn btn-outline-primary mt-2"
-                  >
-                    <i class="fas fa-play"></i> Play Top Track
-                  </button>
+          <div class="scroll-container" :class="{ paused: isScrollingPaused }">
+            <div class="scroll-content" ref="scrollContent">
+              <div
+                class="recommended-artist-card my-2"
+                v-for="artist in filteredRecommendedArtists"
+                :key="artist.id"
+                @mouseover="pauseScrolling"
+                @mouseleave="resumeScrolling"
+              >
+                <div class="card text-center">
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <img
+                      :src="artist.image"
+                      :alt="artist.name"
+                      class="artist-image mb-3"
+                      loading="lazy"
+                    />
+                    <h5 class="card-title text-light">{{ artist.name }}</h5>
+                    <a
+                      :href="artist.external_urls.spotify"
+                      target="_blank"
+                      class="btn btn-spotify mt-2"
+                      aria-label="Listen to {{ artist.name }} on Spotify"
+                    >
+                      <i class="fab fa-spotify me-2"></i>Listen on Spotify
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div
-              v-if="recommendedArtists.length === 0"
-              class="col-12 text-center text-muted"
-            >
-              <p>No recommended artists available.</p>
-            </div>
+          </div>
+          <div
+            v-if="filteredRecommendedArtists.length === 0"
+            class="text-center text-light"
+          >
+            <p>No recommended artists available.</p>
           </div>
         </section>
 
@@ -174,11 +177,7 @@
           <div class="container">
             <h2 class="cta-title">Stay updated on {{ band.name }}</h2>
 
-            <form
-              @submit.prevent="submitForm"
-              class="mx-auto"
-              style="max-width: 400px"
-            >
+            <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px">
               <div class="mb-3">
                 <input
                   v-model="email"
@@ -187,6 +186,7 @@
                   id="emailInput"
                   placeholder="Enter your email"
                   required
+                  aria-label="Email address"
                 />
               </div>
               <button type="submit" class="btn btn-primary w-100">
@@ -202,9 +202,7 @@
         <div class="social-icons mb-3">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
           <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
         <p>Contact {{ band.name }} here!</p>
       </footer>
@@ -219,49 +217,22 @@
 
 <script>
 import axios from "axios";
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { ref, onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   name: "BandProfile",
   setup() {
     const route = useRoute();
-    const router = useRouter();
     const band = ref(null);
     const email = ref("");
     const loading = ref(true);
     const error = ref(false);
-    const spotifyLoggedIn = ref(false);
     const recommendedArtists = ref([]);
-    const spotifyPlaylistUrl = ref("");
-
-    // Predefined list of Spotify Playlist IDs
-    const playlistIds = [
-      "37i9dQZF1DXcBWIGoYBM5M", // Today's Top Hits - Pop
-      "37i9dQZF1DX0XUsuxWHRQd", // RapCaviar - Hip-Hop
-      "37i9dQZF1DX1lVhptIYRda", // Rock Classics - Rock
-      "37i9dQZF1DX4JAvHpjipBk", // Mood Booster - Pop
-      "37i9dQZF1DWXRqgorJj26U", // Feel Good Friday - Pop
-      "37i9dQZF1DX2yvmlOdMYzV", // Pop Rising - Pop
-      "37i9dQZF1DX1gIWILh4VV6", // Indie Pop - Indie
-      "37i9dQZF1DX5Ejj0EkURtP", // Chill Hits - Chill
-      "37i9dQZF1DWYBF1d9QID5V", // Hot Hits USA - Pop
-      "37i9dQZF1DXaXB8fQg7xif", // Alternative Hits - Alternative
-    ];
-
-    // Mapping from Playlist ID to Genre
-    const playlistGenreMap = {
-      "37i9dQZF1DXcBWIGoYBM5M": "pop",
-      "37i9dQZF1DX0XUsuxWHRQd": "hip-hop",
-      "37i9dQZF1DX1lVhptIYRda": "rock",
-      "37i9dQZF1DX4JAvHpjipBk": "pop",
-      "37i9dQZF1DWXRqgorJj26U": "pop",
-      "37i9dQZF1DX2yvmlOdMYzV": "pop",
-      "37i9dQZF1DX1gIWILh4VV6": "indie",
-      "37i9dQZF1DX5Ejj0EkURtP": "chill",
-      "37i9dQZF1DWYBF1d9QID5V": "pop",
-      "37i9dQZF1DXaXB8fQg7xif": "alternative",
-    };
+    const spotifyAccessToken = ref("");
+    const featuredArtist = ref(null);
+    const isScrollingPaused = ref(false);
+    const scrollContent = ref(null);
 
     const submitForm = () => {
       console.log("Submitted email:", email.value);
@@ -269,126 +240,119 @@ export default {
       email.value = "";
     };
 
-    const loginToSpotify = () => {
-      // Redirect user to Spotify login page (OAuth flow)
-      const clientId = import.meta.env.VITE_CLIENT_ID;
-      const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
-      const scopes = encodeURIComponent("user-library-modify");
-      window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes}`;
-    };
-
-    const addToFavorites = async () => {
+    const fetchSpotifyAccessToken = async () => {
       try {
-        const accessToken = localStorage.getItem("spotifyAccessToken");
-        if (!accessToken) {
-          alert("Please login to Spotify first.");
-          return;
-        }
-
-        const playlistIdMatch = spotifyPlaylistUrl.value.match(
-          /playlist\/([a-zA-Z0-9]+)/
-        );
-        if (!playlistIdMatch || !playlistIdMatch[1]) {
-          console.error("Invalid Spotify playlist URL.");
-          alert("Invalid playlist URL.");
-          return;
-        }
-        const playlistId = playlistIdMatch[1];
-        const response = await axios.put(
-          `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
-          {},
+        const clientId = import.meta.env.VITE_CLIENT_ID;
+        const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
+        const response = await axios.post(
+          "https://accounts.spotify.com/api/token",
+          "grant_type=client_credentials",
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
             },
           }
         );
-
-        alert("Playlist added to your favorites!");
+        spotifyAccessToken.value = response.data.access_token;
       } catch (err) {
-        console.error("Error adding playlist to favorites:", err);
-        alert("Failed to add playlist to favorites. Please try again.");
+        console.error("Error fetching Spotify access token:", err);
       }
     };
 
-    const playArtistTopTrack = async (artistId) => {
+    const fetchRecommendedArtistsByGenres = async (genres) => {
       try {
-        const accessToken = localStorage.getItem("spotifyAccessToken");
-        if (!accessToken) {
-          alert("Please login to Spotify first.");
+        if (!spotifyAccessToken.value) {
+          console.warn("Spotify access token not available.");
           return;
         }
 
-        const response = await axios.get(
-          `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
-          {
+        let allArtists = [];
+
+        // Fetch artists for each genre
+        for (const genre of genres) {
+          const response = await axios.get("https://api.spotify.com/v1/search", {
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${spotifyAccessToken.value}`,
             },
             params: {
-              market: "US",
+              q: `genre:"${genre}"`,
+              type: "artist",
+              limit: 6, // Fetch a smaller number per genre for diversity
             },
-          }
+          });
+
+          const artists = response.data.artists.items;
+          allArtists = allArtists.concat(artists);
+        }
+
+        // Remove duplicate artists based on their ID
+        const uniqueArtists = Array.from(
+          new Map(allArtists.map((artist) => [artist.id, artist])).values()
         );
 
-        const trackUri = response.data.tracks[0]?.uri;
-        if (trackUri) {
-          await axios.put(
-            "https://api.spotify.com/v1/me/player/play",
-            {
-              uris: [trackUri],
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
-          alert("Playing top track!");
+        // Sort artists alphabetically by name for consistency
+        uniqueArtists.sort((a, b) => a.name.localeCompare(b.name));
+
+        // Check if a featured artist is already stored in localStorage
+        const storedFeaturedArtistId = localStorage.getItem(`featuredArtist_${band.value.id}`);
+        if (storedFeaturedArtistId) {
+          const storedArtist = uniqueArtists.find((artist) => artist.id === storedFeaturedArtistId);
+          if (storedArtist) {
+            featuredArtist.value = storedArtist;
+          } else {
+            // Fallback to the first artist if stored ID is not found
+            featuredArtist.value = uniqueArtists[0];
+            localStorage.setItem(`featuredArtist_${band.value.id}`, featuredArtist.value.id);
+          }
         } else {
-          alert("No top track found for this artist.");
-        }
-      } catch (err) {
-        console.error("Error playing artist top track:", err);
-        alert("Failed to play the top track. Please try again.");
-      }
-    };
-
-    const fetchRecommendedArtistsByGenre = async (genre) => {
-      try {
-        const accessToken = localStorage.getItem("spotifyAccessToken");
-        if (!accessToken) {
-          console.warn("Spotify access token not found.");
-          return;
+          // Select the first artist as the featured artist
+          if (uniqueArtists.length > 0) {
+            featuredArtist.value = uniqueArtists[0];
+            // Store the featured artist ID
+            localStorage.setItem(`featuredArtist_${band.value.id}`, featuredArtist.value.id);
+          }
         }
 
-        // Search for artists by genre
-        const response = await axios.get("https://api.spotify.com/v1/search", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            q: `genre:"${genre}"`,
-            type: "artist",
-            limit: 12, // Fetch 12 artists for a more diverse selection
-          },
-        });
+        if (featuredArtist.value) {
+          await fetchArtistSpotifyEmbedUrl(featuredArtist.value.id);
 
-        const artists = response.data.artists.items;
+          // Exclude the featured artist from recommended artists
+          const remainingArtists = uniqueArtists.filter(
+            (artist) => artist.id !== featuredArtist.value.id
+          );
 
-        // Shuffle the artists to add randomness
-        const shuffledArtists = artists.sort(() => 0.5 - Math.random());
-
-        // Select the first 9 artists for display
-        recommendedArtists.value = shuffledArtists
-          .slice(0, 9)
-          .map((artist) => ({
+          // Limit to first 10 recommended artists for the carousel
+          recommendedArtists.value = remainingArtists.slice(0, 10).map((artist) => ({
             id: artist.id,
             name: artist.name,
             image: artist.images[0]?.url || "https://via.placeholder.com/300", // Fallback image
+            external_urls: artist.external_urls,
           }));
+        }
       } catch (err) {
         console.error("Error fetching recommended artists:", err);
+      }
+    };
+
+    const fetchArtistSpotifyEmbedUrl = async (artistId) => {
+      try {
+        if (!spotifyAccessToken.value) {
+          console.warn("Spotify access token not available.");
+          return;
+        }
+
+        // Fetch the artist's information to get the Spotify URI
+        const response = await axios.get(`https://api.spotify.com/v1/artists/${artistId}`, {
+          headers: {
+            Authorization: `Bearer ${spotifyAccessToken.value}`,
+          },
+        });
+
+        // Convert URI to embed URL
+        featuredArtist.value.spotifyEmbedUrl = `https://open.spotify.com/embed/artist/${artistId}`;
+      } catch (err) {
+        console.error("Error fetching artist's Spotify embed URL:", err);
       }
     };
 
@@ -402,12 +366,8 @@ export default {
 
         if (foundBand) {
           // Ensure all required properties are arrays
-          foundBand.genres = Array.isArray(foundBand.genres)
-            ? foundBand.genres
-            : [];
-          foundBand.members = Array.isArray(foundBand.members)
-            ? foundBand.members
-            : [];
+          foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
+          foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
           foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events)
             ? foundBand.upcoming_events
             : [];
@@ -417,16 +377,9 @@ export default {
 
           band.value = foundBand;
 
-          // Assign a Spotify playlist based on the band ID
-          const playlistIndex = bandId % playlistIds.length;
-          const selectedPlaylistId = playlistIds[playlistIndex];
-          spotifyPlaylistUrl.value = `https://open.spotify.com/embed/playlist/${selectedPlaylistId}`;
-
-          // Get genre from the mapping
-          const genre = playlistGenreMap[selectedPlaylistId] || "pop"; // Default to 'pop' if not mapped
-
-          // Fetch recommended artists based on genre
-          await fetchRecommendedArtistsByGenre(genre);
+          // Fetch recommended artists based on the band's genres
+          await fetchSpotifyAccessToken();
+          await fetchRecommendedArtistsByGenres(foundBand.genres);
         } else {
           console.error("Band not found");
           error.value = true;
@@ -447,19 +400,17 @@ export default {
       return date.toLocaleDateString(undefined, options);
     };
 
-    onMounted(() => {
-      const hash = window.location.hash;
-      if (hash) {
-        const params = new URLSearchParams(hash.substring(1));
-        const accessToken = params.get("access_token");
-        if (accessToken) {
-          localStorage.setItem("spotifyAccessToken", accessToken);
-          spotifyLoggedIn.value = true;
-          // Optionally, you can remove the token from the URL
-          window.history.replaceState(null, null, " ");
-        }
-      }
+    const pauseScrolling = () => {
+      isScrollingPaused.value = true;
+    };
 
+    const resumeScrolling = () => {
+      isScrollingPaused.value = false;
+    };
+
+    const filteredRecommendedArtists = computed(() => recommendedArtists.value);
+
+    onMounted(() => {
       const bandId = parseInt(route.params.id, 10);
       if (isNaN(bandId)) {
         console.error("Invalid band ID");
@@ -477,12 +428,13 @@ export default {
       formatDate,
       loading,
       error,
-      spotifyPlaylistUrl,
-      spotifyLoggedIn,
-      loginToSpotify,
-      addToFavorites,
       recommendedArtists,
-      playArtistTopTrack,
+      featuredArtist,
+      isScrollingPaused,
+      filteredRecommendedArtists,
+      pauseScrolling,
+      resumeScrolling,
+      scrollContent,
     };
   },
 };
@@ -552,7 +504,7 @@ export default {
 .band-name {
   position: relative;
   font-family: "Poppins", sans-serif;
-  font-size: 10vh;
+  font-size: 8vw;
   text-align: center;
   color: #ffffff;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
@@ -565,7 +517,8 @@ export default {
 .members-section,
 .events-section,
 .call-to-action,
-.artist-recommendations-section {
+.artist-recommendations-section,
+.artist-playlist-section {
   animation: fadeInUp 1s ease forwards;
   opacity: 0;
 }
@@ -713,9 +666,150 @@ footer p {
 .artist-image {
   width: 100%;
   height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
+
+.featured-artist-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #1db954;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.featured-artist h4 {
+  color: #1db954;
+  margin-bottom: 0.5rem;
+}
+
+.featured-artist .btn-success {
+  background-color: #1db954;
+  border: none;
+}
+
+.featured-artist .btn-success:hover {
+  background-color: #1ed760;
+}
+
+.spotify-embed {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.artist-playlist-section .list-group-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #e6e1e5;
+}
+
+.list-group{
+  background-color: #1db954 !important;
+}
+
+.list-group-item{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #e6e1e5;
+  background: linear-gradient(
+    135deg,
+    rgb(59, 1, 80),
+    rgb(61, 4, 126));
+}
+
+.artist-playlist-section .list-group-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.artist-recommendations-section {
+  overflow: hidden;
+  height: 400px; /* Increased height to accommodate full card height */
+}
+
+.scroll-container {
+  position: relative;
+  width: 100%;
+  /* overflow: hidden; */
+  height: 300px; /* Match the artist-recommendations-section height */
+  display: flex;
+  align-items: center;
+}
+
+.scroll-content {
+  display: flex;
+  animation: scroll 25s linear infinite;
+}
+
+.scroll-container.paused .scroll-content {
+  animation-play-state: paused;
+}
+
+.recommended-artist-card {
+  flex: 0 0 auto;
+  width: 300px;
+  margin-right: 20px;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure card fills the container's height */
+}
+
+.recommended-artist-card:hover {
+  transform: scale(1.1);
+}
+
+.artist-recommendations-section .card {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  border: none;
+  border-radius: 16px;
+  transition: transform 0.3s, background 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Make card fill the recommended-artist-card's height */
+}
+
+.artist-recommendations-section .card:hover {
+  background: linear-gradient(135deg, #4a00e0, #8e2de2);
+}
+
+.artist-recommendations-section .artist-image {
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  width: 100px; /* Fixed size for consistency */
+  height: 100px;
+  object-fit: cover;
+  margin: 0 auto 15px auto;
+}
+
+.btn-spotify {
+  background-color: #1db954;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.3s;
+  align-self: center;
+}
+
+.btn-spotify:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+/* Infinite Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive Adjustments */
+
 
 /* Animations */
 @keyframes fadeIn {
