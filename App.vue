@@ -2,7 +2,7 @@
 <template>
     <Nav v-if="!hideNavbar"></Nav>
     <router-view v-slot="{ Component }">
-  <transition enter-active-class="animate__animated animate__fadeInLeft" leave-active-class="animate__animated animate__animate__fadeOutRight" mode="out-in">
+  <transition enter-active-class="animate__animated animate__fadeInDown" mode="out-in">
     <component :is="Component" :key="$route.path"></component>
   </transition>
 </router-view>
