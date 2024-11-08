@@ -1,5 +1,5 @@
 <template>
-  <div id="favorites-app" class="container-fluid px-sm-0 px-lg-4 mt-4">
+  <div id="favorites-app" class="container-fluid px-4 px-lg-4 mt-4">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="text-light">My Favorites</h2>
@@ -11,12 +11,24 @@
     <!-- Favorites Section -->
     <div class="cardsSection col-12">
       <div class="d-flex flex-wrap gap-3 align-items-stretch">
-        <div v-for="band in favorites" :key="band.id + '-favorite'" class="card-container">
+        <div
+          v-for="band in favorites"
+          :key="band.id + '-favorite'"
+          class="card-container"
+        >
           <div class="card-wrapper">
-            <router-link :to="{ name: 'BandProfile', params: { id: band.id } }" class="card-link">
+            <router-link
+              :to="{ name: 'BandProfile', params: { id: band.id } }"
+              class="card-link"
+            >
               <div class="card h-100">
                 <div class="card-image-container">
-                  <img :src="band.thumbnail" :alt="band.name" class="card-img-top" loading="lazy" />
+                  <img
+                    :src="band.thumbnail"
+                    :alt="band.name"
+                    class="card-img-top"
+                    loading="lazy"
+                  />
                   <div class="overlay">
                     <i class="fas fa-info-circle"></i>
                   </div>
@@ -24,7 +36,11 @@
                 <div class="card-body d-flex flex-column text-left">
                   <h5 class="card-title fw-bold">{{ band.name }}</h5>
                   <p class="card-text">
-                    <span v-for="genre in band.genres" :key="genre" class="badge me-1 genre-badge">
+                    <span
+                      v-for="genre in band.genres"
+                      :key="genre"
+                      class="badge me-1 genre-badge"
+                    >
                       {{ genre }}
                     </span>
                   </p>
@@ -35,12 +51,19 @@
               </div>
             </router-link>
             <!-- Remove from Favorites Button -->
-            <button class="btn-favorite favorited" @click.stop="removeFavorite(band)" title="Remove from Favorites">
+            <button
+              class="btn-favorite favorited"
+              @click.stop="removeFavorite(band)"
+              title="Remove from Favorites"
+            >
               <i class="fas fa-heart"></i>
             </button>
           </div>
         </div>
-        <div v-if="favorites.length === 0" class="col-12 text-center text-light mt-5">
+        <div
+          v-if="favorites.length === 0"
+          class="col-12 text-center text-light mt-5"
+        >
           You have no favorites yet.
         </div>
       </div>
@@ -49,12 +72,12 @@
 </template>
 
 <script>
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import axios from 'axios';
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import axios from "axios";
 
 export default {
-  name: 'Favorite',
+  name: "Favorite",
   data() {
     return {
       favorites: [],
@@ -67,24 +90,26 @@ export default {
       const user = auth.currentUser;
       if (user) {
         const db = getFirestore();
-        const userDoc = doc(db, 'userPreferences', user.uid);
+        const userDoc = doc(db, "userPreferences", user.uid);
         try {
           const docSnap = await getDoc(userDoc);
           if (docSnap.exists()) {
             const favoriteIds = docSnap.data().favorites || [];
-            this.favorites = this.bands.filter(band => favoriteIds.includes(band.id));
+            this.favorites = this.bands.filter((band) =>
+              favoriteIds.includes(band.id)
+            );
           } else {
-            console.log('No such document!');
+            console.log("No such document!");
           }
         } catch (error) {
-          console.error('Error loading favorites from Firestore:', error);
+          console.error("Error loading favorites from Firestore:", error);
         }
       } else {
-        console.error('User is not authenticated');
+        console.error("User is not authenticated");
       }
     },
     async removeFavorite(band) {
-      this.favorites = this.favorites.filter(fav => fav.id !== band.id);
+      this.favorites = this.favorites.filter((fav) => fav.id !== band.id);
       await this.saveFavorites();
     },
     async saveFavorites() {
@@ -92,16 +117,16 @@ export default {
       const user = auth.currentUser;
       if (user) {
         const db = getFirestore();
-        const userDoc = doc(db, 'userPreferences', user.uid);
-        const bandIds = this.favorites.map(fav => fav.id);
+        const userDoc = doc(db, "userPreferences", user.uid);
+        const bandIds = this.favorites.map((fav) => fav.id);
         try {
           await setDoc(userDoc, { favorites: bandIds }, { merge: true });
-          console.log('Favorites saved to Firestore');
+          console.log("Favorites saved to Firestore");
         } catch (error) {
-          console.error('Error saving favorites to Firestore:', error);
+          console.error("Error saving favorites to Firestore:", error);
         }
       } else {
-        console.error('User is not authenticated');
+        console.error("User is not authenticated");
       }
     },
     goBack() {
@@ -110,29 +135,37 @@ export default {
   },
   async mounted() {
     try {
-      const response = await axios.get('/MOCK_DATA.json');
+      const response = await axios.get("/MOCK_DATA.json");
       this.bands = response.data;
       await this.loadFavorites(); // Load favorites after bands are loaded
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   },
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 #favorites-app {
-  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(14, 0, 19, 0.85),
+    rgba(17, 0, 36, 0.9)
+  );
   min-height: 100vh;
   padding-left: 0;
   padding-right: 0;
 }
 
 .cardsSection {
-  background: linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(32, 1, 43, 0.85),
+    rgba(10, 0, 20, 0.9)
+  );
   padding: 20px;
   border-radius: 16px;
   backdrop-filter: blur(10px);

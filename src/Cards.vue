@@ -1,13 +1,20 @@
 <template>
   <div id="app" class="container-fluid px-sm-0 px-lg-4 mt-4">
     <!-- Bootstrap Row -->
-    <div class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3">
-
+    <div
+      class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3"
+    >
       <!-- Filter Section -->
       <div class="filter-section col-12 col-lg-3 mb-4 mb-lg-0">
         <!-- Toggle Filters Button for Small Screens -->
-        <button class="btn btn-secondary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse"
-          data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+        <button
+          class="btn btn-secondary d-lg-none w-100 mb-3"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#filterCollapse"
+          aria-expanded="false"
+          aria-controls="filterCollapse"
+        >
           <i class="fas fa-sliders-h"></i> Toggle Filters
         </button>
         <div class="collapse d-lg-block" id="filterCollapse">
@@ -16,49 +23,85 @@
           <!-- Genres Filter -->
           <h5><i class="fas fa-music"></i> Genres</h5>
           <div class="genre-pills-container mb-3">
-            <div v-for="genre in genres" :key="genre" class="genre-pill"
-              :class="{ 'selected': selectedGenres.includes(genre) }" @click="toggleGenre(genre)">
+            <div
+              v-for="genre in genres"
+              :key="genre"
+              class="genre-pill"
+              :class="{ selected: selectedGenres.includes(genre) }"
+              @click="toggleGenre(genre)"
+            >
               <i :class="genreIcons[genre]" class="genre-icon"></i> {{ genre }}
             </div>
           </div>
 
           <!-- Other Genres Dropdown -->
           <h5><i class="fas fa-plus-circle"></i> Other Genres</h5>
-          <select class="styled-select mb-3" @change="addLessCommonGenre($event)">
+          <select
+            class="styled-select mb-3"
+            @change="addLessCommonGenre($event)"
+          >
             <option value="" disabled selected>Select other genres...</option>
-            <option v-for="genre in lessCommonGenres" :key="genre" :value="genre" v-if="!genres.includes(genre)">
+            <option
+              v-for="genre in lessCommonGenres"
+              :key="genre"
+              :value="genre"
+              v-if="!genres.includes(genre)"
+            >
               {{ genre }}
             </option>
           </select>
-          
-<!-- Price Range Display -->
-<h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
-<div class="d-flex justify-content-between mb-2 align-items-center">
-  <span>Min: $</span>
-  <input type="number" v-model="priceRange.min" :min="minPrice" :max="priceRange.max" 
-    class="form-control me-2 ms-2 w-auto" @input="adjustMinPriceInput" />
-  
-  <span>Max: $</span>
-  <input type="number" v-model="priceRange.max" :min="priceRange.min" :max="maxPrice"
-    class="form-control me-2 ms-2 w-auto" @input="adjustMaxPriceInput" />
-</div>
 
+          <!-- Price Range Display -->
+          <h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
+          <div class="d-flex justify-content-between mb-2 align-items-center">
+            <span>Min: $</span>
+            <input
+              type="number"
+              v-model="priceRange.min"
+              :min="minPrice"
+              :max="priceRange.max"
+              class="form-control me-2 ms-2 w-auto"
+              @input="adjustMinPriceInput"
+            />
 
-<!-- Minimum Price Slider -->
-<div class="d-flex align-items-center mb-3">
-  <span class="me-2">Min</span>
-  <input id="minPriceSlider" type="range" v-model="priceRange.min" :min="minPrice" :max="priceRange.max"
-    class="styled-range" @input="adjustMinPrice" />
-</div>
+            <span>Max: $</span>
+            <input
+              type="number"
+              v-model="priceRange.max"
+              :min="priceRange.min"
+              :max="maxPrice"
+              class="form-control me-2 ms-2 w-auto"
+              @input="adjustMaxPriceInput"
+            />
+          </div>
 
-<!-- Maximum Price Slider -->
-<div class="d-flex align-items-center mb-3">
-  <span class="me-2">Max</span>
-  <input id="maxPriceSlider" type="range" v-model="priceRange.max" :min="priceRange.min" :max="maxPrice"
-    class="styled-range" @input="adjustMaxPrice" />
-</div>
+          <!-- Minimum Price Slider -->
+          <div class="d-flex align-items-center mb-3">
+            <span class="me-2">Min</span>
+            <input
+              id="minPriceSlider"
+              type="range"
+              v-model="priceRange.min"
+              :min="minPrice"
+              :max="priceRange.max"
+              class="styled-range"
+              @input="adjustMinPrice"
+            />
+          </div>
 
-
+          <!-- Maximum Price Slider -->
+          <div class="d-flex align-items-center mb-3">
+            <span class="me-2">Max</span>
+            <input
+              id="maxPriceSlider"
+              type="range"
+              v-model="priceRange.max"
+              :min="priceRange.min"
+              :max="maxPrice"
+              class="styled-range"
+              @input="adjustMaxPrice"
+            />
+          </div>
 
           <!-- Clear Filters Button -->
           <button class="btn btn-danger w-100 mt-3" @click="clearFilters">
@@ -69,15 +112,32 @@
 
       <!-- Cards Section -->
       <div class="cardsSection col-12 col-lg-9">
-        <input type="text" class="search-bar mb-4" placeholder="Search by name or genre..." v-model="searchQuery"
-          @input="resetPage" />
+        <input
+          type="text"
+          class="search-bar mb-4"
+          placeholder="Search by name or genre..."
+          v-model="searchQuery"
+          @input="resetPage"
+        />
         <div class="d-flex flex-wrap gap-3 align-items-stretch">
-          <div v-for="band in paginatedBands" :key="band.id + '-' + filterTrigger" class="card-container">
+          <div
+            v-for="band in paginatedBands"
+            :key="band.id + '-' + filterTrigger"
+            class="card-container"
+          >
             <div class="card-wrapper">
-              <router-link :to="{ name: 'BandProfile', params: { id: band.id } }" class="card-link">
+              <router-link
+                :to="{ name: 'BandProfile', params: { id: band.id } }"
+                class="card-link"
+              >
                 <div class="card h-100">
                   <div class="card-image-container">
-                    <img :src="band.thumbnail" :alt="band.name" class="card-img-top" loading="lazy" />
+                    <img
+                      :src="band.thumbnail"
+                      :alt="band.name"
+                      class="card-img-top"
+                      loading="lazy"
+                    />
                     <div class="overlay">
                       <i class="fas fa-info-circle"></i>
                     </div>
@@ -85,7 +145,11 @@
                   <div class="card-body d-flex flex-column text-left">
                     <h4 class="card-title fw-bold">{{ band.name }}</h4>
                     <p class="card-text">
-                      <span v-for="genre in band.genres" :key="genre" class="badge me-1 genre-badge">
+                      <span
+                        v-for="genre in band.genres"
+                        :key="genre"
+                        class="badge me-1 genre-badge"
+                      >
                         {{ genre }}
                       </span>
                     </p>
@@ -97,25 +161,50 @@
               </router-link>
               <!-- Add to Favorites Button -->
               <div v-if="isLoggedIn">
-
-                <button class="btn-favorite" @click.stop="toggleFavorite(band)"
-                  :class="{ 'favorited': isFavorited(band.id) }"
-                  :title="isFavorited(band.id) ? 'Remove from Favorites' : 'Add to Favorites'">
-                  <i :class="isFavorited(band.id) ? 'fas fa-heart' : 'far fa-heart'"></i>
+                <button
+                  class="btn-favorite"
+                  @click.stop="toggleFavorite(band)"
+                  :class="{ favorited: isFavorited(band.id) }"
+                  :title="
+                    isFavorited(band.id)
+                      ? 'Remove from Favorites'
+                      : 'Add to Favorites'
+                  "
+                >
+                  <i
+                    :class="
+                      isFavorited(band.id) ? 'fas fa-heart' : 'far fa-heart'
+                    "
+                  ></i>
                 </button>
               </div>
             </div>
           </div>
-          <div v-if="filteredBands.length === 0" class="col-12 text-center text-light mt-5">No results found.</div>
+          <div
+            v-if="filteredBands.length === 0"
+            class="col-12 text-center text-light mt-5"
+          >
+            No results found.
+          </div>
         </div>
 
         <!-- Pagination Controls -->
         <div class="pagination-controls d-flex justify-content-center mt-4">
-          <button class="btn btn-secondary me-2" :disabled="currentPage === 1" @click="prevPage">
+          <button
+            class="btn btn-secondary me-2"
+            :disabled="currentPage === 1"
+            @click="prevPage"
+          >
             <i class="fas fa-chevron-left"></i> Previous Page
           </button>
-          <span class="text-light mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
-          <button class="btn btn-secondary ms-2" :disabled="currentPage === totalPages" @click="nextPage">
+          <span class="text-light mx-3"
+            >Page {{ currentPage }} of {{ totalPages }}</span
+          >
+          <button
+            class="btn btn-secondary ms-2"
+            :disabled="currentPage === totalPages"
+            @click="nextPage"
+          >
             Next Page <i class="fas fa-chevron-right"></i>
           </button>
         </div>
@@ -125,16 +214,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { inject } from 'vue';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import axios from "axios";
+import { inject } from "vue";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export default {
   props: {
     userGenres: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     userPrefMinPrice: {
       type: Number,
@@ -145,71 +234,97 @@ export default {
       // default: 100 // Set a default value for maxPrice if it's not passed
     },
   },
-  name: 'Cards',
+  name: "Cards",
   setup() {
-    const isLoggedIn = inject('isLoggedIn');
-    
-    return { isLoggedIn };  
+    const isLoggedIn = inject("isLoggedIn");
+
+    return { isLoggedIn };
   },
   data() {
     return {
       bands: [],
-      searchQuery: '',
-      genres: ['Pop', 'Country', 'Ambient', 'Jazz', 'Rock', 'Hip Hop', 'Metal', 'Electronic', 'Blues', 'Reggae'],
-      lessCommonGenres: ['Folk', 'Indie', 'Ska', 'Punk', 'Funk', 'Latin', 'Gospel', 'Grunge', 'Soul'],
+      searchQuery: "",
+      genres: [
+        "Pop",
+        "Country",
+        "Ambient",
+        "Jazz",
+        "Rock",
+        "Hip Hop",
+        "Metal",
+        "Electronic",
+        "Blues",
+        "Reggae",
+      ],
+      lessCommonGenres: [
+        "Folk",
+        "Indie",
+        "Ska",
+        "Punk",
+        "Funk",
+        "Latin",
+        "Gospel",
+        "Grunge",
+        "Soul",
+      ],
       selectedGenres: [],
       minPrice: 0,
       maxPrice: 1000,
       priceRange: {
-      min: 0,
-      max: 1000,
-      userPrefMinPrice: null, // User's preferred min price
-      userPrefMaxPrice: null, // User's preferred max price
-      priceRangeMinUpdated: false, // Flag to track if the price range has been updated
-      priceRangeMaxUpdated: false, // Flag to track if the price range has been updated
-
+        min: 0,
+        max: 1000,
+        userPrefMinPrice: null, // User's preferred min price
+        userPrefMaxPrice: null, // User's preferred max price
+        priceRangeMinUpdated: false, // Flag to track if the price range has been updated
+        priceRangeMaxUpdated: false, // Flag to track if the price range has been updated
       },
       currentPage: 1,
       itemsPerPage: 15,
       filterTrigger: 0,
       genreIcons: {
-        'Pop': 'fas fa-music',
-        'Country': 'fas fa-guitar',
-        'Ambient': 'fas fa-leaf',
-        'Jazz': 'fas fa-music',
-        'Rock': 'fas fa-guitar',
-        'Hip Hop': 'fas fa-microphone-alt',
-        'Metal': 'fas fa-skull',
-        'Electronic': 'fas fa-headphones',
-        'Blues': 'fas fa-music',
-        'Reggae': 'fas fa-tree',
-        'Folk': 'fas fa-tree',
-        'Indie': 'fas fa-star',
-        'Ska': 'fas fa-music',
-        'Punk': 'fas fa-bolt',
-        'Funk': 'fas fa-guitar',
-        'Latin': 'fas fa-music',
-        'Gospel': 'fas fa-church',
-        'Grunge': 'fas fa-smog',
-        'Soul': 'fas fa-heart',
+        Pop: "fas fa-music",
+        Country: "fas fa-guitar",
+        Ambient: "fas fa-leaf",
+        Jazz: "fas fa-music",
+        Rock: "fas fa-guitar",
+        "Hip Hop": "fas fa-microphone-alt",
+        Metal: "fas fa-skull",
+        Electronic: "fas fa-headphones",
+        Blues: "fas fa-music",
+        Reggae: "fas fa-tree",
+        Folk: "fas fa-tree",
+        Indie: "fas fa-star",
+        Ska: "fas fa-music",
+        Punk: "fas fa-bolt",
+        Funk: "fas fa-guitar",
+        Latin: "fas fa-music",
+        Gospel: "fas fa-church",
+        Grunge: "fas fa-smog",
+        Soul: "fas fa-heart",
       },
       favorites: [], // Initialize favorites
     };
   },
   computed: {
     filteredBands() {
-      return this.bands.filter(band => {
+      return this.bands.filter((band) => {
         // Search Filter
-        const matchesSearch = !this.searchQuery ||
+        const matchesSearch =
+          !this.searchQuery ||
           band.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          band.genres.some(genre => genre.toLowerCase().includes(this.searchQuery.toLowerCase()));
+          band.genres.some((genre) =>
+            genre.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
 
         // Genre Filter
-        const matchesGenre = this.selectedGenres.length === 0 ||
-          band.genres.some(genre => this.selectedGenres.includes(genre));
+        const matchesGenre =
+          this.selectedGenres.length === 0 ||
+          band.genres.some((genre) => this.selectedGenres.includes(genre));
 
         // Price Filter
-        const matchesPrice = band.price >= this.priceRange.min && band.price <= this.priceRange.max;
+        const matchesPrice =
+          band.price >= this.priceRange.min &&
+          band.price <= this.priceRange.max;
 
         return matchesSearch && matchesGenre && matchesPrice;
       });
@@ -221,39 +336,39 @@ export default {
     },
     totalPages() {
       return Math.ceil(this.filteredBands.length / this.itemsPerPage);
-    }
+    },
   },
   methods: {
     adjustMinPrice() {
-    if (this.priceRange.min >= this.priceRange.max) {
-      this.priceRange.min = this.priceRange.max - 1;
-    }
-    this.resetPage();
-    this.filterTrigger++;
-  },
-  adjustMaxPrice() {
-    if (this.priceRange.max <= this.priceRange.min) {
-      this.priceRange.max = this.priceRange.min + 1;
-    }
-    this.resetPage();
-    this.filterTrigger++;
-  },
-  adjustMinPriceInput() {
-    // Handle min price input field change
-    if (this.priceRange.min >= this.priceRange.max) {
-      this.priceRange.min = this.priceRange.max - 1;
-    }
-    this.resetPage();
-    this.filterTrigger++;
-  },
-  adjustMaxPriceInput() {
-    // Handle max price input field change
-    if (this.priceRange.max <= this.priceRange.min) {
-      this.priceRange.max = this.priceRange.min + 1;
-    }
-    this.resetPage();
-    this.filterTrigger++;
-  },
+      if (this.priceRange.min >= this.priceRange.max) {
+        this.priceRange.min = this.priceRange.max - 1;
+      }
+      this.resetPage();
+      this.filterTrigger++;
+    },
+    adjustMaxPrice() {
+      if (this.priceRange.max <= this.priceRange.min) {
+        this.priceRange.max = this.priceRange.min + 1;
+      }
+      this.resetPage();
+      this.filterTrigger++;
+    },
+    adjustMinPriceInput() {
+      // Handle min price input field change
+      if (this.priceRange.min >= this.priceRange.max) {
+        this.priceRange.min = this.priceRange.max - 1;
+      }
+      this.resetPage();
+      this.filterTrigger++;
+    },
+    adjustMaxPriceInput() {
+      // Handle max price input field change
+      if (this.priceRange.max <= this.priceRange.min) {
+        this.priceRange.max = this.priceRange.min + 1;
+      }
+      this.resetPage();
+      this.filterTrigger++;
+    },
     // updatePriceRange() {
     // // Ensure min slider is always less than max slider
     // if (this.priceRange.min >= this.priceRange.max) {
@@ -268,7 +383,7 @@ export default {
     },
     toggleGenre(genre) {
       if (this.selectedGenres.includes(genre)) {
-        this.selectedGenres = this.selectedGenres.filter(g => g !== genre);
+        this.selectedGenres = this.selectedGenres.filter((g) => g !== genre);
       } else {
         this.selectedGenres.push(genre);
       }
@@ -290,7 +405,7 @@ export default {
     clearFilters() {
       this.selectedGenres = [];
       this.priceRange = { min: this.minPrice, max: this.maxPrice }; // Reset both min and max
-      this.searchQuery = '';
+      this.searchQuery = "";
       this.resetPage();
     },
     nextPage() {
@@ -305,34 +420,36 @@ export default {
     },
     async toggleFavorite(band) {
       if (this.isFavorited(band.id)) {
-        this.favorites = this.favorites.filter(fav => fav.id !== band.id);
+        this.favorites = this.favorites.filter((fav) => fav.id !== band.id);
       } else {
         this.favorites.push(band);
       }
       await this.saveFavorites();
     },
     isFavorited(bandId) {
-      return this.favorites.some(fav => fav.id === bandId);
+      return this.favorites.some((fav) => fav.id === bandId);
     },
     async loadFavorites() {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
         const db = getFirestore();
-        const userDoc = doc(db, 'userPreferences', user.uid);
+        const userDoc = doc(db, "userPreferences", user.uid);
         try {
           const docSnap = await getDoc(userDoc);
           if (docSnap.exists()) {
             const favoriteIds = docSnap.data().favorites || [];
-            this.favorites = this.bands.filter(band => favoriteIds.includes(band.id));
+            this.favorites = this.bands.filter((band) =>
+              favoriteIds.includes(band.id)
+            );
           } else {
-            console.log('No such document!');
+            console.log("No such document!");
           }
         } catch (error) {
-          console.error('Error loading favorites from Firestore:', error);
+          console.error("Error loading favorites from Firestore:", error);
         }
       } else {
-        console.error('User is not authenticated');
+        console.error("User is not authenticated");
       }
     },
     async saveFavorites() {
@@ -340,85 +457,90 @@ export default {
       const user = auth.currentUser;
       if (user) {
         const db = getFirestore();
-        const userDoc = doc(db, 'userPreferences', user.uid);
-        const bandIds = this.favorites.map(fav => fav.id);
+        const userDoc = doc(db, "userPreferences", user.uid);
+        const bandIds = this.favorites.map((fav) => fav.id);
         try {
           await setDoc(userDoc, { favorites: bandIds }, { merge: true });
-          console.log('Favorites saved to Firestore');
+          console.log("Favorites saved to Firestore");
         } catch (error) {
-          console.error('Error saving favorites to Firestore:', error);
+          console.error("Error saving favorites to Firestore:", error);
         }
       } else {
-        console.error('User is not authenticated');
+        console.error("User is not authenticated");
       }
     },
   },
 
-async mounted() { 
-  try { 
-    const response = await axios.get('/MOCK_DATA.json'); 
-    this.bands = response.data; 
-    // Determine min and max price from data 
-    const prices = this.bands.map(band => band.price); 
-    this.minPrice = Math.min(...prices); 
-    this.maxPrice = Math.max(...prices); 
-    this.priceRange = { min: this.minPrice, max: this.maxPrice };
-        await this.loadFavorites(); // Load favorites after bands are loaded 
-  } catch (error) { 
-    console.error('Error fetching data:', error); 
-  }
+  async mounted() {
+    try {
+      const response = await axios.get("/MOCK_DATA.json");
+      this.bands = response.data;
+      // Determine min and max price from data
+      const prices = this.bands.map((band) => band.price);
+      this.minPrice = Math.min(...prices);
+      this.maxPrice = Math.max(...prices);
+      this.priceRange = { min: this.minPrice, max: this.maxPrice };
+      await this.loadFavorites(); // Load favorites after bands are loaded
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
 
-  // Append userGenres to selectedGenres when the component is mounted
-  if (this.userGenres && this.userGenres.length) {
-    this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
-  }
-  },
-
-watch: {
-  userGenres(newGenres) {
-    if (newGenres && newGenres.length) {
-      // Ensure that new genres are added only once (avoid duplicates)
-      this.selectedGenres = [...new Set([...this.selectedGenres, ...newGenres])];
+    // Append userGenres to selectedGenres when the component is mounted
+    if (this.userGenres && this.userGenres.length) {
+      this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
     }
   },
-  userPrefMinPrice(newMinPrice) {
+
+  watch: {
+    userGenres(newGenres) {
+      if (newGenres && newGenres.length) {
+        // Ensure that new genres are added only once (avoid duplicates)
+        this.selectedGenres = [
+          ...new Set([...this.selectedGenres, ...newGenres]),
+        ];
+      }
+    },
+    userPrefMinPrice(newMinPrice) {
       if (newMinPrice !== null && !this.priceRangeMinUpdated) {
-       
-        
         this.priceRange.min = newMinPrice; // Update the price range
-        this.priceRangeMinUpdated = true
+        this.priceRangeMinUpdated = true;
         console.log(this.priceRange);
-        console.log('User price min range updated to:',  newMinPrice );
+        console.log("User price min range updated to:", newMinPrice);
       }
-  },
-  userPrefMaxPrice(newMaxPrice) {
+    },
+    userPrefMaxPrice(newMaxPrice) {
       if (newMaxPrice !== null && !this.priceRangeMaxUpdated) {
-        console.log('User price min range updated to:',  newMaxPrice );
+        console.log("User price min range updated to:", newMaxPrice);
         this.priceRange.max = newMaxPrice; // Update the price range
-        this.priceRangeMaxUpdated = true
+        this.priceRangeMaxUpdated = true;
         console.log(this.priceRange);
-        console.log('User price min range updated to:',  newMaxPrice );
+        console.log("User price min range updated to:", newMaxPrice);
       }
+    },
   },
-
-
-
-},
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 #app {
   padding-left: 0;
   padding-right: 0;
-  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(14, 0, 19, 0.85),
+    rgba(17, 0, 36, 0.9)
+  );
 }
 
 .cardsSection {
-  background: linear-gradient(135deg, rgba(32, 1, 43, 0.85), rgba(10, 0, 20, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(32, 1, 43, 0.85),
+    rgba(10, 0, 20, 0.9)
+  );
   padding: 20px;
   border-radius: 0px 16px 16px 0px;
   backdrop-filter: blur(10px);
@@ -465,9 +587,9 @@ watch: {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(100, 1, 133, 0.372);
   border: none;
-  border-radius: 50%;
+  border-radius: 25px;
   padding: 10px;
   cursor: pointer;
   color: #ff4081;
@@ -551,7 +673,11 @@ watch: {
 }
 
 .filter-section {
-  background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
+  background: linear-gradient(
+    135deg,
+    rgba(31, 0, 61, 0.85),
+    rgba(101, 0, 163, 0.85)
+  );
   padding: 15px;
   border-radius: 16px 0px 0px 16px;
   backdrop-filter: blur(10px);

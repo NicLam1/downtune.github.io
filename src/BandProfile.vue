@@ -18,7 +18,9 @@
         <!-- Biography and Genres Section -->
         <section class="row biography-genres-section mb-5">
           <div class="col-md-6 biography-section">
-            <h2 class="section-title"><i class="fas fa-info-circle"></i> Biography</h2>
+            <h2 class="section-title">
+              <i class="fas fa-info-circle"></i> Biography
+            </h2>
             <p class="biography">{{ band.biography }}</p>
           </div>
           <div class="col-md-6 genres-section">
@@ -37,7 +39,9 @@
 
         <!-- Band Members Section -->
         <section class="members-section mb-5">
-          <h3 class="section-title"><i class="fas fa-users"></i> Band Members</h3>
+          <h3 class="section-title">
+            <i class="fas fa-users"></i> Band Members
+          </h3>
           <div class="row">
             <div
               class="col-md-4 member-card my-2"
@@ -45,7 +49,7 @@
               :key="member"
             >
               <div class="card text-center">
-                <div class="card-body">
+                <div class="card-body text-light">
                   <i class="fas fa-user fa-3x mb-3"></i>
                   <h5 class="card-title">{{ member }}</h5>
                 </div>
@@ -56,7 +60,9 @@
 
         <!-- Events Section -->
         <section class="events-section mb-5">
-          <h3 class="section-title"><i class="fas fa-calendar-alt"></i> Events</h3>
+          <h3 class="section-title">
+            <i class="fas fa-calendar-alt"></i> Events
+          </h3>
           <div class="row">
             <!-- Upcoming Events -->
             <div class="col-md-6 mb-4">
@@ -67,9 +73,12 @@
                   v-for="event in band.upcoming_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> -
+                  {{ event.name }} @ {{ event.location }}
                 </li>
-                <li v-if="!band.upcoming_events.length" class="list-group-item">No upcoming events.</li>
+                <li v-if="!band.upcoming_events.length" class="list-group-item">
+                  No upcoming events.
+                </li>
               </ul>
             </div>
             <!-- Past Events -->
@@ -81,9 +90,12 @@
                   v-for="event in band.past_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> -
+                  {{ event.name }} @ {{ event.location }}
                 </li>
-                <li v-if="!band.past_events.length" class="list-group-item">No past events.</li>
+                <li v-if="!band.past_events.length" class="list-group-item">
+                  No past events.
+                </li>
               </ul>
             </div>
           </div>
@@ -91,7 +103,9 @@
 
         <!-- Spotify Playlist Section -->
         <section class="spotify-playlist-section mb-5">
-          <h3 class="section-title"><i class="fab fa-spotify"></i> Spotify Playlist</h3>
+          <h3 class="section-title">
+            <i class="fab fa-spotify"></i> Spotify Playlist
+          </h3>
           <div class="spotify-embed">
             <iframe
               :src="spotifyPlaylistUrl"
@@ -102,17 +116,27 @@
               allowfullscreen
             ></iframe>
           </div>
-          <button v-if="!spotifyLoggedIn" @click="loginToSpotify" class="btn btn-success mt-3">
+          <button
+            v-if="!spotifyLoggedIn"
+            @click="loginToSpotify"
+            class="btn btn-success mt-3"
+          >
             <i class="fab fa-spotify"></i> Login to Spotify
           </button>
-          <button v-if="spotifyLoggedIn" @click="addToFavorites" class="btn btn-primary mt-3">
+          <button
+            v-if="spotifyLoggedIn"
+            @click="addToFavorites"
+            class="btn btn-primary mt-3"
+          >
             <i class="fas fa-heart"></i> Add Playlist to Favorites
           </button>
         </section>
 
         <!-- Artist Recommendations Section -->
         <section class="artist-recommendations-section mb-5">
-          <h3 class="section-title"><i class="fas fa-guitar"></i> Recommended Artists</h3>
+          <h3 class="section-title">
+            <i class="fas fa-guitar"></i> Recommended Artists
+          </h3>
           <div class="row">
             <div
               class="col-md-4 recommended-artist-card my-2"
@@ -121,15 +145,25 @@
             >
               <div class="card text-center">
                 <div class="card-body">
-                  <img :src="artist.image" :alt="artist.name" class="artist-image mb-3" />
+                  <img
+                    :src="artist.image"
+                    :alt="artist.name"
+                    class="artist-image mb-3"
+                  />
                   <h5 class="card-title">{{ artist.name }}</h5>
-                  <button @click="playArtistTopTrack(artist.id)" class="btn btn-outline-primary mt-2">
+                  <button
+                    @click="playArtistTopTrack(artist.id)"
+                    class="btn btn-outline-primary mt-2"
+                  >
                     <i class="fas fa-play"></i> Play Top Track
                   </button>
                 </div>
               </div>
             </div>
-            <div v-if="recommendedArtists.length === 0" class="col-12 text-center text-muted">
+            <div
+              v-if="recommendedArtists.length === 0"
+              class="col-12 text-center text-muted"
+            >
               <p>No recommended artists available.</p>
             </div>
           </div>
@@ -140,7 +174,11 @@
           <div class="container">
             <h2 class="cta-title">Stay updated on {{ band.name }}</h2>
 
-            <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px;">
+            <form
+              @submit.prevent="submitForm"
+              class="mx-auto"
+              style="max-width: 400px"
+            >
               <div class="mb-3">
                 <input
                   v-model="email"
@@ -164,9 +202,11 @@
         <div class="social-icons mb-3">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
           <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Instagram"
+            ><i class="fab fa-instagram"></i
+          ></a>
         </div>
-        <p>&copy; 2024 Club Bandwagon | Join the rhythm of our vibes</p>
+        <p>Contact {{ band.name }} here!</p>
       </footer>
     </div>
 
@@ -178,77 +218,79 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default {
-  name: 'BandProfile',
+  name: "BandProfile",
   setup() {
     const route = useRoute();
     const router = useRouter();
     const band = ref(null);
-    const email = ref('');
+    const email = ref("");
     const loading = ref(true);
     const error = ref(false);
     const spotifyLoggedIn = ref(false);
     const recommendedArtists = ref([]);
-    const spotifyPlaylistUrl = ref('');
+    const spotifyPlaylistUrl = ref("");
 
     // Predefined list of Spotify Playlist IDs
     const playlistIds = [
-      '37i9dQZF1DXcBWIGoYBM5M', // Today's Top Hits - Pop
-      '37i9dQZF1DX0XUsuxWHRQd', // RapCaviar - Hip-Hop
-      '37i9dQZF1DX1lVhptIYRda', // Rock Classics - Rock
-      '37i9dQZF1DX4JAvHpjipBk', // Mood Booster - Pop
-      '37i9dQZF1DWXRqgorJj26U', // Feel Good Friday - Pop
-      '37i9dQZF1DX2yvmlOdMYzV', // Pop Rising - Pop
-      '37i9dQZF1DX1gIWILh4VV6', // Indie Pop - Indie
-      '37i9dQZF1DX5Ejj0EkURtP', // Chill Hits - Chill
-      '37i9dQZF1DWYBF1d9QID5V', // Hot Hits USA - Pop
-      '37i9dQZF1DXaXB8fQg7xif', // Alternative Hits - Alternative
+      "37i9dQZF1DXcBWIGoYBM5M", // Today's Top Hits - Pop
+      "37i9dQZF1DX0XUsuxWHRQd", // RapCaviar - Hip-Hop
+      "37i9dQZF1DX1lVhptIYRda", // Rock Classics - Rock
+      "37i9dQZF1DX4JAvHpjipBk", // Mood Booster - Pop
+      "37i9dQZF1DWXRqgorJj26U", // Feel Good Friday - Pop
+      "37i9dQZF1DX2yvmlOdMYzV", // Pop Rising - Pop
+      "37i9dQZF1DX1gIWILh4VV6", // Indie Pop - Indie
+      "37i9dQZF1DX5Ejj0EkURtP", // Chill Hits - Chill
+      "37i9dQZF1DWYBF1d9QID5V", // Hot Hits USA - Pop
+      "37i9dQZF1DXaXB8fQg7xif", // Alternative Hits - Alternative
     ];
 
     // Mapping from Playlist ID to Genre
     const playlistGenreMap = {
-      '37i9dQZF1DXcBWIGoYBM5M': 'pop',
-      '37i9dQZF1DX0XUsuxWHRQd': 'hip-hop',
-      '37i9dQZF1DX1lVhptIYRda': 'rock',
-      '37i9dQZF1DX4JAvHpjipBk': 'pop',
-      '37i9dQZF1DWXRqgorJj26U': 'pop',
-      '37i9dQZF1DX2yvmlOdMYzV': 'pop',
-      '37i9dQZF1DX1gIWILh4VV6': 'indie',
-      '37i9dQZF1DX5Ejj0EkURtP': 'chill',
-      '37i9dQZF1DWYBF1d9QID5V': 'pop',
-      '37i9dQZF1DXaXB8fQg7xif': 'alternative',
+      "37i9dQZF1DXcBWIGoYBM5M": "pop",
+      "37i9dQZF1DX0XUsuxWHRQd": "hip-hop",
+      "37i9dQZF1DX1lVhptIYRda": "rock",
+      "37i9dQZF1DX4JAvHpjipBk": "pop",
+      "37i9dQZF1DWXRqgorJj26U": "pop",
+      "37i9dQZF1DX2yvmlOdMYzV": "pop",
+      "37i9dQZF1DX1gIWILh4VV6": "indie",
+      "37i9dQZF1DX5Ejj0EkURtP": "chill",
+      "37i9dQZF1DWYBF1d9QID5V": "pop",
+      "37i9dQZF1DXaXB8fQg7xif": "alternative",
     };
 
     const submitForm = () => {
-      console.log('Submitted email:', email.value);
-      alert('Thanks for subscribing!');
-      email.value = '';
+      console.log("Submitted email:", email.value);
+      alert("Thanks for subscribing!");
+      email.value = "";
     };
 
     const loginToSpotify = () => {
       // Redirect user to Spotify login page (OAuth flow)
       const clientId = import.meta.env.VITE_CLIENT_ID;
       const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
-      const scopes = encodeURIComponent('user-library-modify');
+      const scopes = encodeURIComponent("user-library-modify");
       window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=${scopes}`;
     };
 
     const addToFavorites = async () => {
       try {
-        const accessToken = localStorage.getItem('spotifyAccessToken');
+        const accessToken = localStorage.getItem("spotifyAccessToken");
         if (!accessToken) {
-          alert('Please login to Spotify first.');
+          alert("Please login to Spotify first.");
           return;
         }
 
-        const playlistIdMatch = spotifyPlaylistUrl.value.match(/playlist\/([a-zA-Z0-9]+)/);
+        const playlistIdMatch = spotifyPlaylistUrl.value.match(
+          /playlist\/([a-zA-Z0-9]+)/
+        );
         if (!playlistIdMatch || !playlistIdMatch[1]) {
-          console.error('Invalid Spotify playlist URL.');
-          alert('Invalid playlist URL.');
+          console.error("Invalid Spotify playlist URL.");
+          alert("Invalid playlist URL.");
           return;
         }
         const playlistId = playlistIdMatch[1];
@@ -262,34 +304,37 @@ export default {
           }
         );
 
-        alert('Playlist added to your favorites!');
+        alert("Playlist added to your favorites!");
       } catch (err) {
-        console.error('Error adding playlist to favorites:', err);
-        alert('Failed to add playlist to favorites. Please try again.');
+        console.error("Error adding playlist to favorites:", err);
+        alert("Failed to add playlist to favorites. Please try again.");
       }
     };
 
     const playArtistTopTrack = async (artistId) => {
       try {
-        const accessToken = localStorage.getItem('spotifyAccessToken');
+        const accessToken = localStorage.getItem("spotifyAccessToken");
         if (!accessToken) {
-          alert('Please login to Spotify first.');
+          alert("Please login to Spotify first.");
           return;
         }
 
-        const response = await axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            market: 'US',
-          },
-        });
+        const response = await axios.get(
+          `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              market: "US",
+            },
+          }
+        );
 
         const trackUri = response.data.tracks[0]?.uri;
         if (trackUri) {
           await axios.put(
-            'https://api.spotify.com/v1/me/player/play',
+            "https://api.spotify.com/v1/me/player/play",
             {
               uris: [trackUri],
             },
@@ -299,32 +344,32 @@ export default {
               },
             }
           );
-          alert('Playing top track!');
+          alert("Playing top track!");
         } else {
-          alert('No top track found for this artist.');
+          alert("No top track found for this artist.");
         }
       } catch (err) {
-        console.error('Error playing artist top track:', err);
-        alert('Failed to play the top track. Please try again.');
+        console.error("Error playing artist top track:", err);
+        alert("Failed to play the top track. Please try again.");
       }
     };
 
     const fetchRecommendedArtistsByGenre = async (genre) => {
       try {
-        const accessToken = localStorage.getItem('spotifyAccessToken');
+        const accessToken = localStorage.getItem("spotifyAccessToken");
         if (!accessToken) {
-          console.warn('Spotify access token not found.');
+          console.warn("Spotify access token not found.");
           return;
         }
 
         // Search for artists by genre
-        const response = await axios.get('https://api.spotify.com/v1/search', {
+        const response = await axios.get("https://api.spotify.com/v1/search", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
           params: {
             q: `genre:"${genre}"`,
-            type: 'artist',
+            type: "artist",
             limit: 12, // Fetch 12 artists for a more diverse selection
           },
         });
@@ -335,19 +380,21 @@ export default {
         const shuffledArtists = artists.sort(() => 0.5 - Math.random());
 
         // Select the first 9 artists for display
-        recommendedArtists.value = shuffledArtists.slice(0, 9).map(artist => ({
-          id: artist.id,
-          name: artist.name,
-          image: artist.images[0]?.url || 'https://via.placeholder.com/300', // Fallback image
-        }));
+        recommendedArtists.value = shuffledArtists
+          .slice(0, 9)
+          .map((artist) => ({
+            id: artist.id,
+            name: artist.name,
+            image: artist.images[0]?.url || "https://via.placeholder.com/300", // Fallback image
+          }));
       } catch (err) {
-        console.error('Error fetching recommended artists:', err);
+        console.error("Error fetching recommended artists:", err);
       }
     };
 
     const fetchBandData = async (bandId) => {
       try {
-        const response = await axios.get('/MOCK_DATA.json');
+        const response = await axios.get("/MOCK_DATA.json");
         const allBands = response.data;
 
         // Find the band with the matching ID
@@ -355,10 +402,18 @@ export default {
 
         if (foundBand) {
           // Ensure all required properties are arrays
-          foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
-          foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
-          foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events) ? foundBand.upcoming_events : [];
-          foundBand.past_events = Array.isArray(foundBand.past_events) ? foundBand.past_events : [];
+          foundBand.genres = Array.isArray(foundBand.genres)
+            ? foundBand.genres
+            : [];
+          foundBand.members = Array.isArray(foundBand.members)
+            ? foundBand.members
+            : [];
+          foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events)
+            ? foundBand.upcoming_events
+            : [];
+          foundBand.past_events = Array.isArray(foundBand.past_events)
+            ? foundBand.past_events
+            : [];
 
           band.value = foundBand;
 
@@ -368,16 +423,16 @@ export default {
           spotifyPlaylistUrl.value = `https://open.spotify.com/embed/playlist/${selectedPlaylistId}`;
 
           // Get genre from the mapping
-          const genre = playlistGenreMap[selectedPlaylistId] || 'pop'; // Default to 'pop' if not mapped
+          const genre = playlistGenreMap[selectedPlaylistId] || "pop"; // Default to 'pop' if not mapped
 
           // Fetch recommended artists based on genre
           await fetchRecommendedArtistsByGenre(genre);
         } else {
-          console.error('Band not found');
+          console.error("Band not found");
           error.value = true;
         }
       } catch (err) {
-        console.error('Error fetching band data:', err);
+        console.error("Error fetching band data:", err);
         error.value = true;
       } finally {
         loading.value = false;
@@ -385,8 +440,8 @@ export default {
     };
 
     const formatDate = (dateStr) => {
-      if (!dateStr) return '';
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      if (!dateStr) return "";
+      const options = { year: "numeric", month: "long", day: "numeric" };
       const date = new Date(dateStr);
       if (isNaN(date)) return dateStr;
       return date.toLocaleDateString(undefined, options);
@@ -396,18 +451,18 @@ export default {
       const hash = window.location.hash;
       if (hash) {
         const params = new URLSearchParams(hash.substring(1));
-        const accessToken = params.get('access_token');
+        const accessToken = params.get("access_token");
         if (accessToken) {
-          localStorage.setItem('spotifyAccessToken', accessToken);
+          localStorage.setItem("spotifyAccessToken", accessToken);
           spotifyLoggedIn.value = true;
           // Optionally, you can remove the token from the URL
-          window.history.replaceState(null, null, ' ');
+          window.history.replaceState(null, null, " ");
         }
       }
 
       const bandId = parseInt(route.params.id, 10);
       if (isNaN(bandId)) {
-        console.error('Invalid band ID');
+        console.error("Invalid band ID");
         error.value = true;
         loading.value = false;
       } else {
@@ -434,14 +489,18 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 .band-profile-container {
-  background: linear-gradient(135deg, rgba(14, 0, 19, 0.85), rgba(17, 0, 36, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(14, 0, 19, 0.85),
+    rgba(17, 0, 36, 0.9)
+  );
   min-height: 100vh;
   color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   position: relative;
 }
 
@@ -492,7 +551,7 @@ export default {
 
 .band-name {
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 10vh;
   text-align: center;
   color: #ffffff;
@@ -521,7 +580,7 @@ export default {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 50px;
   height: 3px;
@@ -571,7 +630,11 @@ export default {
 }
 
 .call-to-action {
-  background: linear-gradient(135deg, rgba(31, 0, 61, 0.85), rgba(101, 0, 163, 0.85));
+  background: linear-gradient(
+    135deg,
+    rgba(31, 0, 61, 0.85),
+    rgba(101, 0, 163, 0.85)
+  );
   padding: 4rem 0;
   border-radius: 16px;
   animation: fadeIn 1s ease forwards;
@@ -581,7 +644,7 @@ export default {
   font-size: 2.5rem;
   color: #ff66ff;
   margin-bottom: 1rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   animation: fadeInDown 0.5s ease forwards;
 }
 
@@ -656,33 +719,69 @@ footer p {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes bounceIn {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-30px); }
-  60% { transform: translateY(-15px); }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
 }
 
 @keyframes growWidth {
-  from { width: 0; }
-  to { width: 50px; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 50px;
+  }
 }
 
 @keyframes popIn {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 </style>
