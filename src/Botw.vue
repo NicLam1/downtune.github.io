@@ -79,11 +79,11 @@ export default {
   data() {
     return {
       bands: [
-        { name: "Band One", image: "/stock band/image1.jpg" },
-        { name: "Band Two", image: "/stock band/image2.jpg" },
-        { name: "Band Three", image: "/stock band/image3.jpg" },
-        { name: "Band Four", image: "/stock band/image4.jpg" },
-        { name: "Band Five", image: "/stock band/image5.jpg" },
+        { name: "Band One", image: "/stock band/image (1).webp" },
+        { name: "Band Two", image: "/stock band/image (2).webp" },
+        { name: "Band Three", image: "/stock band/image (3).webp" },
+        { name: "Band Four", image: "/stock band/image (4).webp" },
+        { name: "Band Five", image: "/stock band/image (5).webp" },
       ],
     };
   },
@@ -141,9 +141,11 @@ export default {
 
 h1 {
   background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjltcjM2bHk1NHpncXJuamd5bm81dGl2aTA4ODBta2djdnN5MWcxeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/84Ppz0cXydbICAgZXC/giphy.gif);
+
   background-repeat: none;
   background-size: contain;
   color: transparent;
+  /* color: white; */
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
@@ -188,7 +190,7 @@ h1 {
 }
 
 .botw .item {
-  transition: 0.5s;
+  transition: 0.4s;
   filter: brightness(0.8);
   padding: 1em;
   overflow: hidden;
