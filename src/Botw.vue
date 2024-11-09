@@ -3,7 +3,7 @@
     <div class="container-fluid botwSection">
       <!-- Grid view for large screens -->
       <div
-        class="pt-5 botw row px-5 justify-content-center d-none d-lg-flex mb-5"
+        class="pt-3 botw row px-5 justify-content-center d-none d-lg-flex mb-5"
       >
         <div class="title">
           <h1
@@ -65,6 +65,11 @@
         </button>
       </div>
     </div>
+
+    <!-- Blinking Arrow -->
+    <div class="scroll-arrow mb-4" @click="scrollToNext">
+      <span class="arrow"></span>
+    </div>
   </div>
 </template>
 
@@ -81,6 +86,14 @@ export default {
         { name: "Band Five", image: "/stock band/image5.jpg" },
       ],
     };
+  },
+  methods: {
+    scrollToNext() {
+      const nextElement = this.$el.nextElementSibling;
+      if (nextElement) {
+        nextElement.scrollIntoView({ behavior: "smooth" });
+      }
+    },
   },
 };
 </script>
@@ -99,8 +112,10 @@ export default {
   background-image: url("/stock band/botw.jpg");
   background-position: center center;
   background-size: cover;
+  z-index: -99;
 }
 .botwSection {
+  margin-top: 0;
   background: rgba(57, 0, 59, 0.606);
   padding: 40px 0;
   position: relative;
@@ -108,6 +123,7 @@ export default {
   object-fit: cover;
   background-repeat: none;
   backdrop-filter: blur(20px);
+  height: 89vh;
 }
 
 .title {
@@ -134,19 +150,38 @@ h1 {
   font-size: clamp(2em, 8vw, 10em); /* Responsive font size */
   margin: 10px 0;
   font-family: "Trends";
-
-  /* text-shadow: 2px 2px #330101; */
 }
 
-@keyframes neonGlow {
-  0% {
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-  }
+/* Blinking Arrow */
+.scroll-arrow {
+  z-index: 0;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: blink 1.5s infinite;
+}
+
+.arrow {
+  display: inline-block;
+  border: solid #fff;
+  border-width: 0 5px 5px 0;
+  padding: 10px;
+  transform: rotate(45deg);
+}
+
+@keyframes blink {
+  0%,
   100% {
-    text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }
 
+/* Other existing styles */
 .botw {
   transform-style: preserve-3d;
   transform: perspective(1000px);
