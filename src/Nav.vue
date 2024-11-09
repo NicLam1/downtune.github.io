@@ -1,11 +1,21 @@
 <template>
-  <nav class="navbar navbar-expand-lg custom-navbar" :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }">
+  <nav
+    class="navbar navbar-expand-lg custom-navbar"
+    :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }"
+  >
     <div class="container-fluid">
       <div class="navbar-brand">
         <router-link to="/" class="nav-title">Downtune</router-link>
       </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Updated navbar-collapse -->
@@ -21,25 +31,42 @@
         </ul>
         <!-- Profile dropdown on the right -->
         <div v-if="displayName" class="logged-in-info mx-4 text-light fs-bold">
-            Welcome, {{displayName}}!
-          </div>
+          Welcome, {{ displayName }}!
+        </div>
         <div class="user-section">
-          
           <div v-if="displayName" class="logged-in-info">
             <div class="dropdown">
-              <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
+              <img
+                src="../public/band/image (1).jpg"
+                alt="Profile"
+                class="profile-icon"
+                @click="toggleDropdown"
+              />
               <div v-if="dropdownVisible" class="dropdown-menu show">
-                <router-link to="/account" class="dropdown-item">My Account</router-link>
-                <router-link to="/favorites" class="dropdown-item">Favourites</router-link>
-                <button class="dropdown-item" @click="handleAuth">Logout</button>
+                <router-link to="/account" class="dropdown-item"
+                  >My Account</router-link
+                >
+                <router-link to="/favorites" class="dropdown-item"
+                  >Favourites</router-link
+                >
+                <button class="dropdown-item" @click="handleAuth">
+                  Logout
+                </button>
               </div>
             </div>
           </div>
           <div v-else>
             <div class="dropdown">
-              <img src="../public/band/image (1).jpg" alt="Profile" class="profile-icon" @click="toggleDropdown">
+              <img
+                src="../public/band/image (1).jpg"
+                alt="Profile"
+                class="profile-icon"
+                @click="toggleDropdown"
+              />
               <div v-if="dropdownVisible" class="dropdown-menu show">
-                <router-link to="/choose" class="dropdown-item">Login / Sign Up</router-link>
+                <router-link to="/choose" class="dropdown-item"
+                  >Login / Sign Up</router-link
+                >
               </div>
             </div>
           </div>
@@ -50,19 +77,19 @@
 </template>
 
 <script>
-import { computed, inject, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { auth } from '../firebaseConfig'; // Adjust the path as necessary
-import { signOut } from 'firebase/auth';
+import { computed, inject, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { auth } from "../firebaseConfig"; // Adjust the path as necessary
+import { signOut } from "firebase/auth";
 
 export default {
   name: "Nav",
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const isLoggedIn = inject('isLoggedIn');
-    const setLoginState = inject('setLoginState');
-    const displayName = inject('displayName');
+    const isLoggedIn = inject("isLoggedIn");
+    const setLoginState = inject("setLoginState");
+    const displayName = inject("displayName");
     const dropdownVisible = ref(false);
 
     const toggleDropdown = () => {
@@ -73,10 +100,10 @@ export default {
       if (isLoggedIn.value) {
         await signOut(auth);
         setLoginState(false);
-        router.push('/'); // Redirect to home page
-        location.reload
+        router.push("/"); // Redirect to home page
+        location.reload;
       } else {
-        router.push('/choose'); // Redirect to login page
+        router.push("/choose"); // Redirect to login page
       }
     };
 
@@ -85,15 +112,14 @@ export default {
       displayName,
       handleAuth,
       toggleDropdown,
-      dropdownVisible
+      dropdownVisible,
     };
   },
   computed: {
-  isCalendarPage() {
-    return this.$route.name === 'calendar'; // Adjust based on your routing logic
-  }
-}
-
+    isCalendarPage() {
+      return this.$route.name === "calendar"; // Adjust based on your routing logic
+    },
+  },
 };
 </script>
 

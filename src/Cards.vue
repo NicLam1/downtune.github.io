@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid px-sm-0 px-lg-4 mt-4">
+  <div id="app" class="container-fluid px-sm-3 px-lg-4 mt-4">
     <!-- Bootstrap Row -->
     <div
       class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3"
@@ -27,7 +27,10 @@
               v-for="genre in genres"
               :key="genre"
               class="genre-pill"
-              :class="{ selected: selectedGenres.includes(genre) }"
+              :class="{
+                selected: selectedGenres.includes(genre),
+                glow: newlyAddedGenres.includes(genre),
+              }"
               @click="toggleGenre(genre)"
             >
               <i :class="genreIcons[genre]" class="genre-icon"></i> {{ genre }}
@@ -130,7 +133,7 @@
                 :to="{ name: 'BandProfile', params: { id: band.id } }"
                 class="card-link"
               >
-                <div class="card h-100">
+                <div class="card h-100 d-flex flex-column">
                   <div class="card-image-container">
                     <img
                       :src="band.thumbnail"
@@ -142,7 +145,9 @@
                       <i class="fas fa-info-circle"></i>
                     </div>
                   </div>
-                  <div class="card-body d-flex flex-column text-left">
+                  <div
+                    class="card-body d-flex flex-column text-left flex-grow-1"
+                  >
                     <h4 class="card-title fw-bold">{{ band.name }}</h4>
                     <p class="card-text">
                       <span
@@ -153,7 +158,9 @@
                         {{ genre }}
                       </span>
                     </p>
-                    <p class="card-text">
+                    <!-- Spacer to push the price to the bottom -->
+                    <div class="flex-grow-1"></div>
+                    <p class="card-text price-text">
                       <strong>Price:</strong> ${{ band.price }}/hr
                     </p>
                   </div>
@@ -177,6 +184,10 @@
                     "
                   ></i>
                 </button>
+              </div>
+              <!-- Arrow Icon -->
+              <div class="card-arrow mx-2">
+                <i class="fas fa-arrow-right"></i>
               </div>
             </div>
           </div>
@@ -279,7 +290,7 @@ export default {
         priceRangeMaxUpdated: false, // Flag to track if the price range has been updated
       },
       currentPage: 1,
-      itemsPerPage: 15,
+      itemsPerPage: 12,
       filterTrigger: 0,
       genreIcons: {
         Pop: "fas fa-music",
@@ -303,6 +314,7 @@ export default {
         Soul: "fas fa-heart",
       },
       favorites: [], // Initialize favorites
+      newlyAddedGenres: [], // For the glow effect
     };
   },
   computed: {
@@ -369,14 +381,6 @@ export default {
       this.resetPage();
       this.filterTrigger++;
     },
-    // updatePriceRange() {
-    // // Ensure min slider is always less than max slider
-    // if (this.priceRange.min >= this.priceRange.max) {
-    //   this.priceRange.min = this.priceRange.max - 1;
-    // }
-    //   this.resetPage();
-    //   this.filterTrigger++;
-    // },
     resetPage() {
       this.currentPage = 1;
       this.filterTrigger++;
@@ -397,6 +401,13 @@ export default {
       }
       if (genre && !this.selectedGenres.includes(genre)) {
         this.selectedGenres.push(genre); // Mark as selected
+        this.newlyAddedGenres.push(genre); // Add to newlyAddedGenres for glow effect
+        // Remove the glow class after a delay
+        setTimeout(() => {
+          this.newlyAddedGenres = this.newlyAddedGenres.filter(
+            (g) => g !== genre
+          );
+        }, 1000); // Duration of the glow effect in milliseconds
       }
       event.target.selectedIndex = 0; // Reset dropdown selection
       this.resetPage();
@@ -525,14 +536,19 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
-#app {
-  padding-left: 0;
-  padding-right: 0;
+body {
+  font-family: "Poppins", sans-serif;
   background: linear-gradient(
     135deg,
     rgba(14, 0, 19, 0.85),
     rgba(17, 0, 36, 0.9)
   );
+}
+
+#app {
+  padding-left: 0;
+  padding-right: 0;
+  background: none;
 }
 
 .cardsSection {
@@ -547,12 +563,19 @@ export default {
   box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   flex-grow: 1;
-  min-height: 130vh;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+@media (width<992px) {
+  .cardsSection {
+    border-radius: 16px;
+  }
 }
 
 .search-bar {
   padding: 15px;
-  border-radius: 50px;
+  border-radius: 4px;
   border: none;
   background: rgba(255, 255, 255, 0.15);
   color: #ffffff;
@@ -563,13 +586,11 @@ export default {
 }
 
 .card-container {
-  flex: 1 1 calc(20% - 1rem);
-  max-width: calc(20% - 1rem);
+  flex: 1 1 calc(25% - 1rem);
+  max-width: calc(25% - 1rem);
   padding: 10px;
   display: flex;
   align-items: stretch;
-  animation: fadeInUp 0.5s ease-in-out forwards;
-  animation-delay: var(--animation-delay);
   cursor: pointer;
 }
 
@@ -644,7 +665,7 @@ export default {
 .card {
   background: rgba(58, 0, 77, 0.7);
   box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
-  border-radius: 16px;
+  border-radius: 4px;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -665,11 +686,16 @@ export default {
 }
 
 .card-title {
-  color: #ff00ff;
+  color: #ff66ff;
 }
 
 .card-text {
   color: #e6e1e5;
+}
+
+.price-text {
+  font-size: 1.1em;
+  color: #ffffff;
 }
 
 .filter-section {
@@ -689,6 +715,25 @@ export default {
   flex-direction: column;
 }
 
+@media (width<992px) {
+  .filter-section {
+    background: linear-gradient(
+      135deg,
+      rgba(31, 0, 61, 0.85),
+      rgba(101, 0, 163, 0.85)
+    );
+    padding: 15px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(102, 0, 204, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .genre-pills-container {
   display: flex;
   flex-wrap: wrap;
@@ -697,7 +742,7 @@ export default {
 }
 
 .genre-pill {
-  padding: 10px 20px;
+  padding: 7px 20px;
   background: linear-gradient(135deg, #6f00e8, #c603ff);
   border-radius: 30px;
   cursor: pointer;
@@ -715,6 +760,19 @@ export default {
   color: #fff;
 }
 
+.genre-pill.glow {
+  animation: glow-animation 1s forwards;
+}
+
+@keyframes glow-animation {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
 .genre-icon {
   margin-right: 8px;
 }
@@ -728,7 +786,7 @@ export default {
 
 .styled-select {
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 4px;
   border: none;
   background: rgb(54, 0, 75);
   color: #ffffff;
@@ -736,6 +794,15 @@ export default {
   box-shadow: 0 0 10px 5px rgba(185, 72, 255, 0.521);
   font-weight: bold;
   width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20fill%3D%27%23ffffff%27%20height%3D%2710%27%20viewBox%3D%270%200%2024%2024%27%20width%3D%2710%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M7%2010l5%205%205-5H7z%27/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 10px;
+}
+
+.styled-select:hover {
+  cursor: pointer;
 }
 
 .styled-range {
@@ -792,6 +859,20 @@ export default {
   opacity: 1;
 }
 
+.card-arrow {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.card:hover .card-arrow {
+  transform: translateY(-10px) scale(1.2);
+}
+
 .pagination-controls {
   margin-top: 20px;
   align-items: center;
@@ -825,6 +906,7 @@ export default {
   border: none;
   color: #fff;
   transition: background-color 0.3s;
+  border-radius: 4px !important;
 }
 
 .btn-danger:hover {
@@ -842,36 +924,5 @@ export default {
 
 .custom-gap {
   margin-left: 20px;
-}
-
-@media (max-width: 992px) {
-  .custom-gap {
-    margin-left: 0;
-  }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 </style>

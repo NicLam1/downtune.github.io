@@ -7,7 +7,7 @@
       >
         <div class="title">
           <h1
-            class="text-center botw-heading animate__animated animate__fadeInDown"
+            class="text-center botw-heading animate__animated animate__zoomIn"
           >
             Bands of the Week
           </h1>
@@ -86,8 +86,14 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Cairo");
+
+@font-face {
+  font-family: Trends;
+  src: url(/fonts/Trends.ttf);
+}
 
 .backgroundPic {
   background-image: url("/stock band/botw.jpg");
@@ -95,21 +101,17 @@ export default {
   background-size: cover;
 }
 .botwSection {
-  background: linear-gradient(
-    135deg,
-    rgba(14, 0, 19, 0.4),
-    rgba(17, 0, 36, 0.4)
-  );
+  background: rgba(57, 0, 59, 0.606);
   padding: 40px 0;
   position: relative;
   overflow: hidden;
   object-fit: cover;
   background-repeat: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
 }
 
 .title {
-  font-family: "Fugaz One";
+  font-family: "Trends";
   font-weight: bolder;
   text-align: center;
   color: #fff;
@@ -122,16 +124,17 @@ export default {
 }
 
 h1 {
-  background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM25pb2ZtMmxseXZoY3Q5NzU1MmF4emE4bGgxMjRhbnh0cjhpemQ0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Fpe0mIR5Y7MyCcxse/giphy.gif);
+  background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjltcjM2bHk1NHpncXJuamd5bm81dGl2aTA4ODBta2djdnN5MWcxeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/84Ppz0cXydbICAgZXC/giphy.gif);
   background-repeat: none;
-  background-size: cover;
+  background-size: contain;
   color: transparent;
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
   font-size: clamp(2em, 8vw, 10em); /* Responsive font size */
   margin: 10px 0;
-  font-family: "Fugaz One";
+  font-family: "Trends";
+
   /* text-shadow: 2px 2px #330101; */
 }
 
@@ -196,6 +199,7 @@ h1 {
   overflow: hidden;
   border-radius: 16px;
   height: 400px;
+  box-shadow: #ff00ff;
 }
 
 .image-container img {
@@ -205,6 +209,7 @@ h1 {
 }
 
 .caption {
+  font-family: "Poppins";
   position: absolute;
   bottom: 0;
   left: 0;
