@@ -1,5 +1,6 @@
 
 <template>
+  <div>
   <div class="nav-sticky"><router-link to="/calendar2">Click this if you are experiencing issues</router-link></div>
       <div class="container">
         <div class="overlay">
@@ -62,6 +63,7 @@
 
 </div> 
  
+</div>
 </div>
 </div>
 </div>
