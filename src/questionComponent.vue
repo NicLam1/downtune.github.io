@@ -48,6 +48,7 @@ export default {
   height: 75vh;
   border-radius: 15px;
   display: flex;
+  color: white;
 
 }
 
@@ -74,16 +75,16 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.2);
   /* Translucent border */
   border-radius: 4px;
-  color: rgba(0, 0, 0, 0.7);
+  color: white;
   /* Semi-translucent text */
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .option-radio:checked+.option-button {
-  background-color: #007bff;
+  background-color: #d900ff;
   color: #fff;
-  border-color: #007bff;
+  border-color: #d900ff;
   font-weight: bold;
 }
 

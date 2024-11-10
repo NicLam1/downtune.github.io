@@ -188,6 +188,7 @@ export default {
   /* Ensure the wrapper fills the entire viewport height */
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .carousel-wrapper {
