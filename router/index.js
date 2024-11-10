@@ -5,8 +5,8 @@ import UserLogin from '../src/userLogin.vue';
 import UserRegister from '../src/userRegister.vue';
 import BandProfile from '../src/BandProfile.vue';
 import chooseUserType from '../src/chooseUserType.vue';
-import Calendar from  '../src/Calendar.vue';
-import CalendarGuitar from  '../src/CalendarGuitar.vue';
+import Calendar from '../src/Calendar.vue';
+import CalendarGuitar from '../src/CalendarGuitar.vue';
 import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
 import Favorite from '../src/Favorite.vue';
@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/login/user',
     name: 'UserLogin',
-    component: UserLogin 
+    component: UserLogin
   },
   {
     path: '/register/user',
@@ -45,29 +45,29 @@ const routes = [
     component: newBandLogin
   },
   {
-    path: '/band/:id', 
+    path: '/band/:id',
     name: 'BandProfile',
     component: BandProfile,
     props: true
   },
   {
-    path: '/register/band', 
+    path: '/register/band',
     name: 'bandRegister',
     component: newBandRegis
   },
   {
-    path: '/calendar', 
+    path: '/calendar',
     name: 'Calendar',
     component: Calendar
   }
   ,
   {
-    path: '/calendar2', 
+    path: '/calendar2',
     name: 'CalendarGuitar',
     component: CalendarGuitar
   },
   {
-    path: '/account', 
+    path: '/account',
     name: 'account',
     component: UserProfile
   }
@@ -75,7 +75,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // Always scroll to the top
+    return { top: 0 };
+  }
 });
 
 export default router;

@@ -1,74 +1,33 @@
 <template>
-  <div
-    class="backgroundMain d-flex justify-content-center align-items-center w-100"
-  >
-    <div
-      class="background"
-      style="background-image: url('/img2/gig.jpg'); filter: blur(5px)"
-    ></div>
+  <div class="backgroundMain d-flex justify-content-center align-items-center w-100">
+    <div class="background" style="background-image: url('/img2/gig.jpg'); filter: blur(5px)"></div>
     <div class="fog-container">
       <div class="fog-img fog-img-first"></div>
       <div class="fog-img fog-img-second"></div>
     </div>
-    <div
-      class="container min-h-screen d-flex justify-content-center align-items-center"
-    >
-      <div class="card w-50 h-100 shadow-lg overflow-hidden">
+    <div class="container min-h-screen d-flex justify-content-center align-items-center">
+      <div class="card col-12 col-md-8 col-lg-6 h-100 col-lg-5 shadow-lg overflow-hidden">
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
-          <div
-            class="col-md-8 col-12 p-5 col-flex d-flex flex-column login-section"
-          >
+          <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column login-section">
             <h2 class="text-center text-light fw-bold mb-4">
               Sign in to your account
             </h2>
-            <form
-              @submit.prevent="handleSubmit"
-              class="d-flex flex-column justify-content-center"
-            >
+            <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
-                <label for="email-address" class="form-label text-light"
-                  >Email address</label
-                >
-                <input
-                  type="email"
-                  id="email-address"
-                  v-model="email"
-                  name="email"
-                  class="form-control"
-                  required
-                />
+                <label for="email-address" class="form-label text-light">Email address</label>
+                <input type="email" id="email-address" v-model="email" name="email" class="form-control" required />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label text-light"
-                  >Password</label
-                >
-                <input
-                  type="password"
-                  id="password"
-                  v-model="password"
-                  name="password"
-                  class="form-control"
-                  required
-                />
+                <label for="password" class="form-label text-light">Password</label>
+                <input type="password" id="password" v-model="password" name="password" class="form-control" required />
               </div>
-              <div
-                class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3"
-              >
+              <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
                 <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="remember-me"
-                    v-model="rememberMe"
-                  />
-                  <label class="form-check-label text-light" for="remember-me"
-                    >Remember me</label
-                  >
+                  <input class="form-check-input" type="checkbox" id="remember-me" v-model="rememberMe" />
+                  <label class="form-check-label text-light" for="remember-me">Remember me</label>
                 </div>
-                <a href="/forgot-password" class="text-light mt-2 mt-md-0"
-                  >Forgot your password?</a
-                >
+                <a href="/forgot-password" class="text-light mt-2 mt-md-0">Forgot your password?</a>
               </div>
               <button type="submit" class="btn btn-light w-100">Sign in</button>
             </form>
@@ -168,13 +127,15 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  overflow: hidden; /* Prevent horizontal scrolling */
+  overflow: hidden;
+  /* Prevent horizontal scrolling */
 }
 
 .fog-img {
   position: absolute;
   height: 100%;
-  width: 200%; /* Adjust width to prevent horizontal scrolling */
+  width: 200%;
+  /* Adjust width to prevent horizontal scrolling */
   z-index: 3;
 }
 
@@ -183,7 +144,8 @@ body {
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
-  animation: marquee 10s linear infinite; /* Adjusted duration */
+  animation: marquee 10s linear infinite;
+  /* Adjusted duration */
 }
 
 .fog-img-second {
@@ -191,19 +153,20 @@ body {
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
-  animation: marquee 60s linear infinite; /* Adjusted duration */
+  animation: marquee 60s linear infinite;
+  /* Adjusted duration */
 }
 
 @keyframes marquee {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
-    transform: translate3d(
-      -50%,
-      0,
-      0
-    ); /* Adjust to prevent horizontal scrolling */
+    transform: translate3d(-50%,
+        0,
+        0);
+    /* Adjust to prevent horizontal scrolling */
   }
 }
 

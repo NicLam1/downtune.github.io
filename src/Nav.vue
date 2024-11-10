@@ -23,7 +23,7 @@
         <!-- Navigation links on the left -->
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link to="/" class="nav-link">Home</router-link>
+            <router-link to="/" class="nav-link" activeClass="router-link-active">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/calendar" class="nav-link">Events</router-link>
@@ -267,7 +267,7 @@ router-link a {
   background: #240244;
 }
 
-a.router-link-active {
+.navbar-nav .router-link-active {
   color: #ff7e5f;
 }
 

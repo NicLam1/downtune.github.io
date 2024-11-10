@@ -8,7 +8,7 @@
         <div class="fog-img fog-img-second"></div>
       </div>
       <div class="container min-h-screen d-flex justify-content-center align-items-center">
-        <div class="card w-50 h-100 shadow-lg overflow-hidden">
+        <div class="card col-12 col-md-8 col-lg-6 h-100 shadow-lg overflow-hidden">
           <div class="row g-0 h-100">
             <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
               <h2 class="text-center text-light fw-bold mb-4">Register</h2>
@@ -127,16 +127,16 @@ export default {
     },
 
     // Method to update user preferences in Firestore after they answer the questions
-    async updatePreferences(preferences) {
-      try {
-        const userId = this.user.uid; // Use the current user's UID
-        const docRef = doc(db, "userPreferences", userId);
-        await setDoc(docRef, preferences); // Store preferences in Firestore
-        console.log("Preferences updated successfully!");
-      } catch (error) {
-        console.error("Error updating preferences:", error);
-      }
-    },
+    // async updatePreferences(preferences) {
+    //   try {
+    //     const userId = this.user.uid; // Use the current user's UID
+    //     const docRef = doc(db, "userPreferences", userId);
+    //     await setDoc(docRef, preferences); // Store preferences in Firestore
+    //     console.log("Preferences updated successfully!");
+    //   } catch (error) {
+    //     console.error("Error updating preferences:", error);
+    //   }
+    // },
   },
 };
 </script>

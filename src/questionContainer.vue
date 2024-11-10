@@ -22,7 +22,7 @@
         @selectedOption="updateResponse">
       </OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-primary submit-responses" @click="submitResponses">Submit</button>
+    <button class="btn btn-primary submit-responses px-5" @click="submitResponses">Submit</button>
     <footer style="font-size: 8px;">
       &zwnj;
       <!-- Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
@@ -121,10 +121,16 @@ export default {
   align-items: center;
   justify-content: center;
   position: relative;
+  color: white;
 }
 
 .welcome-text {
   font-size: 80px;
+}
+@media (max-width: 768px) {
+  .welcome-text {
+    font-size: 4rem; /* Smaller font size for tablets */
+  }
 }
 
 .scroll-arrow {
@@ -153,6 +159,7 @@ export default {
   background: linear-gradient(135deg, #d900ff, #7500e8);
   border: none;
   transition: background-color 0.3s;
+  border-radius: 4px !important;
 }
 
 .btn-primary:hover {
