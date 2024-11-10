@@ -1,93 +1,53 @@
 <template>
-  <div
-    v-if="!isRegistered"
-    class="backgroundMain d-flex justify-content-center align-items-center w-100"
-  >
-    <!-- Registration Form Section (already exists) -->
-    <div
-      class="background"
-      style="background-image: url('/img2/gig.jpg')"
-    ></div>
-    <div class="fog-container">
-      <div class="fog-img fog-img-first"></div>
-      <div class="fog-img fog-img-second"></div>
-    </div>
-    <div
-      class="container min-h-screen d-flex justify-content-center align-items-center"
-    >
-      <div class="card w-50 h-100 shadow-lg overflow-hidden">
-        <div class="row g-0 h-100">
-          <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
-            <h2 class="text-center text-light fw-bold mb-4">Register</h2>
-            <form
-              @submit.prevent="handleRegister"
-              class="d-flex flex-column justify-content-center text-light"
-            >
-              <div class="mb-3">
-                <label for="email-address" class="form-label"
-                  >Email address</label
-                >
-                <input
-                  type="email"
-                  v-model="email"
-                  class="form-control"
-                  id="email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  v-model="password"
-                  class="form-control"
-                  id="password"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="password-confirm" class="form-label"
-                  >Confirm Password</label
-                >
-                <input
-                  type="password"
-                  v-model="confirmPassword"
-                  class="form-control"
-                  id="confirmPassword"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="username" class="form-label">Display Name</label>
-                <input
-                  type="text"
-                  v-model="username"
-                  class="form-control"
-                  id="username"
-                  required
-                />
-              </div>
-              <p v-if="error" class="text-danger">{{ error }}</p>
-              <button type="submit" class="btn btn-light w-100">Sign Up</button>
-            </form>
-            <p class="text-center mt-3 text-light">
-              Have an account?
-              <router-link to="/login/user" class="text-light">
-                Sign In
-              </router-link>
-            </p>
+  <div>
+    <div v-if="!isRegistered" class="backgroundMain d-flex justify-content-center align-items-center w-100">
+      <!-- Registration Form Section (already exists) -->
+      <div class="background" style="background-image: url('/img2/gig.jpg')"></div>
+      <div class="fog-container">
+        <div class="fog-img fog-img-first"></div>
+        <div class="fog-img fog-img-second"></div>
+      </div>
+      <div class="container min-h-screen d-flex justify-content-center align-items-center">
+        <div class="card w-50 h-100 shadow-lg overflow-hidden">
+          <div class="row g-0 h-100">
+            <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
+              <h2 class="text-center text-light fw-bold mb-4">Register</h2>
+              <form @submit.prevent="handleRegister" class="d-flex flex-column justify-content-center text-light">
+                <div class="mb-3">
+                  <label for="email-address" class="form-label">Email address</label>
+                  <input type="email" v-model="email" class="form-control" id="email" required />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" v-model="password" class="form-control" id="password" required />
+                </div>
+                <div class="mb-3">
+                  <label for="password-confirm" class="form-label">Confirm Password</label>
+                  <input type="password" v-model="confirmPassword" class="form-control" id="confirmPassword" required />
+                </div>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Display Name</label>
+                  <input type="text" v-model="username" class="form-control" id="username" required />
+                </div>
+                <p v-if="error" class="text-danger">{{ error }}</p>
+                <button type="submit" class="btn btn-light w-100">Sign Up</button>
+              </form>
+              <p class="text-center mt-3 text-light">
+                Have an account?
+                <router-link to="/login/user" class="text-light">
+                  Sign In
+                </router-link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Question Container Section (Visible after registration) -->
-  <div v-else>
-    <QuestionContainer
-      :user="user"
-      @submit="updatePreferences"
-    ></QuestionContainer>
+    <!-- Question Container Section (Visible after registration) -->
+    <div v-else>
+      <QuestionContainer :user="user" @submit="updatePreferences"></QuestionContainer>
+    </div>
   </div>
 </template>
 
@@ -207,13 +167,15 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  overflow: hidden; /* Prevent horizontal scrolling */
+  overflow: hidden;
+  /* Prevent horizontal scrolling */
 }
 
 .fog-img {
   position: absolute;
   height: 100%;
-  width: 200%; /* Adjust width to prevent horizontal scrolling */
+  width: 200%;
+  /* Adjust width to prevent horizontal scrolling */
   z-index: 3;
 }
 
@@ -222,7 +184,8 @@ body {
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
-  animation: marquee 10s linear infinite; /* Adjusted duration */
+  animation: marquee 10s linear infinite;
+  /* Adjusted duration */
 }
 
 .fog-img-second {
@@ -230,19 +193,20 @@ body {
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
-  animation: marquee 60s linear infinite; /* Adjusted duration */
+  animation: marquee 60s linear infinite;
+  /* Adjusted duration */
 }
 
 @keyframes marquee {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
-    transform: translate3d(
-      -50%,
-      0,
-      0
-    ); /* Adjust to prevent horizontal scrolling */
+    transform: translate3d(-50%,
+        0,
+        0);
+    /* Adjust to prevent horizontal scrolling */
   }
 }
 
@@ -292,4 +256,3 @@ body {
   background: #8e24aa;
 }
 </style>
-
