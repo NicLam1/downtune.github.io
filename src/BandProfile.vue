@@ -46,11 +46,22 @@
             <div
               class="col-md-4 member-card my-2"
               v-for="member in band.members"
-              :key="member"
+              :key="member.id"
+              @click="openModal(member)"
+              role="button"
+              tabindex="0"
+              @keyup.enter="openModal(member)"
             >
               <div class="card text-center">
                 <div class="card-body text-light">
-                  <i class="fas fa-user fa-3x mb-3"></i>
+                  <img
+                    :src="
+                      member.picture ||
+                      'https://placehold.co/500x500/purple/white?text=Member'
+                    "
+                    :alt="member"
+                    class="member-picture mb-3"
+                  />
                   <h5 class="card-title">{{ member }}</h5>
                 </div>
               </div>
@@ -73,7 +84,8 @@
                   v-for="event in band.upcoming_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> -
+                  {{ event.name }} @ {{ event.location }}
                 </li>
                 <li v-if="!band.upcoming_events.length" class="list-group-item">
                   No upcoming events.
@@ -89,7 +101,8 @@
                   v-for="event in band.past_events"
                   :key="event.name + event.date"
                 >
-                  <strong>{{ formatDate(event.date) }}</strong> - {{ event.name }} @ {{ event.location }}
+                  <strong>{{ formatDate(event.date) }}</strong> -
+                  {{ event.name }} @ {{ event.location }}
                 </li>
                 <li v-if="!band.past_events.length" class="list-group-item">
                   No past events.
@@ -105,7 +118,6 @@
             <i class="fas fa-headphones-alt"></i> Featured Artist Playlist
           </h3>
           <div v-if="featuredArtist" class="featured-artist">
-            
             <!-- Embedded Spotify Player -->
             <div class="spotify-embed">
               <iframe
@@ -143,7 +155,9 @@
                 @mouseleave="resumeScrolling"
               >
                 <div class="card text-center">
-                  <div class="card-body d-flex flex-column justify-content-between">
+                  <div
+                    class="card-body d-flex flex-column justify-content-between"
+                  >
                     <img
                       :src="artist.image"
                       :alt="artist.name"
@@ -177,7 +191,11 @@
           <div class="container">
             <h2 class="cta-title">Stay updated on {{ band.name }}</h2>
 
-            <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px">
+            <form
+              @submit.prevent="submitForm"
+              class="mx-auto"
+              style="max-width: 400px"
+            >
               <div class="mb-3">
                 <input
                   v-model="email"
@@ -194,19 +212,51 @@
               </button>
             </form>
 
-            <h2 class="cta-title">& follow our socials today:  </h2>
-            <div class="social-icons ">
-              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <h2 class="cta-title">& follow our socials today:</h2>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
             </div>
           </div>
         </section>
       </main>
 
+      <!-- Modal for Band Member Details -->
+      <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
+        <div class="modal-content">
+          <button
+            class="close-button"
+            @click="closeModal"
+            aria-label="Close Modal"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="modal-body">
+            <img
+              :src="
+                selectedMember.picture ||
+                'https://placehold.co/500x500/purple/white?text=Band+Member'
+              "
+              :alt="selectedMember.name"
+              class="modal-member-picture mb-4"
+            />
+            <h2 class="modal-member-name">{{ selectedMember }}</h2>
+            <p><strong>Age:</strong> 26</p>
+            <p><strong>Nationality:</strong> Singaporean</p>
+            <p><strong>Instrument:</strong> Vocals</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Footer Section -->
       <!-- <footer class="text-center">
-
         <p>© 2024 Not Like Us, G3-Group 8 , All Rights Reserved.</p>
       </footer> -->
     </div>
@@ -236,6 +286,15 @@ export default {
     const featuredArtist = ref(null);
     const isScrollingPaused = ref(false);
     const scrollContent = ref(null);
+
+    // Modal State
+    const isModalOpen = ref(false);
+    const selectedMember = ref({
+      name: "",
+      age: "",
+      nationality: "",
+      picture: "",
+    });
 
     const submitForm = () => {
       console.log("Submitted email:", email.value);
@@ -274,16 +333,19 @@ export default {
 
         // Fetch artists for each genre
         for (const genre of genres) {
-          const response = await axios.get("https://api.spotify.com/v1/search", {
-            headers: {
-              Authorization: `Bearer ${spotifyAccessToken.value}`,
-            },
-            params: {
-              q: `genre:"${genre}"`,
-              type: "artist",
-              limit: 6, // Fetch a smaller number per genre for diversity
-            },
-          });
+          const response = await axios.get(
+            "https://api.spotify.com/v1/search",
+            {
+              headers: {
+                Authorization: `Bearer ${spotifyAccessToken.value}`,
+              },
+              params: {
+                q: `genre:"${genre}"`,
+                type: "artist",
+                limit: 6, // Fetch a smaller number per genre for diversity
+              },
+            }
+          );
 
           const artists = response.data.artists.items;
           allArtists = allArtists.concat(artists);
@@ -298,22 +360,32 @@ export default {
         uniqueArtists.sort((a, b) => a.name.localeCompare(b.name));
 
         // Check if a featured artist is already stored in localStorage
-        const storedFeaturedArtistId = localStorage.getItem(`featuredArtist_${band.value.id}`);
+        const storedFeaturedArtistId = localStorage.getItem(
+          `featuredArtist_${band.value.id}`
+        );
         if (storedFeaturedArtistId) {
-          const storedArtist = uniqueArtists.find((artist) => artist.id === storedFeaturedArtistId);
+          const storedArtist = uniqueArtists.find(
+            (artist) => artist.id === storedFeaturedArtistId
+          );
           if (storedArtist) {
             featuredArtist.value = storedArtist;
           } else {
             // Fallback to the first artist if stored ID is not found
             featuredArtist.value = uniqueArtists[0];
-            localStorage.setItem(`featuredArtist_${band.value.id}`, featuredArtist.value.id);
+            localStorage.setItem(
+              `featuredArtist_${band.value.id}`,
+              featuredArtist.value.id
+            );
           }
         } else {
           // Select the first artist as the featured artist
           if (uniqueArtists.length > 0) {
             featuredArtist.value = uniqueArtists[0];
             // Store the featured artist ID
-            localStorage.setItem(`featuredArtist_${band.value.id}`, featuredArtist.value.id);
+            localStorage.setItem(
+              `featuredArtist_${band.value.id}`,
+              featuredArtist.value.id
+            );
           }
         }
 
@@ -326,12 +398,14 @@ export default {
           );
 
           // Limit to first 10 recommended artists for the carousel
-          recommendedArtists.value = remainingArtists.slice(0, 10).map((artist) => ({
-            id: artist.id,
-            name: artist.name,
-            image: artist.images[0]?.url || "https://via.placeholder.com/300", // Fallback image
-            external_urls: artist.external_urls,
-          }));
+          recommendedArtists.value = remainingArtists
+            .slice(0, 10)
+            .map((artist) => ({
+              id: artist.id,
+              name: artist.name,
+              image: artist.images[0]?.url || "https://via.placeholder.com/300", // Fallback image
+              external_urls: artist.external_urls,
+            }));
         }
       } catch (err) {
         console.error("Error fetching recommended artists:", err);
@@ -346,11 +420,14 @@ export default {
         }
 
         // Fetch the artist's information to get the Spotify URI
-        const response = await axios.get(`https://api.spotify.com/v1/artists/${artistId}`, {
-          headers: {
-            Authorization: `Bearer ${spotifyAccessToken.value}`,
-          },
-        });
+        const response = await axios.get(
+          `https://api.spotify.com/v1/artists/${artistId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${spotifyAccessToken.value}`,
+            },
+          }
+        );
 
         // Convert URI to embed URL
         featuredArtist.value.spotifyEmbedUrl = `https://open.spotify.com/embed/artist/${artistId}`;
@@ -369,8 +446,12 @@ export default {
 
         if (foundBand) {
           // Ensure all required properties are arrays
-          foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
-          foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
+          foundBand.genres = Array.isArray(foundBand.genres)
+            ? foundBand.genres
+            : [];
+          foundBand.members = Array.isArray(foundBand.members)
+            ? foundBand.members
+            : [];
           foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events)
             ? foundBand.upcoming_events
             : [];
@@ -413,6 +494,18 @@ export default {
 
     const filteredRecommendedArtists = computed(() => recommendedArtists.value);
 
+    // Modal Methods
+    const openModal = (member) => {
+      selectedMember.value = member;
+      isModalOpen.value = true;
+      document.body.style.overflow = "hidden"; // Prevent background scrolling
+    };
+
+    const closeModal = () => {
+      isModalOpen.value = false;
+      document.body.style.overflow = "auto"; // Restore scrolling
+    };
+
     onMounted(() => {
       const bandId = parseInt(route.params.id, 10);
       if (isNaN(bandId)) {
@@ -438,6 +531,11 @@ export default {
       pauseScrolling,
       resumeScrolling,
       scrollContent,
+      // Modal State and Methods
+      isModalOpen,
+      selectedMember,
+      openModal,
+      closeModal,
     };
   },
 };
@@ -567,6 +665,15 @@ export default {
   animation: popIn 0.5s ease forwards;
 }
 
+.member-card {
+  cursor: pointer;
+  outline: none;
+}
+
+.member-card:focus .card {
+  box-shadow: 0 0 0 3px #ff6f61;
+}
+
 .member-card .card {
   background: rgba(255, 255, 255, 0.15);
   border: none;
@@ -579,6 +686,15 @@ export default {
 .member-card .card:hover {
   transform: scale(1.05);
   background: linear-gradient(135deg, #e600e8, #ff66ff);
+}
+
+.member-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  margin: 0 auto 15px auto;
 }
 
 .events-section .row {
@@ -604,7 +720,7 @@ export default {
   animation: fadeInDown 0.5s ease forwards;
 }
 
-.mx-auto{
+.mx-auto {
   margin-bottom: 1rem;
 }
 
@@ -713,18 +829,15 @@ footer p {
   color: #e6e1e5;
 }
 
-.list-group{
+.list-group {
   background-color: #1db954 !important;
 }
 
-.list-group-item{
+.list-group-item {
   padding-top: 10px;
   padding-bottom: 10px;
   color: #e6e1e5;
-  background: linear-gradient(
-    135deg,
-    rgb(59, 1, 80),
-    rgb(61, 4, 126));
+  background: linear-gradient(135deg, rgb(59, 1, 80), rgb(61, 4, 126));
 }
 
 .artist-playlist-section .list-group-item:hover {
@@ -815,9 +928,6 @@ footer p {
   }
 }
 
-/* Responsive Adjustments */
-
-
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -883,6 +993,87 @@ footer p {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 0, 36, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #6f00e8, #c603ff);
+  padding: 30px;
+  border-radius: 16px;
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  color: #ffffff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #ff6f61;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-member-picture {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  margin-bottom: 20px;
+}
+
+.modal-member-name {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .band-name {
+    font-size: 12vw;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-member-picture {
+    width: 200px;
+    height: 200px;
+  }
+
+  .modal-member-name {
+    font-size: 1.5rem;
   }
 }
 </style>
