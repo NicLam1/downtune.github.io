@@ -17,16 +17,16 @@
                 <input type="email" v-model="email" class="form-control" id="email" required />
               </div>
               <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" v-model="username" class="form-control" id="username" required />
-              </div>
-              <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" v-model="password" class="form-control" id="password" required />
               </div>
               <div class="mb-3">
                 <label for="password-confirm" class="form-label">Confirm Password</label>
                 <input type="password" v-model="confirmPassword" class="form-control" id="confirmPassword" required />
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Display Name</label>
+                <input type="text" v-model="username" class="form-control" id="username" required />
               </div>
               <p v-if="error" class="text-danger">{{ error }}</p>
               <button type="submit" class="btn btn-primary w-100">Sign Up</button>
