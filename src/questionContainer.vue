@@ -24,13 +24,14 @@
     </MotionGroup>
     <button class="btn btn-primary submit-responses" @click="submitResponses">Submit</button>
     <footer style="font-size: 8px;">
-      Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
+      &zwnj;
+      <!-- Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
       (https://poly.pizza/m/3FiWjHDj0Zf)<br>
       "Grand Piano" (https://skfb.ly/U87o) by farhad.Guli is licensed under Creative Commons Attribution
       (http://creativecommons.org/licenses/by/4.0/).<br>
       "Electric Guitar" (https://skfb.ly/6nFJX) by haerades is licensed under Creative Commons Attribution-NonCommercial
       (http://creativecommons.org/licenses/by-nc/4.0/).<br>
-      DJ gear by Poly by Google [CC-BY] via Poly Pizza<br>
+      DJ gear by Poly by Google [CC-BY] via Poly Pizza<br> -->
     </footer>
   </div>
 
@@ -51,7 +52,7 @@ export default {
   },
   data() {
     return {
-      backgroundGradient: 'linear-gradient(135deg, forestgreen, darkseagreen)',
+      backgroundGradient: 'linear-gradient(135deg, purple, rebeccapurple)',
       showArrow: true,
       questions: [
         { title: 'What type of event are you planning?', options: ['Corporate', 'Wedding', 'Party', 'Festival', 'Others'], link: '/Guitar_Amp.glb' },
@@ -111,6 +112,12 @@ export default {
 </script>
 
 <style scoped>
+.form-container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .welcome-container {
   height: 95vh;
   font-weight: bold;
