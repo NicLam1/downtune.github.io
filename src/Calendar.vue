@@ -1,7 +1,11 @@
 
 <template>
   <div>
-  <div class="nav-sticky"><router-link to="/calendar2">Click this if you are experiencing issues</router-link></div>
+    <div class="nav-sticky">
+  <router-link to="/calendar2">
+    <button>Click this if you are experiencing issues</button>
+  </router-link>
+</div>
       <div class="container">
         <div class="overlay">
   <div class="slider" id = "slider" >
@@ -735,13 +739,29 @@ nav > div{
     pointer-events: none;
 }
 
-.nav-sticky{
-  color:white;
-  z-index: 100000000; 
+.nav-sticky {
   position: fixed;
-  top: 80px;
+  bottom: 0; /* Stick to the bottom of the screen */
+  width: 100%; /* Full width */
   text-align: center;
-  width: 100%; /* Ensure full width */
+  z-index: 100000000;
+  background: linear-gradient(to right, #240244, #100014);
+  padding: 10px 0; /* Add some padding for better click area */
 }
+
+.nav-sticky button {
+  background: linear-gradient(135deg, #6f00e8, #c603ff); /* Darker blue for button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.nav-sticky button:hover {
+  background-color: #004494; /* Slightly darker on hover */
+}
+
 
 </style>
