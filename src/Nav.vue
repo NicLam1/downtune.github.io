@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar navbar-expand-lg custom-navbar"
-    :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }"
+    :class="{ 'navbar navbar-expand-lg custom-navbar-sticky-for-calendar': isCalendarPage }"
   >
     <div class="container-fluid">
       <div class="navbar-brand">
@@ -117,7 +117,7 @@ export default {
   },
   computed: {
     isCalendarPage() {
-      return this.$route.name === "calendar"; // Adjust based on your routing logic
+      return this.$route.name === "Calendar"; // Adjust based on your routing logic
     },
   },
 };
@@ -136,8 +136,9 @@ export default {
 
 .custom-navbar-sticky-for-calendar {
   z-index: 100000000;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%; /* Ensure it spans across the full width */
   /* Make sure z index is high so it works for the calendar / event page */
 }
 
