@@ -42,13 +42,14 @@
                 class="profile-icon"
                 @click="toggleDropdown"
               />
+
               <div v-if="dropdownVisible" class="dropdown-menu show">
-                <router-link to="/account" class="dropdown-item"
-                  >My Account</router-link
-                >
-                <router-link to="/favorites" class="dropdown-item"
-                  >Favourites</router-link
-                >
+                <router-link to="/account" class="dropdown-item" @click="closeDropdown">
+                  My Account
+                </router-link>
+                <router-link to="/favorites" class="dropdown-item" @click="closeDropdown">
+                  Favourites
+                </router-link>
                 <button class="dropdown-item" @click="handleAuth">
                   Logout
                 </button>
@@ -64,9 +65,9 @@
                 @click="toggleDropdown"
               />
               <div v-if="dropdownVisible" class="dropdown-menu show">
-                <router-link to="/choose" class="dropdown-item"
-                  >Login / Sign Up</router-link
-                >
+                <router-link to="/choose" class="dropdown-item" @click="closeDropdown">
+                  Login / Sign Up
+                </router-link>
               </div>
             </div>
           </div>
@@ -76,8 +77,9 @@
   </nav>
 </template>
 
+
 <script>
-import { computed, inject, ref } from "vue";
+import { computed, inject, ref, onMounted, onBeforeUnmount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { auth } from "../firebaseConfig"; // Adjust the path as necessary
 import { signOut } from "firebase/auth";
@@ -93,7 +95,13 @@ export default {
     const dropdownVisible = ref(false);
 
     const toggleDropdown = () => {
+      // Open the dropdown if it's closed, or close it if it's open
       dropdownVisible.value = !dropdownVisible.value;
+    };
+
+    const closeDropdown = () => {
+      // Explicitly close the dropdown
+      dropdownVisible.value = false;
     };
 
     const handleAuth = async () => {
@@ -101,11 +109,32 @@ export default {
         await signOut(auth);
         setLoginState(false);
         router.push("/"); // Redirect to home page
-        location.reload;
+        location.reload();
       } else {
         router.push("/choose"); // Redirect to login page
       }
     };
+
+    // Detect clicks outside the dropdown to close it
+    const handleClickOutside = (event) => {
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      const profileIcon = document.querySelector('.profile-icon');
+      if (
+        dropdownMenu && !dropdownMenu.contains(event.target) &&
+        profileIcon && !profileIcon.contains(event.target)
+      ) {
+        closeDropdown();
+      }
+    };
+
+    // Add and remove event listener when component is mounted/unmounted
+    onMounted(() => {
+      document.addEventListener('click', handleClickOutside);
+    });
+
+    onBeforeUnmount(() => {
+      document.removeEventListener('click', handleClickOutside);
+    });
 
     return {
       isLoggedIn,
@@ -113,6 +142,7 @@ export default {
       handleAuth,
       toggleDropdown,
       dropdownVisible,
+      closeDropdown, // Expose closeDropdown for clicking on items
     };
   },
   computed: {
@@ -121,6 +151,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>
@@ -238,5 +269,13 @@ router-link a {
 
 a.router-link-active {
   color: #ff7e5f;
+}
+
+/* For smaller screens */
+@media (max-width: 991px) { /* Adjust for screens where the navbar collapses */
+  .dropdown-menu {
+    left: 0; /* Align dropdown to the left of the screen on smaller screens */
+    right: auto; /* Remove right positioning */
+  }
 }
 </style>
