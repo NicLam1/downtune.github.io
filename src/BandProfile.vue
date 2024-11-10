@@ -193,19 +193,22 @@
                 <i class="fas fa-envelope"></i> Subscribe
               </button>
             </form>
+
+            <h2 class="cta-title">& follow our socials today:  </h2>
+            <div class="social-icons mb-3">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
           </div>
         </section>
       </main>
 
       <!-- Footer Section -->
-      <footer class="text-center">
-        <div class="social-icons mb-3">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>Contact {{ band.name }} here!</p>
-      </footer>
+      <!-- <footer class="text-center">
+
+        <p>© 2024 Not Like Us, G3-Group 8 , All Rights Reserved.</p>
+      </footer> -->
     </div>
 
     <!-- Error Message -->
@@ -599,6 +602,10 @@ export default {
   margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
   animation: fadeInDown 0.5s ease forwards;
+}
+
+.mx-auto{
+  margin-bottom: 1rem;
 }
 
 .styled-select {
