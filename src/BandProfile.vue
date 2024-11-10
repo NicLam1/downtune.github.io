@@ -59,7 +59,7 @@
         </section>
 
         <!-- Events Section -->
-        <section class="events-section mb-2">
+        <section class="events-section mb-5">
           <h3 class="section-title">
             <i class="fas fa-calendar-alt"></i> Events
           </h3>
