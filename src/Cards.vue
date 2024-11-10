@@ -186,9 +186,9 @@
                 </button>
               </div>
               <!-- Arrow Icon -->
-              <div class="card-arrow mx-2">
+              <!-- <div class="card-arrow mx-2">
                 <i class="fas fa-arrow-right"></i>
-              </div>
+              </div> -->
             </div>
           </div>
           <div
