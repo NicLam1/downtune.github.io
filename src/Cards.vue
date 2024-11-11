@@ -780,8 +780,10 @@ body {
 .genre-badge {
   background-color: #7100e0;
   border-radius: 50px;
-  padding: 5px 10px 5px 10px;
+  padding: 7px 13px 7px 13px;
   margin-bottom: 5px;
+  margin-left: 5px;
+  font-size: ;
 }
 
 .styled-select {

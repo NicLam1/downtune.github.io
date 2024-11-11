@@ -1,27 +1,15 @@
 <template>
   <nav
     class="navbar navbar-expand-lg custom-navbar"
-    :class="{ 'navbar navbar-expand-lg custom-navbar-sticky-for-calendar': isCalendarPage }"
+    :class="{ 'custom-navbar-sticky-for-calendar': isCalendarPage }"
   >
     <div class="container-fluid">
-      <div class="navbar-brand">
-        <router-link to="/" class="nav-title">Downtune</router-link>
-      </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Updated navbar-collapse -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- Navigation links on the left -->
-        <ul class="navbar-nav me-auto">
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="navbar-brand">
+          <router-link to="/" class="nav-title">Downtune</router-link>
+        </div>
+        <!-- Navigation links for large screens -->
+        <ul class="navbar-nav me-auto d-none d-lg-flex">
           <li class="nav-item">
             <router-link to="/" class="nav-link" activeClass="router-link-active">Home</router-link>
           </li>
@@ -29,21 +17,82 @@
             <router-link to="/calendar" class="nav-link">Events</router-link>
           </li>
         </ul>
-        <!-- Profile dropdown on the right -->
-        <div v-if="displayName" class="logged-in-info mx-4 text-light fs-bold">
-          Welcome, {{ displayName }}!
+        <div class="d-flex align-items-center">
+          <!-- Navbar toggler -->
+          <button
+            class="navbar-toggler me-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars toggler-icon"></i>
+          </button>
+          <!-- User section for small screens -->
+          <div class="user-section d-flex align-items-center d-lg-none ms-2">
+            <div v-if="displayName" class="logged-in-info">
+              <div class="dropdown">
+                <i class="fas fa-user-circle profile-icon" @click="toggleDropdown"></i>
+                <div
+                  v-if="dropdownVisible"
+                  class="dropdown-menu show"
+                  ref="dropdownMenu"
+                >
+                  <router-link to="/account" class="dropdown-item" @click="closeDropdown">
+                    My Account
+                  </router-link>
+                  <router-link to="/favorites" class="dropdown-item" @click="closeDropdown">
+                    Favourites
+                  </router-link>
+                  <button class="dropdown-item" @click="handleAuth">
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="dropdown">
+                <i class="fas fa-user-circle profile-icon" @click="toggleDropdown"></i>
+                <div
+                  v-if="dropdownVisible"
+                  class="dropdown-menu show"
+                  ref="dropdownMenu"
+                >
+                  <router-link to="/choose" class="dropdown-item" @click="closeDropdown">
+                    Login / Sign Up
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="user-section">
+      </div>
+      <!-- Navbar collapse -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Navigation links for small screens -->
+        <ul class="navbar-nav me-auto d-lg-none">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link" activeClass="router-link-active">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/calendar" class="nav-link">Events</router-link>
+          </li>
+        </ul>
+        <!-- User section for large screens -->
+        <div class="user-section d-flex align-items-center ms-auto d-none d-lg-flex">
+          <div v-if="displayName" class="logged-in-info mx-4 text-light fw-bold">
+            Welcome, {{ displayName }}!
+          </div>
           <div v-if="displayName" class="logged-in-info">
             <div class="dropdown">
-              <img
-                src="../public/band/image (1).jpg"
-                alt="Profile"
-                class="profile-icon"
-                @click="toggleDropdown"
-              />
-
-              <div v-if="dropdownVisible" class="dropdown-menu show">
+              <i class="fas fa-user-circle profile-icon" @click="toggleDropdown"></i>
+              <div
+                v-if="dropdownVisible"
+                class="dropdown-menu show"
+                ref="dropdownMenu"
+              >
                 <router-link to="/account" class="dropdown-item" @click="closeDropdown">
                   My Account
                 </router-link>
@@ -58,13 +107,12 @@
           </div>
           <div v-else>
             <div class="dropdown">
-              <img
-                src="../public/band/image (1).jpg"
-                alt="Profile"
-                class="profile-icon"
-                @click="toggleDropdown"
-              />
-              <div v-if="dropdownVisible" class="dropdown-menu show">
+              <i class="fas fa-user-circle profile-icon" @click="toggleDropdown"></i>
+              <div
+                v-if="dropdownVisible"
+                class="dropdown-menu show"
+                ref="dropdownMenu"
+              >
                 <router-link to="/choose" class="dropdown-item" @click="closeDropdown">
                   Login / Sign Up
                 </router-link>
@@ -76,7 +124,6 @@
     </div>
   </nav>
 </template>
-
 
 <script>
 import { computed, inject, ref, onMounted, onBeforeUnmount } from "vue";
@@ -93,14 +140,13 @@ export default {
     const setLoginState = inject("setLoginState");
     const displayName = inject("displayName");
     const dropdownVisible = ref(false);
+    const dropdownMenu = ref(null);
 
     const toggleDropdown = () => {
-      // Open the dropdown if it's closed, or close it if it's open
       dropdownVisible.value = !dropdownVisible.value;
     };
 
     const closeDropdown = () => {
-      // Explicitly close the dropdown
       dropdownVisible.value = false;
     };
 
@@ -117,23 +163,25 @@ export default {
 
     // Detect clicks outside the dropdown to close it
     const handleClickOutside = (event) => {
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      const profileIcon = document.querySelector('.profile-icon');
+      const profileIcons = document.querySelectorAll(".profile-icon");
+      const clickedOnProfileIcon = Array.from(profileIcons).some((icon) =>
+        icon.contains(event.target)
+      );
       if (
-        dropdownMenu && !dropdownMenu.contains(event.target) &&
-        profileIcon && !profileIcon.contains(event.target)
+        dropdownMenu.value &&
+        !dropdownMenu.value.contains(event.target) &&
+        !clickedOnProfileIcon
       ) {
         closeDropdown();
       }
     };
 
-    // Add and remove event listener when component is mounted/unmounted
     onMounted(() => {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     });
 
     onBeforeUnmount(() => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     });
 
     return {
@@ -142,7 +190,8 @@ export default {
       handleAuth,
       toggleDropdown,
       dropdownVisible,
-      closeDropdown, // Expose closeDropdown for clicking on items
+      closeDropdown,
+      dropdownMenu,
     };
   },
   computed: {
@@ -151,7 +200,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
@@ -170,14 +218,12 @@ export default {
   position: fixed;
   top: 0;
   width: 100%; /* Ensure it spans across the full width */
-  /* Make sure z index is high so it works for the calendar / event page */
 }
 
 .nav-title {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: #feb47b;
-  /* Using the accent color for a pop */
   font-size: 1.5rem;
   text-decoration: none;
 }
@@ -192,16 +238,16 @@ export default {
 
 .navbar-nav .nav-link:hover {
   color: #ff7e5f;
-  /* A more noticeable color on hover */
 }
 
 .navbar-toggler {
   border: none;
-  background-color: rgba(255, 255, 255, 0.3);
+  background: none;
 }
 
-.navbar-toggler-icon {
-  filter: invert(1);
+.toggler-icon {
+  color: #d900ff;
+  font-size: 1.8rem;
 }
 
 router-link a {
@@ -230,27 +276,31 @@ router-link a {
   color: #f0f0f0;
 }
 
+.logged-in-info.mx-4.text-light.fw-bold {
+  white-space: nowrap;
+}
+
 .profile-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  font-size: 1.8rem;
+  color: #ff7e5f; /* Purple color */
   cursor: pointer;
-  transition: box-shadow 0.3s;
+  transition: color 0.3s;
 }
 
 .profile-icon:hover {
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  color: #d900ff;
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 50px;
+  top: calc(100% + 10px);
   right: 0;
   background: #240244;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   padding: 0.5em 1em;
   z-index: 100000000;
+  min-width: 150px; /* Ensure the dropdown is wide enough */
 }
 
 .dropdown-item {
@@ -272,10 +322,23 @@ router-link a {
 }
 
 /* For smaller screens */
-@media (max-width: 991px) { /* Adjust for screens where the navbar collapses */
+@media (max-width: 991px) {
   .dropdown-menu {
-    left: 0; /* Align dropdown to the left of the screen on smaller screens */
-    right: auto; /* Remove right positioning */
+    right: -10px; /* Adjust to keep it within the screen */
+  }
+}
+
+/* Hide the welcome message on small screens */
+@media (max-width: 991px) {
+  .logged-in-info.mx-4.text-light.fw-bold {
+    display: none;
+  }
+}
+
+/* Adjust dropdown position if it goes off-screen */
+@media (max-width: 400px) {
+  .dropdown-menu {
+    right: -50px; /* Further adjust if needed */
   }
 }
 </style>
