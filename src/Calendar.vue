@@ -505,12 +505,10 @@ const zStep = 2500; // Distance between images
 
 <style scoped>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-
 
 canvas {
   position: fixed;
@@ -520,248 +518,207 @@ canvas {
 }
 
 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-
 .color-1 {
-    font-size: 50px;
-    color: #ff00ff;
-    font-weight: bold;
-
+  font-size: 50px;
+  color: #ff00ff;
+  font-weight: bold;
 }
 
 .color-2 {
-    font-size: 30px;
-    color: white;
+  font-size: 30px;
+  color: white;
 }
-
-  
 
 h1 {
-    color: black;
-    font-size: 50px;
-    font-weight: 500;
+  color: black;
+  font-size: 50px;
+  font-weight: 500;
 }
 
-nav, footer{
-    position: fixed;
-    width: 100%;
-    padding: 2em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    mix-blend-mode: exclusion;
-    z-index: 2;
-
+nav, footer {
+  position: fixed;
+  width: 100%;
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: exclusion;
+  z-index: 2;
 }
 
 nav {
-    top: 0;
+  top: 0;
 }
 
 footer {
-    bottom: 0;
+  bottom: 0;
 }
 
-nav > div{
-    flex: 1;
-    display: flex;
-    gap: 2em;
+nav > div {
+  flex: 1;
+  display: flex;
+  gap: 2em;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.logo a{
-    font-size: 48px;
-    font-weight: lighter;
+.logo a {
+  font-size: 48px;
+  font-weight: lighter;
 }
 
-.nav-items:nth-child(3){
-    justify-content: flex-end;
+.nav-items:nth-child(3) {
+  justify-content: flex-end;
 }
-
 
 .container {
-    width: 100%;
-    /* height: 2000vh; */
-    /* height: 100vh; */
-    overflow-y: auto; /* Allow vertical scrolling */
+  width: 100%;
+  overflow-y: auto;
 }
 
-.slider{
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    transform-style: preserve-3d;
-    perspective: 500px;
-    overflow: hidden;
-    z-index: 3;
-    opacity: 1;
+.slider {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  overflow: hidden;
+  z-index: 3;
+  opacity: 1;
 }
 
-
-.slide{
-    position: absolute;
-    width: 400px;
-    height: 500px;
-    will-change: transform, opacity;
-    /* added this:  */
-    transform-style: preserve-3d; /* Ensure 3D transformations are applied */
+.slide {
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
 }
 
-.slide-img{
-    width: 100%;
-    height: 100%;
-    padding: 0.5em;
-    background-color: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(20px); 
-    position: relative
+.slide-img {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  position: relative;
 }
-
 
 .slide-text {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    background-color: #3d004d;;
-    box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 10%
-  }
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  background-color: #3d004d;
+  box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 10%;
+}
 
-.slide.slide-class-video{
-    display: block;
-    justify-content: center;
-    align-items: center;
-    height: auto; /* Fixed height */
-    width: auto; /* Full width of the container */
-    background-color: #3d004d;;
-    box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 2%;
-  }
+.slide.slide-class-video {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  background-color: #3d004d;
+  box-shadow: 0 8px 32px 0 rgba(76, 0, 153, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2%;
+}
 
-  .slide-video {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto; /* Allow height to adjust */
-    width: 100%; /* Full width of the container */
-    margin: 5% 0; /* Top and bottom margin */
+.slide-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  margin: 5% 0;
 }
 
 .iframe-wrapper {
-    width: 100%; /* Full width */
-    height: 0; /* Set height to 0 for the aspect ratio trick */
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    position: relative; /* Positioning context for absolute child */
-    overflow: hidden; /* Hide overflow */
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
+  overflow: hidden;
 }
 
 .responsive-iframe {
-    position: absolute; /* Positioning the iframe */
-    top: 0; /* Align to top */
-    left: 0; /* Align to left */
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    object-fit: cover; /* Keep the aspect ratio without distortion */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* For smaller screens, allow the iframe to resize */
 @media (max-width: 800px) {
-    .slide-video {
-        width: 80vw; /* Allow width to adjust based on viewport */
-        margin: 5% auto; /* Center the video with auto margins */
-    }
+  .slide-video {
+    width: 80vw;
+    margin: 5% auto;
+  }
 
-    .iframe-wrapper {
-        padding-bottom: 56.25%; /* Maintain aspect ratio */
-    }
+  .iframe-wrapper {
+    padding-bottom: 56.25%;
+  }
 
-    .responsive-iframe {
-        min-width: 300px; /* Minimum width for small screens */
-        max-width: 100%; /* Allow full width */
-    }
+  .responsive-iframe {
+    min-width: 300px;
+    max-width: 100%;
+  }
 }
 
-  
-
-  .slide-header-text{
-    width: auto;
-    text-align: center;
+.slide-header-text {
+  width: auto;
+  text-align: center;
 }
-
-
-
-
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 10vw;
-    height: 100vh;
-    background: black;
-    background: radial-gradient(circle,
-    rgba(0,0,0,0)60%,
-    rgba(0,0,0,1)100%
-    
-    );
-
-}
-
-.lenis.lenis-smooth{
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth[data-lenis-prevent]{
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped{
-    overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe{
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10vw;
+  height: 100vh;
+  background: black;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%);
 }
 
 .nav-sticky {
   position: fixed;
-  bottom: 0; /* Stick to the bottom of the screen */
-  width: 100%; /* Full width */
-  text-align: center;
+  bottom: 10px;
+  right: 10px;
   z-index: 100000000;
   background: linear-gradient(to right, #240244, #100014);
-  padding: 10px 0; /* Add some padding for better click area */
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
 .nav-sticky button {
-  background: linear-gradient(135deg, #6f00e8, #c603ff); /* Darker blue for button */
+  background: linear-gradient(135deg, #6f00e8, #c603ff);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .nav-sticky button:hover {
-  background-color: #004494; /* Slightly darker on hover */
+  background-color: #004494;
 }
-
-
 </style>

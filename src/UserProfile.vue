@@ -13,7 +13,7 @@
 
       <main class="container py-5">
         <!--  Section -->
-        <section class="row biography-genres-section mb-5">
+        <section class="row biography-genres-section">
           <div class="col-md-6 biography-section">
             <h2 class="section-title"><i class="fas fa-sliders-h"></i> Saved Event Preferences</h2>
             <div v-if="preferences">
@@ -31,7 +31,7 @@
         </section>
 
         <!-- Change Event Preferences -->
-        <section class="members-section mb-5">
+        <section class="members-section mt-4">
         <h3 class="section-title"><i class="fas fa-cogs"></i> Change Event Preferences</h3>
         <div class="row">
             <div class="col-md-4 member-card my-2">
@@ -48,22 +48,22 @@
         <section class="change-profile-section mb-5">
           <h3 class="section-title"><i class="fas fa-user-cog"></i> Change Email / Username / Password</h3>
           <form @submit.prevent="updateProfile">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 mt-2">
               <label for="username">Username</label>
               <input type="text" id="username" class="form-control" v-model="username" placeholder="Enter new username" />
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 mt-2">
               <label for="email">Email</label>
               <input type="email" id="email" class="form-control" v-model="email" placeholder="Enter new email" />
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 mt-2">
               <label for="password">Password</label>
               <input type="password" id="password" class="form-control" v-model="password" placeholder="Enter new password" />
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Profile</button>
+            <button type="submit" class="btn btn-primary mt-4">Update Profile</button>
           </form>
         </section>
       </main>

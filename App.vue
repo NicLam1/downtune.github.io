@@ -15,6 +15,8 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Nav from "./src/Nav.vue";
+import '@fortawesome/fontawesome-free/css/all.css';
+
 export default {
   name: "App",
   components: {

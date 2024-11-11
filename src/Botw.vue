@@ -1,9 +1,9 @@
 <template>
   <div class="backgroundPic">
-    <div class="container-fluid botwSection">
+    <div class="container-fluid botwSection d-lg-flex">
       <!-- Grid view for large screens -->
       <div
-        class="pt-3 botw row px-5 justify-content-center d-none d-lg-flex mb-5"
+        class="pt-3 botw row px-5 justify-content-center d-none d-lg-flex"
       >
         <div class="title">
           <h1
@@ -13,9 +13,9 @@
           </h1>
         </div>
 
-        <div class="item col-lg-2" v-for="(band, index) in bands" :key="index">
+        <div class="item col-lg-2" v-for="band in bands" :key="band.id">
           <div class="image-container">
-            <img :src="band.image" alt="" />
+            <img :src="band.thumbnail" :alt="band.name" />
             <div class="caption">
               <h3>{{ band.name }}</h3>
             </div>
@@ -34,11 +34,11 @@
           <div
             class="carousel-item"
             v-for="(band, index) in bands"
-            :key="'carousel-' + index"
+            :key="'carousel-' + band.id"
             :class="{ active: index === 0 }"
           >
             <div class="image-container">
-              <img :src="band.image" class="d-block w-100" alt="" />
+              <img :src="band.thumbnail" class="d-block w-100" :alt="band.name" />
               <div class="caption">
                 <h3>{{ band.name }}</h3>
               </div>
@@ -67,27 +67,45 @@
     </div>
 
     <!-- Blinking Arrow -->
-    <div class="scroll-arrow mb-4" @click="scrollToNext">
+    <div class="scroll-arrow" @click="scrollToNext">
       <span class="arrow"></span>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "Botw",
   data() {
     return {
-      bands: [
-        { name: "Band One", image: "/stock band/image (1).webp" },
-        { name: "Band Two", image: "/stock band/image (2).webp" },
-        { name: "Band Three", image: "/stock band/image (3).webp" },
-        { name: "Band Four", image: "/stock band/image (4).webp" },
-        { name: "Band Five", image: "/stock band/image (5).webp" },
-      ],
+      bands: [], // Initialize as empty array
+      loading: true, // Optional: To handle loading state
+      error: null, // Optional: To handle errors
     };
   },
+  mounted() {
+    this.fetchBands();
+  },
   methods: {
+    async fetchBands() {
+      try {
+        const response = await axios.get('/MOCK_DATA.json');
+        const allBands = response.data;
+
+        // Define the specific IDs to fetch
+        const desiredIds = [24, 37, 73, 84, 91];
+
+        // Filter the mock data to include only the desired bands
+        this.bands = allBands.filter(band => desiredIds.includes(band.id));
+      } catch (err) {
+        console.error("Error fetching band data:", err);
+        this.error = "Failed to load bands. Please try again later.";
+      } finally {
+        this.loading = false;
+      }
+    },
     scrollToNext() {
       const nextElement = this.$el.nextElementSibling;
       if (nextElement) {
@@ -109,7 +127,7 @@ export default {
 }
 
 .backgroundPic {
-  background-image: url("/stock band/botw.jpg");
+  background-image: url("/stock band/botw.jpg"); /* Updated path assuming botw.jpg is in public */
   background-position: center center;
   background-size: cover;
   z-index: -99;
@@ -117,13 +135,20 @@ export default {
 .botwSection {
   margin-top: 0;
   background: rgba(57, 0, 59, 0.606);
-  padding: 40px 0;
+  padding: 0px 0;
   position: relative;
   overflow: hidden;
   object-fit: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
   backdrop-filter: blur(20px);
   height: 89vh;
+}
+
+/* Responsive height adjustment */
+@media (max-width: 991px) {
+  .botwSection {
+    height: auto; /* Reduce height for carousel */
+  }
 }
 
 .title {
@@ -141,11 +166,10 @@ export default {
 
 h1 {
   background-image: url(https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjltcjM2bHk1NHpncXJuamd5bm81dGl2aTA4ODBta2djdnN5MWcxeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/84Ppz0cXydbICAgZXC/giphy.gif);
-
-  background-repeat: none;
-  background-size: contain;
+  -webkit-text-stroke: 1px rgb(238, 238, 238);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: transparent;
-  /* color: white; */
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
@@ -158,11 +182,18 @@ h1 {
 .scroll-arrow {
   z-index: 0;
   position: absolute;
-  bottom: 20px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
   animation: blink 1.5s infinite;
+}
+
+/* Hide the blinking arrow on smaller screens */
+@media (max-width: 991px) {
+  .scroll-arrow {
+    display: none;
+  }
 }
 
 .arrow {
@@ -235,8 +266,8 @@ h1 {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  height: 400px;
-  box-shadow: #ff00ff;
+  height: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow */
 }
 
 .image-container img {
@@ -246,7 +277,7 @@ h1 {
 }
 
 .caption {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif; /* Ensured Poppins is used */
   position: absolute;
   bottom: 0;
   left: 0;
@@ -267,7 +298,7 @@ h1 {
 
 .caption h3 {
   margin: 0;
-  font-family: "Fugaz One";
+  font-family: "Poppins", sans-serif; /* Changed to Poppins */
   animation: captionGlow 2s infinite alternate;
 }
 
@@ -284,7 +315,27 @@ h1 {
 #botwCarousel .carousel-inner,
 #botwCarousel .carousel-item,
 #botwCarousel .image-container {
-  height: 400px; /* Consistent height */
+  height: 400px; /* Default height for large screens */
+}
+
+/* Adjust carousel height for smaller screens */
+@media (max-width: 991px) {
+  #botwCarousel .carousel-inner,
+  #botwCarousel .carousel-item,
+  #botwCarousel .image-container {
+    height: 250px; /* Reduced height for smaller screens */
+  }
+
+  /* Add side padding to the carousel */
+  #botwCarousel {
+    padding: 0 20px;
+  }
+
+  /* Ensure captions are Poppins and visible */
+  #botwCarousel .caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #botwCarousel .image-container img {
