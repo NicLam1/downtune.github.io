@@ -745,7 +745,7 @@ body {
   background-repeat: no-repeat;
   background-size: 100% auto; /* Set specific background size */
   width: 100%; /* Constrain width to the available space */
-  min-height: 2400px;
+  min-height: 10000px;
   padding-top: 0;
   position: absolute;
   top: -110px;
