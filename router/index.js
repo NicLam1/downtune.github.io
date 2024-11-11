@@ -11,6 +11,7 @@ import newBandLogin from '../src/newBandLogin.vue';
 import newBandRegis from '../src/newBandRegis.vue';
 import Favorite from '../src/Favorite.vue';
 import UserProfile from '../src/UserProfile.vue';
+import forgotPassword from '../src/forgotPassword.vue';
 
 
 const routes = [
@@ -70,6 +71,11 @@ const routes = [
     path: '/account',
     name: 'account',
     component: UserProfile
+  },
+  {
+    path: '/forgotPassword',
+    name: 'forgotPassword',
+    component: forgotPassword
   }
 ];
 

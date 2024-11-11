@@ -15,11 +15,11 @@
         <i class="fa fa-arrow-down"></i>
       </div>
     </div>
-    <Carousel @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"></Carousel>
+    <Carousel @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres" :initialGenre="preselect"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
       <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
         :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
-        @selectedOption="updateResponse">
+        @selectedOption="updateResponse" :initialSelectedOption="responses[index]">
       </OtherQuestions>
     </MotionGroup>
     <button class="btn btn-primary submit-responses px-5" @click="submitResponses">Submit</button>
@@ -41,6 +41,7 @@
 import { auth } from '../firebaseConfig';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { getDoc } from 'firebase/firestore';
 
 import Carousel from './Carousel.vue';
 import OtherQuestions from './questionComponent.vue';
@@ -64,10 +65,29 @@ export default {
       genres: [],
     };
   },
-  mounted() {
+  async mounted() {
     setTimeout(() => {
       this.showArrow = false;
     }, 6500);
+
+    // Fetch user preferences if the user is logged in
+    const user = auth.currentUser;
+    if (user) {
+      const userId = user.uid;
+      const docRef = doc(db, 'userPreferences', userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const preferences = docSnap.data();
+        this.genres = preferences.genres || [];
+        this.responses = {
+          0: preferences.eventType,
+          1: preferences.budget,
+          2: preferences.eventDuration,
+          3: preferences.eventLocation,
+        };
+        console.log(this.responses)
+      }
+    }
   },
   methods: {
     setBackgroundGradient(gradient) {

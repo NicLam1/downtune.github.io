@@ -11,31 +11,18 @@
           <!-- Login Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column login-section">
             <h2 class="text-center text-light fw-bold mb-4">
-              Sign in to your account
+              Reset your password
             </h2>
             <form @submit.prevent="handleSubmit" class="d-flex flex-column justify-content-center">
               <div class="mb-3">
                 <label for="email-address" class="form-label text-light">Email address</label>
                 <input type="email" id="email-address" v-model="email" name="email" class="form-control" required />
               </div>
-              <div class="mb-3">
-                <label for="password" class="form-label text-light">Password</label>
-                <input type="password" id="password" v-model="password" name="password" class="form-control" required />
-              </div>
-              <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-                <router-link to="/forgotPassword" class="text-light mt-2 mt-md-0">Forgot your password?</router-link>
-              </div>
-              <button type="submit" class="btn btn-light w-100">Sign in</button>
+              <button type="submit" class="btn btn-light w-100">Reset Password</button>
             </form>
             <p class="text-center mt-3 text-light">
-              Don't have an account?
-              <router-link to="/register/user" class="text-light">
-                Sign up
-              </router-link>
+              <div>{{ this.error }}</div>
             </p>
-            <div>
-              {{ this.error }}
-            </div>
           </div>
 
           <!-- Carousel Section -->
@@ -62,14 +49,15 @@
 
 <script>
 import { auth } from "../firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { inject } from "vue";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 export default {
   data() {
     return {
       email: "",
       password: "",
+      rememberMe: false,
       error: null,
       currentBackground: "/img2/gig.jpg", // Initial background image
     };
@@ -80,20 +68,13 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          this.email,
-          this.password
-        );
-        const user = userCredential.user;
-        console.log("User successfully logged in:", user);
-        this.setLoginState(true, user.uid, user.displayName); // Store the user ID and display name
-        this.$router.push("/"); // Redirect to home page
-      } catch (error) {
-        console.error("Error logging in:", error);
-        this.error = error.message;
-      }
+      sendPasswordResetEmail(auth, this.email)
+        .then(() => {
+          this.error = "Password reset email sent!";
+        })
+        .catch((error) => {
+          this.error = error.message;
+        });
     },
   },
 };

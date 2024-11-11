@@ -26,18 +26,28 @@
 import '@google/model-viewer';
 
 export default {
-  props: ['title', 'options', 'link' ,'questionIndex'],
+  props: ['title', 'options', 'link' ,'questionIndex', 'initialSelectedOption'],
   components: {
   },
   data() {
     return {
-      selectedOption: null, // Stores the selected option
+      selectedOption: this.initialSelectedOption || null, // Stores the selected option
     };
   },
   watch: {
     selectedOption(newValue) {
       // Emit the selected option and question index as soon as the selection changes
       this.$emit('selectedOption', { questionIndex: this.questionIndex, selectedOption: newValue });
+    },
+    initialSelectedOption(newValue) {
+      // Update the selectedOption when initialSelectedOption prop changes
+      this.selectedOption = newValue;
+    }
+  },
+  mounted() {
+    // Ensure the selectedOption is set correctly when the component is mounted
+    if (this.initialSelectedOption) {
+      this.selectedOption = this.initialSelectedOption;
     }
   }
 };
