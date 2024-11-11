@@ -9,7 +9,9 @@ export default {
   const calendarData = ref([]); // Reactive calendar data
   const availableLivestreams = ref([]); // Reactive for available livestreams
   const observer = ref(null); // Ref to store the IntersectionObserver
-  
+  const windowWidth = ref(window.innerWidth); // Track window width reactively
+  const paddingUpdated = ref(false); // Flag to track if padding has been updated
+
   // Fetch data with real-time listener
   const fetchCalendarData = () => {
     console.log("Running fetchdata")
@@ -133,6 +135,85 @@ const updateAvailableLivestreams = () => {
       }
     };
 
+
+
+
+    // Refs for the DOM elements to apply padding
+    const smallerThan1290div = ref(null);
+    const smallerThan1290div2 = ref(null);
+    const smallerThan1290div3 = ref(null);
+    const smallerThan1290div4 = ref(null);
+    const smallerThan1290div5 = ref(null);
+    const smallerThan1290div6 = ref(null);
+
+    watch(smallerThan1290div, (newValue) => {
+      if (newValue !== null) {
+        console.log("Ref updated via watcher:", newValue);
+        updateInitialPadding();
+      }
+    });
+
+
+    // Define updateInitialPadding as a constant 
+    const updateInitialPadding = () => {
+          if (paddingUpdated.value) return; // Do nothing if already updated or window width is >= 1290
+  const minWidth = 770;
+  const maxWidth = 1290;
+  const minPadding = 2; // 2vw
+  const maxPadding = 13; // 12vw
+  console.log(windowWidth.value);
+
+  // Calculate the non-linear padding for window widths above 1291px
+  const incrementWidth = 400; // Increment for each 5vw change
+  const diffWidth = windowWidth.value - maxWidth; // Difference between window width and maxWidth
+  const paddingScale = diffWidth / incrementWidth; // Calculate how much the width has increased in increments
+  const incrementPadding = 5; // The padding change in vw for every 400px increase
+  
+  // Add the 20px to the padding, convert it to vw
+  const additionalPaddingPx = 20; // Additional padding in pixels
+  const additionalPaddingVw = (additionalPaddingPx / windowWidth.value) * 100; // Convert px to vw
+  const nonLinearPadding2 = (incrementPadding * paddingScale / 2 + additionalPaddingVw); // Calculate the padding in vw
+
+
+      // Ensure DOM is updated before accessing elements
+      nextTick(() => {
+        console.log("NEXTTICK")
+
+    // Calculate non-linear padding based on a quadratic scale
+    const scale = (windowWidth.value - minWidth) / (maxWidth - minWidth);
+    const nonLinearPadding = minPadding + (maxPadding - minPadding) * Math.pow(scale, 1);
+ // Access the refs directly
+ if (smallerThan1290div.value && smallerThan1290div2.value && smallerThan1290div3.value && smallerThan1290div4.value) {
+  if (windowWidth.value <= maxWidth) {
+    // Wait for the DOM to update before accessing the element
+    nextTick(() => {
+      console.log("Running smallerthan1290divs");
+      smallerThan1290div.value.style.paddingTop = `${nonLinearPadding}vw`;
+      smallerThan1290div2.value.style.marginTop = `15vw`;
+      smallerThan1290div3.value.style.paddingBottom = '0';
+      smallerThan1290div4.value.style.paddingBottom = '0';
+      smallerThan1290div5.value.style.padding = '20px 0';
+    });
+  } else {
+    console.log("Running NOT smallerthan1290divs");
+    nextTick(() => {
+      console.log("Ref at this point:", smallerThan1290div);  // Check if ref is available
+      console.log(smallerThan1290div);
+      console.log("nonLinearPadding2", nonLinearPadding2);
+      smallerThan1290div.value.style.paddingTop = `0`; 
+      smallerThan1290div2.value.value.style.marginTop = `0`;
+      smallerThan1290div3.value.style.paddingBottom = '15%';
+      smallerThan1290div4.value.style.paddingBottom = '30px';
+      smallerThan1290div5.value.style.padding = `${Math.min(nonLinearPadding2)}vw 0`;
+
+    });
+  }
+  paddingUpdated.value = true; // Set the flag to true after the first update
+}
+
+})
+};
+
   onMounted(() => {
     fetchCalendarData(); // Call the fetch function when the component is mounted
   });
@@ -146,12 +227,29 @@ const updateAvailableLivestreams = () => {
     console.log('Calendar sort upcoming events:', sortUpcomingEvents);
 
     updateAvailableLivestreams(); // Update available livestreams on calendar data change
-    initObserver() 
+    initObserver();
+    
+    
+    
+     // Wait for multiple DOM updates to ensure refs are set
+     for (let i = 0; i < 10; i++) {
+      await nextTick();
+    }
+    
+    // After multiple DOM updates, check if the refs are available
+    // if (smallerThan1290div.value && smallerThan1290div2.value && smallerThan1290div3.value && smallerThan1290div4.value) {
+    //   console.log("Refs are available. Proceeding with update.");
+    //   updateInitialPadding();
+    // } else {
+    //   console.log("Refs are not available yet.");
+    // }
 
   } catch (error) {
     console.error('Error in watcher:', error);
   }
 });
+
+
 onBeforeUnmount(() => {
       disconnectObserver(); // Cleanup observer
     });
@@ -166,6 +264,13 @@ onBeforeUnmount(() => {
     shouldDisplayEndDate,
     availableLivestreams,
     today,
+    updateInitialPadding,
+    smallerThan1290div,
+    smallerThan1290div2,
+    smallerThan1290div3,
+    smallerThan1290div4,
+    smallerThan1290div5,
+    smallerThan1290div6,
     debugData() {
       console.log('Fetched Calendar Data:', calendarData.value);
       console.log('Upcoming E',sortUpcomingEvents);
@@ -215,13 +320,85 @@ onBeforeUnmount(() => {
         this.observer.disconnect(); // Clean up observer
       }
     },
+    handleResize() {
+      this.smallerThan1290 = window.innerWidth < 1290;
+    },
+    updatePadding() {
+      const minWidth = 770;
+      const maxWidth = 1290;
+      const minPadding = 2; // 2vw
+      const maxPadding = 13; // 12vw
+      console.log(this.windowWidth)
+      // Calculate the non-linear padding for window widths above 1291px
+      const incrementWidth = 400; // Increment for each 5vw change
+      const diffWidth = this.windowWidth - maxWidth; // Difference between window width and minWidth
+      const paddingScale = diffWidth / incrementWidth; // Calculate how much the width has increased in increments
+      const incrementPadding = 5; // The padding change in vw for every 400px increase
+       // Add the 20px to the padding, convert it to vw
+      const additionalPaddingPx = 20; // Additional padding in pixels
+      const additionalPaddingVw = (additionalPaddingPx / this.windowWidth) * 100; // Convert px to vw
+      var nonLinearPadding2 = (incrementPadding * paddingScale / 2 + additionalPaddingVw); // Calculate the padding in vw
+// Access the refs directly
+        if (this.$refs.smallerThan1290div) {
+
+
+      if (this.windowWidth <= maxWidth) {
+        // Calculate non-linear padding based on a quadratic scale
+        const scale = (this.windowWidth - minWidth) / (maxWidth - minWidth);
+        const nonLinearPadding = minPadding + (maxPadding - minPadding) * Math.pow(scale, 1);
+
+        // Wait for the DOM to update before accessing the element
+        this.$nextTick(() => {
+            // Set padding dynamically
+            console.log("Running smallerthan1290divs");
+            this.$refs.smallerThan1290div.style.paddingTop = `${nonLinearPadding}vw`;
+            this.$refs.smallerThan1290div2.style.marginTop = `15vw`;
+            this.$refs.smallerThan1290div3.style.paddingBottom = '0';
+            this.$refs.smallerThan1290div4.style.paddingBottom = '0';
+            this.$refs.smallerThan1290div5.style.padding = '20px 0';
+        });
+      } else {
+        console.log("Running NOT smallerthan1290divs");
+        this.$nextTick(() => {
+          console.log("Ref at this point:", this.$refs.smallerThan1290div);  // Check if ref is available
+          console.log(this.$refs.smallerThan1290div);
+          console.log("nonLinearPadding2", nonLinearPadding2);
+          this.$refs.smallerThan1290div.style.paddingTop = `0`; 
+          this.$refs.smallerThan1290div2.style.marginTop = `0`;
+          this.$refs.smallerThan1290div3.style.paddingBottom = '15%';
+          this.$refs.smallerThan1290div4.style.paddingBottom = '30px';
+          this.$refs.smallerThan1290div5.style.padding = `${Math.min(nonLinearPadding2)}vw 0`;
+        });
+      }
+    }},
+    
   },
   mounted() {
     // this.initObserver();
+    // this.updateInitialPadding();
+
   },
+  
   beforeUnmount() {
     this.disconnectObserver();
-  }
+  },
+  data() {
+    return {
+      smallerThan1290: window.innerWidth < 1290,
+      windowWidth: window.innerWidth,
+    };
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('resize', () => {
+      this.windowWidth = window.innerWidth;
+      this.updatePadding();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.updatePadding);
+  },
 };
 </script>
 
@@ -231,21 +408,22 @@ onBeforeUnmount(() => {
   <div class="bg-container-start"></div>
   <div id = "miniapp">
     
-      <h1>Calendar & Live Stream</h1>
-  <div>
+      <h1 ref="smallerThan1290div5" >Calendar & Live Stream</h1>
+  <div class = "live-stream-section" ref="smallerThan1290div3">
     <!-- Livestream Section -->
 
     <!-- <pre>{{ currentLivestream }}</pre>  -->
     <!-- //debugging ^^^ instead of using console.log -->
-    <div class="video-container" v-if="availableLivestreams.length > 0">
-      <div class = "h3-blur">
+    <div class="video-container" ref="smallerThan1290div4" v-if="availableLivestreams.length > 0">
+      <div ref="smallerThan1290div" class = "smallerThan1290class"></div>
+        <div class = "h3-blur" ref="smallerThan1290div2" :style="{ order: smallerThan1290 ? 2 : 1 }">
         <div class = "color-1 headerbandname">{{ availableLivestreams[0].bandName }}</div>
         <div class = "color-2">      Live Now till 
       <span v-if="shouldDisplayEndDate(availableLivestreams[0])"> {{ formatShortDate(availableLivestreams[0].performanceEnd).shortdate }}</span>
       {{ formatTime(availableLivestreams[0].performanceEnd) }}
       <p>@ {{ availableLivestreams[0].location }}</p></div>
       </div>
-      <div class="iframe-wrapper">
+      <div class="iframe-wrapper" :style="{ order: smallerThan1290 ? 1 : 2 }">
       <iframe 
         :src="availableLivestreams[0].livestream.replace('watch?v=', 'embed/') + '?autoplay=1&mute=0'"
          
@@ -256,7 +434,7 @@ onBeforeUnmount(() => {
       ></iframe>
     </div>
     </div>
-    <div v-else class = "nolivestreamclass">
+    <div v-else class = "nolivestreamclass" ref="smallerThan1290div6">
     <div class = "slide-header-text color-1">No Live Streams Available</div>
     
     <div class = "slide-header-text">
@@ -266,9 +444,10 @@ onBeforeUnmount(() => {
 </div>
   </div>
  
-<h3 class = "h3-blur">Upcoming events:</h3>
+
 <div id = "band-cards-id">
-    <div v-for="(event,index) in sortUpcomingEvents" >
+  <h3 class="h3-blur">Upcoming events:</h3>
+  <div v-for="(event,index) in sortUpcomingEvents" >
       <div class = "animation-and-card-border">
       <div v-if="index !== 0" class = "animation-border">
       <div class = "coloring"></div>
@@ -313,25 +492,26 @@ onBeforeUnmount(() => {
 .band-card {
   /* background-color: #333; */
   background-image: url('../calendar/background-mid.png');
-  
+  background-repeat: repeat-y;
+  background-size: 100%;
   border-radius: 8px;
   color: white;
   position: relative;
   z-index: 2; /* Higher z-index to place above animation-border */
-  width: 400px;
+  /* width: 400px; */
+  width: 100%;
   
+}
+
+.band-card-parent-border{
+  width: 100%;
 }
 
 .band-card-blur {
   /* background-color: #333; */
   background-color: rgba(0, 0, 0, 0.7);
-  
-
   border-radius: 8px;  
   padding: 15px;
-
-  
-  
 }
 
 .fade-element{
@@ -409,8 +589,8 @@ onBeforeUnmount(() => {
 .band-image {
   /* max-width: 100%;
   height: auto; */
-  max-width: 360px;
-  max-height: 20vh;
+  max-width: 100%;
+  max-height: 80vh;
   border-radius: 8px;
   margin-bottom: 10px;
   z-index: 5; /* higher z-index to place in front  band-card */
@@ -419,32 +599,38 @@ onBeforeUnmount(() => {
 /* 
 a {
   color: #1E90FF; /* Dodger blue color for links */
+.live-stream-section{
+  padding-bottom: 15%;
+}
 
 
 .video-container {
   position: relative; 
-  /* Establish positioning context */ 
-  /*  Allow overflow */
   overflow: visible;
-  /* padding: 0px; Optional padding */
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column; /* Default layout */
 }
 
 .iframe-wrapper {
-  position: relative; /* Establish positioning for the iframe */
-  /* width: 100%; Full width of the parent */
-  /* height: 50vh; Set height as desired */
-  /* width: 600px; */
-  height: 300px;
-  width: auto;
-  overflow: visible; /* Allow overflow */
+  position: relative;
+  width: 130%; /* Set full width relative to parent */
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  overflow: visible;
 }
 
+.iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 37%;
+  width: 100%;
+  height: 130%;
+}
 
 .responsive-iframe {
   position: absolute; /* Position absolutely within the wrapper */
   top: 0; /* Align to the top */
-  left: 50%; /* Align to the left */
+  left: 48%; /* Align to the left */
   transform: translateX(-50%); /* Center the iframe */
   width: 130%; /* Full viewport width */
   height: 100%; /* Full height of the wrapper */
@@ -465,8 +651,8 @@ h3{
 .h3-blur {
   /* background-color: #333; */
   background-color: rgba(0, 0, 0, 0.7);
-  
-  padding: 5px;
+  width: 100%;
+  padding: 15px;
   margin: 15px 0;
   border-radius: 8px;
   position: relative;
@@ -484,22 +670,20 @@ h3{
   
 }
 
-
-
-
-.animation-border{
-  position: relative; /* Create a positioning context for absolute children */
-  width: 400px; /* Set the width as needed */
-  height: inherit; /* Set height as needed */
-  z-index: 1; /* Lower z-index to place behind band-card */
-
+.smallerThan1290class{
+  padding: 0;
 }
+
+
+
 
 .animation-and-card-border {
-  margin: 15px 0; 
+  margin: 15px 0; /* Optional: removes any extra margin */
   display: flex;
-
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
 }
+
 
 .coloring {
   content: '';
@@ -536,13 +720,18 @@ body {
     }
 
     #miniapp {
-      max-width: 400px; 
+      /* max-width: 400px;  */
+      max-width: 65vw;
       /* edited this ^ */
       margin: 0 auto;
       padding: 0 2rem;
       text-align: center;
+      display: flex; 
+      flex-direction: column;
+      overflow: visible; /* Ensure overflow is visible in miniapp */
+      justify-content: center; /* Center content horizontally */
       
-    }
+}
 
     .bg-container {
       background: linear-gradient(to right, #240244, #100014);
@@ -554,7 +743,7 @@ body {
   background-image: url('../calendar/wallpaperstart.png');
   background-position: top center;
   background-repeat: no-repeat;
-  background-size: 2600px auto; /* Set specific background size */
+  background-size: 100% auto; /* Set specific background size */
   width: 100%; /* Constrain width to the available space */
   min-height: 2400px;
   padding-top: 0;
@@ -571,7 +760,7 @@ body {
   background-image: url('../calendar/wallpaperend.png'); /* Replace with your image path */
   background-position: top center; /* Aligns the image to the top center */
   background-repeat: no-repeat;
-  background-size: 1300px auto; /* Set specific background size */
+  background-size: 100% auto; /* Set specific background size */
   width: 100%; /* Constrain width to the available space */
   min-height: 1800px; /* Ensure it has a minimum height */
   padding-top: 0; /* No padding on top */
@@ -588,10 +777,10 @@ body {
     }
 
     h1 {
-      font-size: x-large;
+      /* font-size: x-large; */
     font-style: italic; /* Italic style */
     margin: 0;
-    padding: 20px 0 0 0;
+    padding: 20px 0 20px 0;
     text-align: center;
     color: #ffffff;
     text-shadow: 
@@ -602,7 +791,11 @@ body {
     position: relative;
     z-index: 100;
     overflow: visible; /* Allow overflow to be visible */
-    white-space: normal; /* Allow wrapping if necessary */
+    /* white-space: normal; Allow wrapping if necessary */
+    /* white-space: nowrap; Prevent wrapping */
+    display: inline-block; /* Allow horizontal overflow */
+      
+
 }
 
 
@@ -615,11 +808,6 @@ body {
             margin: 0 auto 0 auto; /* Center the image horizontally */
 
         }
-
-        #band-cards-id{
-          margin-left: -30px;
-        }
-
 
 .color-1 {
     color: #ff00ff;
@@ -636,8 +824,8 @@ body {
 
 .nolivestreamclass{
   position: relative;
-  margin: 160px 0 50px 0;
-  padding: 80px 0px;
+  margin: 0 0 0 0;
+  padding: 16vw 0px;
   border-radius: 8px;
   background-color: #000000;
 }
