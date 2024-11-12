@@ -2,13 +2,9 @@
   <div class="backgroundPic">
     <div class="container-fluid botwSection d-lg-flex">
       <!-- Grid view for large screens -->
-      <div
-        class="pt-3 botw row px-5 justify-content-center d-none d-lg-flex"
-      >
+      <div class="pt-3 botw row px-5 justify-content-center d-none d-lg-flex">
         <div class="title">
-          <h1
-            class="text-center botw-heading animate__animated animate__zoomIn"
-          >
+          <h1 class="text-center botw-heading animate__animated animate__zoomIn">
             Bands of the Week
           </h1>
         </div>
@@ -55,21 +51,11 @@
             </router-link>
           </div>
         </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#botwCarousel"
-          data-bs-slide="prev"
-        >
+        <button class="carousel-control-prev" type="button" data-bs-target="#botwCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#botwCarousel"
-          data-bs-slide="next"
-        >
+        <button class="carousel-control-next" type="button" data-bs-target="#botwCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -85,6 +71,8 @@
 
 <script>
 import axios from 'axios';
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 export default {
   name: "Botw",
@@ -93,6 +81,7 @@ export default {
       bands: [], // Initialize as empty array
       loading: true, // Optional: To handle loading state
       error: null, // Optional: To handle errors
+      topBands: [],
     };
   },
   mounted() {
@@ -104,11 +93,22 @@ export default {
         const response = await axios.get('/MOCK_DATA.json');
         const allBands = response.data;
 
-        // Define the specific IDs to fetch
-        const desiredIds = [24, 37, 73, 84, 91];
+        this.topBands = [];
+        const q = query(collection(db, "bandviews"), orderBy("views", "desc"), limit(5));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          this.topBands.push(parseInt(doc.id));
+        });
 
+        // Define the specific IDs to fetch
+        const desiredIds = [24, 37, 73, 84, 91, 86, 23, 14, 2, 3];
+        for (let i = 0; i < desiredIds.length && this.topBands.length < 5; i++) {
+          if (!this.topBands.includes(desiredIds[i])) {
+            this.topBands.push(desiredIds[i]);
+          }
+        }
         // Filter the mock data to include only the desired bands
-        this.bands = allBands.filter(band => desiredIds.includes(band.id));
+        this.bands = allBands.filter(band => this.topBands.includes(band.id));
       } catch (err) {
         console.error("Error fetching band data:", err);
         this.error = "Failed to load bands. Please try again later.";
@@ -137,11 +137,13 @@ export default {
 }
 
 .backgroundPic {
-  background-image: url("/stock band/botw.jpg"); /* Updated path assuming botw.jpg is in public */
+  background-image: url("/stock band/botw.jpg");
+  /* Updated path assuming botw.jpg is in public */
   background-position: center center;
   background-size: cover;
   z-index: -99;
 }
+
 .botwSection {
   margin-top: 0;
   background: rgba(57, 0, 59, 0.606);
@@ -157,7 +159,8 @@ export default {
 /* Responsive height adjustment */
 @media (max-width: 991px) {
   .botwSection {
-    height: auto; /* Reduce height for carousel */
+    height: auto;
+    /* Reduce height for carousel */
   }
 }
 
@@ -183,7 +186,8 @@ h1 {
   -moz-background-clip: text;
   -webkit-background-clip: text;
   text-transform: uppercase;
-  font-size: clamp(2em, 8vw, 10em); /* Responsive font size */
+  font-size: clamp(2em, 8vw, 10em);
+  /* Responsive font size */
   margin: 10px 0;
   font-family: "Trends";
 }
@@ -215,10 +219,12 @@ h1 {
 }
 
 @keyframes blink {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
@@ -244,17 +250,17 @@ h1 {
   transform: translateZ(150px);
 }
 
-.botw .item:hover + * {
+.botw .item:hover+* {
   filter: brightness(0.6);
   transform: translateZ(100px) rotateY(30deg);
 }
 
-.botw .item:hover + * + * {
+.botw .item:hover+*+* {
   filter: brightness(0.4);
   transform: translateZ(50px) rotateY(10deg);
 }
 
-.botw .item:hover + * + * + * {
+.botw .item:hover+*+*+* {
   filter: brightness(0.2);
   transform: translateZ(20px) rotateY(5deg);
 }
@@ -263,10 +269,12 @@ h1 {
   filter: brightness(0.6);
   transform: translateZ(100px) rotateY(-30deg);
 }
+
 .botw .item:has(+ * + *:hover) {
   filter: brightness(0.4);
   transform: translateZ(50px) rotateY(-10deg);
 }
+
 .botw .item:has(+ * + * + *:hover) {
   filter: brightness(0.2);
   transform: translateZ(20px) rotateY(-5deg);
@@ -310,7 +318,8 @@ h1 {
 .caption h3 {
   font-size: 1em;
   margin: 0;
-  font-family: "Poppins", sans-serif; /* Changed to Poppins */
+  font-family: "Poppins", sans-serif;
+  /* Changed to Poppins */
   animation: captionGlow 2s infinite alternate;
 }
 
@@ -318,6 +327,7 @@ h1 {
   0% {
     text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
   }
+
   100% {
     text-shadow: 0 0 15px #ff00ff, 0 0 20px #ff00ff;
   }
@@ -327,15 +337,18 @@ h1 {
 #botwCarousel .carousel-inner,
 #botwCarousel .carousel-item,
 #botwCarousel .image-container {
-  height: 400px; /* Default height for large screens */
+  height: 400px;
+  /* Default height for large screens */
 }
 
 /* Adjust carousel height for smaller screens */
 @media (max-width: 991px) {
+
   #botwCarousel .carousel-inner,
   #botwCarousel .carousel-item,
   #botwCarousel .image-container {
-    height: 250px; /* Reduced height for smaller screens */
+    height: 250px;
+    /* Reduced height for smaller screens */
   }
 
   /* Add side padding to the carousel */
@@ -372,6 +385,7 @@ h1 {
 
 /* Responsive adjustments */
 @media (min-width: 992px) {
+
   /* Hide carousel on large screens */
   #botwCarousel {
     display: none;
@@ -379,6 +393,7 @@ h1 {
 }
 
 @media (max-width: 991px) {
+
   /* Hide grid on small screens */
   .botw {
     display: none;
