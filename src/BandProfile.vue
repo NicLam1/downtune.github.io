@@ -26,11 +26,7 @@
           <div class="col-md-6 genres-section">
             <h3 class="section-title"><i class="fas fa-music"></i> Genres</h3>
             <div class="genres-list">
-              <span
-                v-for="genre in band.genres"
-                :key="genre"
-                class="badge bg-primary genre-badge genre-pill fs-3 mx-2"
-              >
+              <span v-for="genre in band.genres" :key="genre" class="badge bg-primary genre-badge genre-pill fs-3 mx-2">
                 {{ genre }}
               </span>
             </div>
@@ -43,25 +39,13 @@
             <i class="fas fa-users"></i> Band Members
           </h3>
           <div class="row">
-            <div
-              class="col-md-4 member-card my-2"
-              v-for="member in band.members"
-              :key="member.id"
-              @click="openModal(member)"
-              role="button"
-              tabindex="0"
-              @keyup.enter="openModal(member)"
-            >
+            <div class="col-md-4 member-card my-2" v-for="member in band.members" :key="member.id"
+              @click="openModal(member)" role="button" tabindex="0" @keyup.enter="openModal(member)">
               <div class="card text-center">
                 <div class="card-body text-light">
-                  <img
-                    :src="
-                      member.picture ||
-                      'https://placehold.co/500x500/purple/white?text=Member'
-                    "
-                    :alt="member"
-                    class="member-picture mb-3"
-                  />
+                  <img :src="member.picture ||
+                    'https://placehold.co/500x500/purple/white?text=Member'
+                    " :alt="member" class="member-picture mb-3" />
                   <h5 class="card-title">{{ member }}</h5>
                 </div>
               </div>
@@ -79,11 +63,8 @@
             <div class="col-md-6">
               <h4 class="fw-bold">Upcoming Events</h4>
               <ul class="list-group">
-                <li
-                  class="list-group-item event-item"
-                  v-for="event in band.upcoming_events"
-                  :key="event.name + event.date"
-                >
+                <li class="list-group-item event-item" v-for="event in band.upcoming_events"
+                  :key="event.name + event.date">
                   <strong>{{ formatDate(event.date) }}</strong> -
                   {{ event.name }} @ {{ event.location }}
                 </li>
@@ -96,11 +77,7 @@
             <div class="col-md-6 mb-4 mt-4 mt-md-0">
               <h4 class="fw-bold">Past Events</h4>
               <ul class="list-group">
-                <li
-                  class="list-group-item event-item"
-                  v-for="event in band.past_events"
-                  :key="event.name + event.date"
-                >
+                <li class="list-group-item event-item" v-for="event in band.past_events" :key="event.name + event.date">
                   <strong>{{ formatDate(event.date) }}</strong> -
                   {{ event.name }} @ {{ event.location }}
                 </li>
@@ -120,16 +97,9 @@
           <div v-if="featuredArtist" class="featured-artist">
             <!-- Embedded Spotify Player -->
             <div class="spotify-embed">
-              <iframe
-                v-if="featuredArtist.spotifyEmbedUrl"
-                :src="featuredArtist.spotifyEmbedUrl"
-                width="100%"
-                height="380"
-                frameborder="0"
-                allowtransparency="true"
-                allow="encrypted-media"
-                aria-label="Spotify player for {{ featuredArtist.name }}"
-              ></iframe>
+              <iframe v-if="featuredArtist.spotifyEmbedUrl" :src="featuredArtist.spotifyEmbedUrl" width="100%"
+                height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"
+                aria-label="Spotify player for {{ featuredArtist.name }}"></iframe>
               <div v-else class="text-center text-light">
                 <p>Spotify player not available.</p>
               </div>
@@ -147,30 +117,14 @@
           </h3>
           <div class="scroll-container" :class="{ paused: isScrollingPaused }">
             <div class="scroll-content" ref="scrollContent">
-              <div
-                class="recommended-artist-card my-2"
-                v-for="artist in filteredRecommendedArtists"
-                :key="artist.id"
-                @mouseover="pauseScrolling"
-                @mouseleave="resumeScrolling"
-              >
+              <div class="recommended-artist-card my-2" v-for="artist in filteredRecommendedArtists" :key="artist.id"
+                @mouseover="pauseScrolling" @mouseleave="resumeScrolling">
                 <div class="card text-center">
-                  <div
-                    class="card-body d-flex flex-column justify-content-between"
-                  >
-                    <img
-                      :src="artist.image"
-                      :alt="artist.name"
-                      class="artist-image mb-3"
-                      loading="lazy"
-                    />
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <img :src="artist.image" :alt="artist.name" class="artist-image mb-3" loading="lazy" />
                     <h5 class="card-title text-light">{{ artist.name }}</h5>
-                    <a
-                      :href="artist.external_urls.spotify"
-                      target="_blank"
-                      class="btn btn-spotify mt-2"
-                      aria-label="Listen to {{ artist.name }} on Spotify"
-                    >
+                    <a :href="artist.external_urls.spotify" target="_blank" class="btn btn-spotify mt-2"
+                      aria-label="Listen to {{ artist.name }} on Spotify">
                       <i class="fab fa-spotify me-2"></i>Listen on Spotify
                     </a>
                   </div>
@@ -178,10 +132,7 @@
               </div>
             </div>
           </div>
-          <div
-            v-if="filteredRecommendedArtists.length === 0"
-            class="text-center text-light"
-          >
+          <div v-if="filteredRecommendedArtists.length === 0" class="text-center text-light">
             <p>No recommended artists available.</p>
           </div>
         </section>
@@ -191,21 +142,10 @@
           <div class="container">
             <h2 class="cta-title">Stay updated on {{ band.name }}</h2>
 
-            <form
-              @submit.prevent="submitForm"
-              class="mx-auto"
-              style="max-width: 400px"
-            >
+            <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px">
               <div class="mb-3">
-                <input
-                  v-model="email"
-                  type="email"
-                  class="form-control styled-select"
-                  id="emailInput"
-                  placeholder="Enter your email"
-                  required
-                  aria-label="Email address"
-                />
+                <input v-model="email" type="email" class="form-control styled-select" id="emailInput"
+                  placeholder="Enter your email" required aria-label="Email address" />
               </div>
               <button type="submit" class="btn btn-primary w-100">
                 <i class="fas fa-envelope"></i> Subscribe
@@ -214,15 +154,9 @@
 
             <h2 class="cta-title">& follow our socials today:</h2>
             <div class="social-icons">
-              <a href="#" aria-label="Facebook"
-                ><i class="fab fa-facebook"></i
-              ></a>
-              <a href="#" aria-label="Twitter"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="#" aria-label="Instagram"
-                ><i class="fab fa-instagram"></i
-              ></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
         </section>
@@ -231,22 +165,13 @@
       <!-- Modal for Band Member Details -->
       <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content">
-          <button
-            class="close-button"
-            @click="closeModal"
-            aria-label="Close Modal"
-          >
+          <button class="close-button" @click="closeModal" aria-label="Close Modal">
             <i class="fas fa-times"></i>
           </button>
           <div class="modal-body">
-            <img
-              :src="
-                selectedMember.picture ||
-                'https://placehold.co/500x500/purple/white?text=Band+Member'
-              "
-              :alt="selectedMember.name"
-              class="modal-member-picture mb-4"
-            />
+            <img :src="selectedMember.picture ||
+              'https://placehold.co/500x500/purple/white?text=Band+Member'
+              " :alt="selectedMember.name" class="modal-member-picture mb-4" />
             <h2 class="modal-member-name">{{ selectedMember }}</h2>
             <p><strong>Age:</strong> 26</p>
             <p><strong>Nationality:</strong> Singaporean</p>
@@ -272,6 +197,8 @@
 import axios from "axios";
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
+import { db } from "../firebaseConfig";
+import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 
 export default {
   name: "BandProfile",
@@ -506,6 +433,24 @@ export default {
       document.body.style.overflow = "auto"; // Restore scrolling
     };
 
+    const updateBandViews = async (bandId) => {
+      const bandViewRef = doc(db, "bandviews", bandId.toString());
+      const bandViewDoc = await getDoc(bandViewRef);
+
+      console.log("Incrementing view count for band", bandId);
+      if (bandViewDoc.exists()) {
+        // Increment the view count if the document exists
+        await updateDoc(bandViewRef, {
+          views: increment(1)
+        });
+      } else {
+        // Create a new document with the initial view count if it does not exist
+        await setDoc(bandViewRef, {
+          views: 1
+        });
+      }
+    };
+
     onMounted(() => {
       const bandId = parseInt(route.params.id, 10);
       if (isNaN(bandId)) {
@@ -514,6 +459,7 @@ export default {
         loading.value = false;
       } else {
         fetchBandData(bandId);
+        updateBandViews(bandId);
       }
     });
 
@@ -536,6 +482,7 @@ export default {
       selectedMember,
       openModal,
       closeModal,
+      updateBandViews
     };
   },
 };
@@ -546,11 +493,9 @@ export default {
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 .band-profile-container {
-  background: linear-gradient(
-    135deg,
-    rgba(14, 0, 19, 0.85),
-    rgba(17, 0, 36, 0.9)
-  );
+  background: linear-gradient(135deg,
+      rgba(14, 0, 19, 0.85),
+      rgba(17, 0, 36, 0.9));
   min-height: 100vh;
   color: #ffffff;
   font-family: "Poppins", sans-serif;
@@ -702,11 +647,9 @@ export default {
 }
 
 .call-to-action {
-  background: linear-gradient(
-    135deg,
-    rgba(31, 0, 61, 0.85),
-    rgba(101, 0, 163, 0.85)
-  );
+  background: linear-gradient(135deg,
+      rgba(31, 0, 61, 0.85),
+      rgba(101, 0, 163, 0.85));
   padding: 4rem 0;
   border-radius: 16px;
   animation: fadeIn 1s ease forwards;
@@ -846,14 +789,16 @@ footer p {
 
 .artist-recommendations-section {
   overflow: hidden;
-  height: 400px; /* Increased height to accommodate full card height */
+  height: 400px;
+  /* Increased height to accommodate full card height */
 }
 
 .scroll-container {
   position: relative;
   width: 100%;
   /* overflow: hidden; */
-  height: 300px; /* Match the artist-recommendations-section height */
+  height: 300px;
+  /* Match the artist-recommendations-section height */
   display: flex;
   align-items: center;
 }
@@ -874,7 +819,8 @@ footer p {
   transition: transform 0.3s;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Ensure card fills the container's height */
+  height: 100%;
+  /* Ensure card fills the container's height */
 }
 
 .recommended-artist-card:hover {
@@ -889,7 +835,8 @@ footer p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%; /* Make card fill the recommended-artist-card's height */
+  height: 100%;
+  /* Make card fill the recommended-artist-card's height */
 }
 
 .artist-recommendations-section .card:hover {
@@ -899,7 +846,8 @@ footer p {
 .artist-recommendations-section .artist-image {
   border-radius: 50%;
   border: 3px solid #ffffff;
-  width: 100px; /* Fixed size for consistency */
+  width: 100px;
+  /* Fixed size for consistency */
   height: 100px;
   object-fit: cover;
   margin: 0 auto 15px auto;
@@ -923,6 +871,7 @@ footer p {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -933,6 +882,7 @@ footer p {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -943,6 +893,7 @@ footer p {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -954,6 +905,7 @@ footer p {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -961,6 +913,7 @@ footer p {
 }
 
 @keyframes bounceIn {
+
   0%,
   20%,
   50%,
@@ -968,9 +921,11 @@ footer p {
   100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-30px);
   }
+
   60% {
     transform: translateY(-15px);
   }
@@ -980,6 +935,7 @@ footer p {
   from {
     width: 0;
   }
+
   to {
     width: 50px;
   }
@@ -990,6 +946,7 @@ footer p {
     transform: scale(0);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
