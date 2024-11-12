@@ -212,7 +212,7 @@
               </button>
             </form>
 
-            <h2 class="cta-title">& follow our socials today:</h2>
+            <h2 class="cta-title">Contact us here!</h2>
             <div class="social-icons">
               <a href="#" aria-label="Facebook"
                 ><i class="fab fa-facebook"></i

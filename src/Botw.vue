@@ -14,19 +14,24 @@
         </div>
 
         <div class="item col-lg-2" v-for="band in bands" :key="band.id">
-          <div class="image-container">
-            <img :src="band.thumbnail" :alt="band.name" />
-            <div class="caption">
-              <h3>{{ band.name }}</h3>
+          <router-link
+            :to="{ name: 'BandProfile', params: { id: band.id } }"
+            class="card-link"
+          >
+            <div class="image-container">
+              <img :src="band.thumbnail" :alt="band.name" />
+              <div class="caption">
+                <h3>{{ band.name }}</h3>
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
 
       <!-- Carousel for smaller screens -->
       <div
         id="botwCarousel"
-        class="carousel slide d-lg-none"
+        class="carousel slide d-lg-none mb-4"
         data-bs-ride="carousel"
       >
         <h1 class="text-center botw-heading">Bands of the Week</h1>
@@ -37,12 +42,17 @@
             :key="'carousel-' + band.id"
             :class="{ active: index === 0 }"
           >
-            <div class="image-container">
-              <img :src="band.thumbnail" class="d-block w-100" :alt="band.name" />
-              <div class="caption">
-                <h3>{{ band.name }}</h3>
+            <router-link
+              :to="{ name: 'BandProfile', params: { id: band.id } }"
+              class="card-link"
+            >
+              <div class="image-container">
+                <img :src="band.thumbnail" class="d-block w-100" :alt="band.name" />
+                <div class="caption">
+                  <h3>{{ band.name }}</h3>
+                </div>
               </div>
-            </div>
+            </router-link>
           </div>
         </div>
         <button
