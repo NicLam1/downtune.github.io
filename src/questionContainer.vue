@@ -23,7 +23,7 @@
         @selectedOption="updateResponse" :initialSelectedOption="responses[index]" :ref="'question' + index">
       </OtherQuestions>
     </MotionGroup>
-    <button class="btn btn-primary submit-responses px-5" @click="submitResponses">Submit</button>
+    <button class="btn btn-primary submit-responses px-5 mb-5" @click="submitResponses">Submit</button>
     <footer style="font-size: 8px;">
       &zwnj;
       <!-- Guitar Amp by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza
@@ -179,7 +179,7 @@ export default {
   border: none;
   outline: none;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 4px;
   color: #fff;
   font-size: 24px;
   transform: 0.3s ease;
