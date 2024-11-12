@@ -56,19 +56,22 @@
 
 <script>
 import { auth } from "../firebaseConfig";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import QuestionContainer from "./questionContainer.vue";
 import { inject } from "vue";
 
 export default {
   mounted() {
-    const user = auth.currentUser;
+    onAuthStateChanged(auth, (user) => {
     if (user) {
       this.isRegistered = true;
       this.user = user;
       this.setLoginState(true, user.uid, user.displayName); // Keep login state in sync
+    } else {
+      this.isRegistered = false;
     }
+  });
   },
 
   components: {
@@ -81,7 +84,7 @@ export default {
       password: "",
       confirmPassword: "",
       error: "",
-      isRegistered: false,
+      isRegistered: null,
       user: null, // Store user object
     };
   },
