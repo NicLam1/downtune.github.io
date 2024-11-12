@@ -60,21 +60,23 @@
             <span>Min: $</span>
             <input
               type="number"
-              v-model="priceRange.min"
+              v-model.number="priceRange.min"
               :min="minPrice"
-              :max="priceRange.max"
+              :max="priceRange.max - 50"
+              step="100"
               class="form-control me-2 ms-2 w-auto"
-              @input="adjustMinPriceInput"
+              @input="onMinPriceChange"
             />
 
             <span>Max: $</span>
             <input
               type="number"
-              v-model="priceRange.max"
-              :min="priceRange.min"
+              v-model.number="priceRange.max"
+              :min="priceRange.min + 50"
               :max="maxPrice"
+              step="100"
               class="form-control me-2 ms-2 w-auto"
-              @input="adjustMaxPriceInput"
+              @input="onMaxPriceChange"
             />
           </div>
 
@@ -84,11 +86,12 @@
             <input
               id="minPriceSlider"
               type="range"
-              v-model="priceRange.min"
+              v-model.number="priceRange.min"
               :min="minPrice"
-              :max="priceRange.max"
+              :max="priceRange.max - 50"
+              step="50"
               class="styled-range"
-              @input="adjustMinPrice"
+              @input="onMinPriceChange"
             />
           </div>
 
@@ -98,11 +101,12 @@
             <input
               id="maxPriceSlider"
               type="range"
-              v-model="priceRange.max"
-              :min="priceRange.min"
+              v-model.number="priceRange.max"
+              :min="priceRange.min + 50"
               :max="maxPrice"
+              step="50"
               class="styled-range"
-              @input="adjustMaxPrice"
+              @input="onMaxPriceChange"
             />
           </div>
 
@@ -238,11 +242,11 @@ export default {
     },
     userPrefMinPrice: {
       type: Number,
-      // default: 0 // Set a default value for minPrice if it's not passed
+      default: null, // Set default to null to handle absence
     },
     userPrefMaxPrice: {
       type: Number,
-      // default: 100 // Set a default value for maxPrice if it's not passed
+      default: null, // Set default to null to handle absence
     },
   },
   name: "Cards",
@@ -284,10 +288,6 @@ export default {
       priceRange: {
         min: 0,
         max: 1000,
-        userPrefMinPrice: null, // User's preferred min price
-        userPrefMaxPrice: null, // User's preferred max price
-        priceRangeMinUpdated: false, // Flag to track if the price range has been updated
-        priceRangeMaxUpdated: false, // Flag to track if the price range has been updated
       },
       currentPage: 1,
       itemsPerPage: 12,
@@ -347,37 +347,44 @@ export default {
       return this.filteredBands.slice(start, end);
     },
     totalPages() {
-      return Math.ceil(this.filteredBands.length / this.itemsPerPage);
+      return Math.ceil(this.filteredBands.length / this.itemsPerPage) || 1;
     },
   },
   methods: {
-    adjustMinPrice() {
+    roundToNearest50(value) {
+      return Math.round(value / 50) * 50;
+    },
+    onMinPriceChange() {
+      // Round to nearest 50
+      this.priceRange.min = this.roundToNearest50(this.priceRange.min);
+
+      // Ensure min does not exceed max - 50
       if (this.priceRange.min >= this.priceRange.max) {
-        this.priceRange.min = this.priceRange.max - 1;
+        this.priceRange.min = this.priceRange.max - 50;
       }
+
+      // Ensure min is not below the overall minPrice
+      if (this.priceRange.min < this.minPrice) {
+        this.priceRange.min = this.minPrice;
+      }
+
       this.resetPage();
       this.filterTrigger++;
     },
-    adjustMaxPrice() {
+    onMaxPriceChange() {
+      // Round to nearest 50
+      this.priceRange.max = this.roundToNearest50(this.priceRange.max);
+
+      // Ensure max does not go below min + 50
       if (this.priceRange.max <= this.priceRange.min) {
-        this.priceRange.max = this.priceRange.min + 1;
+        this.priceRange.max = this.priceRange.min + 50;
       }
-      this.resetPage();
-      this.filterTrigger++;
-    },
-    adjustMinPriceInput() {
-      // Handle min price input field change
-      if (this.priceRange.min >= this.priceRange.max) {
-        this.priceRange.min = this.priceRange.max - 1;
+
+      // Ensure max does not exceed the overall maxPrice
+      if (this.priceRange.max > this.maxPrice) {
+        this.priceRange.max = this.maxPrice;
       }
-      this.resetPage();
-      this.filterTrigger++;
-    },
-    adjustMaxPriceInput() {
-      // Handle max price input field change
-      if (this.priceRange.max <= this.priceRange.min) {
-        this.priceRange.max = this.priceRange.min + 1;
-      }
+
       this.resetPage();
       this.filterTrigger++;
     },
@@ -397,7 +404,7 @@ export default {
     addLessCommonGenre(event) {
       const genre = event.target.value;
       if (genre && !this.genres.includes(genre)) {
-        this.genres.push(genre); // Add to genres list to display as a pill
+        this.genres.push(genre); // Add to genres list to display as pill
       }
       if (genre && !this.selectedGenres.includes(genre)) {
         this.selectedGenres.push(genre); // Mark as selected
@@ -415,7 +422,8 @@ export default {
     },
     clearFilters() {
       this.selectedGenres = [];
-      this.priceRange = { min: this.minPrice, max: this.maxPrice }; // Reset both min and max
+      this.priceRange.min = this.minPrice;
+      this.priceRange.max = this.maxPrice;
       this.searchQuery = "";
       this.resetPage();
     },
@@ -490,7 +498,21 @@ export default {
       const prices = this.bands.map((band) => band.price);
       this.minPrice = Math.min(...prices);
       this.maxPrice = Math.max(...prices);
-      this.priceRange = { min: this.minPrice, max: this.maxPrice };
+
+      // Initialize priceRange based on user preferences or data
+      this.priceRange.min =
+        this.userPrefMinPrice !== null
+          ? this.roundToNearest50(
+              Math.max(this.userPrefMinPrice, this.minPrice)
+            )
+          : this.roundToNearest50(this.minPrice);
+      this.priceRange.max =
+        this.userPrefMaxPrice !== null
+          ? this.roundToNearest50(
+              Math.min(this.userPrefMaxPrice, this.maxPrice)
+            )
+          : this.roundToNearest50(this.maxPrice);
+
       await this.loadFavorites(); // Load favorites after bands are loaded
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -509,23 +531,30 @@ export default {
         this.selectedGenres = [
           ...new Set([...this.selectedGenres, ...newGenres]),
         ];
+        this.resetPage();
+        this.filterTrigger++;
       }
     },
     userPrefMinPrice(newMinPrice) {
-      if (newMinPrice !== null && !this.priceRangeMinUpdated) {
-        this.priceRange.min = newMinPrice; // Update the price range
-        this.priceRangeMinUpdated = true;
-        console.log(this.priceRange);
-        console.log("User price min range updated to:", newMinPrice);
+      if (
+        newMinPrice !== null &&
+        newMinPrice >= this.minPrice &&
+        newMinPrice < this.priceRange.max
+      ) {
+        this.priceRange.min = this.roundToNearest50(newMinPrice);
+        this.resetPage();
+        this.filterTrigger++;
       }
     },
     userPrefMaxPrice(newMaxPrice) {
-      if (newMaxPrice !== null && !this.priceRangeMaxUpdated) {
-        console.log("User price min range updated to:", newMaxPrice);
-        this.priceRange.max = newMaxPrice; // Update the price range
-        this.priceRangeMaxUpdated = true;
-        console.log(this.priceRange);
-        console.log("User price min range updated to:", newMaxPrice);
+      if (
+        newMaxPrice !== null &&
+        newMaxPrice <= this.maxPrice &&
+        newMaxPrice > this.priceRange.min
+      ) {
+        this.priceRange.max = this.roundToNearest50(newMaxPrice);
+        this.resetPage();
+        this.filterTrigger++;
       }
     },
   },
@@ -567,7 +596,7 @@ body {
   color: #ffffff;
 }
 
-@media (width<992px) {
+@media (max-width: 992px) {
   .cardsSection {
     border-radius: 16px;
   }
@@ -715,7 +744,7 @@ body {
   flex-direction: column;
 }
 
-@media (width<992px) {
+@media (max-width: 992px) {
   .filter-section {
     background: linear-gradient(
       135deg,
@@ -783,7 +812,7 @@ body {
   padding: 7px 13px 7px 13px;
   margin-bottom: 5px;
   margin-left: 5px;
-  font-size: ;
+  font-size: 0.9em;
 }
 
 .styled-select {
