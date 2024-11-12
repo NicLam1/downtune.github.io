@@ -11,7 +11,7 @@
       <div
         class="banner"
         :class="{ 'banner-loaded': bannerLoaded }"
-        :style="{ backgroundImage: `url('${band.banner}')` }"
+        :style="{ backgroundImage: `url('${band.thumbnail}')` }"
       >
         <div class="banner-overlay justify-content-center">
           <h1 class="band-name mx-4">{{ band.name }}</h1>
