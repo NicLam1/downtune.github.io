@@ -9,7 +9,7 @@
     <div v-else-if="band" class="band-profile-content">
       <!-- Band Banner -->
        
-      <div class="banner animate__animated animate__fadeIn" :style="{ backgroundImage: `url('${band.banner}')` }">
+      <div class="banner" :style="{ backgroundImage: `url('${band.banner}')` }">
         <div class="banner-overlay justify-content-center">
           <h1 class="band-name mx-4">{{ band.name }}</h1>
         </div>
