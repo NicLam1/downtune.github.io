@@ -49,7 +49,7 @@
               <div class="image-container">
                 <img :src="band.thumbnail" class="d-block w-100" :alt="band.name" />
                 <div class="caption">
-                  <h3>{{ band.name }}</h3>
+                  <h4>{{ band.name }}</h4>
                 </div>
               </div>
             </router-link>
@@ -192,7 +192,7 @@ h1 {
 .scroll-arrow {
   z-index: 0;
   position: absolute;
-  bottom: 100px;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
@@ -276,7 +276,7 @@ h1 {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  height: 600px;
+  height: 40vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow */
 }
 
@@ -288,6 +288,7 @@ h1 {
 
 .caption {
   font-family: "Poppins", sans-serif; /* Ensured Poppins is used */
+  font-size: 1em;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -307,6 +308,7 @@ h1 {
 }
 
 .caption h3 {
+  font-size: 1em;
   margin: 0;
   font-family: "Poppins", sans-serif; /* Changed to Poppins */
   animation: captionGlow 2s infinite alternate;
