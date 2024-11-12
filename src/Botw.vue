@@ -122,9 +122,6 @@ export default {
         nextElement.scrollIntoView({ behavior: "smooth" });
       }
     },
-    goToProfile(bandId){
-      this.$router.push({ name: 'BandProfile', params: { id: bandId } });
-    }
   },
 };
 </script>
