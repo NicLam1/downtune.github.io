@@ -10,6 +10,9 @@
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column login-section">
+            <button class="btn btn-secondary mb-4 w-25" @click="goBack">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
             <h2 class="text-center text-light fw-bold mb-4">
               Reset your password
             </h2>
@@ -20,9 +23,9 @@
               </div>
               <button type="submit" class="btn btn-light w-100">Reset Password</button>
             </form>
-            <p class="text-center mt-3 text-light">
-              <div>{{ this.error }}</div>
-            </p>
+            <div class="text-center mt-3 text-light">
+              <p>{{ this.error }}</p>
+            </div>
           </div>
 
           <!-- Carousel Section -->
@@ -76,6 +79,9 @@ export default {
           this.error = error.message;
         });
     },
+    goBack(){
+      this.$router.go(-1);
+    }
   },
 };
 </script>
@@ -197,5 +203,11 @@ body {
 
 .btn-light:hover {
   background: #8e24aa;
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #7100e0, #ac00e8);
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s;
 }
 </style>

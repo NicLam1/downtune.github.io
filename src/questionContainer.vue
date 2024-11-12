@@ -15,11 +15,12 @@
         <i class="fa fa-arrow-down"></i>
       </div>
     </div>
-    <Carousel @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres" :initialGenre="preselect"></Carousel>
+      <Carousel ref="carousel" @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"
+        :initialGenres="genres"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
       <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
         :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
-        @selectedOption="updateResponse" :initialSelectedOption="responses[index]">
+        @selectedOption="updateResponse" :initialSelectedOption="responses[index]" :ref="'question' + index">
       </OtherQuestions>
     </MotionGroup>
     <button class="btn btn-primary submit-responses px-5" @click="submitResponses">Submit</button>
@@ -99,6 +100,17 @@ export default {
     async submitResponses() {
       console.log(this.responses);
       console.log(this.genres);
+      if(this.genres.length === 0) {
+        this.$refs.carousel.$el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+      for (let i = 0; i < this.questions.length; i++) {
+        if (!this.responses[i]) {
+          // Scroll to the first unanswered question
+          this.$refs['question' + i][0].$el.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
 
       const user = auth.currentUser;
       if (!user) {
@@ -132,7 +144,6 @@ export default {
 </script>
 
 <style scoped>
-
 .welcome-container {
   height: 95vh;
   font-weight: bold;
@@ -147,15 +158,17 @@ export default {
 .welcome-text {
   font-size: 80px;
 }
+
 @media (max-width: 768px) {
   .welcome-text {
-    font-size: 4rem; /* Smaller font size for tablets */
+    font-size: 4rem;
+    /* Smaller font size for tablets */
   }
 }
 
 .scroll-arrow {
   font-size: 4rem;
-  color: #333;
+  color: white;
   margin-top: 2rem;
   position: absolute;
   bottom: 20px;

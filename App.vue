@@ -31,7 +31,8 @@ export default {
         route.path === "/login/user" ||
         route.path === "/login/band" ||
         route.path === "/register/user" ||
-        route.path === "/register/band"
+        route.path === "/register/band" ||
+        route.path === "/forgotPassword" 
       );
     });
 

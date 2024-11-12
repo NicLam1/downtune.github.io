@@ -11,6 +11,9 @@
         <div class="card col-12 col-md-8 col-lg-6 h-100 shadow-lg overflow-hidden">
           <div class="row g-0 h-100">
             <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column">
+              <button class="btn btn-secondary mb-4 w-25" @click="goBack">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
               <h2 class="text-center text-light fw-bold mb-4">Register</h2>
               <form @submit.prevent="handleRegister" class="d-flex flex-column justify-content-center text-light">
                 <div class="mb-3">
@@ -122,9 +125,12 @@ export default {
         this.setLoginState(true, user.uid, user.displayName);
       } catch (error) {
         console.error("Error during registration:", error);
-        this.error = error.message;
+        this.error = "Email is already in use.";
       }
     },
+    goBack(){
+      this.$router.push("/choose");
+    }
 
     // Method to update user preferences in Firestore after they answer the questions
     // async updatePreferences(preferences) {
@@ -138,6 +144,7 @@ export default {
     //   }
     // },
   },
+ 
 };
 </script>
 
@@ -254,5 +261,11 @@ body {
 
 .btn-light:hover {
   background: #8e24aa;
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #7100e0, #ac00e8);
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s;
 }
 </style>

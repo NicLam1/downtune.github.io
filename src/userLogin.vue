@@ -10,6 +10,9 @@
         <div class="row g-0 h-100">
           <!-- Login Form Section -->
           <div class="col-md-8 col-12 p-5 col-flex d-flex flex-column login-section">
+            <button class="btn btn-secondary mb-4 w-25" @click="goBack">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
             <h2 class="text-center text-light fw-bold mb-4">
               Sign in to your account
             </h2>
@@ -25,6 +28,9 @@
               <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
                 <router-link to="/forgotPassword" class="text-light mt-2 mt-md-0">Forgot your password?</router-link>
               </div>
+              <div class="text-danger">
+                {{ error }}
+              </div>
               <button type="submit" class="btn btn-light w-100">Sign in</button>
             </form>
             <p class="text-center mt-3 text-light">
@@ -33,9 +39,6 @@
                 Sign up
               </router-link>
             </p>
-            <div>
-              {{ this.error }}
-            </div>
           </div>
 
           <!-- Carousel Section -->
@@ -92,9 +95,12 @@ export default {
         this.$router.push("/"); // Redirect to home page
       } catch (error) {
         console.error("Error logging in:", error);
-        this.error = error.message;
+        this.error = "Check your email and password and try again.";
       }
     },
+    goBack(){
+      this.$router.push("/choose");
+    }
   },
 };
 </script>
@@ -216,5 +222,15 @@ body {
 
 .btn-light:hover {
   background: #8e24aa;
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #7100e0, #ac00e8);
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+.error{
+  color: red;
+  font-size: 1.2rem;
 }
 </style>

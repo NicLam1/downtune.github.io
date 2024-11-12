@@ -1,43 +1,31 @@
 <template>
-  <div class="background-wrapper" >
+  <div class="background-wrapper">
     <div class="carousel-wrapper"> <!-- Wrapper to center the carousel -->
       <div class="question mb-5 text-center">
         <h1>What genre of music are you looking for?</h1>
         <h3 :class="{ 'bounce-text': bounceLimitReached }">Click up to 3</h3>
       </div>
 
-      <swiper
-        :modules="[EffectCoverflow, Pagination, Navigation]"
-        effect="coverflow"
-        :grab-cursor="true"
-        :loop="true"
-        :centered-slides="true"
-        :slides-per-view="'auto'"
-        :coverflowEffect="{
+      <swiper :modules="[EffectCoverflow, Pagination, Navigation]" effect="coverflow" :grab-cursor="true" :loop="true"
+        :centered-slides="true" :slides-per-view="'auto'" :coverflowEffect="{
           rotate: 50,
           stretch: 0,
           depth: 100,
           modifier: 1,
           slideShadows: true
-        }"
-        :pagination="{
+        }" :pagination="{
           el: '.swiper-pagination',
           clickable: true
-        }"
-        :navigation="{
+        }" :navigation="{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
-        }"
-        :breakpoints="{
+        }" :breakpoints="{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 3 }
-        }"
-        @slideChange="onSlideChange"
-        :allow-touch-move="true"
-        class="mySwiper"
-      >
-        <swiper-slide v-for="(slide, index) in slides" :key="index" :class="{'selected-genre': isGenreSelected(slide.title)}" @click="toggleGenreSelection(slide.title)">
+        }" @slideChange="onSlideChange" :allow-touch-move="true" class="mySwiper">
+        <swiper-slide v-for="(slide, index) in slides" :key="index"
+          :class="{ 'selected-genre': isGenreSelected(slide.title) }" @click="toggleGenreSelection(slide.title)">
           <img :src="slide.url" :alt="slide.title" />
         </swiper-slide>
 
@@ -75,6 +63,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export default {
+  props: ['initialGenres'],
   components: {
     Swiper,
     SwiperSlide,
@@ -102,9 +91,9 @@ export default {
         { title: 'Hip-hop', url: '/userQuestionImg/hiphop.jpg' },
         { title: 'Metal', url: '/userQuestionImg/metal.webp' },
         { title: 'Reggae', url: '/userQuestionImg/reggae.webp' },
-        
+
       ],
-      bounceLimitReached: false, 
+      bounceLimitReached: false,
     };
   },
   methods: {
@@ -115,8 +104,8 @@ export default {
       this.currentGenre = this.slides[currentIndex].title;
 
     },
-     // Toggles the current genre in the user's selection list
-     toggleGenreSelection(genre) {
+    // Toggles the current genre in the user's selection list
+    toggleGenreSelection(genre) {
       if (this.userSelection.includes(genre)) {
         // If the genre is already selected, remove it
         const index = this.userSelection.indexOf(genre);
@@ -129,7 +118,7 @@ export default {
           this.triggerBounceAnimation();
         }
       }
-      this.$emit('selectedGenres',this.userSelection);
+      this.$emit('selectedGenres', this.userSelection);
     },
 
     // Check if a genre is already selected
@@ -151,23 +140,23 @@ export default {
         case 'Pop':
           return 'linear-gradient(135deg, lightpink, pink)';
         case 'Jazz':
-          return 'linear-gradient(135deg, chocolate, coral)'; 
+          return 'linear-gradient(135deg, chocolate, coral)';
         case 'Electronic':
-          return 'linear-gradient(135deg, cyan, dodgerblue)'; 
+          return 'linear-gradient(135deg, cyan, dodgerblue)';
         case 'Classical':
-          return 'linear-gradient(135deg, beige, mistyrose)'; 
+          return 'linear-gradient(135deg, beige, mistyrose)';
         case 'Country':
           return 'linear-gradient(135deg, goldenrod, peru)';
         case 'Ambient':
           return 'linear-gradient(135deg, lavender, lightsteelblue)';
         case 'Blues':
-          return 'linear-gradient(135deg, royalblue, skyblue)'; 
+          return 'linear-gradient(135deg, royalblue, skyblue)';
         case 'Hip-hop':
-          return 'linear-gradient(135deg, darkorange, orangered)'; 
+          return 'linear-gradient(135deg, darkorange, orangered)';
         case 'Metal':
-          return 'linear-gradient(135deg, darkslategray, silver)'; 
+          return 'linear-gradient(135deg, darkslategray, silver)';
         case 'Reggae':
-          return 'linear-gradient(135deg, yellowgreen, limegreen)'; 
+          return 'linear-gradient(135deg, yellowgreen, limegreen)';
         default:
           return 'linear-gradient(135deg, forestgreen, darkseagreen)'; // Default background
       }
@@ -177,8 +166,11 @@ export default {
     // Watch for changes in backgroundGradient
     backgroundGradient(newGradient) {
       this.$emit('updateBackgroundGradient', newGradient);
-      
     },
+    initialGenres(newValue) {
+      console.log('initialGenres watcher triggered:', newValue);
+      this.userSelection = newValue || [];
+    }
   },
 };
 </script>
@@ -219,7 +211,7 @@ export default {
   transition: border 0.3s ease;
 }
 
-.swiper-slide-active{
+.swiper-slide-active {
   cursor: pointer;
 }
 
@@ -236,23 +228,32 @@ export default {
 }
 
 .selected-genre {
-  border: 5px solid limegreen; /* Bright green border */
+  border: 5px solid limegreen;
+  /* Bright green border */
   border-radius: 10px
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-20px);
   }
+
   60% {
     transform: translateY(-10px);
   }
 }
 
 .bounce-text {
-  animation: bounce 1s ease; /* Apply the bounce animation for 1 second */
+  animation: bounce 1s ease;
+  /* Apply the bounce animation for 1 second */
 }
 </style>
