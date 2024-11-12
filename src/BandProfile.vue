@@ -33,7 +33,7 @@
               <span
                 v-for="genre in band.genres"
                 :key="genre"
-                class="badge bg-primary genre-badge genre-pill fs-3 mx-2"
+                class="badge genre-pill fs-4 mx-2 px-4 py-2"
               >
                 {{ genre }}
               </span>
@@ -60,10 +60,10 @@
                 <div class="card-body text-light">
                   <img
                     :src="member.picture || 'https://placehold.co/500x500/purple/white?text=Member'"
-                    :alt="member.name"
+                    :alt="member"
                     class="member-picture mb-3"
                   />
-                  <h5 class="card-title">{{ member.name }}</h5>
+                  <h5 class="card-title">{{ member }}</h5>
                 </div>
               </div>
             </div>
@@ -226,10 +226,10 @@
               :alt="selectedMember.name"
               class="modal-member-picture mb-4"
             />
-            <h2 class="modal-member-name">{{ selectedMember.name }}</h2>
-            <p><strong>Age:</strong> {{ selectedMember.age }}</p>
-            <p><strong>Nationality:</strong> {{ selectedMember.nationality }}</p>
-            <p><strong>Instrument:</strong> {{ selectedMember.instrument }}</p>
+            <h2 class="modal-member-name">{{ selectedMember}}</h2>
+            <p><strong>Age:</strong> 23</p>
+            <p><strong>Nationality:</strong> Singaporean</p>
+            <p><strong>Instrument:</strong> Vocals</p>
           </div>
         </div>
       </div>
@@ -653,8 +653,12 @@ export default {
 }
 
 .genre-badge {
-  margin: 0.2rem;
   animation: popIn 0.5s ease forwards;
+  background: #7100e0;
+  border-radius: 50px;
+  padding: 7px 13px 7px 13px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .member-card {
@@ -904,6 +908,20 @@ footer p {
 .btn-spotify:hover {
   background-color: #1ed760;
   transform: scale(1.05);
+}
+
+.genre-pill{
+  padding: 7px 20px;
+  background: linear-gradient(135deg, #6f00e8, #c603ff);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  transition: background 0.3s, color 0.3s;
+  user-select: none;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
 }
 
 /* Infinite Scroll Animation */
