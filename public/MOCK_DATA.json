@@ -6,7 +6,7 @@
     "thumbnail": "/band/image (1).webp",
     "banner": "/band/image (1).jpg",
     "members": ["Henry Woods", "Liam White", "Emily Stone", "Grace Taylor"],
-    "price": 5800,
+    "price": 1300,
     "biography": "The Groove Alliance is known for their deep, soulful sounds combined with the rhythmic edge of funk. They bring smooth melodies and groovy basslines that captivate audiences.",
     "upcoming_events": [
       {
@@ -56,7 +56,7 @@
       "Mason Hill",
       "Alex Chen"
     ],
-    "price": 68,
+    "price": 670,
     "biography": "Ethereal Echo creates immersive soundscapes that transport listeners to another dimension. Their unique mix of ambient and electronic sounds is perfect for introspective and meditative experiences.",
     "upcoming_events": [
       {
@@ -226,7 +226,7 @@
     "thumbnail": "/band/image (6).webp",
     "banner": "/band/image (6).jpg",
     "members": ["Ava Morgan", "Charlie Day", "Ella Thompson", "Jacky Smith"],
-    "price": 208,
+    "price": 1200,
     "biography": "Folk Harmony is a group that captures the essence of traditional folk music with a modern twist. Their acoustic and indie influences bring a unique sound that resonates with audiences.",
     "upcoming_events": [
       {
@@ -415,7 +415,7 @@
       "Samantha Roberts",
       "Ella Tan"
     ],
-    "price": 161,
+    "price": 890,
     "biography": "Indie Vibes brings an alternative edge to rock with their unique indie sound, appealing to fans of both classic rock and modern alternative.",
     "upcoming_events": [
       {
@@ -451,7 +451,7 @@
     "thumbnail": "/band/image (11).webp",
     "banner": "/band/image (11).jpg",
     "members": ["Oliver Scott", "Mia Brown", "Kevin White", "Sara Johnson"],
-    "price": 290,
+    "price": 550,
     "biography": "Hip Hop Nation is a high-energy group that brings powerful lyrics, heavy beats, and a strong connection with the crowd. Their fusion of hip hop, rap, and R&B creates an electrifying performance.",
     "upcoming_events": [
       {
@@ -669,7 +669,7 @@
       "Noah Reed",
       "Hannah Young"
     ],
-    "price": 117,
+    "price": 1350,
     "biography": "Rasta Groove is known for their lively performances that blend reggae, ska, and world music, creating an uplifting experience for audiences.",
     "upcoming_events": [
       {
@@ -850,7 +850,7 @@
     "thumbnail": "/band/image (22).webp",
     "banner": "/band/image (22).jpg",
     "members": ["Noah Reed", "Grace Lee", "Liam Chen", "Isabella Tan"],
-    "price": 394,
+    "price": 700,
     "biography": "Ambient Flow creates ethereal soundscapes with a blend of downtempo and chillout beats, perfect for relaxing and meditative environments.",
     "upcoming_events": [
       {
@@ -1040,7 +1040,7 @@
     "thumbnail": "/band/image (27).webp",
     "banner": "/band/image (27).jpg",
     "members": ["Henry Stone", "Lucas Grey", "Ella Wright", "Sarah Green"],
-    "price": 350,
+    "price": 1100,
     "biography": "Blues & Soul delivers a unique mix of soulful melodies and bluesy rock, creating an intimate atmosphere that captivates audiences.",
     "upcoming_events": [
       {
@@ -1162,7 +1162,7 @@
       "Emma Black",
       "Sophie Johnson"
     ],
-    "price": 158,
+    "price": 450,
     "biography": "Metal Storm brings a storm of heavy riffs and intense vocals, making every performance a headbanger's paradise.",
     "upcoming_events": [
       {
@@ -1308,7 +1308,7 @@
     "thumbnail": "/band/image (34).webp",
     "banner": "/band/image (34).jpg",
     "members": ["Mason Torres", "Liam Scott", "Emma Williams", "Noah Garcia"],
-    "price": 477,
+    "price": 570,
     "biography": "Worldly Rhythms combines a blend of Afrobeat, Latin, and world music for a high-energy, dance-driven performance that celebrates global sounds.",
     "upcoming_events": [
       {
@@ -1705,7 +1705,7 @@
     "thumbnail": "/band/image (45).webp",
     "banner": "/band/image (45).jpg",
     "members": ["Noah Brown", "Sophia Miller", "Ethan Garcia", "Lucas Johnson"],
-    "price": 185,
+    "price": 900,
     "biography": "Blues Rhythm merges soulful blues with jazzy undertones for a smooth, nostalgic sound that resonates deeply with listeners.",
     "upcoming_events": [
       {
@@ -1907,7 +1907,7 @@
     "thumbnail": "/band/image (52).webp",
     "banner": "/band/image (52).jpg",
     "members": ["Isabella Jones", "Mia Brown", "Ava Wilson"],
-    "price": 490,
+    "price": 600,
     "biography": "Gospel Voices uplift audiences with powerful gospel songs infused with soulful melodies.",
     "upcoming_events": [
       {
@@ -2028,7 +2028,7 @@
     "thumbnail": "/band/image (56).webp",
     "banner": "/band/image (56).jpg",
     "members": ["Ava Brown", "Emily Roberts", "Oliver Green"],
-    "price": 210,
+    "price": 850,
     "biography": "Folk Horizons combines the charm of folk and country music, painting stories with each melody.",
     "upcoming_events": [
       {
@@ -2138,24 +2138,24 @@
   },
   {
     "id": 60,
-    "name": "Rock Star",
-    "genres": ["Rock", "Punk"],
-    "thumbnail": "/band/image (60).webp",
-    "banner": "/band/image (60).jpg",
-    "members": ["Alexander Kim", "Lucas Johnson", "James Park", "Ethan White"],
-    "price": 181,
-    "biography": "Rock Star brings an intense punk rock edge to their performances, with high energy and powerful riffs.",
+    "name": "Justin Bieber",
+    "genres": ["Pop"],
+    "thumbnail": "/band/JB_banner.webp",
+    "banner": "/band/JB_banner.webp",
+    "members": ["Justin Bieber"],
+    "price": 850,
+    "biography": "Justin Bieber is a Canadian pop sensation known for his smooth vocals and chart-topping hits, blending pop and R&B styles.",
     "upcoming_events": [
-      { "name": "Rock Night", "date": "2024-06-30", "location": "Bugis" },
-      { "name": "Punk Power", "date": "2024-08-15", "location": "Orchard" }
+      { "name": "World Tour", "date": "2024-07-15", "location": "Marina Bay Sands" },
+      { "name": "Bieber Fever", "date": "2024-09-10", "location": "Singapore Indoor Stadium" }
     ],
     "past_events": [
       {
-        "name": "Punk Riot",
-        "date": "2023-11-07",
-        "location": "Downtown Core"
+        "name": "Justice Tour",
+        "date": "2023-10-12",
+        "location": "Tokyo Dome"
       },
-      { "name": "Rock and Roll", "date": "2023-09-03", "location": "Sentosa" }
+      { "name": "Purpose World Tour", "date": "2016-08-19", "location": "Madison Square Garden" }
     ]
   },
   {
@@ -2232,7 +2232,7 @@
       "Mason Lee",
       "Olivia Evans"
     ],
-    "price": 232,
+    "price": 800,
     "biography": "Acoustic Soul blends folk and soul into an acoustic performance that is as heartfelt as it is powerful.",
     "upcoming_events": [
       {
@@ -2257,7 +2257,7 @@
     "thumbnail": "/band/image (64).webp",
     "banner": "/band/image (64).jpg",
     "members": ["Liam Thompson", "Ella Kim", "Grace Brown", "James Cooper"],
-    "price": 339,
+    "price": 400,
     "biography": "Pop Fusion brings an upbeat pop sound with dance and electronic influences, perfect for a lively night out.",
     "upcoming_events": [
       { "name": "Pop Fest", "date": "2024-06-18", "location": "Esplanade" },
@@ -2504,7 +2504,7 @@
       "Ella Wilson",
       "Mason Wong"
     ],
-    "price": 382,
+    "price": 670,
     "biography": "Metal Blast delivers intense metal and thrash performances that leave audiences electrified.",
     "upcoming_events": [
       {
@@ -2557,7 +2557,7 @@
       "Sophie James",
       "Emma Carter"
     ],
-    "price": 447,
+    "price": 880,
     "biography": "Urban Funk combines urban hip hop beats with funky rhythms, energizing the crowd and keeping the party going.",
     "upcoming_events": [
       {
@@ -2755,7 +2755,7 @@
     "thumbnail": "/band/image (83).webp",
     "banner": "/band/image (83).jpg",
     "members": ["Lucas Chen", "Grace Martinez"],
-    "price": 87,
+    "price": 520,
     "biography": "Downtempo Vibes crafts serene, relaxing soundscapes perfect for winding down and escaping the hustle of the city.",
     "upcoming_events": [
       {
@@ -2803,7 +2803,7 @@
       "Ethan Williams",
       "Liam Taylor"
     ],
-    "price": 413,
+    "price": 650,
     "biography": "Folk & Blues brings the simplicity of folk with the depth of blues, offering a storytelling experience in every performance.",
     "upcoming_events": [
       { "name": "Folk Fest", "date": "2024-06-22", "location": "Clarke Quay" },
@@ -2825,7 +2825,7 @@
     "thumbnail": "/band/image (86).webp",
     "banner": "/band/image (86).jpg",
     "members": ["Benjamin Carter", "Lucas Gray", "Olivia Martinez"],
-    "price": 57,
+    "price": 780,
     "biography": "Ska Connection combines ska with reggae beats, making every event a dance party with a lively atmosphere.",
     "upcoming_events": [
       { "name": "Ska Fest", "date": "2024-07-24", "location": "Orchard" },
@@ -2941,7 +2941,7 @@
     "thumbnail": "/band/image (91).webp",
     "banner": "/band/image (91).jpg",
     "members": ["Lucas Nguyen", "Emma Brown", "Sophia Green", "Ethan White"],
-    "price": 485,
+    "price": 630,
     "biography": "Indie Dream blends indie and pop elements, creating ethereal, dreamy soundscapes that captivate the heart.",
     "upcoming_events": [
       {
@@ -3034,7 +3034,7 @@
     "thumbnail": "/band/image (95).webp",
     "banner": "/band/image (95).jpg",
     "members": ["Amelia Black", "Henry Lee", "Olivia King"],
-    "price": 269,
+    "price": 1400,
     "biography": "Ska Rebels brings a lively ska and punk fusion, making every show a high-energy experience that keeps the crowd moving.",
     "upcoming_events": [
       { "name": "Ska Punk Night", "date": "2024-07-12", "location": "Bugis" },
@@ -3078,7 +3078,7 @@
     "thumbnail": "/band/image (97).webp",
     "banner": "/band/image (97).jpg",
     "members": ["Ava Cooper", "Isabella Wright", "James Tan"],
-    "price": 366,
+    "price": 1700,
     "biography": "Acoustic Echo combines simple, heartfelt folk and acoustic tunes, capturing a raw and intimate performance style.",
     "upcoming_events": [
       { "name": "Folk Night", "date": "2024-07-15", "location": "Orchard" }

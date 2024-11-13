@@ -412,7 +412,12 @@ export default {
         });
 
         // Convert URI to embed URL
-        featuredArtist.value.spotifyEmbedUrl = `https://open.spotify.com/embed/artist/${artistId}`;
+        if(band.value.id === 60){
+          featuredArtist.value.spotifyEmbedUrl = `https://open.spotify.com/embed/artist/1uNFoZAHBGtllmzznpCI3s`;
+        }
+        else{
+          featuredArtist.value.spotifyEmbedUrl = `https://open.spotify.com/embed/artist/${artistId}`;
+        }
       } catch (err) {
         console.error("Error fetching artist's Spotify embed URL:", err);
       }
