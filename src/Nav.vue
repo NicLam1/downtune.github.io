@@ -155,7 +155,6 @@ export default {
         await signOut(auth);
         setLoginState(false);
         router.push("/"); // Redirect to home page
-        location.reload();
       } else {
         router.push("/choose"); // Redirect to login page
       }

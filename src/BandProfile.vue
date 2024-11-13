@@ -61,6 +61,10 @@
               <div class="card text-center">
                 <div class="card-body text-light">
                   <img
+                    v-if="band.id == 60"
+                    src="/band/justinthumb.jpg"
+                    class="member-picture mb-3"/>
+                  <img v-else
                     :src="member.picture || 'https://placehold.co/500x500/purple/white?text=Member'"
                     :alt="member"
                     class="member-picture mb-3"
@@ -223,15 +227,23 @@
             <i class="fas fa-times"></i>
           </button>
           <div class="modal-body">
-            <img
+            <img v-if="band.id == 60" src="/band/justinthumb.jpg" class="modal-member-picture mb-4">
+            <img v-else
               :src="selectedMember.picture || 'https://placehold.co/500x500/purple/white?text=Band+Member'"
               :alt="selectedMember.name"
               class="modal-member-picture mb-4"
             />
             <h2 class="modal-member-name">{{ selectedMember }}</h2>
-            <p><strong>Age:</strong> 23</p>
-            <p><strong>Nationality:</strong> Singaporean</p>
-            <p><strong>Instrument:</strong> Vocals</p>
+            <div v-if="band.id == 60">
+              <p><strong>Age:</strong> 30</p>
+              <p><strong>Nationality:</strong> Canadian</p>
+              <p><strong>Instrument:</strong> Vocals</p>
+            </div>
+            <div v-else>
+              <p><strong>Age:</strong> 23</p>
+              <p><strong>Nationality:</strong> Singaporean</p>
+              <p><strong>Instrument:</strong> Vocals</p>
+            </div>
           </div>
         </div>
       </div>
