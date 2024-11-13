@@ -196,7 +196,7 @@ export default {
   },
   computed: {
     isCalendarPage() {
-      return this.$route.name === "Calendar"; // Adjust based on your routing logic
+      return this.$route.name === "Calendar"|| this.$route.name === "CalendarGuitar" ; // Adjust based on your routing logic
     },
   },
 };
