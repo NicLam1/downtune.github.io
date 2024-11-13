@@ -43,7 +43,11 @@
               class="card-link"
             >
               <div class="image-container">
-                <img :src="band.thumbnail" class="d-block w-100" :alt="band.name" />
+                <img
+                  :src="band.thumbnail"
+                  class="d-block w-100"
+                  :alt="band.name"
+                />
                 <div class="caption">
                   <h4>{{ band.name }}</h4>
                 </div>
@@ -51,14 +55,41 @@
             </router-link>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#botwCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#botwCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+
+        <!-- Indicators and Controls -->
+        <div class="carousel-controls">
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#botwCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              v-for="(band, index) in bands"
+              :key="'indicator-' + band.id"
+              data-bs-target="#botwCarousel"
+              :data-bs-slide-to="index"
+              :class="{ active: index === 0 }"
+              :aria-label="'Slide ' + (index + 1)"
+            ></button>
+          </div>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#botwCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -68,6 +99,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -125,6 +157,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
@@ -369,12 +402,58 @@ h1 {
   object-fit: cover;
 }
 
-/* Center carousel controls vertically */
+/* Hide default carousel controls */
 #botwCarousel .carousel-control-prev,
 #botwCarousel .carousel-control-next {
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5%;
+  display: none;
+}
+
+/* Carousel Controls Styles */
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.carousel-controls .carousel-control-prev,
+.carousel-controls .carousel-control-next {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+}
+
+.carousel-controls .carousel-control-prev {
+  margin-right: 10px;
+}
+
+.carousel-controls .carousel-control-next {
+  margin-left: 10px;
+}
+
+.carousel-controls .carousel-control-prev-icon,
+.carousel-controls .carousel-control-next-icon {
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+}
+
+.carousel-controls .carousel-indicators {
+  display: flex;
+  flex-direction: row;
+}
+
+.carousel-controls .carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: none;
+  margin: 0 4px;
+}
+
+.carousel-controls .carousel-indicators .active {
+  background-color: #333;
 }
 
 /* Ensure the caption is always visible in the carousel */
@@ -407,3 +486,4 @@ h1 {
   }
 }
 </style>
+

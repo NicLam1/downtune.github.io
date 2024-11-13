@@ -1,8 +1,10 @@
 <template>
   <div class="band-profile-container">
     <!-- Loading Spinner -->
-    <div v-if="loading" class="loading-spinner">
-      <i class="fas fa-spinner fa-spin fa-3x"></i>
+    <div v-if="loading" class="loading-spinner-container">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin fa-3x"></i>
+      </div>
     </div>
 
     <!-- Band Profile Content -->
@@ -11,7 +13,7 @@
       <div
         class="banner"
         :class="{ 'banner-loaded': bannerLoaded }"
-        :style="{ backgroundImage: `url('${band.thumbnail}')` }"
+        :style="{ backgroundImage: `url('${band.banner}')` }"
       >
         <div class="banner-overlay justify-content-center">
           <h1 class="band-name mx-4">{{ band.name }}</h1>
@@ -33,7 +35,7 @@
               <span
                 v-for="genre in band.genres"
                 :key="genre"
-                class="badge genre-pill fs-4 mx-2 px-4 py-2"
+                class="badge genre-pill fs-4 mx-2 px-4 py-2 mt-md-2"
               >
                 {{ genre }}
               </span>
@@ -226,7 +228,7 @@
               :alt="selectedMember.name"
               class="modal-member-picture mb-4"
             />
-            <h2 class="modal-member-name">{{ selectedMember}}</h2>
+            <h2 class="modal-member-name">{{ selectedMember }}</h2>
             <p><strong>Age:</strong> 23</p>
             <p><strong>Nationality:</strong> Singaporean</p>
             <p><strong>Instrument:</strong> Vocals</p>
@@ -253,6 +255,7 @@ import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { db } from "../firebaseConfig";
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
+import bandProfileCache from "./cache.js"; // Import the cache
 
 export default {
   name: "BandProfile",
@@ -417,44 +420,55 @@ export default {
 
     const fetchBandData = async (bandId) => {
       try {
-        const response = await axios.get("/MOCK_DATA.json");
-        const allBands = response.data;
-
-        // Find the band with the matching ID
-        const foundBand = allBands.find((b) => b.id === bandId);
-
-        if (foundBand) {
-          // Ensure all required properties are arrays
-          foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
-          foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
-          foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events)
-            ? foundBand.upcoming_events
-            : [];
-          foundBand.past_events = Array.isArray(foundBand.past_events)
-            ? foundBand.past_events
-            : [];
-
-          band.value = foundBand;
-
-          // Preload the banner image
-          const img = new Image();
-          img.src = band.value.banner;
-          img.onload = () => {
-            bannerLoaded.value = true;
-          };
-          img.onerror = () => {
-            console.error("Failed to load banner image.");
-            // Optionally, set a default banner or handle the error
-            bannerLoaded.value = true; // Even on error, remove the loader
-          };
-
-          // Fetch recommended artists based on the band's genres
-          await fetchSpotifyAccessToken();
-          await fetchRecommendedArtistsByGenres(foundBand.genres);
+        // Check if the band data is already in the cache
+        if (bandProfileCache[bandId]) {
+          band.value = bandProfileCache[bandId];
+          console.log("Loaded band data from cache");
         } else {
-          console.error("Band not found");
-          error.value = true;
+          const response = await axios.get("/MOCK_DATA.json");
+          const allBands = response.data;
+
+          // Find the band with the matching ID
+          const foundBand = allBands.find((b) => b.id === bandId);
+
+          if (foundBand) {
+            // Ensure all required properties are arrays
+            foundBand.genres = Array.isArray(foundBand.genres) ? foundBand.genres : [];
+            foundBand.members = Array.isArray(foundBand.members) ? foundBand.members : [];
+            foundBand.upcoming_events = Array.isArray(foundBand.upcoming_events)
+              ? foundBand.upcoming_events
+              : [];
+            foundBand.past_events = Array.isArray(foundBand.past_events)
+              ? foundBand.past_events
+              : [];
+
+            band.value = foundBand;
+
+            // Cache the band data
+            bandProfileCache[bandId] = foundBand;
+
+            console.log("Fetched band data and stored in cache");
+          } else {
+            console.error("Band not found");
+            error.value = true;
+          }
         }
+
+        // Preload the banner image
+        const img = new Image();
+        img.src = band.value.banner;
+        img.onload = () => {
+          bannerLoaded.value = true;
+        };
+        img.onerror = () => {
+          console.error("Failed to load banner image.");
+          // Optionally, set a default banner or handle the error
+          bannerLoaded.value = true; // Even on error, remove the loader
+        };
+
+        // Fetch recommended artists based on the band's genres
+        await fetchSpotifyAccessToken();
+        await fetchRecommendedArtistsByGenres(band.value.genres);
       } catch (err) {
         console.error("Error fetching band data:", err);
         error.value = true;
@@ -560,6 +574,19 @@ export default {
   color: #ffffff;
   font-family: "Poppins", sans-serif;
   position: relative;
+}
+
+/* Loading Spinner Styles */
+.loading-spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.loading-spinner {
+  text-align: center;
 }
 
 /* Banner Styles with Fade-In */
@@ -910,7 +937,7 @@ footer p {
   transform: scale(1.05);
 }
 
-.genre-pill{
+.genre-pill {
   padding: 7px 20px;
   background: linear-gradient(135deg, #6f00e8, #c603ff);
   border-radius: 30px;

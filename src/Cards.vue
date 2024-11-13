@@ -124,7 +124,7 @@
           class="search-bar mb-4"
           placeholder="Search by name or genre..."
           v-model="searchQuery"
-          @input="resetPage"
+          @input="onSearchQueryChange"
         />
         <div class="d-flex flex-wrap gap-3 align-items-stretch">
           <div
@@ -132,7 +132,10 @@
             :key="band.id + '-' + filterTrigger"
             class="card-container"
           >
-            <div class="card-wrapper">
+            <div
+              class="card-wrapper"
+              @mouseover="preloadBandProfile(band.id)"
+            >
               <router-link
                 :to="{ name: 'BandProfile', params: { id: band.id } }"
                 class="card-link"
@@ -189,10 +192,6 @@
                   ></i>
                 </button>
               </div>
-              <!-- Arrow Icon -->
-              <!-- <div class="card-arrow mx-2">
-                <i class="fas fa-arrow-right"></i>
-              </div> -->
             </div>
           </div>
           <div
@@ -233,6 +232,7 @@ import axios from "axios";
 import { inject } from "vue";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import bandProfileCache from "./cache.js"; // Import the cache
 
 export default {
   props: {
@@ -368,6 +368,7 @@ export default {
         this.priceRange.min = this.minPrice;
       }
 
+      this.saveFiltersToSessionStorage();
       this.resetPage();
       this.filterTrigger++;
     },
@@ -385,11 +386,17 @@ export default {
         this.priceRange.max = this.maxPrice;
       }
 
+      this.saveFiltersToSessionStorage();
       this.resetPage();
       this.filterTrigger++;
     },
+    onSearchQueryChange() {
+      this.saveFiltersToSessionStorage();
+      this.resetPage();
+    },
     resetPage() {
       this.currentPage = 1;
+      this.saveCurrentPageToSessionStorage();
       this.filterTrigger++;
     },
     toggleGenre(genre) {
@@ -398,6 +405,7 @@ export default {
       } else {
         this.selectedGenres.push(genre);
       }
+      this.saveFiltersToSessionStorage();
       this.resetPage();
       this.filterTrigger++;
     },
@@ -417,6 +425,7 @@ export default {
         }, 1000); // Duration of the glow effect in milliseconds
       }
       event.target.selectedIndex = 0; // Reset dropdown selection
+      this.saveFiltersToSessionStorage();
       this.resetPage();
       this.filterTrigger++;
     },
@@ -425,16 +434,21 @@ export default {
       this.priceRange.min = this.minPrice;
       this.priceRange.max = this.maxPrice;
       this.searchQuery = "";
-      this.resetPage();
+      this.currentPage = 1;
+      sessionStorage.removeItem("selectedFilters"); // Remove filters from sessionStorage
+      sessionStorage.removeItem("currentPage"); // Remove currentPage from sessionStorage
+      this.filterTrigger++;
     },
     nextPage() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
+        this.saveCurrentPageToSessionStorage();
       }
     },
     prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
+        this.saveCurrentPageToSessionStorage();
       }
     },
     async toggleFavorite(band) {
@@ -488,6 +502,78 @@ export default {
         console.error("User is not authenticated");
       }
     },
+    preloadBandProfile(bandId) {
+      if (!bandProfileCache[bandId]) {
+        const band = this.bands.find((b) => b.id === bandId);
+        if (band) {
+          bandProfileCache[bandId] = band;
+        }
+      }
+    },
+    saveFiltersToSessionStorage() {
+      if (typeof sessionStorage !== "undefined") {
+        const filters = {
+          selectedGenres: this.selectedGenres,
+          priceRange: this.priceRange,
+          searchQuery: this.searchQuery,
+        };
+        sessionStorage.setItem("selectedFilters", JSON.stringify(filters));
+      }
+    },
+    loadFiltersFromSessionStorage() {
+      if (typeof sessionStorage !== "undefined") {
+        const storedFilters = sessionStorage.getItem("selectedFilters");
+        if (storedFilters) {
+          const parsedFilters = JSON.parse(storedFilters);
+          this.selectedGenres = parsedFilters.selectedGenres || [];
+          this.priceRange = parsedFilters.priceRange || {
+            min: this.minPrice,
+            max: this.maxPrice,
+          };
+          this.searchQuery = parsedFilters.searchQuery || "";
+        } else {
+          // Use user's preferences if available
+          if (this.userGenres && this.userGenres.length) {
+            this.selectedGenres = [...this.userGenres];
+          }
+          this.priceRange.min =
+            this.userPrefMinPrice !== null
+              ? this.roundToNearest50(
+                  Math.max(this.userPrefMinPrice, this.minPrice)
+                )
+              : this.roundToNearest50(this.minPrice);
+          this.priceRange.max =
+            this.userPrefMaxPrice !== null
+              ? this.roundToNearest50(
+                  Math.min(this.userPrefMaxPrice, this.maxPrice)
+                )
+              : this.roundToNearest50(this.maxPrice);
+        }
+      } else {
+        console.warn("SessionStorage is not available.");
+      }
+    },
+    saveCurrentPageToSessionStorage() {
+      if (typeof sessionStorage !== "undefined") {
+        sessionStorage.setItem("currentPage", this.currentPage);
+      }
+    },
+    loadCurrentPageFromSessionStorage() {
+      if (typeof sessionStorage !== "undefined") {
+        const storedPage = sessionStorage.getItem("currentPage");
+        if (storedPage) {
+          this.currentPage = parseInt(storedPage, 10);
+          // Ensure currentPage is within valid range
+          if (isNaN(this.currentPage) || this.currentPage < 1) {
+            this.currentPage = 1;
+          } else if (this.currentPage > this.totalPages) {
+            this.currentPage = this.totalPages;
+          }
+        }
+      } else {
+        console.warn("SessionStorage is not available.");
+      }
+    },
   },
 
   async mounted() {
@@ -499,64 +585,25 @@ export default {
       this.minPrice = Math.min(...prices);
       this.maxPrice = Math.max(...prices);
 
-      // Initialize priceRange based on user preferences or data
-      this.priceRange.min =
-        this.userPrefMinPrice !== null
-          ? this.roundToNearest50(
-              Math.max(this.userPrefMinPrice, this.minPrice)
-            )
-          : this.roundToNearest50(this.minPrice);
-      this.priceRange.max =
-        this.userPrefMaxPrice !== null
-          ? this.roundToNearest50(
-              Math.min(this.userPrefMaxPrice, this.maxPrice)
-            )
-          : this.roundToNearest50(this.maxPrice);
+      // Initialize priceRange
+      this.priceRange.min = this.roundToNearest50(this.minPrice);
+      this.priceRange.max = this.roundToNearest50(this.maxPrice);
 
-      await this.loadFavorites(); // Load favorites after bands are loaded
+      // Load favorites after bands are loaded
+      await this.loadFavorites();
+
+      // Load filters and currentPage from sessionStorage
+      this.loadFiltersFromSessionStorage();
+      this.loadCurrentPageFromSessionStorage();
+
+      // Adjust currentPage if it exceeds totalPages after filters are applied
+      if (this.currentPage > this.totalPages) {
+        this.currentPage = this.totalPages;
+        this.saveCurrentPageToSessionStorage();
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-
-    // Append userGenres to selectedGenres when the component is mounted
-    if (this.userGenres && this.userGenres.length) {
-      this.selectedGenres = [...this.selectedGenres, ...this.userGenres];
-    }
-  },
-
-  watch: {
-    userGenres(newGenres) {
-      if (newGenres && newGenres.length) {
-        // Ensure that new genres are added only once (avoid duplicates)
-        this.selectedGenres = [
-          ...new Set([...this.selectedGenres, ...newGenres]),
-        ];
-        this.resetPage();
-        this.filterTrigger++;
-      }
-    },
-    userPrefMinPrice(newMinPrice) {
-      if (
-        newMinPrice !== null &&
-        newMinPrice >= this.minPrice &&
-        newMinPrice < this.priceRange.max
-      ) {
-        this.priceRange.min = this.roundToNearest50(newMinPrice);
-        this.resetPage();
-        this.filterTrigger++;
-      }
-    },
-    userPrefMaxPrice(newMaxPrice) {
-      if (
-        newMaxPrice !== null &&
-        newMaxPrice <= this.maxPrice &&
-        newMaxPrice > this.priceRange.min
-      ) {
-        this.priceRange.max = this.roundToNearest50(newMaxPrice);
-        this.resetPage();
-        this.filterTrigger++;
-      }
-    },
   },
 };
 </script>
