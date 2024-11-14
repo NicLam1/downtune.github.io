@@ -108,6 +108,8 @@ const updateAvailableLivestreams = () => {
 
     // Initialize the IntersectionObserver
     const initObserver = () => {
+
+      
       observer.value = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -147,6 +149,7 @@ const updateAvailableLivestreams = () => {
     const smallerThan1290div6 = ref(null);
 
     watch(smallerThan1290div, (newValue) => {
+      console.log("WATCHINGGGG:", newValue);
       if (newValue !== null) {
         console.log("Ref updated via watcher:", newValue);
         updateInitialPadding();
@@ -156,7 +159,11 @@ const updateAvailableLivestreams = () => {
 
     // Define updateInitialPadding as a constant 
     const updateInitialPadding = () => {
+      console.log("Running Upadting initial padding:");
+
           if (paddingUpdated.value) return; // Do nothing if already updated or window width is >= 1290
+          console.log("Running Upadting initial padding2:");
+
   const minWidth = 770;
   const maxWidth = 1290;
   const minPadding = 2; // 2vw
@@ -201,7 +208,7 @@ const updateAvailableLivestreams = () => {
       console.log(smallerThan1290div);
       console.log("nonLinearPadding2", nonLinearPadding2);
       smallerThan1290div.value.style.paddingTop = `0`; 
-      smallerThan1290div2.value.value.style.marginTop = `0`;
+      smallerThan1290div2.value.style.marginTop = `0`;
       smallerThan1290div3.value.style.paddingBottom = '15%';
       smallerThan1290div4.value.style.paddingBottom = '30px';
       smallerThan1290div5.value.style.padding = `${Math.min(nonLinearPadding2)}vw 0`;
@@ -836,7 +843,8 @@ body {
 }
 
 #invisiblenavbarpadding{
-  height: 82px;
+  margin: 82px 0 0 0;
+
 }
 
 .logo {
