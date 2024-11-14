@@ -78,13 +78,13 @@
 
         <!-- Events Section -->
         <section class="events-section mb-5">
-          <h3 class="section-title">
+          <router-link to="/calendar" class="nav-link"><h3 class="section-title">
             <i class="fas fa-calendar-alt"></i> Events
-          </h3>
+          </h3></router-link>
           <div class="row">
             <!-- Upcoming Events -->
             <div class="col-md-6">
-              <h4 class="fw-bold">Upcoming Events</h4>
+              <router-link to="/calendar" class="nav-link"><h4 class="fw-bold">Upcoming Events</h4></router-link>
               <ul class="list-group">
                 <li
                   class="list-group-item event-item"
@@ -195,15 +195,16 @@
 
             <form @submit.prevent="submitForm" class="mx-auto" style="max-width: 400px">
               <div class="mb-3">
-                <input
-                  v-model="email"
-                  type="email"
-                  class="form-control styled-select"
-                  id="emailInput"
-                  placeholder="Enter your email"
-                  required
-                  aria-label="Email address"
-                />
+                <!-- Bind email to input field -->
+                  <input
+                    v-model="email"
+                    type="email"
+                    class="form-control styled-select"
+                    id="emailInput"
+                    placeholder="Enter your email"
+                    required
+                    aria-label="Email address"
+                  />
               </div>
               <button type="submit" class="btn btn-primary w-100">
                 <i class="fas fa-envelope"></i> Subscribe
@@ -280,6 +281,8 @@ import { useRoute } from "vue-router";
 import { db } from "../firebaseConfig";
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import bandProfileCache from "./cache.js"; // Import the cache
+import { getAuth } from "firebase/auth"; // Import Firebase Authentication
+
 
 export default {
   name: "BandProfile",
@@ -294,7 +297,7 @@ export default {
     const featuredArtist = ref(null);
     const isScrollingPaused = ref(false);
     const scrollContent = ref(null);
-
+    
     // Modal State
     const isModalOpen = ref(false);
     const selectedMember = ref({
@@ -553,6 +556,14 @@ export default {
         });
       }
     };
+    // Fetch the signed-in user's email
+    const auth = getAuth();
+    onMounted(() => {
+      const user = auth.currentUser;
+      if (user) {
+        email.value = user.email; // Set email to the logged-in user's email
+      }
+    });
 
     onMounted(() => {
       const bandId = parseInt(route.params.id, 10);
@@ -972,7 +983,7 @@ footer p {
   padding: 7px 20px;
   background: linear-gradient(135deg, #6f00e8, #c603ff);
   border-radius: 30px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-weight: bold;
   color: #ffffff;
   transition: background 0.3s, color 0.3s;
