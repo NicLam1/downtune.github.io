@@ -7,8 +7,9 @@
       <div class="d-flex align-items-center justify-content-between w-100">
         <div class="navbar-brand d-flex align-items-center">
           <!-- Placeholder Logo Image -->
-          <img src="/Logo.png" alt="Logo" class="logo-image me-2" />
-          <router-link to="/" class="nav-title">Downtune</router-link>
+          <router-link to="/" class="nav-title">
+            <img src="/Logo.png" alt="Logo" class="logo-image me-2" />
+          Downtune</router-link>
         </div>
         <!-- Navigation links for large screens -->
         <ul class="navbar-nav me-auto d-none d-lg-flex">

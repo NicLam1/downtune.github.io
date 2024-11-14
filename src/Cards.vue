@@ -486,9 +486,7 @@ export default {
         } catch (error) {
           console.error("Error loading favorites from Firestore:", error);
         }
-      } else {
-        console.error("User is not authenticated");
-      }
+      } 
     },
     async saveFavorites() {
       const auth = getAuth();
