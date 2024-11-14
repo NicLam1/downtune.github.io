@@ -58,29 +58,29 @@
           <h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
           <div class="d-flex justify-content-between mb-2 align-items-center flex-wrap">
             <div>
-            <span>Min: $</span>
-            <input
-              type="number"
-              v-model.number="priceRange.min"
-              :min="minPrice"
-              :max="maxPrice"
-              step="50"
-              class="form-control me-2 ms-2 w-auto"
-              @input="debouncedInput('min')"
-            />
-          </div>
-          <div>
-            <span>Max: $</span>
-            <input
-              type="number"
-              v-model.number="priceRange.max"
-              :min="minPrice"
-              :max="maxPrice"
-              step="50"
-              class="form-control me-2 ms-2 w-auto"
-              @input="debouncedInput('max')"
-            />
-          </div>
+              <span>Min: $</span>
+              <input
+                type="number"
+                v-model.number="priceRange.min"
+                :min="minPrice"
+                :max="maxPrice"
+                step="50"
+                class="form-control me-2 ms-2 w-auto"
+                @input="debouncedInput('min')"
+              />
+            </div>
+            <div>
+              <span>Max: $</span>
+              <input
+                type="number"
+                v-model.number="priceRange.max"
+                :min="minPrice"
+                :max="maxPrice"
+                step="50"
+                class="form-control me-2 ms-2 w-auto"
+                @input="debouncedInput('max')"
+              />
+            </div>
           </div>
 
           <!-- Minimum Price Slider -->
@@ -198,7 +198,8 @@
             v-if="filteredBands.length === 0"
             class="col-12 text-center text-light mt-5"
           >
-            Oops! It looks like your filters are too strict. <br>Try adjusting or clearing them to see more results.
+            Oops! It looks like your filters are too strict. <br />Try adjusting
+            or clearing them to see more results.
           </div>
         </div>
 
@@ -355,7 +356,12 @@ export default {
     roundToNearest50(value) {
       return Math.round(value / 50) * 50;
     },
-
+    roundDownToNearest50(value) {
+      return Math.floor(value / 50) * 50;
+    },
+    roundUpToNearest50(value) {
+      return Math.ceil(value / 50) * 50;
+    },
     // A debounced input method for both max and min
     debouncedInput(type) {
       // Clear any existing timeout to reset the debounce
@@ -365,9 +371,9 @@ export default {
 
       // Set a new timeout to trigger the correct function after a delay
       this.debounceTimeout = setTimeout(() => {
-        if (type === 'max') {
+        if (type === "max") {
           this.onMaxPriceChange();
-        } else if (type === 'min') {
+        } else if (type === "min") {
           this.onMinPriceChange();
         }
       }, 1000); //timeout 1 second
@@ -443,8 +449,8 @@ export default {
         }, 1000); // Duration of the glow effect in milliseconds
       }
 
-       // Remove genre from lessCommonGenres
-       this.lessCommonGenres = this.lessCommonGenres.filter(g2 => g2 !== genre);
+      // Remove genre from lessCommonGenres
+      this.lessCommonGenres = this.lessCommonGenres.filter((g2) => g2 !== genre);
 
       event.target.selectedIndex = 0; // Reset dropdown selection
       this.saveFiltersToSessionStorage();
@@ -503,7 +509,7 @@ export default {
         } catch (error) {
           console.error("Error loading favorites from Firestore:", error);
         }
-      } 
+      }
     },
     async saveFavorites() {
       const auth = getAuth();
@@ -538,7 +544,6 @@ export default {
           searchQuery: this.searchQuery,
           tempGenres: this.genres,
           templessCommonGenres: this.lessCommonGenres,
-
         };
         console.log("saveFiltersToSessionStorage");
         sessionStorage.setItem("selectedFilters", JSON.stringify(filters));
@@ -555,12 +560,12 @@ export default {
             min: this.minPrice,
             max: this.maxPrice,
           };
-          
+
           if (parsedFilters.tempGenres) {
             this.genres = parsedFilters.tempGenres;
             this.lessCommonGenres = parsedFilters.templessCommonGenres;
           }
-          
+
           this.searchQuery = parsedFilters.searchQuery || "";
         } else {
           // Use user's preferences if available
@@ -613,12 +618,12 @@ export default {
       this.bands = response.data;
       // Determine min and max price from data
       const prices = this.bands.map((band) => band.price);
-      this.minPrice = Math.min(...prices);
-      this.maxPrice = Math.max(...prices);
+      this.minPrice = this.roundDownToNearest50(Math.min(...prices));
+      this.maxPrice = this.roundUpToNearest50(Math.max(...prices));
 
       // Initialize priceRange
-      this.priceRange.min = this.roundToNearest50(this.minPrice);
-      this.priceRange.max = this.roundToNearest50(this.maxPrice);
+      this.priceRange.min = this.minPrice;
+      this.priceRange.max = this.maxPrice;
 
       // Load favorites after bands are loaded
       await this.loadFavorites();
