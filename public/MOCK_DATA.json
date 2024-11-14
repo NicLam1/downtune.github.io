@@ -2146,8 +2146,8 @@
     "price": 850,
     "biography": "Justin Bieber is a Canadian pop sensation known for his smooth vocals and chart-topping hits, blending pop and R&B styles.",
     "upcoming_events": [
-      { "name": "World Tour", "date": "2024-07-15", "location": "Marina Bay Sands" },
-      { "name": "Bieber Fever", "date": "2024-09-10", "location": "Singapore Indoor Stadium" }
+      { "name": "World Tour", "date": "2024-12-15", "location": "Marina Bay Sands" },
+      { "name": "Bieber Fever", "date": "2025-09-10", "location": "Singapore Indoor Stadium" }
     ],
     "past_events": [
       {
