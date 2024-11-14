@@ -407,7 +407,7 @@ onBeforeUnmount(() => {
   <div class = "bg-container">
   <div class="bg-container-start"></div>
   <div id = "miniapp">
-    
+      <div id = "invisiblenavbarpadding"></div>
       <h1 ref="smallerThan1290div5" >Calendar & Live Stream</h1>
   <div class = "live-stream-section" ref="smallerThan1290div3">
     <!-- Livestream Section -->
@@ -835,10 +835,10 @@ body {
   text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
 }
 
-</style>
+#invisiblenavbarpadding{
+  height: 82px;
+}
 
-
-<style scoped>
 .logo {
   height: 6em;
   padding: 1.5em;

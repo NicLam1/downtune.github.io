@@ -3,7 +3,7 @@
   <div>
     <div class="nav-sticky">
   <router-link to="/calendar2">
-    <button>Click this if you are experiencing issues</button>
+    <button>Click here for a light-weight version</button>
   </router-link>
 </div>
       <div class="container">
