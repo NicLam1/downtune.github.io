@@ -120,7 +120,7 @@
           </li>
         </ul>
         <!-- User section for large screens -->
-        <div v-if="!loading"
+        <div
           class="user-section d-flex align-items-center ms-auto d-none d-lg-flex"
         >
           <div
@@ -160,16 +160,16 @@
               </div>
             </div>
           </div>
-        </div>
-        <div v-else class="auth-buttons d-flex align-items-center">
-          <button
-            class="btn btn-primary me-2 d-flex align-items-center"
-            > 
-            <router-link to="/choose" class="nav-link"> <i class="fas fa-sign-in-alt me-1"></i>
-            <span>Login / </span><i class="fas fa-user-plus me-1"></i>
-            <span>Sign Up</span></router-link>
-          </button>
-         
+          <div v-else class="auth-buttons d-flex align-items-center">
+            <button
+              class="btn btn-primary me-2 d-flex align-items-center"
+              > 
+              <router-link to="/choose" class="nav-link"> <i class="fas fa-sign-in-alt me-1"></i>
+              <span>Login / </span><i class="fas fa-user-plus me-1"></i>
+              <span>Sign Up</span></router-link>
+            </button>
+           
+          </div>
         </div>
       </div>
     </div>
@@ -193,7 +193,6 @@ export default {
     const displayName = inject("displayName");
     const dropdownVisible = ref(false);
     const dropdownMenu = ref(null);
-    const loading = ref(true);
 
     const toggleDropdown = () => {
       dropdownVisible.value = !dropdownVisible.value;
@@ -207,7 +206,6 @@ export default {
       if (isLoggedIn.value) {
         await signOut(auth);
         setLoginState(false);
-        loading.value = true;
         router.push("/"); // Redirect to home page
       } else {
         router.push("/choose"); // Redirect to login page
@@ -234,9 +232,6 @@ export default {
     };
 
     onMounted(() => {
-      initializeAuthState();
-      loading.value = false;
-
       document.addEventListener("click", handleClickOutside);
     });
 
@@ -253,7 +248,6 @@ export default {
       closeDropdown,
       dropdownMenu,
       navigateTo,
-      loading,
     };
   },
   computed: {
