@@ -171,7 +171,7 @@
                 </div>
               </router-link>
               <!-- Add to Favorites Button -->
-              <div v-if="isLoggedIn">
+              <div v-if="isLoggedIn === true">
                 <button
                   class="btn-favorite"
                   @click.stop="toggleFavorite(band)"
