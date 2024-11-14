@@ -16,9 +16,11 @@ export const setLoginState = (state, id = null, name = null) => {
 export const initializeAuthState = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setLoginState(true, user.uid, user.displayName);
+      isLoggedIn.value = true;
+      displayName.value = user.displayName;
     } else {
-      setLoginState(false);
+      isLoggedIn.value = false;
+      displayName.value = null;
     }
   });
 };
