@@ -1,16 +1,18 @@
 <template>
   <body>
     <div>
-      <div class = "helpertext">
+      <div class="helpertext">
         <div>
           <h1><b>Please choose your user type: </b></h1>
-          <p>If you're part of a band, select "Artist."<br>
-            If you're here to explore music, select "Listener."</p>
-          </div>
-    </div>
+          <p>
+            If you're part of a band, select "Artist."<br />
+            If you're here to explore music, select "Listener."
+          </p>
+        </div>
+      </div>
       <nav class="menu">
         <div class="menu__item">
-          <router-link to="/login/band" class="menu__item-link"
+          <router-link to="/notImplemented" class="menu__item-link"
             >Artists</router-link
           >
           <img class="menu__item-img" src="./chooseUserTypeImg/band1.jpg" />
@@ -108,12 +110,10 @@ body {
   transition: all 0.4s;
 }
 
-
-.helpertext{
+.helpertext {
   color: white;
-  padding: 10vh 6vw 0vh
+  padding: 10vh 6vw 0vh;
 }
-
 
 .menu {
   padding: 10vh 0 50vh;
@@ -250,6 +250,4 @@ body {
   transform: translate3d(0, -30%, 0) rotate3d(0, 0, 1, 5deg);
   transition: all 0.4s 0.4s;
 }
-
-
 </style>
