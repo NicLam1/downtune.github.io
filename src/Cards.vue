@@ -66,7 +66,7 @@
               :max="maxPrice"
               step="50"
               class="form-control me-2 ms-2 w-auto"
-              @input="onMinPriceChange"
+              @input="debouncedInput('min')"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@
               :max="maxPrice"
               step="50"
               class="form-control me-2 ms-2 w-auto"
-              @input="onMaxPriceChange"
+              @input="debouncedInput('max')"
             />
           </div>
           </div>
@@ -198,7 +198,7 @@
             v-if="filteredBands.length === 0"
             class="col-12 text-center text-light mt-5"
           >
-            No results found.
+            Oops! It looks like your filters are too strict. <br>Try adjusting or clearing them to see more results.
           </div>
         </div>
 
@@ -354,6 +354,23 @@ export default {
   methods: {
     roundToNearest50(value) {
       return Math.round(value / 50) * 50;
+    },
+
+    // A debounced input method for both max and min
+    debouncedInput(type) {
+      // Clear any existing timeout to reset the debounce
+      if (this.debounceTimeout) {
+        clearTimeout(this.debounceTimeout);
+      }
+
+      // Set a new timeout to trigger the correct function after a delay
+      this.debounceTimeout = setTimeout(() => {
+        if (type === 'max') {
+          this.onMaxPriceChange();
+        } else if (type === 'min') {
+          this.onMinPriceChange();
+        }
+      }, 1000); //timeout 1 second
     },
     onMinPriceChange() {
       // Round to nearest 50
