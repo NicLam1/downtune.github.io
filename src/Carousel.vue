@@ -88,7 +88,7 @@ export default {
         { title: 'Country', url: '/userQuestionImg/country.webp' },
         { title: 'Ambient', url: '/userQuestionImg/ambient.webp' },
         { title: 'Blues', url: '/userQuestionImg/blues.jpg' },
-        { title: 'Hip-hop', url: '/userQuestionImg/hiphop.jpg' },
+        { title: 'Hip Hop', url: '/userQuestionImg/hiphop.jpg' },
         { title: 'Metal', url: '/userQuestionImg/metal.webp' },
         { title: 'Reggae', url: '/userQuestionImg/reggae.webp' },
 
@@ -151,7 +151,7 @@ export default {
           return 'linear-gradient(135deg, lavender, lightsteelblue)';
         case 'Blues':
           return 'linear-gradient(135deg, royalblue, skyblue)';
-        case 'Hip-hop':
+        case 'Hip Hop':
           return 'linear-gradient(135deg, darkorange, orangered)';
         case 'Metal':
           return 'linear-gradient(135deg, darkslategray, silver)';
