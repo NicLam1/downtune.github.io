@@ -1,11 +1,11 @@
 <template>
-  <div id="app" class="container-fluid px-sm-3 px-lg-4 mt-4">
+  <div id="app" class="container-fluid px-4 mt-4">
     <!-- Bootstrap Row -->
     <div
       class="row no-margin-on-small align-items-stretch flex-lg-nowrap gx-lg-3"
     >
       <!-- Filter Section -->
-      <div class="filter-section col-12 col-lg-3 mb-4 mb-lg-0">
+      <div class="filter-section col-12 col-lg-3 mb-4">
         <!-- Toggle Filters Button for Small Screens -->
         <button
           class="btn btn-secondary d-lg-none w-100 mb-3"
@@ -62,8 +62,8 @@
               type="number"
               v-model.number="priceRange.min"
               :min="minPrice"
-              :max="priceRange.max - 50"
-              step="100"
+              :max="maxPrice"
+              step="50"
               class="form-control me-2 ms-2 w-auto"
               @input="onMinPriceChange"
             />
@@ -72,9 +72,9 @@
             <input
               type="number"
               v-model.number="priceRange.max"
-              :min="priceRange.min + 50"
+              :min="minPrice"
               :max="maxPrice"
-              step="100"
+              step="50"
               class="form-control me-2 ms-2 w-auto"
               @input="onMaxPriceChange"
             />
@@ -88,7 +88,7 @@
               type="range"
               v-model.number="priceRange.min"
               :min="minPrice"
-              :max="priceRange.max - 50"
+              :max="maxPrice"
               step="50"
               class="styled-range"
               @input="onMinPriceChange"
@@ -102,7 +102,7 @@
               id="maxPriceSlider"
               type="range"
               v-model.number="priceRange.max"
-              :min="priceRange.min + 50"
+              :min="minPrice"
               :max="maxPrice"
               step="50"
               class="styled-range"
@@ -132,10 +132,7 @@
             :key="band.id + '-' + filterTrigger"
             class="card-container"
           >
-            <div
-              class="card-wrapper"
-              @mouseover="preloadBandProfile(band.id)"
-            >
+            <div class="card-wrapper" @mouseover="preloadBandProfile(band.id)">
               <router-link
                 :to="{ name: 'BandProfile', params: { id: band.id } }"
                 class="card-link"
@@ -358,9 +355,9 @@ export default {
       // Round to nearest 50
       this.priceRange.min = this.roundToNearest50(this.priceRange.min);
 
-      // Ensure min does not exceed max - 50
-      if (this.priceRange.min >= this.priceRange.max) {
-        this.priceRange.min = this.priceRange.max - 50;
+      // Ensure min does not exceed max
+      if (this.priceRange.min > this.priceRange.max) {
+        this.priceRange.min = this.priceRange.max;
       }
 
       // Ensure min is not below the overall minPrice
@@ -376,9 +373,9 @@ export default {
       // Round to nearest 50
       this.priceRange.max = this.roundToNearest50(this.priceRange.max);
 
-      // Ensure max does not go below min + 50
-      if (this.priceRange.max <= this.priceRange.min) {
-        this.priceRange.max = this.priceRange.min + 50;
+      // Ensure max does not go below min
+      if (this.priceRange.max < this.priceRange.min) {
+        this.priceRange.max = this.priceRange.min;
       }
 
       // Ensure max does not exceed the overall maxPrice
@@ -724,17 +721,13 @@ body {
 
 @media (max-width: 600px) {
   .card-container {
-    flex: 1 1 calc(100% - 1rem);
-    max-width: calc(100% - 1rem);
-  }
-
-  .filter-section {
-    padding: 0;
-  }
-
-  #app {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    flex: 0 1 auto;
+    max-width: 100%;
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
   }
 }
 
