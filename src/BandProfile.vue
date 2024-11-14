@@ -211,11 +211,23 @@
             </form>
 
             <h2 class="cta-title">Contact us here!</h2>
-            <div class="social-icons">
-              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
+              <div class="social-icons">
+                <!-- Facebook search link -->
+                <a :href="'https://www.facebook.com/search/top?q=' + encodeURIComponent(band.name)" target="_blank" aria-label="Facebook">
+                  <i class="fab fa-facebook"></i>
+                </a>
+
+                <!-- Twitter search link -->
+                <a :href="'https://twitter.com/search?q=' + encodeURIComponent(band.name)" target="_blank" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+
+                <!-- Instagram profile link -->
+                <a :href="'https://instagram.com/' + band.name.trim().replace(/\s+/g, '')" target="_blank"  aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+
+              </div>
           </div>
         </section>
       </main>
@@ -578,7 +590,9 @@ export default {
       bannerLoaded,
     };
   },
+
 };
+
 </script>
 
 <style scoped>
