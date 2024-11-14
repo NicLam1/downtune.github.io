@@ -71,7 +71,7 @@
                 </div>
               </div>
             </div>
-            <div v-else>
+            <div v-else-if="displayName == null && isLoggedIn == null" >
               <div class="dropdown">
                 
                 <router-link to="/choose" class="nav-link"><i
@@ -129,7 +129,8 @@
           >
             Welcome, {{ displayName }}!
           </div>
-          <div v-if="displayName" class="logged-in-info">
+          <div  v-if="displayName && isLoggedIn !== null"
+          class="logged-in-info">
             <div class="dropdown">
               <i
                 class="fas fa-user-circle profile-icon"
@@ -160,7 +161,7 @@
               </div>
             </div>
           </div>
-          <div v-else class="auth-buttons d-flex align-items-center">
+          <div v-else-if="displayName == null && isLoggedIn == null"  class="auth-buttons d-flex align-items-center">
             <button
               class="btn btn-primary me-2 d-flex align-items-center"
               > 
