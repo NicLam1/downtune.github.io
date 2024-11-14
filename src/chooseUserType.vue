@@ -1,6 +1,13 @@
 <template>
   <body>
     <div>
+      <div class = "helpertext">
+        <div>
+          <h1><b>Please choose your user type: </b></h1>
+          <p>If you're part of a band, select "Artist."<br>
+            If you're here to explore music, select "Listener."</p>
+          </div>
+    </div>
       <nav class="menu">
         <div class="menu__item">
           <router-link to="/login/band" class="menu__item-link"
@@ -101,8 +108,15 @@ body {
   transition: all 0.4s;
 }
 
+
+.helpertext{
+  color: white;
+  padding: 10vh 6vw 0vh
+}
+
+
 .menu {
-  padding: 20vh 0 50vh;
+  padding: 10vh 0 50vh;
   --offset: 20vw;
   --move-initial: calc(-25% + var(--offset));
   --move-final: calc(-50% + var(--offset));
@@ -236,4 +250,6 @@ body {
   transform: translate3d(0, -30%, 0) rotate3d(0, 0, 1, 5deg);
   transition: all 0.4s 0.4s;
 }
+
+
 </style>
