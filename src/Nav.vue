@@ -207,6 +207,7 @@ export default {
       if (isLoggedIn.value) {
         await signOut(auth);
         setLoginState(false);
+        loading.value = true;
         router.push("/"); // Redirect to home page
       } else {
         router.push("/choose"); // Redirect to login page
