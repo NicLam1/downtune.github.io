@@ -521,7 +521,11 @@ export default {
           selectedGenres: this.selectedGenres,
           priceRange: this.priceRange,
           searchQuery: this.searchQuery,
+          tempGenres: this.genres,
+          templessCommonGenres: this.lessCommonGenres,
+
         };
+        console.log("saveFiltersToSessionStorage");
         sessionStorage.setItem("selectedFilters", JSON.stringify(filters));
       }
     },
@@ -529,12 +533,19 @@ export default {
       if (typeof sessionStorage !== "undefined") {
         const storedFilters = sessionStorage.getItem("selectedFilters");
         if (storedFilters) {
+          console.log("loadFiltersFromSessionStorage storedFilters");
           const parsedFilters = JSON.parse(storedFilters);
           this.selectedGenres = parsedFilters.selectedGenres || [];
           this.priceRange = parsedFilters.priceRange || {
             min: this.minPrice,
             max: this.maxPrice,
           };
+          
+          if (parsedFilters.tempGenres) {
+            this.genres = parsedFilters.tempGenres;
+            this.lessCommonGenres = parsedFilters.templessCommonGenres;
+          }
+          
           this.searchQuery = parsedFilters.searchQuery || "";
         } else {
           // Use user's preferences if available
