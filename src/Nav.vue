@@ -39,6 +39,7 @@
           </button>
           <!-- User section for small screens -->
           <div class="user-section d-flex align-items-center d-lg-none ms-2">
+            <!-- If user is logged in -->
             <div v-if="displayName" class="logged-in-info">
               <div class="dropdown">
                 <i
@@ -72,16 +73,17 @@
             </div>
             <div v-else>
               <div class="dropdown">
-                <i
+                
+                <router-link to="/choose" class="nav-link"><i
                   class="fas fa-user-circle profile-icon"
-                  @click="toggleDropdown"
-                ></i>
-                <div
+                ></i></router-link>
+                <!-- <div
                   v-if="dropdownVisible"
                   class="dropdown-menu show"
                   ref="dropdownMenu"
                 >
-                  <router-link
+                 -->
+                  <!-- <router-link
                     to="/login/user"
                     class="dropdown-item"
                     @click="closeDropdown"
@@ -94,8 +96,8 @@
                     @click="closeDropdown"
                   >
                     <i class="fas fa-user-plus me-1"></i> Sign Up
-                  </router-link>
-                </div>
+                  </router-link> -->
+                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -161,18 +163,12 @@
           <div v-else class="auth-buttons d-flex align-items-center">
             <button
               class="btn btn-primary me-2 d-flex align-items-center"
-              @click="navigateTo('login/user')"
-            >
-              <i class="fas fa-sign-in-alt me-1"></i>
-              <span>Login</span>
+              > 
+              <router-link to="/choose" class="nav-link"> <i class="fas fa-sign-in-alt me-1"></i>
+              <span>Login / </span><i class="fas fa-user-plus me-1"></i>
+              <span>Sign Up</span></router-link>
             </button>
-            <button
-              class="btn btn-secondary d-flex align-items-center"
-              @click="navigateTo('login/user')"
-            >
-              <i class="fas fa-user-plus me-1"></i>
-              <span>Sign Up</span>
-            </button>
+           
           </div>
         </div>
       </div>
