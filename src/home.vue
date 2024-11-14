@@ -72,15 +72,24 @@ export default {
         }
       },
       extractPriceRange() {
-      // Assuming preferences.budget is a string like "$1000-$1400 per hour"
+      // Assuming preferences.budget is a string like "$1000-$1400 per hour" or "$1500+ per hour"
       const budget = this.preferences?.budget || "";
-      const priceMatch = budget.match(/\$(\d+)-\$(\d+)/);
+      
+      // Match the "$1000-$1400" format
+      const rangeMatch = budget.match(/\$(\d+)-\$(\d+)/);
+      
+      // Match the "$1500+" format
+      const minOnlyMatch = budget.match(/\$(\d+)\+/);
+      
+      if (rangeMatch) {
+        this.minPrice = parseInt(rangeMatch[1], 10);
+        this.maxPrice = parseInt(rangeMatch[2], 10);
+      } else if (minOnlyMatch) {
+        this.minPrice = parseInt(minOnlyMatch[1], 10);
+        this.maxPrice = Infinity; // Set max price to Infinity
+      }
+    },
 
-        if (priceMatch) {
-          this.minPrice = parseInt(priceMatch[1], 10);
-          this.maxPrice = parseInt(priceMatch[2], 10);
-        }
-      },
     }
 };
 </script>
