@@ -66,7 +66,7 @@
               :max="maxPrice"
               step="50"
               class="form-control me-2 ms-2 w-auto"
-              @input="onMinPriceChange"
+              @input="debouncedOnPriceChange('min')"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@
               :max="maxPrice"
               step="50"
               class="form-control me-2 ms-2 w-auto"
-              @input="onMaxPriceChange"
+              @input="debouncedOnPriceChange('max')"
             />
           </div>
           </div>
@@ -355,42 +355,54 @@ export default {
     roundToNearest50(value) {
       return Math.round(value / 50) * 50;
     },
-    onMinPriceChange() {
-      // Round to nearest 50
-      this.priceRange.min = this.roundToNearest50(this.priceRange.min);
+    
+    // debouncedOnPriceChange: debounce(function (type) {
+    //   this.onPriceChange(type);
+    // }, 2000) // Adjust the delay as needed
+    // ,
+    debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    },
+    debouncedOnPriceChange: null, // Placeholder to initialize later
+    
+    onPriceChange(type) {
+      if (type === "min") {
+        // Round to nearest 50
+        this.priceRange.min = this.roundToNearest50(this.priceRange.min);
 
-      // Ensure min does not exceed max
-      if (this.priceRange.min > this.priceRange.max) {
-        this.priceRange.min = this.priceRange.max;
-      }
+        // Ensure min does not exceed max
+        if (this.priceRange.min > this.priceRange.max) {
+          this.priceRange.min = this.priceRange.max;
+        }
 
-      // Ensure min is not below the overall minPrice
-      if (this.priceRange.min < this.minPrice) {
-        this.priceRange.min = this.minPrice;
+        // Ensure min is not below the overall minPrice
+        if (this.priceRange.min < this.minPrice) {
+          this.priceRange.min = this.minPrice;
+        }
+      } else if (type === "max") {
+        // Round to nearest 50
+        this.priceRange.max = this.roundToNearest50(this.priceRange.max);
+
+        // Ensure max does not fall below min
+        if (this.priceRange.max < this.priceRange.min) {
+          this.priceRange.max = this.priceRange.min;
+        }
+
+        // Ensure max does not exceed the overall maxPrice
+        if (this.priceRange.max > this.maxPrice) {
+          this.priceRange.max = this.maxPrice;
+        }
       }
 
       this.saveFiltersToSessionStorage();
       this.resetPage();
       this.filterTrigger++;
     },
-    onMaxPriceChange() {
-      // Round to nearest 50
-      this.priceRange.max = this.roundToNearest50(this.priceRange.max);
 
-      // Ensure max does not go below min
-      if (this.priceRange.max < this.priceRange.min) {
-        this.priceRange.max = this.priceRange.min;
-      }
-
-      // Ensure max does not exceed the overall maxPrice
-      if (this.priceRange.max > this.maxPrice) {
-        this.priceRange.max = this.maxPrice;
-      }
-
-      this.saveFiltersToSessionStorage();
-      this.resetPage();
-      this.filterTrigger++;
-    },
     onSearchQueryChange() {
       this.saveFiltersToSessionStorage();
       this.resetPage();
@@ -589,7 +601,9 @@ export default {
       }
     },
   },
-
+  created() {
+    this.debouncedOnPriceChange = this.debounce(this.onPriceChange, 2000);
+  },
   async mounted() {
     try {
       const response = await axios.get("/MOCK_DATA.json");
