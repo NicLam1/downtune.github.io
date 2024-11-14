@@ -235,7 +235,7 @@ export default {
 
     onMounted(() => {
       initializeAuthState();
-      loading.value = false; 
+      loading.value = false;
 
       document.addEventListener("click", handleClickOutside);
     });
