@@ -56,7 +56,8 @@
 
           <!-- Price Range Display -->
           <h5><i class="fas fa-dollar-sign"></i> Price Range</h5>
-          <div class="d-flex justify-content-between mb-2 align-items-center">
+          <div class="d-flex justify-content-between mb-2 align-items-center flex-wrap">
+            <div>
             <span>Min: $</span>
             <input
               type="number"
@@ -67,7 +68,8 @@
               class="form-control me-2 ms-2 w-auto"
               @input="onMinPriceChange"
             />
-
+          </div>
+          <div>
             <span>Max: $</span>
             <input
               type="number"
@@ -78,6 +80,7 @@
               class="form-control me-2 ms-2 w-auto"
               @input="onMaxPriceChange"
             />
+          </div>
           </div>
 
           <!-- Minimum Price Slider -->
@@ -255,6 +258,7 @@ export default {
   data() {
     return {
       bands: [],
+      genre: null,
       searchQuery: "",
       genres: [
         "Pop",
@@ -421,6 +425,10 @@ export default {
           );
         }, 1000); // Duration of the glow effect in milliseconds
       }
+
+       // Remove genre from lessCommonGenres
+       this.lessCommonGenres = this.lessCommonGenres.filter(g2 => g2 !== genre);
+
       event.target.selectedIndex = 0; // Reset dropdown selection
       this.saveFiltersToSessionStorage();
       this.resetPage();
