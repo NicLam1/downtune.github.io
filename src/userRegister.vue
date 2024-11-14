@@ -60,7 +60,6 @@ import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } fro
 import { doc, setDoc } from "firebase/firestore";
 import QuestionContainer from "./questionContainer.vue";
 import { inject } from "vue";
-
 export default {
   mounted() {
     onAuthStateChanged(auth, (user) => {
@@ -126,6 +125,7 @@ export default {
         this.isRegistered = true;
         this.user = user; // Store the user object
         this.setLoginState(true, user.uid, user.displayName);
+        sessionStorage.removeItem("selectedFilters");
       } catch (error) {
         console.error("Error during registration:", error);
         this.error = "Email is already in use.";

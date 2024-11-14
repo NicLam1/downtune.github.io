@@ -15,8 +15,8 @@
         <i class="fa fa-arrow-down"></i>
       </div>
     </div>
-      <Carousel ref="carousel" @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"
-        :initialGenres="genres"></Carousel>
+    <Carousel ref="carousel" @updateBackgroundGradient="setBackgroundGradient" @selectedGenres="updateGenres"
+      :initialGenres="genres"></Carousel>
     <MotionGroup preset="slideVisibleLeft" :duration="600">
       <OtherQuestions v-for="(question, index) in questions" :key="index" :title="question.title"
         :options="question.options" :link="question.link" :background="backgroundGradient" :questionIndex="index"
@@ -42,7 +42,7 @@
 import { auth } from '../firebaseConfig';
 import { doc, setDoc, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import { getDoc } from 'firebase/firestore';
+import { getDoc, updateDoc } from 'firebase/firestore';
 
 import Carousel from './Carousel.vue';
 import OtherQuestions from './questionComponent.vue';
@@ -100,7 +100,7 @@ export default {
     async submitResponses() {
       console.log(this.responses);
       console.log(this.genres);
-      if(this.genres.length === 0) {
+      if (this.genres.length === 0) {
         this.$refs.carousel.$el.scrollIntoView({ behavior: 'smooth' });
         return;
       }
@@ -129,8 +129,16 @@ export default {
 
       try {
         // Save preferences directly to Firestore using the modular syntax
-        await setDoc(doc(collection(db, "userPreferences"), userId), preferences);
+        const docRef = doc(db, 'userPreferences', userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()){
+          await updateDoc(docRef, preferences);
+        }
+        else{
+          await setDoc(doc(collection(db, "userPreferences"), userId), preferences);
+        }
         console.log("User preferences saved successfully!");
+        sessionStorage.removeItem('selectedFilters');
         this.$router.push('/');
       } catch (error) {
         console.error("Error saving preferences:", error);
