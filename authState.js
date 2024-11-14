@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { auth } from './firebaseConfig'; // Adjust the path as necessary
 import { onAuthStateChanged } from 'firebase/auth';
 
-export const isLoggedIn = ref(false);
+export const isLoggedIn = ref(null);
 export const userId = ref(null);
 export const displayName = ref(null);
 
@@ -19,7 +19,7 @@ export const initializeAuthState = () => {
       isLoggedIn.value = true;
       displayName.value = user.displayName;
     } else {
-      isLoggedIn.value = false;
+      isLoggedIn.value = 'notloggedin';
       displayName.value = null;
     }
   });

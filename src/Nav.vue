@@ -71,7 +71,8 @@
                 </div>
               </div>
             </div>
-            <div v-else-if="displayName == null && isLoggedIn == null" >
+            <div v-else-if="isLoggedIn === 'notloggedin'">
+
               <div class="dropdown">
                 
                 <router-link to="/choose" class="nav-link"><i
@@ -129,7 +130,9 @@
           >
             Welcome, {{ displayName }}!
           </div>
-          <div  v-if="displayName && isLoggedIn !== null"
+
+
+          <div  v-if="displayName"
           class="logged-in-info">
             <div class="dropdown">
               <i
@@ -161,7 +164,12 @@
               </div>
             </div>
           </div>
-          <div v-else-if="displayName == null && isLoggedIn == null"  class="auth-buttons d-flex align-items-center">
+          
+          <div v-else-if="isLoggedIn === 'notloggedin'"
+
+
+            class="auth-buttons d-flex align-items-center">
+
             <button
               class="btn btn-primary me-2 d-flex align-items-center"
               > 
@@ -206,7 +214,7 @@ export default {
     const handleAuth = async () => {
       if (isLoggedIn.value) {
         await signOut(auth);
-        setLoginState(false);
+        setLoginState('notloggedin');
         router.push("/"); // Redirect to home page
       } else {
         router.push("/choose"); // Redirect to login page
